@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Tribo' target in the 'Tribo' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+#endif

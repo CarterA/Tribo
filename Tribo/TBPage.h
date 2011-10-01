@@ -1,0 +1,21 @@
+//
+//  TBPage.h
+//  Tribo
+//
+//  Created by Carter Allen on 9/30/11.
+//  Copyright (c) 2011 Opt-6 Products, LLC. All rights reserved.
+//
+
+@class GRMustacheTemplate;
+@class TBSite;
+
+@interface TBPage : NSObject
++ (TBPage *)pageWithURL:(NSURL *)URL inSite:(TBSite *)site;
+- (void)parse;
+@property (nonatomic, strong) NSURL *URL;
+@property (nonatomic, weak) TBSite *site;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) GRMustacheTemplate *template;
+@property (nonatomic, strong) NSArray *stylesheets;
+@end
