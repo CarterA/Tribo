@@ -86,6 +86,7 @@
 		4A8829261437C63700EBBD7E /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A72F123143155AA00A164E9 /* libGRMustache1-macosx10.6.a */; };
 		4A8829491438EB9F00EBBD7E /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A88294A1438EB9F00EBBD7E /* UKFSEventsWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -186,6 +187,8 @@
 		4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
 		4A8829471438EB9F00EBBD7E /* UKFSEventsWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFSEventsWatcher.h; sourceTree = "<group>"; };
 		4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFSEventsWatcher.m; sourceTree = "<group>"; };
+		4A8829531438F54000EBBD7E /* Safari.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Safari.h; sourceTree = "<group>"; };
+		4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +215,7 @@
 				4A8829231437C53000EBBD7E /* CoreFoundation.framework in Frameworks */,
 				4A8829241437C53000EBBD7E /* Foundation.framework in Frameworks */,
 				4A8829251437C53000EBBD7E /* Security.framework in Frameworks */,
+				4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */,
 				4A8829261437C63700EBBD7E /* libGRMustache1-macosx10.6.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +265,7 @@
 				4A6DC8EB1430203B00CB5025 /* Foundation.framework */,
 				4A75580D1436F6820040A10C /* Security.framework */,
 				4A8696231437BE0B00204482 /* Cocoa.framework */,
+				4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */,
 				4A8696251437BE0B00204482 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -435,6 +440,7 @@
 				4A8696481437BE3400204482 /* TBAppDelegate.m */,
 				4A8696491437BE3400204482 /* App-Info.plist */,
 				4A86964A1437BE3400204482 /* App-Prefix.pch */,
+				4A8829531438F54000EBBD7E /* Safari.h */,
 			);
 			path = App;
 			sourceTree = "<group>";

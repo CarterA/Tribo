@@ -10,10 +10,12 @@
 #import "TBSite.h"
 #import "TBPost.h"
 #import "HTTPServer.h"
+#import "Safari.h"
 #import "UKFSEventsWatcher.h"
 
 @interface TBAppDelegate ()
 @property (nonatomic, strong) UKFSEventsWatcher *queue;
+- (void)refreshLocalhostPages;
 - (void)postWasDoubleClicked:(id)sender;
 @end
 
@@ -52,10 +54,23 @@
 	self.server.documentRoot = self.site.destination.path;
 	self.server.port = 4000;
 	[self.server start:nil];
+	[self refreshLocalhostPages];
 	
+}
+- (void)refreshLocalhostPages {
+	// Refresh any Safari tabs open to http://localhost:4000/**.
+	SafariApplication *safari = (SafariApplication *)[[SBApplication alloc] initWithBundleIdentifier:@"com.apple.Safari"];
+	for (SafariWindow *window in safari.windows) {
+		for (SafariTab *tab in window.tabs) {
+			if ([tab.URL hasPrefix:@"http://localhost:4000"]) {
+				tab.URL = tab.URL;
+			}
+		}
+	}
 }
 - (void)watcher:(id<UKFileWatcher>)kQueue receivedNotification:(NSString *)notification forPath:(NSString *)path {
 	[self.site process];
+	[self refreshLocalhostPages];
 }
 - (void)postWasDoubleClicked:(id)sender {
 	TBPost *clickedPost = [self.site.posts objectAtIndex:[self.postTableView clickedRow]];
