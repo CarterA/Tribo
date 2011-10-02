@@ -13,4 +13,5 @@
 @property (nonatomic, strong) NSString *author;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *slug;
+@property (nonatomic, strong) NSString *markdownContent;
 @end
