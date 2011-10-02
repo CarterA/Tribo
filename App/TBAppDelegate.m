@@ -14,7 +14,7 @@
 @synthesize site=_site;
 - (void)awakeFromNib {
 	self.site = [TBSite new];
-	self.site.root = [NSURL fileURLWithPath:@"/Users/carterallen/Development/Web/Blog - New"];
+	self.site.root = [NSURL fileURLWithPath:[[NSUserDefaults standardUserDefaults] objectForKey:@"root"] isDirectory:YES];
 	self.site.destination = [self.site.root URLByAppendingPathComponent:@"Output" isDirectory:YES];
 	self.site.sourceDirectory = [self.site.root URLByAppendingPathComponent:@"Source" isDirectory:YES];
 	self.site.postsDirectory = [self.site.root URLByAppendingPathComponent:@"Posts" isDirectory:YES];
