@@ -8,19 +8,25 @@
 
 #import "TBAppDelegate.h"
 #import "TBSite.h"
+#import "TBPost.h"
 #import "HTTPServer.h"
 #import "UKFSEventsWatcher.h"
 
 @interface TBAppDelegate ()
 @property (nonatomic, strong) UKFSEventsWatcher *queue;
+- (void)postWasDoubleClicked:(id)sender;
 @end
 
 @implementation TBAppDelegate
 @synthesize window=_window;
+@synthesize postTableView=_postTableView;
 @synthesize site=_site;
 @synthesize server=_server;
 @synthesize queue=_queue;
 - (void)awakeFromNib {
+	
+	self.postTableView.target = self;
+	self.postTableView.doubleAction = @selector(postWasDoubleClicked:);
 	
 	// Configure and process the site for the first time.
 	self.site = [TBSite new];
@@ -50,5 +56,9 @@
 }
 - (void)watcher:(id<UKFileWatcher>)kQueue receivedNotification:(NSString *)notification forPath:(NSString *)path {
 	[self.site process];
+}
+- (void)postWasDoubleClicked:(id)sender {
+	TBPost *clickedPost = [self.site.posts objectAtIndex:[self.postTableView clickedRow]];
+	[[NSWorkspace sharedWorkspace] openURL:clickedPost.URL];
 }
 @end
