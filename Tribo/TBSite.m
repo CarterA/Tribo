@@ -11,7 +11,6 @@
 #import "GRMustache.h"
 
 @interface TBSite ()
-@property (nonatomic, strong) NSMutableArray *posts;
 @property (nonatomic, strong) NSArray *recentPosts;
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
 - (void)parsePosts;

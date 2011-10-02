@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSURL *sourceDirectory;
 @property (nonatomic, strong) NSURL *postsDirectory;
 @property (nonatomic, strong) NSURL *templatesDirectory;
+@property (nonatomic, strong) NSMutableArray *posts;
 
 @end

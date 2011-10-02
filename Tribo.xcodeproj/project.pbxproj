@@ -44,6 +44,46 @@
 		4A7558121436F8390040A10C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558101436F82D0040A10C /* CoreServices.framework */; };
 		4A7558151436FBAD0040A10C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558131436FBA10040A10C /* ApplicationServices.framework */; };
 		4A8696181437B60400204482 /* tribo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696171437B60400204482 /* tribo.m */; };
+		4A8696241437BE0B00204482 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8696231437BE0B00204482 /* Cocoa.framework */; };
+		4A86964D1437BE3400204482 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8696441437BE3400204482 /* MainMenu.xib */; };
+		4A86964E1437BE3400204482 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696461437BE3400204482 /* Core.m */; };
+		4A86964F1437BE3400204482 /* TBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696481437BE3400204482 /* TBAppDelegate.m */; };
+		4A8829021437C52200EBBD7E /* TBSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337A1430216500F6702F /* TBSite.m */; };
+		4A8829031437C52200EBBD7E /* TBPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337D143028CA00F6702F /* TBPost.m */; };
+		4A8829041437C52200EBBD7E /* TBPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F14114368E1200A164E9 /* TBPage.m */; };
+		4A8829051437C52200EBBD7E /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557F31436F6190040A10C /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829061437C52200EBBD7E /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557F71436F6190040A10C /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829071437C52200EBBD7E /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557F91436F6190040A10C /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829081437C52200EBBD7E /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557FB1436F6190040A10C /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829091437C52200EBBD7E /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557FD1436F6190040A10C /* DDLog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A88290A1437C52200EBBD7E /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557FF1436F6190040A10C /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A88290B1437C52200EBBD7E /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C11436F4D70040A10C /* DDData.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A88290C1437C52200EBBD7E /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C31436F4D70040A10C /* DDNumber.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A88290D1437C52200EBBD7E /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C51436F4D70040A10C /* DDRange.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A88290E1437C52200EBBD7E /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C71436F4D70040A10C /* HTTPAuthenticationRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A88290F1437C52200EBBD7E /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C91436F4D70040A10C /* HTTPConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829101437C52200EBBD7E /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557CC1436F4D70040A10C /* HTTPMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829111437C52200EBBD7E /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557CF1436F4D70040A10C /* HTTPServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829121437C52200EBBD7E /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557D21436F4D70040A10C /* HTTPAsyncFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829131437C52200EBBD7E /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557D41436F4D70040A10C /* HTTPDataResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829141437C52200EBBD7E /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557D61436F4D70040A10C /* HTTPDynamicFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829151437C52200EBBD7E /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557D81436F4D70040A10C /* HTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829161437C52200EBBD7E /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557DA1436F4D70040A10C /* HTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829171437C52200EBBD7E /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557DC1436F4D70040A10C /* WebSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829181437C52200EBBD7E /* houdini_href_e.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F137143688D900A164E9 /* houdini_href_e.c */; };
+		4A8829191437C52200EBBD7E /* houdini_html_e.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F138143688D900A164E9 /* houdini_html_e.c */; };
+		4A88291A1437C52200EBBD7E /* html.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F139143688D900A164E9 /* html.c */; };
+		4A88291B1437C52200EBBD7E /* html_smartypants.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F13B143688D900A164E9 /* html_smartypants.c */; };
+		4A88291C1437C52200EBBD7E /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F128143686AE00A164E9 /* autolink.c */; };
+		4A88291D1437C52200EBBD7E /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F12A143686AE00A164E9 /* buffer.c */; };
+		4A88291E1437C52200EBBD7E /* markdown.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F12D143686AE00A164E9 /* markdown.c */; };
+		4A88291F1437C52200EBBD7E /* stack.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F12F143686AE00A164E9 /* stack.c */; };
+		4A8829211437C53000EBBD7E /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558131436FBA10040A10C /* ApplicationServices.framework */; };
+		4A8829221437C53000EBBD7E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558101436F82D0040A10C /* CoreServices.framework */; };
+		4A8829231437C53000EBBD7E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A75580A1436F6590040A10C /* CoreFoundation.framework */; };
+		4A8829241437C53000EBBD7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6DC8EB1430203B00CB5025 /* Foundation.framework */; };
+		4A8829251437C53000EBBD7E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A75580D1436F6820040A10C /* Security.framework */; };
+		4A8829261437C63700EBBD7E /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A72F123143155AA00A164E9 /* libGRMustache1-macosx10.6.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -132,6 +172,14 @@
 		4A7558131436FBA10040A10C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		4A8696161437B60400204482 /* CLI-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLI-Prefix.pch"; sourceTree = "<group>"; };
 		4A8696171437B60400204482 /* tribo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tribo.m; sourceTree = "<group>"; };
+		4A8696211437BE0B00204482 /* Tribo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tribo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8696231437BE0B00204482 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4A8696451437BE3400204482 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4A8696461437BE3400204482 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Core.m; sourceTree = "<group>"; };
+		4A8696471437BE3400204482 /* TBAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAppDelegate.h; sourceTree = "<group>"; };
+		4A8696481437BE3400204482 /* TBAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAppDelegate.m; sourceTree = "<group>"; };
+		4A8696491437BE3400204482 /* App-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; sourceTree = "<group>"; };
+		4A86964A1437BE3400204482 /* App-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "App-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +193,20 @@
 				4A6DC8EC1430203B00CB5025 /* Foundation.framework in Frameworks */,
 				4A75580F1436F6A20040A10C /* Security.framework in Frameworks */,
 				4A72F124143155AA00A164E9 /* libGRMustache1-macosx10.6.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A86961E1437BE0B00204482 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8696241437BE0B00204482 /* Cocoa.framework in Frameworks */,
+				4A8829211437C53000EBBD7E /* ApplicationServices.framework in Frameworks */,
+				4A8829221437C53000EBBD7E /* CoreServices.framework in Frameworks */,
+				4A8829231437C53000EBBD7E /* CoreFoundation.framework in Frameworks */,
+				4A8829241437C53000EBBD7E /* Foundation.framework in Frameworks */,
+				4A8829251437C53000EBBD7E /* Security.framework in Frameworks */,
+				4A8829261437C63700EBBD7E /* libGRMustache1-macosx10.6.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +229,7 @@
 			children = (
 				4A6DC8ED1430203B00CB5025 /* Tribo */,
 				4A8696151437B60400204482 /* CLI */,
+				4A86963F1437BE3400204482 /* App */,
 				4A00338E14302F6600F6702F /* Dependencies */,
 				4A6DC8EA1430203B00CB5025 /* Frameworks */,
 				4A6DC8E81430203B00CB5025 /* Products */,
@@ -177,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6DC8E71430203B00CB5025 /* tribo */,
+				4A8696211437BE0B00204482 /* Tribo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,6 +253,8 @@
 				4A75580A1436F6590040A10C /* CoreFoundation.framework */,
 				4A6DC8EB1430203B00CB5025 /* Foundation.framework */,
 				4A75580D1436F6820040A10C /* Security.framework */,
+				4A8696231437BE0B00204482 /* Cocoa.framework */,
+				4A8696251437BE0B00204482 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -346,6 +412,26 @@
 			path = CLI;
 			sourceTree = "<group>";
 		};
+		4A8696251437BE0B00204482 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		4A86963F1437BE3400204482 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4A8696441437BE3400204482 /* MainMenu.xib */,
+				4A8696461437BE3400204482 /* Core.m */,
+				4A8696471437BE3400204482 /* TBAppDelegate.h */,
+				4A8696481437BE3400204482 /* TBAppDelegate.m */,
+				4A8696491437BE3400204482 /* App-Info.plist */,
+				4A86964A1437BE3400204482 /* App-Prefix.pch */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -365,6 +451,23 @@
 			productName = Tribo;
 			productReference = 4A6DC8E71430203B00CB5025 /* tribo */;
 			productType = "com.apple.product-type.tool";
+		};
+		4A8696201437BE0B00204482 /* Tribo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A86963D1437BE0C00204482 /* Build configuration list for PBXNativeTarget "Tribo" */;
+			buildPhases = (
+				4A86961D1437BE0B00204482 /* Sources */,
+				4A86961E1437BE0B00204482 /* Frameworks */,
+				4A86961F1437BE0B00204482 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tribo;
+			productName = Tribo;
+			productReference = 4A8696211437BE0B00204482 /* Tribo.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -388,9 +491,21 @@
 			projectRoot = "";
 			targets = (
 				4A6DC8E61430203B00CB5025 /* CLI */,
+				4A8696201437BE0B00204482 /* Tribo */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4A86961F1437BE0B00204482 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A86964D1437BE3400204482 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4A6DC8E31430203B00CB5025 /* Sources */ = {
@@ -431,7 +546,57 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4A86961D1437BE0B00204482 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A8829021437C52200EBBD7E /* TBSite.m in Sources */,
+				4A8829031437C52200EBBD7E /* TBPost.m in Sources */,
+				4A8829041437C52200EBBD7E /* TBPage.m in Sources */,
+				4A8829051437C52200EBBD7E /* GCDAsyncSocket.m in Sources */,
+				4A8829061437C52200EBBD7E /* DDAbstractDatabaseLogger.m in Sources */,
+				4A8829071437C52200EBBD7E /* DDASLLogger.m in Sources */,
+				4A8829081437C52200EBBD7E /* DDFileLogger.m in Sources */,
+				4A8829091437C52200EBBD7E /* DDLog.m in Sources */,
+				4A88290A1437C52200EBBD7E /* DDTTYLogger.m in Sources */,
+				4A88290B1437C52200EBBD7E /* DDData.m in Sources */,
+				4A88290C1437C52200EBBD7E /* DDNumber.m in Sources */,
+				4A88290D1437C52200EBBD7E /* DDRange.m in Sources */,
+				4A88290E1437C52200EBBD7E /* HTTPAuthenticationRequest.m in Sources */,
+				4A88290F1437C52200EBBD7E /* HTTPConnection.m in Sources */,
+				4A8829101437C52200EBBD7E /* HTTPMessage.m in Sources */,
+				4A8829111437C52200EBBD7E /* HTTPServer.m in Sources */,
+				4A8829121437C52200EBBD7E /* HTTPAsyncFileResponse.m in Sources */,
+				4A8829131437C52200EBBD7E /* HTTPDataResponse.m in Sources */,
+				4A8829141437C52200EBBD7E /* HTTPDynamicFileResponse.m in Sources */,
+				4A8829151437C52200EBBD7E /* HTTPFileResponse.m in Sources */,
+				4A8829161437C52200EBBD7E /* HTTPRedirectResponse.m in Sources */,
+				4A8829171437C52200EBBD7E /* WebSocket.m in Sources */,
+				4A8829181437C52200EBBD7E /* houdini_href_e.c in Sources */,
+				4A8829191437C52200EBBD7E /* houdini_html_e.c in Sources */,
+				4A88291A1437C52200EBBD7E /* html.c in Sources */,
+				4A88291B1437C52200EBBD7E /* html_smartypants.c in Sources */,
+				4A88291C1437C52200EBBD7E /* autolink.c in Sources */,
+				4A88291D1437C52200EBBD7E /* buffer.c in Sources */,
+				4A88291E1437C52200EBBD7E /* markdown.c in Sources */,
+				4A88291F1437C52200EBBD7E /* stack.c in Sources */,
+				4A86964E1437BE3400204482 /* Core.m in Sources */,
+				4A86964F1437BE3400204482 /* TBAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4A8696441437BE3400204482 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4A8696451437BE3400204482 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4A6DC8F41430203B00CB5025 /* Debug */ = {
@@ -509,6 +674,36 @@
 			};
 			name = Release;
 		};
+		4A86963B1437BE0C00204482 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
+				INFOPLIST_FILE = "App/App-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4A86963C1437BE0C00204482 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
+				INFOPLIST_FILE = "App/App-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -526,6 +721,15 @@
 			buildConfigurations = (
 				4A6DC8F71430203B00CB5025 /* Debug */,
 				4A6DC8F81430203B00CB5025 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A86963D1437BE0C00204482 /* Build configuration list for PBXNativeTarget "Tribo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A86963B1437BE0C00204482 /* Debug */,
+				4A86963C1437BE0C00204482 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
