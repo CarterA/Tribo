@@ -9,8 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 @class TBSite;
+@class HTTPServer;
 
 @interface TBAppDelegate : NSObject <NSApplicationDelegate>
 @property (assign) IBOutlet NSWindow *window;
 @property (strong) TBSite *site;
+@property (nonatomic, strong) HTTPServer *server;
 @end
