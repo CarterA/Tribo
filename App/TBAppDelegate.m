@@ -39,6 +39,9 @@
 	self.site.templatesDirectory = [self.site.root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
 	[self.site process];
 	
+	[self.window setTitleWithRepresentedFilename:[[NSFileManager defaultManager] displayNameAtPath:self.site.root.path]];
+	self.window.representedURL = self.site.root;
+	
 }
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	
