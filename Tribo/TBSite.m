@@ -14,7 +14,6 @@
 @property (nonatomic, strong) TBPost *latestPost;
 @property (nonatomic, strong) NSArray *recentPosts;
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
-- (void)parsePosts;
 - (void)writePosts;
 @end
 
@@ -28,6 +27,15 @@
 @synthesize latestPost=_latestPost;
 @synthesize recentPosts=_recentPosts;
 @synthesize postTemplate=_postTemplate;
++ (TBSite *)siteWithRoot:(NSURL *)root {
+	TBSite *site = [TBSite new];
+	site.root = root;
+	site.destination = [site.root URLByAppendingPathComponent:@"Output" isDirectory:YES];
+	site.sourceDirectory = [site.root URLByAppendingPathComponent:@"Source" isDirectory:YES];
+	site.postsDirectory = [site.root URLByAppendingPathComponent:@"Posts" isDirectory:YES];
+	site.templatesDirectory = [site.root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
+	return site;
+}
 - (void)process {
 	
 	// Find and compile the post template.
@@ -80,7 +88,7 @@
 	BOOL postsDirectoryIsDirectory = NO;
 	BOOL postsDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.postsDirectory.path isDirectory:&postsDirectoryIsDirectory];
 	if (!postsDirectoryIsDirectory || !postsDirectoryExists) return;
-	if (!self.posts) self.posts = [NSMutableArray array];
+	self.posts = [NSMutableArray array];
 	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
 		TBPost *post = [TBPost postWithURL:postURL];
 		[self.posts addObject:post];

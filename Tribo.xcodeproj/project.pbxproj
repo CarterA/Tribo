@@ -87,6 +87,9 @@
 		4A8829491438EB9F00EBBD7E /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A88294A1438EB9F00EBBD7E /* UKFSEventsWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */; };
+		4A88295E143A679C00EBBD7E /* TBDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A88295D143A679C00EBBD7E /* TBDocumentController.m */; };
+		4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A882968143A736E00EBBD7E /* TBSiteDocument.m */; };
+		4A88296B143A737000EBBD7E /* TBSiteDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A882969143A736F00EBBD7E /* TBSiteDocument.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -189,6 +192,11 @@
 		4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFSEventsWatcher.m; sourceTree = "<group>"; };
 		4A8829531438F54000EBBD7E /* Safari.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Safari.h; sourceTree = "<group>"; };
 		4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		4A88295C143A679C00EBBD7E /* TBDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBDocumentController.h; sourceTree = "<group>"; };
+		4A88295D143A679C00EBBD7E /* TBDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBDocumentController.m; sourceTree = "<group>"; };
+		4A882967143A736E00EBBD7E /* TBSiteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSiteDocument.h; sourceTree = "<group>"; };
+		4A882968143A736E00EBBD7E /* TBSiteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSiteDocument.m; sourceTree = "<group>"; };
+		4A882969143A736F00EBBD7E /* TBSiteDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSiteDocument.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,6 +449,11 @@
 				4A8696491437BE3400204482 /* App-Info.plist */,
 				4A86964A1437BE3400204482 /* App-Prefix.pch */,
 				4A8829531438F54000EBBD7E /* Safari.h */,
+				4A882967143A736E00EBBD7E /* TBSiteDocument.h */,
+				4A882968143A736E00EBBD7E /* TBSiteDocument.m */,
+				4A882969143A736F00EBBD7E /* TBSiteDocument.xib */,
+				4A88295C143A679C00EBBD7E /* TBDocumentController.h */,
+				4A88295D143A679C00EBBD7E /* TBDocumentController.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -527,6 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A86964D1437BE3400204482 /* MainMenu.xib in Resources */,
+				4A88296B143A737000EBBD7E /* TBSiteDocument.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +623,8 @@
 				4A86964F1437BE3400204482 /* TBAppDelegate.m in Sources */,
 				4A8829491438EB9F00EBBD7E /* UKFileWatcher.m in Sources */,
 				4A88294A1438EB9F00EBBD7E /* UKFSEventsWatcher.m in Sources */,
+				4A88295E143A679C00EBBD7E /* TBDocumentController.m in Sources */,
+				4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

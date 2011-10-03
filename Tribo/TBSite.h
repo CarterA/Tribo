@@ -8,7 +8,10 @@
 
 @interface TBSite : NSObject
 
++ (TBSite *)siteWithRoot:(NSURL *)root;
+
 - (void)process;
+- (void)parsePosts;
 
 @property (nonatomic, strong) NSURL *root;
 @property (nonatomic, strong) NSURL *destination;
