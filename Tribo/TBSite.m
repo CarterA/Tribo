@@ -11,7 +11,7 @@
 #import "GRMustache.h"
 
 @interface TBSite ()
-@property (nonatomic, strong) TBPost *lastPost;
+@property (nonatomic, strong) TBPost *latestPost;
 @property (nonatomic, strong) NSArray *recentPosts;
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
 - (void)parsePosts;
@@ -25,7 +25,7 @@
 @synthesize postsDirectory=_postsDirectory;
 @synthesize templatesDirectory=_templatesDirectory;
 @synthesize posts=_posts;
-@synthesize lastPost=_lastPost;
+@synthesize latestPost=_latestPost;
 @synthesize recentPosts=_recentPosts;
 @synthesize postTemplate=_postTemplate;
 - (void)process {
@@ -87,7 +87,7 @@
 	}
 	self.posts = [NSMutableArray arrayWithArray:[[self.posts reverseObjectEnumerator] allObjects]];
 	self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, 5)];
-    self.lastPost = [self.recentPosts objectAtIndex:0];
+    self.latestPost = [self.recentPosts objectAtIndex:0];
 }
 - (void)writePosts {
 	
