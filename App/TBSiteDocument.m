@@ -15,7 +15,8 @@
 #import "UKFSEventsWatcher.h"
 
 @interface TBSiteDocument ()
-@property (nonatomic, strong) UKFSEventsWatcher *eventsWatcher;
+@property (nonatomic, strong) UKFSEventsWatcher *sourceWatcher;
+@property (nonatomic, strong) UKFSEventsWatcher *postsWatcher;
 @property (nonatomic, strong) HTTPServer *server;
 - (void)refreshLocalhostPages;
 @end
@@ -27,7 +28,8 @@
 @synthesize previewButton=_previewButton;
 @synthesize postCountLabel=_postCountLabel;
 @synthesize addPostSheetController=_addPostSheetController;
-@synthesize eventsWatcher=_eventsWatcher;
+@synthesize sourceWatcher=_sourceWatcher;
+@synthesize postsWatcher=_postsWatcher;
 @synthesize server=_server;
 
 - (NSString *)windowNibName { return @"TBSiteDocument"; }
@@ -41,13 +43,12 @@
 		[self.progressIndicator startAnimation:self];
 		[self.site process];
 		
-		if (!self.eventsWatcher) {
-			self.eventsWatcher = [UKFSEventsWatcher new];
-			self.eventsWatcher.delegate = self;
+		if (!self.sourceWatcher) {
+			self.sourceWatcher = [UKFSEventsWatcher new];
+			self.sourceWatcher.delegate = self;
 		}
-		[self.eventsWatcher addPath:self.site.sourceDirectory.path];
-		[self.eventsWatcher addPath:self.site.postsDirectory.path];
-		[self.eventsWatcher addPath:self.site.templatesDirectory.path];
+		[self.sourceWatcher addPath:self.site.sourceDirectory.path];
+		[self.sourceWatcher addPath:self.site.templatesDirectory.path];
 		
 		// Start up the HTTP server so that the site can be previewed.
 		if (!self.server) {
@@ -66,7 +67,7 @@
 		
 	}
 	else {
-		[self.eventsWatcher removeAllPaths];
+		[self.sourceWatcher removeAllPaths];
 		[self.server stop];
 		self.previewButton.title = @"Preview";
 	}
@@ -115,9 +116,14 @@
 	}
 }
 
-- (void)watcher:(id<UKFileWatcher>)kQueue receivedNotification:(NSString *)notification forPath:(NSString *)path {
-	[self.site process];
-	[self refreshLocalhostPages];
+- (void)watcher:(id<UKFileWatcher>)watcher receivedNotification:(NSString *)notification forPath:(NSString *)path {
+	if (watcher == self.sourceWatcher || self.server.isRunning) {
+		[self.site process];
+		[self refreshLocalhostPages];
+	}
+	else if (watcher == self.postsWatcher) {
+		[self.site parsePosts];
+	}
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)controller {
@@ -126,6 +132,9 @@
 	self.postTableView.doubleAction = @selector(editPost:);
 	((NSCell *)self.postCountLabel.cell).backgroundStyle = NSBackgroundStyleRaised;
 	self.addPostSheetController = [TBAddPostSheetController new];
+	self.postsWatcher = [UKFSEventsWatcher new];
+	self.postsWatcher.delegate = self;
+	[self.postsWatcher addPath:self.site.postsDirectory.path];
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)notification {
