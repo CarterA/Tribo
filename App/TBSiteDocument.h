@@ -19,4 +19,5 @@
 - (IBAction)showAddPostSheet:(id)sender;
 - (IBAction)editPost:(id)sender;
 - (IBAction)previewPost:(id)sender;
+- (IBAction)revealPost:(id)sender;
 @end

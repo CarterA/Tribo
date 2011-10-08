@@ -104,6 +104,11 @@
 	
 }
 
+- (IBAction)revealPost:(id)sender {
+	TBPost *clickedPost = [self.site.posts objectAtIndex:[self.postTableView clickedRow]];
+	[[NSWorkspace sharedWorkspace] selectFile:clickedPost.URL.path inFileViewerRootedAtPath:nil];
+}
+
 - (void)refreshLocalhostPages {
 	// Refresh any Safari tabs open to http://localhost:port/**.
 	SafariApplication *safari = (SafariApplication *)[[SBApplication alloc] initWithBundleIdentifier:@"com.apple.Safari"];
