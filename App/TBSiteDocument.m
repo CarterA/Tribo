@@ -7,6 +7,7 @@
 //
 
 #import "TBSiteDocument.h"
+#import "TBAddPostSheetController.h"
 #import "TBSite.h"
 #import "TBPost.h"
 #import "HTTPServer.h"
@@ -25,6 +26,7 @@
 @synthesize progressIndicator=_progressIndicator;
 @synthesize previewButton=_previewButton;
 @synthesize postCountLabel=_postCountLabel;
+@synthesize addPostSheetController=_addPostSheetController;
 @synthesize eventsWatcher=_eventsWatcher;
 @synthesize server=_server;
 
@@ -70,6 +72,20 @@
 	}
 }
 
+- (IBAction)showAddPostSheet:(id)sender {
+	[self.addPostSheetController runModalForWindow:self.windowForSheet completionBlock:^(NSString *title, NSString *slug) {
+		NSDate *currentDate = [NSDate date];
+		NSDateFormatter *dateFormatter = [NSDateFormatter new];
+		dateFormatter.dateFormat = @"yyyy-MM-dd";
+		NSString *dateString = [dateFormatter stringFromDate:currentDate];
+		NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
+		NSURL *destination = [[self.site.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
+		NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
+		[contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
+		[self.site parsePosts];
+	}];
+}
+
 - (IBAction)editPost:(id)sender {
 	TBPost *clickedPost = [self.site.posts objectAtIndex:[self.postTableView clickedRow]];
 	[[NSWorkspace sharedWorkspace] openURL:clickedPost.URL];
@@ -108,6 +124,7 @@
 	self.postTableView.target = self;
 	self.postTableView.doubleAction = @selector(editPost:);
 	((NSCell *)self.postCountLabel.cell).backgroundStyle = NSBackgroundStyleRaised;
+	self.addPostSheetController = [TBAddPostSheetController new];
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)notification {
