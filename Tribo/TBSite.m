@@ -13,6 +13,7 @@
 @interface TBSite ()
 @property (nonatomic, strong) TBPost *latestPost;
 @property (nonatomic, strong) NSArray *recentPosts;
+@property (nonatomic, readonly) NSString *XMLDate;
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
 - (void)writePosts;
 @end
@@ -49,6 +50,12 @@
 	// Take care of posts early so that pages can use them.
 	[self parsePosts];
 	[self writePosts];
+	
+	// Process the Feed.xml file.
+	NSURL *feedTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Feed.mustache"];
+	GRMustacheTemplate *feedTemplate = [GRMustacheTemplate parseContentsOfURL:feedTemplateURL error:nil];
+	NSString *feedContents = [feedTemplate renderObject:self];
+	[feedContents writeToURL:[self.destination URLByAppendingPathComponent:@"feed.xml"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 	
 	// Recurse through the entire "Source" directory for pages and files.
 	BOOL sourceDirectoryIsDirectory = NO;
@@ -120,5 +127,13 @@
 		
 	}
 	
+}
+- (NSString *)XMLDate {
+	NSDate *date = [NSDate date];
+	NSDateFormatter *formatter = [NSDateFormatter new];
+	formatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
+	NSMutableString *mutableDateString = [[formatter stringFromDate:date] mutableCopy];
+	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
+	return mutableDateString;
 }
 @end

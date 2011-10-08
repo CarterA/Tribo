@@ -13,6 +13,7 @@
 @interface TBPost ()
 - (void)parse;
 @property (readonly) NSString *dateString;
+@property (readonly) NSString *XMLDate;
 @property (readonly) NSString *summary;
 @property (readonly) NSString *relativeURL;
 @end
@@ -31,6 +32,13 @@
 	NSDateFormatter *formatter = [NSDateFormatter new];
 	formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dMMMyyyy" options:0 locale:[NSLocale currentLocale]];
 	return [formatter stringFromDate:self.date];
+}
+- (NSString *)XMLDate {
+	NSDateFormatter *formatter = [NSDateFormatter new];
+	formatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
+	NSMutableString *mutableDateString = [[formatter stringFromDate:self.date] mutableCopy];
+	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
+	return mutableDateString;
 }
 - (NSString *)summary {
 	NSUInteger paraStart = 0, paraEnd = 0, contentsEnd = 0;
