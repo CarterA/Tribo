@@ -24,6 +24,7 @@
 @synthesize postTableView=_postTableView;
 @synthesize progressIndicator=_progressIndicator;
 @synthesize previewButton=_previewButton;
+@synthesize postCountLabel=_postCountLabel;
 @synthesize eventsWatcher=_eventsWatcher;
 @synthesize server=_server;
 
@@ -106,6 +107,15 @@
     [super windowControllerDidLoadNib:controller];
 	self.postTableView.target = self;
 	self.postTableView.doubleAction = @selector(editPost:);
+	((NSCell *)self.postCountLabel.cell).backgroundStyle = NSBackgroundStyleRaised;
+}
+
+- (void)windowDidBecomeKey:(NSNotification *)notification {
+	self.postCountLabel.textColor = [NSColor controlTextColor];
+}
+
+- (void)windowDidResignKey:(NSNotification *)notification {
+	self.postCountLabel.textColor = [NSColor disabledControlTextColor];
 }
 
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {

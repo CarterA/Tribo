@@ -232,14 +232,6 @@
 							<reference key="NSSuperview" ref="607350176"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="415866063"/>
-							<bool key="NSViewIsLayerTreeHost">YES</bool>
-							<object class="NSShadow" key="NSViewShadow">
-								<double key="NSShadowVert">-1</double>
-								<object class="NSColor" key="NSShadowColor" id="279887687">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MSAwLjc1AA</bytes>
-								</object>
-							</object>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSReuseIdentifierKey">_NS:3944</string>
 							<bool key="NSEnabled">YES</bool>
@@ -257,10 +249,7 @@
 									<string key="NSColorName">controlColor</string>
 									<reference key="NSColor" ref="956448123"/>
 								</object>
-								<object class="NSColor" key="NSTextColor">
-									<int key="NSColorSpace">4</int>
-									<bytes key="NSWhite">MAA</bytes>
-								</object>
+								<reference key="NSTextColor" ref="320177745"/>
 							</object>
 						</object>
 						<object class="NSButton" id="415866063">
@@ -334,31 +323,31 @@
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
-			<object class="NSMenu" id="547809480">
+			<object class="NSMenu" id="531875229">
 				<string key="NSTitle"/>
 				<object class="NSMutableArray" key="NSMenuItems">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSMenuItem" id="766278799">
-						<reference key="NSMenu" ref="547809480"/>
+					<object class="NSMenuItem" id="913797357">
+						<reference key="NSMenu" ref="531875229"/>
 						<string key="NSTitle">Edit Post</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<object class="NSCustomResource" key="NSOnImage" id="399144335">
+						<object class="NSCustomResource" key="NSOnImage" id="500455862">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">NSMenuCheckmark</string>
 						</object>
-						<object class="NSCustomResource" key="NSMixedImage" id="804046317">
+						<object class="NSCustomResource" key="NSMixedImage" id="509880365">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">NSMenuMixedState</string>
 						</object>
 					</object>
-					<object class="NSMenuItem" id="817907915">
-						<reference key="NSMenu" ref="547809480"/>
+					<object class="NSMenuItem" id="270086653">
+						<reference key="NSMenu" ref="531875229"/>
 						<string key="NSTitle">Preview in Safari</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="399144335"/>
-						<reference key="NSMixedImage" ref="804046317"/>
+						<reference key="NSOnImage" ref="500455862"/>
+						<reference key="NSMixedImage" ref="509880365"/>
 					</object>
 				</object>
 			</object>
@@ -402,7 +391,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">previewPost:</string>
 						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="817907915"/>
+						<reference key="destination" ref="270086653"/>
 					</object>
 					<int key="connectionID">100180</int>
 				</object>
@@ -410,7 +399,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">editPost:</string>
 						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="766278799"/>
+						<reference key="destination" ref="913797357"/>
 					</object>
 					<int key="connectionID">100181</int>
 				</object>
@@ -421,6 +410,22 @@
 						<reference key="destination" ref="415866063"/>
 					</object>
 					<int key="connectionID">100182</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">postCountLabel</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="715831594"/>
+					</object>
+					<int key="connectionID">100183</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="374790509"/>
+						<reference key="destination" ref="512844837"/>
+					</object>
+					<int key="connectionID">100184</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -478,7 +483,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">menu</string>
 						<reference key="source" ref="382014482"/>
-						<reference key="destination" ref="547809480"/>
+						<reference key="destination" ref="531875229"/>
 					</object>
 					<int key="connectionID">100179</int>
 				</object>
@@ -1563,24 +1568,24 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100175</int>
-						<reference key="object" ref="547809480"/>
+						<reference key="object" ref="531875229"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="766278799"/>
-							<reference ref="817907915"/>
+							<reference ref="913797357"/>
+							<reference ref="270086653"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Post Context Menu</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100176</int>
-						<reference key="object" ref="766278799"/>
-						<reference key="parent" ref="547809480"/>
+						<reference key="object" ref="913797357"/>
+						<reference key="parent" ref="531875229"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100177</int>
-						<reference key="object" ref="817907915"/>
-						<reference key="parent" ref="547809480"/>
+						<reference key="object" ref="270086653"/>
+						<reference key="parent" ref="531875229"/>
 					</object>
 				</object>
 			</object>
@@ -1602,8 +1607,10 @@
 					<string>100025.IBNSViewMetadataConstraints</string>
 					<string>100025.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints</string>
 					<string>100025.IBPluginDependency</string>
+					<string>100025.IBViewIntegration.shadowBlurRadius</string>
 					<string>100025.IBViewIntegration.shadowColor</string>
 					<string>100025.IBViewIntegration.shadowOffsetHeight</string>
+					<string>100025.IBViewIntegration.shadowOffsetWidth</string>
 					<string>100026.IBPluginDependency</string>
 					<string>100027.IBPluginDependency</string>
 					<string>100027.ibExternalAutomaticallyCalculatesRowSizeFromViewHeight</string>
@@ -1703,8 +1710,13 @@
 					</object>
 					<boolean value="NO"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<reference ref="279887687"/>
+					<real value="0.0"/>
+					<object class="NSColor">
+						<int key="NSColorSpace">3</int>
+						<bytes key="NSWhite">MSAwLjc1AA</bytes>
+					</object>
 					<real value="-1"/>
+					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
@@ -1812,7 +1824,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100182</int>
+			<int key="maxID">100184</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1863,12 +1875,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>postCountLabel</string>
 							<string>postTableView</string>
 							<string>previewButton</string>
 							<string>progressIndicator</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSTextField</string>
 							<string>NSTableView</string>
 							<string>NSButton</string>
 							<string>NSProgressIndicator</string>
@@ -1878,12 +1892,17 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>postCountLabel</string>
 							<string>postTableView</string>
 							<string>previewButton</string>
 							<string>progressIndicator</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">postCountLabel</string>
+								<string key="candidateClassName">NSTextField</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">postTableView</string>
 								<string key="candidateClassName">NSTableView</string>
