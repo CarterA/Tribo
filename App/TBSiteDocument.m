@@ -23,16 +23,17 @@
 @synthesize site=_site;
 @synthesize postTableView=_postTableView;
 @synthesize progressIndicator=_progressIndicator;
+@synthesize previewButton=_previewButton;
 @synthesize eventsWatcher=_eventsWatcher;
 @synthesize server=_server;
 
 - (NSString *)windowNibName { return @"TBSiteDocument"; }
 
 - (IBAction)preview:(id)sender {
-	NSButton *button = sender;
+	
 	if (!self.server.isRunning) {
 		
-		button.hidden = YES;
+		self.previewButton.hidden = YES;
 		self.progressIndicator.hidden = NO;
 		[self.progressIndicator startAnimation:self];
 		[self.site process];
@@ -55,17 +56,33 @@
 		
 		[self.progressIndicator stopAnimation:self];
 		self.progressIndicator.hidden = YES;
-		button.title = @"Stop Server";
-		[button sizeToFit];
-		button.hidden = NO;
+		self.previewButton.title = @"Stop Server";
+		[self.previewButton sizeToFit];
+		self.previewButton.hidden = NO;
 		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]]];
 		
 	}
 	else {
 		[self.eventsWatcher removeAllPaths];
 		[self.server stop];
-		button.title = @"Preview";
+		self.previewButton.title = @"Preview";
 	}
+}
+
+- (IBAction)editPost:(id)sender {
+	TBPost *clickedPost = [self.site.posts objectAtIndex:[self.postTableView clickedRow]];
+	[[NSWorkspace sharedWorkspace] openURL:clickedPost.URL];
+}
+
+- (IBAction)previewPost:(id)sender {
+	if (!self.server.isRunning) [self preview:sender];
+	TBPost *clickedPost = [self.site.posts objectAtIndex:[self.postTableView clickedRow]];
+	NSDateFormatter *formatter = [NSDateFormatter new];
+	formatter.dateFormat = @"yyyy/MM/dd";
+	NSString *postURLPrefix = [[formatter stringFromDate:clickedPost.date] stringByAppendingPathComponent:clickedPost.slug];
+	NSURL *postPreviewURL = [NSURL URLWithString:postURLPrefix relativeToURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]]];
+	[[NSWorkspace sharedWorkspace] openURL:postPreviewURL];
+	
 }
 
 - (void)refreshLocalhostPages {
@@ -79,20 +96,16 @@
 		}
 	}
 }
+
 - (void)watcher:(id<UKFileWatcher>)kQueue receivedNotification:(NSString *)notification forPath:(NSString *)path {
 	[self.site process];
 	[self refreshLocalhostPages];
 }
 
-- (void)postWasDoubleClicked:(id)sender {
-	TBPost *clickedPost = [self.site.posts objectAtIndex:[self.postTableView clickedRow]];
-	[[NSWorkspace sharedWorkspace] openURL:clickedPost.URL];
-}
-
 - (void)windowControllerDidLoadNib:(NSWindowController *)controller {
     [super windowControllerDidLoadNib:controller];
 	self.postTableView.target = self;
-	self.postTableView.doubleAction = @selector(postWasDoubleClicked:);
+	self.postTableView.doubleAction = @selector(editPost:);
 }
 
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
