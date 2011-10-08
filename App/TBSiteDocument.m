@@ -83,6 +83,7 @@
 		NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
 		[contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
 		[self.site parsePosts];
+		[[NSWorkspace sharedWorkspace] openURL:destination];
 	}];
 }
 
