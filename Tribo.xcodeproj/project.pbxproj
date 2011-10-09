@@ -92,6 +92,9 @@
 		4A88296B143A737000EBBD7E /* TBSiteDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A882969143A736F00EBBD7E /* TBSiteDocument.xib */; };
 		4ABD6A49143FE466007E2F5D /* TBAddPostSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */; };
 		4ABD6A4C143FE495007E2F5D /* TBAddPostSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */; };
+		4ABD6A4F1441689B007E2F5D /* TBTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD6A4E1441689B007E2F5D /* TBTableView.m */; };
+		4ABD6A5114417DBE007E2F5D /* TBQLPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */; };
+		4ABD6A5414417ED9007E2F5D /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABD6A5214417ECA007E2F5D /* Quartz.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -202,6 +205,10 @@
 		4ABD6A47143FE466007E2F5D /* TBAddPostSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAddPostSheetController.h; sourceTree = "<group>"; };
 		4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAddPostSheetController.m; sourceTree = "<group>"; };
 		4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBAddPostSheet.xib; sourceTree = "<group>"; };
+		4ABD6A4D1441689B007E2F5D /* TBTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTableView.h; sourceTree = "<group>"; };
+		4ABD6A4E1441689B007E2F5D /* TBTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTableView.m; sourceTree = "<group>"; };
+		4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBQLPreviewView.xib; sourceTree = "<group>"; };
+		4ABD6A5214417ECA007E2F5D /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +233,7 @@
 				4A8829211437C53000EBBD7E /* ApplicationServices.framework in Frameworks */,
 				4A8829221437C53000EBBD7E /* CoreServices.framework in Frameworks */,
 				4A8829231437C53000EBBD7E /* CoreFoundation.framework in Frameworks */,
+				4ABD6A5414417ED9007E2F5D /* Quartz.framework in Frameworks */,
 				4A8829241437C53000EBBD7E /* Foundation.framework in Frameworks */,
 				4A8829251437C53000EBBD7E /* Security.framework in Frameworks */,
 				4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */,
@@ -275,6 +283,7 @@
 				4A7558131436FBA10040A10C /* ApplicationServices.framework */,
 				4A7558101436F82D0040A10C /* CoreServices.framework */,
 				4A75580A1436F6590040A10C /* CoreFoundation.framework */,
+				4ABD6A5214417ECA007E2F5D /* Quartz.framework */,
 				4A6DC8EB1430203B00CB5025 /* Foundation.framework */,
 				4A75580D1436F6820040A10C /* Security.framework */,
 				4A8696231437BE0B00204482 /* Cocoa.framework */,
@@ -457,6 +466,9 @@
 				4A882967143A736E00EBBD7E /* TBSiteDocument.h */,
 				4A882968143A736E00EBBD7E /* TBSiteDocument.m */,
 				4A882969143A736F00EBBD7E /* TBSiteDocument.xib */,
+				4ABD6A4D1441689B007E2F5D /* TBTableView.h */,
+				4ABD6A4E1441689B007E2F5D /* TBTableView.m */,
+				4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */,
 				4ABD6A47143FE466007E2F5D /* TBAddPostSheetController.h */,
 				4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */,
 				4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */,
@@ -550,6 +562,7 @@
 				4A86964D1437BE3400204482 /* MainMenu.xib in Resources */,
 				4A88296B143A737000EBBD7E /* TBSiteDocument.xib in Resources */,
 				4ABD6A4C143FE495007E2F5D /* TBAddPostSheet.xib in Resources */,
+				4ABD6A5114417DBE007E2F5D /* TBQLPreviewView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +648,7 @@
 				4A88295E143A679C00EBBD7E /* TBDocumentController.m in Sources */,
 				4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */,
 				4ABD6A49143FE466007E2F5D /* TBAddPostSheetController.m in Sources */,
+				4ABD6A4F1441689B007E2F5D /* TBTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

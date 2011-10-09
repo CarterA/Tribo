@@ -20,4 +20,5 @@
 - (IBAction)editPost:(id)sender;
 - (IBAction)previewPost:(id)sender;
 - (IBAction)revealPost:(id)sender;
+- (void)toggleQuickLookPopover;
 @end
