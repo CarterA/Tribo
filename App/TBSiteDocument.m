@@ -19,8 +19,6 @@
 @property (nonatomic, strong) UKFSEventsWatcher *sourceWatcher;
 @property (nonatomic, strong) UKFSEventsWatcher *postsWatcher;
 @property (nonatomic, strong) HTTPServer *server;
-@property (nonatomic, strong) NSPopover *currentPopover;
-@property (nonatomic, strong) NSViewController *previewController;
 - (void)refreshLocalhostPages;
 @end
 
@@ -34,8 +32,6 @@
 @synthesize sourceWatcher=_sourceWatcher;
 @synthesize postsWatcher=_postsWatcher;
 @synthesize server=_server;
-@synthesize currentPopover=_currentPopover;
-@synthesize previewController=_previewController;
 
 - (NSString *)windowNibName { return @"TBSiteDocument"; }
 
@@ -155,43 +151,31 @@
 	self.postCountLabel.textColor = [NSColor disabledControlTextColor];
 }
 
-- (void)toggleQuickLookPopover {
-	if (!self.currentPopover) {
-		TBPost *selectedPost = [self.site.posts objectAtIndex:self.postTableView.selectedRow];
-		if (!self.previewController) {
-			self.previewController = [[NSViewController alloc] initWithNibName:@"TBQLPreviewView" bundle:[NSBundle bundleForClass:[self class]]];
-			((QLPreviewView *)self.previewController.view).shouldCloseWithWindow = NO;
-		}
-		((QLPreviewView *)self.previewController.view).previewItem = selectedPost.URL;
-		self.currentPopover = [NSPopover new];
-		self.currentPopover.animates = YES;
-		self.currentPopover.contentViewController = self.previewController;
-		[self.currentPopover showRelativeToRect:[self.postTableView rectOfRow:self.postTableView.selectedRow] ofView:self.postTableView preferredEdge:0];
-		[self.postTableView.superview becomeFirstResponder];
-	}
-	else {
-		[self.currentPopover close];
-		self.currentPopover = nil;
-	}
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel {
+	return self.site.posts.count;
 }
 
-- (void)tableViewSelectionDidChange:(NSNotification *)notification {
-	if (self.currentPopover.isShown) {
-		TBPost *selectedPost = [self.site.posts objectAtIndex:self.postTableView.selectedRow];
-		((QLPreviewView *)self.previewController.view).previewItem = selectedPost.URL;
-		self.currentPopover.positioningRect = [self.postTableView rectOfRow:self.postTableView.selectedRow];
+- (BOOL)previewPanel:(QLPreviewPanel *)panel handleEvent:(NSEvent *)event {
+	return NO;
+}
+
+- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item {
+	NSInteger index = 0;
+	for (index = 0; index < self.site.posts.count; index++) {
+		if ([((TBPost *)[self.site.posts objectAtIndex:index]).URL isEqual:item]) continue;
 	}
+	return [self.postTableView rectOfRow:index];
+}
+
+- (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
+	TBPost *requestedPost = [self.site.posts objectAtIndex:index];
+	return requestedPost.URL;
 }
 
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
 	self.site = [TBSite siteWithRoot:URL];
 	[self.site parsePosts];
 	return YES;
-}
-
-- (void)dealloc {
-	if (self.previewController)
-		[(QLPreviewView *)self.previewController.view close];
 }
 
 @end

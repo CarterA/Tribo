@@ -6,9 +6,11 @@
 //  Copyright (c) 2011 Opt-6 Products, LLC. All rights reserved.
 //
 
+#import <Quartz/Quartz.h>
+
 @class TBSite, TBAddPostSheetController;
 
-@interface TBSiteDocument : NSDocument <NSWindowDelegate>
+@interface TBSiteDocument : NSDocument <NSWindowDelegate, QLPreviewPanelDelegate, QLPreviewPanelDataSource>
 @property (nonatomic, strong) TBSite *site;
 @property (nonatomic, assign) IBOutlet NSTableView *postTableView;
 @property (nonatomic, assign) IBOutlet NSProgressIndicator *progressIndicator;
@@ -20,5 +22,4 @@
 - (IBAction)editPost:(id)sender;
 - (IBAction)previewPost:(id)sender;
 - (IBAction)revealPost:(id)sender;
-- (void)toggleQuickLookPopover;
 @end
