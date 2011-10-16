@@ -15,8 +15,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4A8696201437BE0B00204482"
                BuildableName = "Tribo.app"
-               BlueprintName = "Tribo"
-               ReferencedContainer = "container:Tribo.xcodeproj">
+               BlueprintName = "Tribo">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
