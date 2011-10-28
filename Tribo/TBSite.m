@@ -128,6 +128,18 @@
 	}
 	
 }
+- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug {
+	NSDate *currentDate = [NSDate date];
+	NSDateFormatter *dateFormatter = [NSDateFormatter new];
+	dateFormatter.dateFormat = @"yyyy-MM-dd";
+	NSString *dateString = [dateFormatter stringFromDate:currentDate];
+	NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
+	NSURL *destination = [[self.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
+	NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
+	[contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
+	[self parsePosts];
+	return destination;
+}
 - (NSString *)XMLDate {
 	NSDate *date = [NSDate date];
 	NSDateFormatter *formatter = [NSDateFormatter new];

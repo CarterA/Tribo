@@ -12,6 +12,7 @@
 
 - (void)process;
 - (void)parsePosts;
+- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug;
 
 @property (nonatomic, strong) NSURL *root;
 @property (nonatomic, strong) NSURL *destination;

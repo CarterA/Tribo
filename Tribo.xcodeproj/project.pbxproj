@@ -90,7 +90,11 @@
 		4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */; };
 		4A88295E143A679C00EBBD7E /* TBDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A88295D143A679C00EBBD7E /* TBDocumentController.m */; };
 		4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A882968143A736E00EBBD7E /* TBSiteDocument.m */; };
-		4A88296B143A737000EBBD7E /* TBSiteDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A882969143A736F00EBBD7E /* TBSiteDocument.xib */; };
+		4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A882969143A736F00EBBD7E /* TBSiteWindow.xib */; };
+		4AAC8E461451EFA800AE978A /* TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E421451EF9200AE978A /* TBViewController.m */; };
+		4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */; };
+		4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5C1456609300AE978A /* TBPostsViewController.m */; };
+		4AAC8E5F1456617000AE978A /* TBPostsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5E1456616F00AE978A /* TBPostsView.xib */; };
 		4ABD6A49143FE466007E2F5D /* TBAddPostSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */; };
 		4ABD6A4C143FE495007E2F5D /* TBAddPostSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */; };
 		4ABD6A4F1441689B007E2F5D /* TBTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD6A4E1441689B007E2F5D /* TBTableView.m */; };
@@ -203,7 +207,14 @@
 		4A88295D143A679C00EBBD7E /* TBDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBDocumentController.m; sourceTree = "<group>"; };
 		4A882967143A736E00EBBD7E /* TBSiteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSiteDocument.h; sourceTree = "<group>"; };
 		4A882968143A736E00EBBD7E /* TBSiteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSiteDocument.m; sourceTree = "<group>"; };
-		4A882969143A736F00EBBD7E /* TBSiteDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSiteDocument.xib; sourceTree = "<group>"; };
+		4A882969143A736F00EBBD7E /* TBSiteWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSiteWindow.xib; sourceTree = "<group>"; };
+		4AAC8E411451EF9200AE978A /* TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBViewController.h; sourceTree = "<group>"; };
+		4AAC8E421451EF9200AE978A /* TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBViewController.m; sourceTree = "<group>"; };
+		4AAC8E4C145286E000AE978A /* TBSiteWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSiteWindowController.h; sourceTree = "<group>"; };
+		4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSiteWindowController.m; sourceTree = "<group>"; };
+		4AAC8E5B1456609300AE978A /* TBPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPostsViewController.h; sourceTree = "<group>"; };
+		4AAC8E5C1456609300AE978A /* TBPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPostsViewController.m; sourceTree = "<group>"; };
+		4AAC8E5E1456616F00AE978A /* TBPostsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBPostsView.xib; sourceTree = "<group>"; };
 		4ABD6A47143FE466007E2F5D /* TBAddPostSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAddPostSheetController.h; sourceTree = "<group>"; };
 		4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAddPostSheetController.m; sourceTree = "<group>"; };
 		4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBAddPostSheet.xib; sourceTree = "<group>"; };
@@ -468,7 +479,12 @@
 				4A8829531438F54000EBBD7E /* Safari.h */,
 				4A882967143A736E00EBBD7E /* TBSiteDocument.h */,
 				4A882968143A736E00EBBD7E /* TBSiteDocument.m */,
-				4A882969143A736F00EBBD7E /* TBSiteDocument.xib */,
+				4A882969143A736F00EBBD7E /* TBSiteWindow.xib */,
+				4AAC8E4C145286E000AE978A /* TBSiteWindowController.h */,
+				4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */,
+				4AAC8E5E1456616F00AE978A /* TBPostsView.xib */,
+				4AAC8E5B1456609300AE978A /* TBPostsViewController.h */,
+				4AAC8E5C1456609300AE978A /* TBPostsViewController.m */,
 				4ABD6A4D1441689B007E2F5D /* TBTableView.h */,
 				4ABD6A4E1441689B007E2F5D /* TBTableView.m */,
 				4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */,
@@ -477,6 +493,8 @@
 				4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */,
 				4A88295C143A679C00EBBD7E /* TBDocumentController.h */,
 				4A88295D143A679C00EBBD7E /* TBDocumentController.m */,
+				4AAC8E411451EF9200AE978A /* TBViewController.h */,
+				4AAC8E421451EF9200AE978A /* TBViewController.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -563,10 +581,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A86964D1437BE3400204482 /* MainMenu.xib in Resources */,
-				4A88296B143A737000EBBD7E /* TBSiteDocument.xib in Resources */,
+				4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */,
 				4ABD6A4C143FE495007E2F5D /* TBAddPostSheet.xib in Resources */,
 				4ABD6A5114417DBE007E2F5D /* TBQLPreviewView.xib in Resources */,
 				4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */,
+				4AAC8E5F1456617000AE978A /* TBPostsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +672,9 @@
 				4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */,
 				4ABD6A49143FE466007E2F5D /* TBAddPostSheetController.m in Sources */,
 				4ABD6A4F1441689B007E2F5D /* TBTableView.m in Sources */,
+				4AAC8E461451EFA800AE978A /* TBViewController.m in Sources */,
+				4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */,
+				4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,7 +708,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -708,7 +730,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

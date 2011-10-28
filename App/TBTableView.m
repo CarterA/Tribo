@@ -7,7 +7,6 @@
 //
 
 #import "TBTableView.h"
-#import "TBSiteDocument.h"
 #import <Quartz/Quartz.h>
 
 @implementation TBTableView
@@ -32,8 +31,8 @@
 	return YES;
 }
 - (void)beginPreviewPanelControl:(QLPreviewPanel *)panel {
-	panel.delegate = (TBSiteDocument *)self.delegate;
-	panel.dataSource = (TBSiteDocument *)self.delegate;
+	panel.delegate = (id <QLPreviewPanelDelegate>)self.delegate;
+	panel.dataSource = (id <QLPreviewPanelDataSource>)self.delegate;
 }
 - (void)endPreviewPanelControl:(QLPreviewPanel *)panel {
 	return;
