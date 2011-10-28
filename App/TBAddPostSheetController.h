@@ -10,9 +10,4 @@ typedef void(^TBAddPostSheetControllerCompletionHandler)(NSString *title, NSStri
 
 @interface TBAddPostSheetController : NSWindowController
 - (void)runModalForWindow:(NSWindow *)window completionBlock:(TBAddPostSheetControllerCompletionHandler)completionHandler;
-- (IBAction)cancel:(id)sender;
-- (IBAction)add:(id)sender;
-@property (nonatomic, assign) IBOutlet NSTextField *titleField;
-@property (nonatomic, assign) IBOutlet NSTextField *slugField;
-@property (nonatomic, assign) IBOutlet NSButton *addButton;
 @end

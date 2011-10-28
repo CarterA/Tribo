@@ -10,6 +10,11 @@
 
 @interface TBAddPostSheetController ()
 @property (nonatomic, copy) TBAddPostSheetControllerCompletionHandler completionHandler;
+@property (nonatomic, assign) IBOutlet NSTextField *titleField;
+@property (nonatomic, assign) IBOutlet NSTextField *slugField;
+@property (nonatomic, assign) IBOutlet NSButton *addButton;
+- (IBAction)cancel:(id)sender;
+- (IBAction)add:(id)sender;
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 @end
 
