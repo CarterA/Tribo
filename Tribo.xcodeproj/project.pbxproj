@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		4A00337B1430216500F6702F /* TBSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337A1430216500F6702F /* TBSite.m */; };
 		4A00337E143028CA00F6702F /* TBPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337D143028CA00F6702F /* TBPost.m */; };
+		4A198757145CF2810001B208 /* TBProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A198755145CF2810001B208 /* TBProjectsViewController.m */; };
+		4A198758145CF2810001B208 /* TBProjectsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A198756145CF2810001B208 /* TBProjectsView.xib */; };
 		4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4A30E879144B86F4001DDBAE /* Credits.rtf */; };
+		4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */; };
 		4A6DC8EC1430203B00CB5025 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6DC8EB1430203B00CB5025 /* Foundation.framework */; };
 		4A72F124143155AA00A164E9 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A72F123143155AA00A164E9 /* libGRMustache1-macosx10.6.a */; };
 		4A72F131143686AE00A164E9 /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F128143686AE00A164E9 /* autolink.c */; };
@@ -119,7 +122,12 @@
 		4A00337A1430216500F6702F /* TBSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSite.m; sourceTree = "<group>"; };
 		4A00337C143028CA00F6702F /* TBPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPost.h; sourceTree = "<group>"; };
 		4A00337D143028CA00F6702F /* TBPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPost.m; sourceTree = "<group>"; };
+		4A198754145CF2810001B208 /* TBProjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBProjectsViewController.h; sourceTree = "<group>"; };
+		4A198755145CF2810001B208 /* TBProjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBProjectsViewController.m; sourceTree = "<group>"; };
+		4A198756145CF2810001B208 /* TBProjectsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBProjectsView.xib; sourceTree = "<group>"; };
 		4A30E879144B86F4001DDBAE /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTabView.h; sourceTree = "<group>"; };
+		4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTabView.m; sourceTree = "<group>"; };
 		4A6DC8E71430203B00CB5025 /* tribo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tribo; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6DC8EB1430203B00CB5025 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4A72F1221431559F00A164E9 /* GRMustache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRMustache.h; path = Dependencies/GRMustache/include/GRMustache.h; sourceTree = SOURCE_ROOT; };
@@ -485,6 +493,11 @@
 				4AAC8E5E1456616F00AE978A /* TBPostsView.xib */,
 				4AAC8E5B1456609300AE978A /* TBPostsViewController.h */,
 				4AAC8E5C1456609300AE978A /* TBPostsViewController.m */,
+				4A198756145CF2810001B208 /* TBProjectsView.xib */,
+				4A198754145CF2810001B208 /* TBProjectsViewController.h */,
+				4A198755145CF2810001B208 /* TBProjectsViewController.m */,
+				4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */,
+				4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */,
 				4ABD6A4D1441689B007E2F5D /* TBTableView.h */,
 				4ABD6A4E1441689B007E2F5D /* TBTableView.m */,
 				4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */,
@@ -586,6 +599,7 @@
 				4ABD6A5114417DBE007E2F5D /* TBQLPreviewView.xib in Resources */,
 				4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */,
 				4AAC8E5F1456617000AE978A /* TBPostsView.xib in Resources */,
+				4A198758145CF2810001B208 /* TBProjectsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +689,8 @@
 				4AAC8E461451EFA800AE978A /* TBViewController.m in Sources */,
 				4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */,
 				4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */,
+				4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */,
+				4A198757145CF2810001B208 /* TBProjectsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
