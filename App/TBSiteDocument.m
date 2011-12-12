@@ -42,6 +42,7 @@
 		self.sourceWatcher.delegate = self;
 	}
 	[self.sourceWatcher addPath:self.site.sourceDirectory.path];
+	[self.sourceWatcher addPath:self.site.postsDirectory.path];
 	[self.sourceWatcher addPath:self.site.templatesDirectory.path];
 	
 	// Start up the HTTP server so that the site can be previewed.
