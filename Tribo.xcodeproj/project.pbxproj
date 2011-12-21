@@ -487,23 +487,15 @@
 				4A8829531438F54000EBBD7E /* Safari.h */,
 				4A882967143A736E00EBBD7E /* TBSiteDocument.h */,
 				4A882968143A736E00EBBD7E /* TBSiteDocument.m */,
-				4A882969143A736F00EBBD7E /* TBSiteWindow.xib */,
-				4AAC8E4C145286E000AE978A /* TBSiteWindowController.h */,
-				4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */,
-				4AAC8E5E1456616F00AE978A /* TBPostsView.xib */,
-				4AAC8E5B1456609300AE978A /* TBPostsViewController.h */,
-				4AAC8E5C1456609300AE978A /* TBPostsViewController.m */,
-				4A198756145CF2810001B208 /* TBProjectsView.xib */,
-				4A198754145CF2810001B208 /* TBProjectsViewController.h */,
-				4A198755145CF2810001B208 /* TBProjectsViewController.m */,
+				4AEF0C5114A183CD00F0E021 /* TBSiteWindow */,
+				4AEF0C5014A183C200F0E021 /* TBPostsView */,
+				4AEF0C4E14A183AE00F0E021 /* TBProjectsView */,
+				4AEF0C5214A183E400F0E021 /* TBAddPostSheet */,
 				4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */,
 				4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */,
 				4ABD6A4D1441689B007E2F5D /* TBTableView.h */,
 				4ABD6A4E1441689B007E2F5D /* TBTableView.m */,
 				4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */,
-				4ABD6A47143FE466007E2F5D /* TBAddPostSheetController.h */,
-				4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */,
-				4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */,
 				4A88295C143A679C00EBBD7E /* TBDocumentController.h */,
 				4A88295D143A679C00EBBD7E /* TBDocumentController.m */,
 				4AAC8E411451EF9200AE978A /* TBViewController.h */,
@@ -523,6 +515,46 @@
 			name = UKFileWatcher;
 			path = Dependencies/UKFileWatcher;
 			sourceTree = SOURCE_ROOT;
+		};
+		4AEF0C4E14A183AE00F0E021 /* TBProjectsView */ = {
+			isa = PBXGroup;
+			children = (
+				4A198756145CF2810001B208 /* TBProjectsView.xib */,
+				4A198754145CF2810001B208 /* TBProjectsViewController.h */,
+				4A198755145CF2810001B208 /* TBProjectsViewController.m */,
+			);
+			name = TBProjectsView;
+			sourceTree = "<group>";
+		};
+		4AEF0C5014A183C200F0E021 /* TBPostsView */ = {
+			isa = PBXGroup;
+			children = (
+				4AAC8E5E1456616F00AE978A /* TBPostsView.xib */,
+				4AAC8E5B1456609300AE978A /* TBPostsViewController.h */,
+				4AAC8E5C1456609300AE978A /* TBPostsViewController.m */,
+			);
+			name = TBPostsView;
+			sourceTree = "<group>";
+		};
+		4AEF0C5114A183CD00F0E021 /* TBSiteWindow */ = {
+			isa = PBXGroup;
+			children = (
+				4A882969143A736F00EBBD7E /* TBSiteWindow.xib */,
+				4AAC8E4C145286E000AE978A /* TBSiteWindowController.h */,
+				4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */,
+			);
+			name = TBSiteWindow;
+			sourceTree = "<group>";
+		};
+		4AEF0C5214A183E400F0E021 /* TBAddPostSheet */ = {
+			isa = PBXGroup;
+			children = (
+				4ABD6A47143FE466007E2F5D /* TBAddPostSheetController.h */,
+				4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */,
+				4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */,
+			);
+			name = TBAddPostSheet;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
