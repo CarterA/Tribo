@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		4A00337B1430216500F6702F /* TBSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337A1430216500F6702F /* TBSite.m */; };
 		4A00337E143028CA00F6702F /* TBPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337D143028CA00F6702F /* TBPost.m */; };
+		4A0F0C5D14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */; };
+		4A0F0C5E14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */; };
 		4A198757145CF2810001B208 /* TBProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A198755145CF2810001B208 /* TBProjectsViewController.m */; };
 		4A198758145CF2810001B208 /* TBProjectsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A198756145CF2810001B208 /* TBProjectsView.xib */; };
 		4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4A30E879144B86F4001DDBAE /* Credits.rtf */; };
 		4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */; };
 		4A6DC8EC1430203B00CB5025 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6DC8EB1430203B00CB5025 /* Foundation.framework */; };
-		4A72F124143155AA00A164E9 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A72F123143155AA00A164E9 /* libGRMustache1-macosx10.6.a */; };
 		4A72F131143686AE00A164E9 /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F128143686AE00A164E9 /* autolink.c */; };
 		4A72F132143686AE00A164E9 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F12A143686AE00A164E9 /* buffer.c */; };
 		4A72F133143686AE00A164E9 /* markdown.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F12D143686AE00A164E9 /* markdown.c */; };
@@ -87,7 +88,6 @@
 		4A8829231437C53000EBBD7E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A75580A1436F6590040A10C /* CoreFoundation.framework */; };
 		4A8829241437C53000EBBD7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6DC8EB1430203B00CB5025 /* Foundation.framework */; };
 		4A8829251437C53000EBBD7E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A75580D1436F6820040A10C /* Security.framework */; };
-		4A8829261437C63700EBBD7E /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A72F123143155AA00A164E9 /* libGRMustache1-macosx10.6.a */; };
 		4A8829491438EB9F00EBBD7E /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A88294A1438EB9F00EBBD7E /* UKFSEventsWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */; };
@@ -122,6 +122,7 @@
 		4A00337A1430216500F6702F /* TBSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSite.m; sourceTree = "<group>"; };
 		4A00337C143028CA00F6702F /* TBPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPost.h; sourceTree = "<group>"; };
 		4A00337D143028CA00F6702F /* TBPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPost.m; sourceTree = "<group>"; };
+		4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache1-macosx10.6.a"; path = "Dependencies/GRMustache/lib/libGRMustache1-macosx10.6.a"; sourceTree = SOURCE_ROOT; };
 		4A198754145CF2810001B208 /* TBProjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBProjectsViewController.h; sourceTree = "<group>"; };
 		4A198755145CF2810001B208 /* TBProjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBProjectsViewController.m; sourceTree = "<group>"; };
 		4A198756145CF2810001B208 /* TBProjectsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBProjectsView.xib; sourceTree = "<group>"; };
@@ -131,7 +132,6 @@
 		4A6DC8E71430203B00CB5025 /* tribo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tribo; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6DC8EB1430203B00CB5025 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4A72F1221431559F00A164E9 /* GRMustache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRMustache.h; path = Dependencies/GRMustache/include/GRMustache.h; sourceTree = SOURCE_ROOT; };
-		4A72F123143155AA00A164E9 /* libGRMustache1-macosx10.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache1-macosx10.6.a"; path = "Dependencies/GRMustache/lib/libGRMustache1-macosx10.6.a"; sourceTree = SOURCE_ROOT; };
 		4A72F128143686AE00A164E9 /* autolink.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = autolink.c; path = Dependencies/Sundown/src/autolink.c; sourceTree = SOURCE_ROOT; };
 		4A72F129143686AE00A164E9 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autolink.h; path = Dependencies/Sundown/src/autolink.h; sourceTree = SOURCE_ROOT; };
 		4A72F12A143686AE00A164E9 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = buffer.c; path = Dependencies/Sundown/src/buffer.c; sourceTree = SOURCE_ROOT; };
@@ -242,7 +242,7 @@
 				4A75580C1436F6630040A10C /* CoreFoundation.framework in Frameworks */,
 				4A6DC8EC1430203B00CB5025 /* Foundation.framework in Frameworks */,
 				4A75580F1436F6A20040A10C /* Security.framework in Frameworks */,
-				4A72F124143155AA00A164E9 /* libGRMustache1-macosx10.6.a in Frameworks */,
+				4A0F0C5D14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +258,7 @@
 				4A8829241437C53000EBBD7E /* Foundation.framework in Frameworks */,
 				4A8829251437C53000EBBD7E /* Security.framework in Frameworks */,
 				4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */,
-				4A8829261437C63700EBBD7E /* libGRMustache1-macosx10.6.a in Frameworks */,
+				4A0F0C5E14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,7 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				4A72F1221431559F00A164E9 /* GRMustache.h */,
-				4A72F123143155AA00A164E9 /* libGRMustache1-macosx10.6.a */,
+				4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */,
 			);
 			name = GRMustache;
 			sourceTree = "<group>";

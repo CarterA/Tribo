@@ -1,0 +1,9 @@
+[submodule "Dependencies/CocoaHTTPServer"]
+	path = Dependencies/CocoaHTTPServer
+	url = https://github.com/robbiehanson/CocoaHTTPServer.git
+[submodule "Dependencies/GRMustache"]
+	path = Dependencies/GRMustache
+	url = https://github.com/groue/GRMustache.git
+[submodule "Dependencies/Sundown"]
+	path = Dependencies/Sundown
+	url = https://github.com/CarterA/sundown.git
