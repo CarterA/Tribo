@@ -10,7 +10,7 @@
 #define Tribo_TBError_h
 
 // Error domains
-#define TBErrorDomain @"com.opt-6"
+#define TBErrorDomain @"com.opt-6.Tribo.ErrorDomain"
 
 // Error codes
 #define TBErrorBadContent 42
