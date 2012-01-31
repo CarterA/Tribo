@@ -34,8 +34,12 @@
 }
 
 - (void)startPreview {
-	
-	[self.site process];
+	NSError *error = nil;
+	BOOL success = [self.site process:&error];
+    if (!success) {
+        [self presentError:error];
+        return;
+    }
 	
 	if (!self.sourceWatcher) {
 		self.sourceWatcher = [UKFSEventsWatcher new];
@@ -80,18 +84,31 @@
 }
 
 - (void)watcher:(id<UKFileWatcher>)watcher receivedNotification:(NSString *)notification forPath:(NSString *)path {
+    NSError *error = nil;
+    BOOL success = YES;
 	if (watcher == self.sourceWatcher || self.server.isRunning) {
-		[self.site process];
-		[self refreshLocalhostPages];
+        success = [self.site process:&error];
+        if (success) {
+            [self refreshLocalhostPages];
+        }
 	}
 	else if (watcher == self.postsWatcher) {
-		[self.site parsePosts];
+		success = [self.site parsePosts:&error];
 	}
+    if (!success) {
+        [self presentError:error];
+    }
 }
 
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
 	self.site = [TBSite siteWithRoot:URL];
-	[self.site parsePosts];
+    
+    BOOL success = [self.site parsePosts:outError];
+    if (!success) {
+        [NSApp presentError:*outError];
+        *outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil];
+        return NO;
+    }
 	return YES;
 }
 

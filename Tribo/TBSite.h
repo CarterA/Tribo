@@ -10,9 +10,9 @@
 
 + (TBSite *)siteWithRoot:(NSURL *)root;
 
-- (void)process;
-- (void)parsePosts;
-- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug;
+- (BOOL)process:(NSError **)error;
+- (BOOL)parsePosts:(NSError **)error;
+- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error;
 
 @property (nonatomic, strong) NSURL *root;
 @property (nonatomic, strong) NSURL *destination;

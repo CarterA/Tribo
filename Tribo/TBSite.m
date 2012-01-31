@@ -8,6 +8,7 @@
 
 #import "TBSite.h"
 #import "TBPost.h"
+#import "TBError.h"
 #import "GRMustache.h"
 
 @interface TBSite ()
@@ -16,6 +17,7 @@
 @property (nonatomic, readonly) NSString *XMLDate;
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
 - (void)writePosts;
+- (NSError *)badDirectoryError;
 @end
 
 @implementation TBSite
@@ -37,18 +39,20 @@
 	site.templatesDirectory = [site.root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
 	return site;
 }
-- (void)process {
-	
+- (BOOL)process:(NSError **)error {	
 	// Find and compile the post template.
 	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
 	NSString *rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:nil];
 	NSURL *postPartialURL = [self.templatesDirectory URLByAppendingPathComponent:@"Post.mustache" isDirectory:NO];
 	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:nil];
 	NSString *rawPostTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
-	self.postTemplate = [GRMustacheTemplate parseString:rawPostTemplate error:nil];
+	self.postTemplate = [GRMustacheTemplate parseString:rawPostTemplate error:error];
+    if (!self.postTemplate) {
+        return NO;
+    }
 	
 	// Take care of posts early so that pages can use them.
-	[self parsePosts];
+	[self parsePosts:error];
 	[self writePosts];
 	
 	// Process the Feed.xml file.
@@ -60,9 +64,15 @@
 	// Recurse through the entire "Source" directory for pages and files.
 	BOOL sourceDirectoryIsDirectory = NO;
 	BOOL sourceDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.sourceDirectory.path isDirectory:&sourceDirectoryIsDirectory];
-	if (!sourceDirectoryIsDirectory || !sourceDirectoryExists) return;
-	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.sourceDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *error) {
-		return YES;
+	if (!sourceDirectoryIsDirectory || !sourceDirectoryExists){
+        if (error) {
+            *error = [self badDirectoryError];
+        }
+        return NO;
+    }
+    
+	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.sourceDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *enumeratorError) {
+        return YES;
 	}];
 	for (NSURL *URL in enumerator) {
 		
@@ -79,7 +89,10 @@
 			[[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
 		
 		if ([extension isEqualToString:@"mustache"]) {
-			TBPage *page = [TBPage pageWithURL:URL inSite:self];
+			TBPage *page = [TBPage pageWithURL:URL inSite:self error:error];
+            if (!page) {
+                return NO;
+            }
 			NSString *rawPageTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
 			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate parseString:rawPageTemplate error:nil];
 			NSString *renderedPage = [pageTemplate renderObject:page];
@@ -89,20 +102,34 @@
 			[[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:nil];
 		}
 	}
-	
+	return YES;
 }
-- (void)parsePosts {
+- (BOOL)parsePosts:(NSError **)error {
 	BOOL postsDirectoryIsDirectory = NO;
 	BOOL postsDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.postsDirectory.path isDirectory:&postsDirectoryIsDirectory];
-	if (!postsDirectoryIsDirectory || !postsDirectoryExists) return;
+	if (!postsDirectoryIsDirectory || !postsDirectoryExists){
+        if (error) {
+            *error = [self badDirectoryError];
+        }
+        return NO;
+    }
 	self.posts = [NSMutableArray array];
 	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
-		TBPost *post = [TBPost postWithURL:postURL];
+		TBPost *post = [TBPost postWithURL:postURL error:error];
+        if (!post) {
+            return NO;
+        }
 		[self.posts addObject:post];
 	}
 	self.posts = [NSMutableArray arrayWithArray:[[self.posts reverseObjectEnumerator] allObjects]];
-	self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, 5)];
+    
+    NSUInteger recentPostCount = 5;
+    if ([self.posts count] < recentPostCount) {
+        recentPostCount = [self.posts count];
+    }
+	self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, recentPostCount)];
     self.latestPost = [self.recentPosts objectAtIndex:0];
+    return YES;
 }
 - (void)writePosts {
 	
@@ -128,7 +155,7 @@
 	}
 	
 }
-- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug {
+- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error{
 	NSDate *currentDate = [NSDate date];
 	NSDateFormatter *dateFormatter = [NSDateFormatter new];
 	dateFormatter.dateFormat = @"yyyy-MM-dd";
@@ -137,7 +164,9 @@
 	NSURL *destination = [[self.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
 	NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
 	[contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
-	[self parsePosts];
+	if (![self parsePosts:error]) {
+        return nil;
+    }
 	return destination;
 }
 - (NSString *)XMLDate {
@@ -147,5 +176,11 @@
 	NSMutableString *mutableDateString = [[formatter stringFromDate:date] mutableCopy];
 	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
 	return mutableDateString;
+}
+- (NSError *)badDirectoryError{
+    NSString *errorString = [NSString stringWithFormat:@"%@ does not exist!", [self.postsDirectory lastPathComponent]];
+    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:errorString,NSLocalizedDescriptionKey, self.postsDirectory, NSURLErrorKey, nil];
+    NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
+    return contentError;
 }
 @end
