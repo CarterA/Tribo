@@ -9,9 +9,11 @@
 #import "TBPost.h"
 #import "markdown.h"
 #import "html.h"
+#import "TBError.h"
 
 @interface TBPost ()
-- (void)parse;
+- (BOOL)parse:(NSError **)error;
+- (NSError *)badPostError;
 @property (readonly) NSString *dateString;
 @property (readonly) NSString *XMLDate;
 @property (readonly) NSString *summary;
@@ -25,8 +27,8 @@
 @synthesize date=_date;
 @synthesize slug=_slug;
 @synthesize markdownContent=_markdownContent;
-+ (TBPost *)postWithURL:(NSURL *)URL {
-	return (TBPost *)[super pageWithURL:URL inSite:nil];
++ (TBPost *)postWithURL:(NSURL *)URL error:(NSError **)error{
+	return (TBPost *)[super pageWithURL:URL inSite:nil error:error];
 }
 - (NSString *)dateString {
 	NSDateFormatter *formatter = [NSDateFormatter new];
@@ -52,8 +54,15 @@
 	NSString *directoryStructure = [formatter stringFromDate:self.date];
 	return [directoryStructure stringByAppendingPathComponent:self.slug];
 }
-- (void)parse {
+
+- (BOOL)parse:(NSError **)error {
 	NSMutableString *markdownContent = [NSMutableString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
+    if(![markdownContent length]){
+        if(error){
+            *error = [self badPostError];
+        }
+        return NO;
+    }
 	
 	// Titles are optional.
 	// A single # header on the first line of the document is regarded as the title.
@@ -95,6 +104,11 @@
 	
 	bufrelease(inputBuffer);
 	bufrelease(outputBuffer);
-
+    return YES;
+}
+- (NSError *)badPostError{
+    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Could not read any content from the post at %@", [[self URL] lastPathComponent]], NSLocalizedDescriptionKey, [self URL], NSURLErrorKey, nil];
+    NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
+    return contentError;
 }
 @end
