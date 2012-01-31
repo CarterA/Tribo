@@ -16,6 +16,7 @@ void printError(const char *errorMessage);
 int main (int argumentCount, const char *arguments[]) {
 	@autoreleasepool {
 		NSRunLoop *runLoop = [NSRunLoop mainRunLoop];
+		printHeader("Compiling website...");
 		TBSite *site = [TBSite new];
 		site.root = [NSURL fileURLWithPath:[NSFileManager defaultManager].currentDirectoryPath];
 		site.destination = [site.root URLByAppendingPathComponent:@"Output" isDirectory:YES];
