@@ -9,7 +9,7 @@
 #import "TBPage.h"
 
 @interface TBPost : TBPage
-+ (TBPost *)postWithURL:(NSURL *)URL;
++ (TBPost *)postWithURL:(NSURL *)URL error:(NSError **)error;
 @property (nonatomic, strong) NSString *author;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *slug;

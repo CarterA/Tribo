@@ -90,7 +90,11 @@
 
 - (IBAction)showAddPostSheet:(id)sender {
 	[self.addPostSheetController runModalForWindow:self.document.windowForSheet completionBlock:^(NSString *title, NSString *slug) {
-		[self.document.site addPostWithTitle:title slug:slug];
+        NSError *error = nil;
+        NSURL *siteURL = [self.document.site addPostWithTitle:title slug:slug error:&error];
+        if (!siteURL) {
+            [self presentError:error];
+        }
 	}];
 }
 
@@ -105,7 +109,7 @@
 }
 
 - (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item {
-	NSInteger index = 0;
+	NSUInteger index = 0;
 	for (index = 0; index < self.document.site.posts.count; index++) {
 		if ([((TBPost *)[self.document.site.posts objectAtIndex:index]).URL isEqual:item]) continue;
 	}

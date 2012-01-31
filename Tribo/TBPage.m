@@ -7,6 +7,11 @@
 //
 
 #import "TBPage.h"
+#import "TBError.h"
+
+@interface TBPage()
+- (NSError *)badPageError;
+@end
 
 @implementation TBPage
 @synthesize URL=_URL;
@@ -15,17 +20,27 @@
 @synthesize content=_content;
 @synthesize template=_template;
 @synthesize stylesheets=_stylesheets;
-+ (TBPage *)pageWithURL:(NSURL *)URL inSite:(TBSite *)site {
++ (TBPage *)pageWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError**)error{
 	TBPage *page = [super new];
 	if (page) {
 		page.URL = URL;
 		page.site = site;
-		[page parse];
+        
+		BOOL parsedPage = [page parse:error];
+        if (!parsedPage) {
+            return nil;
+        }
 	}
 	return page;
 }
-- (void)parse {
+- (BOOL)parse:(NSError **)error{
 	NSMutableString *content = [NSMutableString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
+    if (![content length]) {
+        if (error) {
+            *error = [self badPageError];
+        }
+        return NO;
+    }
 	
 	// Titles are optional. They take the following form:
 	// <!-- Title -->
@@ -56,6 +71,11 @@
 	}
 	
 	self.content = content;
-	
+	return YES;
+}
+- (NSError *)badPageError{
+    NSString *errorString = [NSString stringWithFormat:@"Could not read any content from %@", [[self URL] lastPathComponent]];
+    NSDictionary *info = [NSDictionary dictionaryWithObject:errorString forKey:NSLocalizedDescriptionKey];
+    return [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
 }
 @end
