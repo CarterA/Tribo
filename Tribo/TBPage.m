@@ -27,7 +27,7 @@
 		page.site = site;
         
 		BOOL parsedPage = [page parse:error];
-        if(!parsedPage){
+        if (!parsedPage) {
             return nil;
         }
 	}
@@ -35,8 +35,8 @@
 }
 - (BOOL)parse:(NSError **)error{
 	NSMutableString *content = [NSMutableString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
-    if(![content length]){
-        if(error){
+    if (![content length]) {
+        if (error) {
             *error = [self badPageError];
         }
         return NO;

@@ -25,7 +25,7 @@ int main (int argumentCount, const char *arguments[]) {
         
         NSError *error = nil;
 		BOOL websiteBuilt = [site process:&error];
-        if(!websiteBuilt){
+        if (!websiteBuilt) {
             printError([[error localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding]);
             exit((int)[error code]);
         }

@@ -47,7 +47,7 @@
 	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:nil];
 	NSString *rawPostTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
 	self.postTemplate = [GRMustacheTemplate parseString:rawPostTemplate error:error];
-    if(!self.postTemplate){
+    if (!self.postTemplate) {
         return NO;
     }
 	
@@ -65,7 +65,7 @@
 	BOOL sourceDirectoryIsDirectory = NO;
 	BOOL sourceDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.sourceDirectory.path isDirectory:&sourceDirectoryIsDirectory];
 	if (!sourceDirectoryIsDirectory || !sourceDirectoryExists){
-        if(error){
+        if (error) {
             *error = [self badDirectoryError];
         }
         return NO;
@@ -90,7 +90,7 @@
 		
 		if ([extension isEqualToString:@"mustache"]) {
 			TBPage *page = [TBPage pageWithURL:URL inSite:self error:error];
-            if(!page){
+            if (!page) {
                 return NO;
             }
 			NSString *rawPageTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
@@ -108,7 +108,7 @@
 	BOOL postsDirectoryIsDirectory = NO;
 	BOOL postsDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.postsDirectory.path isDirectory:&postsDirectoryIsDirectory];
 	if (!postsDirectoryIsDirectory || !postsDirectoryExists){
-        if(error){
+        if (error) {
             *error = [self badDirectoryError];
         }
         return NO;
@@ -116,7 +116,7 @@
 	self.posts = [NSMutableArray array];
 	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
 		TBPost *post = [TBPost postWithURL:postURL error:error];
-        if(!post){
+        if (!post) {
             return NO;
         }
 		[self.posts addObject:post];
@@ -124,7 +124,7 @@
 	self.posts = [NSMutableArray arrayWithArray:[[self.posts reverseObjectEnumerator] allObjects]];
     
     NSUInteger recentPostCount = 5;
-    if([self.posts count] < recentPostCount){
+    if ([self.posts count] < recentPostCount) {
         recentPostCount = [self.posts count];
     }
 	self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, recentPostCount)];
@@ -164,7 +164,7 @@
 	NSURL *destination = [[self.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
 	NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
 	[contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
-	if(![self parsePosts:error]){
+	if (![self parsePosts:error]) {
         return nil;
     }
 	return destination;

@@ -57,8 +57,8 @@
 
 - (BOOL)parse:(NSError **)error {
 	NSMutableString *markdownContent = [NSMutableString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
-    if(![markdownContent length]){
-        if(error){
+    if (![markdownContent length]) {
+        if (error) {
             *error = [self badPostError];
         }
         return NO;

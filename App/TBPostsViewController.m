@@ -92,7 +92,7 @@
 	[self.addPostSheetController runModalForWindow:self.document.windowForSheet completionBlock:^(NSString *title, NSString *slug) {
         NSError *error = nil;
         NSURL *siteURL = [self.document.site addPostWithTitle:title slug:slug error:&error];
-        if(!siteURL){
+        if (!siteURL) {
             [self presentError:error];
         }
 	}];

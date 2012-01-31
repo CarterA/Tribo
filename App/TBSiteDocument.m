@@ -36,7 +36,7 @@
 - (void)startPreview {
 	NSError *error = nil;
 	BOOL success = [self.site process:&error];
-    if(!success){
+    if (!success) {
         [self presentError:error];
         return;
     }
@@ -88,14 +88,14 @@
     BOOL success = YES;
 	if (watcher == self.sourceWatcher || self.server.isRunning) {
         success = [self.site process:&error];
-        if(success){
+        if (success) {
             [self refreshLocalhostPages];
         }
 	}
 	else if (watcher == self.postsWatcher) {
 		success = [self.site parsePosts:&error];
 	}
-    if(!success){
+    if (!success) {
         [self presentError:error];
     }
 }
@@ -104,7 +104,7 @@
 	self.site = [TBSite siteWithRoot:URL];
     
     BOOL success = [self.site parsePosts:outError];
-    if(!success){
+    if (!success) {
         [NSApp presentError:*outError];
         *outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil];
         return NO;
