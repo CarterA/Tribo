@@ -36,7 +36,6 @@
 	[titles enumerateObjectsUsingBlock:^(NSString *title, NSUInteger index, BOOL *stop) {
 		TBTab *tab = [[TBTab alloc] initWithFrame:NSMakeRect(index * tabWidth, 0, tabWidth, tabHeight)];
 		tab.target = self;
-		tab.action = @selector(tabWasClicked:);
 		tab.stringValue = title;
 		tab.autoresizingMask = NSViewWidthSizable;
 		if (index == 0) tab.autoresizingMask = tab.autoresizingMask|NSViewMaxXMargin;
