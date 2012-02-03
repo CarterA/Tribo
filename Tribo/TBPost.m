@@ -87,6 +87,7 @@
 	}
 	
 	// Create and fill a buffer for with the raw markdown data.
+	if ([markdownContent length] == 0) return YES;
 	struct sd_callbacks callbacks;
 	struct html_renderopt options;
 	const char *rawMarkdown = [markdownContent cStringUsingEncoding:NSUTF8StringEncoding];
