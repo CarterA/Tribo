@@ -11,6 +11,9 @@
 #import "html.h"
 #import "TBError.h"
 
+static NSDateFormatter *dateStringFormatter;
+static NSDateFormatter *relativeURLFormatter;
+
 @interface TBPost ()
 - (BOOL)parse:(NSError **)error;
 - (NSError *)badPostError;
@@ -31,9 +34,11 @@
 	return (TBPost *)[super pageWithURL:URL inSite:nil error:error];
 }
 - (NSString *)dateString {
-	NSDateFormatter *formatter = [NSDateFormatter new];
-	formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dMMMyyyy" options:0 locale:[NSLocale currentLocale]];
-	return [formatter stringFromDate:self.date];
+	if (dateStringFormatter == nil) {
+		dateStringFormatter = [NSDateFormatter new];
+		dateStringFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dMMMyyyy" options:0 locale:[NSLocale currentLocale]];
+	}
+	return [dateStringFormatter stringFromDate:self.date];
 }
 - (NSString *)XMLDate {
 	NSDateFormatter *formatter = [NSDateFormatter new];
@@ -49,9 +54,11 @@
 	return [self.content substringWithRange:paragraphRange];
 }
 - (NSString *)relativeURL {
-	NSDateFormatter *formatter = [NSDateFormatter new];
-	formatter.dateFormat = @"/yyyy/MM/dd";
-	NSString *directoryStructure = [formatter stringFromDate:self.date];
+	if (relativeURLFormatter == nil) {
+		relativeURLFormatter = [NSDateFormatter new];
+		relativeURLFormatter.dateFormat = @"/yyyy/MM/dd";
+	}
+	NSString *directoryStructure = [relativeURLFormatter stringFromDate:self.date];
 	return [directoryStructure stringByAppendingPathComponent:self.slug];
 }
 

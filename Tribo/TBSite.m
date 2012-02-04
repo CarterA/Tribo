@@ -11,6 +11,8 @@
 #import "TBError.h"
 #import "GRMustache.h"
 
+static NSDateFormatter *postPathFormatter;
+
 @interface TBSite ()
 @property (nonatomic, strong) TBPost *latestPost;
 @property (nonatomic, strong) NSArray *recentPosts;
@@ -140,9 +142,11 @@
 		
 		// Create the path to the folder where we are going to write the post file.
 		// The directory structure we create is /YYYY/MM/DD/slug/
-		NSDateFormatter *formatter = [NSDateFormatter new];
-		formatter.dateFormat = @"yyyy/MM/dd";
-		NSString *directoryStructure = [formatter stringFromDate:post.date];
+		if (postPathFormatter == nil) {
+			postPathFormatter = [NSDateFormatter new];
+			postPathFormatter.dateFormat = @"yyyy/MM/dd";
+		}
+		NSString *directoryStructure = [postPathFormatter stringFromDate:post.date];
 		NSURL *destinationDirectory = [[self.destination URLByAppendingPathComponent:directoryStructure isDirectory:YES] URLByAppendingPathComponent:post.slug isDirectory:YES];
 		[[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:nil];
 		
