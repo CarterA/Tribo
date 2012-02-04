@@ -113,16 +113,17 @@
         }
         return NO;
     }
-	self.posts = [NSMutableArray array];
+	NSMutableArray *posts = [NSMutableArray array];
 	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
 		TBPost *post = [TBPost postWithURL:postURL error:error];
         if (!post) {
             return NO;
         }
-		[self.posts addObject:post];
+		[posts addObject:post];
 	}
-	self.posts = [NSMutableArray arrayWithArray:[[self.posts reverseObjectEnumerator] allObjects]];
-    
+	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
+    self.posts = posts;
+	
     NSUInteger recentPostCount = 5;
     if ([self.posts count] < recentPostCount) {
         recentPostCount = [self.posts count];

@@ -248,7 +248,6 @@
 						<reference key="NSSuperview" ref="262020719"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="455683324"/>
-						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:2419</string>
 						<bool key="NSEnabled">YES</bool>

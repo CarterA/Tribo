@@ -51,13 +51,18 @@
 		self.progressIndicator.hidden = NO;
 		[self.progressIndicator startAnimation:self];
 		
-		[document startPreview];
-		
-		[self.progressIndicator stopAnimation:self];
-		self.progressIndicator.hidden = YES;
-		self.previewButton.title = @"Stop Server";
-		[self.previewButton sizeToFit];
-		self.previewButton.hidden = NO;
+		[document startPreview:^(NSError *error) {
+			
+			if (error)
+				[self presentError:error];
+			
+			[self.progressIndicator stopAnimation:self];
+			self.progressIndicator.hidden = YES;
+			self.previewButton.hidden = NO;
+			self.previewButton.title = @"Stop Server";
+			[self.previewButton sizeToFit];
+			
+		}];
 		
 	}
 	else {

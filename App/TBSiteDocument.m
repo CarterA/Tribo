@@ -33,30 +33,34 @@
 	[self addWindowController:windowController];
 }
 
-- (void)startPreview {
-	NSError *error = nil;
-	BOOL success = [self.site process:&error];
-    if (!success) {
-        [self presentError:error];
-        return;
-    }
+- (void)startPreview:(TBSiteDocumentPreviewCallback)callback {
 	
-	if (!self.sourceWatcher) {
-		self.sourceWatcher = [UKFSEventsWatcher new];
-		self.sourceWatcher.delegate = self;
-	}
-	[self.sourceWatcher addPath:self.site.sourceDirectory.path];
-	[self.sourceWatcher addPath:self.site.postsDirectory.path];
-	[self.sourceWatcher addPath:self.site.templatesDirectory.path];
-	
-	// Start up the HTTP server so that the site can be previewed.
-	if (!self.server) {
-		self.server = [HTTPServer new];
-		self.server.documentRoot = self.site.destination.path;
-	}
-	[self.server start:nil];
-	[self refreshLocalhostPages];
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]]];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		NSError *error = nil;
+		[self.site process:&error];
+		
+		if (!self.sourceWatcher) {
+			self.sourceWatcher = [UKFSEventsWatcher new];
+			self.sourceWatcher.delegate = self;
+		}
+		[self.sourceWatcher addPath:self.site.sourceDirectory.path];
+		[self.sourceWatcher addPath:self.site.postsDirectory.path];
+		[self.sourceWatcher addPath:self.site.templatesDirectory.path];
+		if (!self.server) {
+			self.server = [HTTPServer new];
+			self.server.documentRoot = self.site.destination.path;
+		}
+		[self.server start:nil];
+		[self refreshLocalhostPages];
+		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]]];
+		
+		if (!callback) return;
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			callback(error);
+		});
+		
+	});
 	
 }
 
