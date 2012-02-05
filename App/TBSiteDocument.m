@@ -104,6 +104,8 @@
     }
 }
 
++ (BOOL)canConcurrentlyReadDocumentsOfType:(NSString *)typeName { return YES; }
+
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
 	self.site = [TBSite siteWithRoot:URL];
     
