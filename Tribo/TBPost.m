@@ -41,9 +41,13 @@ static NSDateFormatter *relativeURLFormatter;
 	return [dateStringFormatter stringFromDate:self.date];
 }
 - (NSString *)XMLDate {
-	NSDateFormatter *formatter = [NSDateFormatter new];
-	formatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
-	NSMutableString *mutableDateString = [[formatter stringFromDate:self.date] mutableCopy];
+	static NSDateFormatter *XMLDateFormatter;
+	if (XMLDateFormatter == nil) {
+		XMLDateFormatter = [NSDateFormatter new];
+		XMLDateFormatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
+	}
+	XMLDateFormatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
+	NSMutableString *mutableDateString = [[XMLDateFormatter stringFromDate:self.date] mutableCopy];
 	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
 	return mutableDateString;
 }

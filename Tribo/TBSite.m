@@ -191,9 +191,12 @@ static NSDateFormatter *postPathFormatter;
 }
 - (NSString *)XMLDate {
 	NSDate *date = [NSDate date];
-	NSDateFormatter *formatter = [NSDateFormatter new];
-	formatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
-	NSMutableString *mutableDateString = [[formatter stringFromDate:date] mutableCopy];
+	static NSDateFormatter *XMLDateFormatter;
+	if (XMLDateFormatter == nil) {
+		XMLDateFormatter = [NSDateFormatter new];
+		XMLDateFormatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
+	}
+	NSMutableString *mutableDateString = [[XMLDateFormatter stringFromDate:date] mutableCopy];
 	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
 	return mutableDateString;
 }
