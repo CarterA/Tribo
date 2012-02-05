@@ -18,6 +18,7 @@ static NSDateFormatter *postPathFormatter;
 @property (nonatomic, strong) NSArray *recentPosts;
 @property (nonatomic, readonly) NSString *XMLDate;
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
+@property (nonatomic, strong) NSDate *lastParsedPostsModificationDate;
 - (void)writePosts;
 - (NSError *)badDirectoryError;
 @end
@@ -32,6 +33,7 @@ static NSDateFormatter *postPathFormatter;
 @synthesize latestPost=_latestPost;
 @synthesize recentPosts=_recentPosts;
 @synthesize postTemplate=_postTemplate;
+@synthesize lastParsedPostsModificationDate=_lastParsedPostsModificationDate;
 + (TBSite *)siteWithRoot:(NSURL *)root {
 	TBSite *site = [TBSite new];
 	site.root = root;
@@ -107,6 +109,8 @@ static NSDateFormatter *postPathFormatter;
 	return YES;
 }
 - (BOOL)parsePosts:(NSError **)error {
+	
+	// Verify that the Posts directory exists and is a directory.
 	BOOL postsDirectoryIsDirectory = NO;
 	BOOL postsDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.postsDirectory.path isDirectory:&postsDirectoryIsDirectory];
 	if (!postsDirectoryIsDirectory || !postsDirectoryExists){
@@ -115,6 +119,15 @@ static NSDateFormatter *postPathFormatter;
         }
         return NO;
     }
+	
+	// Check the modification date of the Posts directory, and bail out if we don't need to re-parse it.
+	NSDate *currentModificationDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.postsDirectory.path stringByResolvingSymlinksInPath] error:nil] fileModificationDate];
+	if (!self.lastParsedPostsModificationDate)
+		self.lastParsedPostsModificationDate = currentModificationDate;
+	else if ([self.lastParsedPostsModificationDate isEqualToDate:currentModificationDate])
+		return YES;
+	
+	// Parse the contents of the Posts directory into individual TBPost objects.
 	NSMutableArray *posts = [NSMutableArray array];
 	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
 		TBPost *post = [TBPost postWithURL:postURL error:error];
@@ -126,6 +139,7 @@ static NSDateFormatter *postPathFormatter;
 	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
     self.posts = posts;
 	
+	// Prepare the convenience sets of posts used by templates.
     NSUInteger recentPostCount = 5;
     if ([self.posts count] < recentPostCount) {
         recentPostCount = [self.posts count];
@@ -133,6 +147,7 @@ static NSDateFormatter *postPathFormatter;
 	self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, recentPostCount)];
     self.latestPost = [self.recentPosts objectAtIndex:0];
     return YES;
+	
 }
 - (void)writePosts {
 	
