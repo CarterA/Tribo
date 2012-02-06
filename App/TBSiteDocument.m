@@ -88,6 +88,7 @@
 }
 
 - (void)watcher:(id<UKFileWatcher>)watcher receivedNotification:(NSString *)notification forPath:(NSString *)path {
+    [[NSProcessInfo processInfo] disableSuddenTermination];
     NSError *error = nil;
     BOOL success = YES;
 	if (watcher == self.sourceWatcher || self.server.isRunning) {
@@ -102,6 +103,7 @@
     if (!success) {
         [self presentError:error];
     }
+    [[NSProcessInfo processInfo] enableSuddenTermination];
 }
 
 + (BOOL)canConcurrentlyReadDocumentsOfType:(NSString *)typeName { return YES; }
