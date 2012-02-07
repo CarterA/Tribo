@@ -36,9 +36,11 @@
 - (void)startPreview:(TBSiteDocumentPreviewCallback)callback {
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [[NSProcessInfo processInfo] disableSuddenTermination];
 		NSError *error = nil;
 		[self.site process:&error];
-		
+		[[NSProcessInfo processInfo] enableSuddenTermination];
+        
 		if (!self.sourceWatcher) {
 			self.sourceWatcher = [UKFSEventsWatcher new];
 			self.sourceWatcher.delegate = self;
@@ -54,7 +56,9 @@
 		[self refreshLocalhostPages];
 		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]]];
 		
-		if (!callback) return;
+		if (!callback){
+            return;
+        }
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			callback(error);
@@ -88,6 +92,7 @@
 }
 
 - (void)watcher:(id<UKFileWatcher>)watcher receivedNotification:(NSString *)notification forPath:(NSString *)path {
+    [[NSProcessInfo processInfo] disableSuddenTermination];
     NSError *error = nil;
     BOOL success = YES;
 	if (watcher == self.sourceWatcher || self.server.isRunning) {
@@ -102,6 +107,7 @@
     if (!success) {
         [self presentError:error];
     }
+    [[NSProcessInfo processInfo] enableSuddenTermination];
 }
 
 + (BOOL)canConcurrentlyReadDocumentsOfType:(NSString *)typeName { return YES; }
