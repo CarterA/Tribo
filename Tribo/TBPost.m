@@ -46,7 +46,6 @@ static NSDateFormatter *relativeURLFormatter;
 		XMLDateFormatter = [NSDateFormatter new];
 		XMLDateFormatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
 	}
-	XMLDateFormatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
 	NSMutableString *mutableDateString = [[XMLDateFormatter stringFromDate:self.date] mutableCopy];
 	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
 	return mutableDateString;
