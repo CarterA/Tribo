@@ -131,6 +131,7 @@ static NSDateFormatter *postPathFormatter;
 	NSMutableArray *posts = [NSMutableArray array];
 	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
 		TBPost *post = [TBPost postWithURL:postURL error:error];
+		post.site = self;
         if (!post) {
             return NO;
         }
