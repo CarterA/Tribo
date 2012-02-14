@@ -220,6 +220,7 @@
 		4A882967143A736E00EBBD7E /* TBSiteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSiteDocument.h; sourceTree = "<group>"; };
 		4A882968143A736E00EBBD7E /* TBSiteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSiteDocument.m; sourceTree = "<group>"; };
 		4A882969143A736F00EBBD7E /* TBSiteWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSiteWindow.xib; sourceTree = "<group>"; };
+		4AA29D0114E42ED5005E341F /* Tribo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tribo.entitlements; sourceTree = "<group>"; };
 		4AAC8E411451EF9200AE978A /* TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBViewController.h; sourceTree = "<group>"; };
 		4AAC8E421451EF9200AE978A /* TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBViewController.m; sourceTree = "<group>"; };
 		4AAC8E4C145286E000AE978A /* TBSiteWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSiteWindowController.h; sourceTree = "<group>"; };
@@ -492,6 +493,7 @@
 			children = (
 				4AE3B29E14E21AE100012A48 /* Scripting */,
 				4A30E879144B86F4001DDBAE /* Credits.rtf */,
+				4AA29D0114E42ED5005E341F /* Tribo.entitlements */,
 				4A8696441437BE3400204482 /* MainMenu.xib */,
 				4A8696461437BE3400204482 /* Core.m */,
 				4A8696471437BE3400204482 /* TBAppDelegate.h */,
@@ -850,6 +852,8 @@
 		4A86963B1437BE0C00204482 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = App/Tribo.entitlements;
+				CODE_SIGN_IDENTITY = "Tribo Open Source Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -866,6 +870,7 @@
 					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -873,6 +878,8 @@
 		4A86963C1437BE0C00204482 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = App/Tribo.entitlements;
+				CODE_SIGN_IDENTITY = "Tribo Open Source Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -889,6 +896,7 @@
 					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
