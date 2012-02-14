@@ -15,6 +15,7 @@
 		4A198758145CF2810001B208 /* TBProjectsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A198756145CF2810001B208 /* TBProjectsView.xib */; };
 		4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4A30E879144B86F4001DDBAE /* Credits.rtf */; };
 		4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */; };
+		4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A43C23314EAB89600D1CC7B /* MainMenu.xib */; };
 		4A6DC8EC1430203B00CB5025 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6DC8EB1430203B00CB5025 /* Foundation.framework */; };
 		4A72F131143686AE00A164E9 /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F128143686AE00A164E9 /* autolink.c */; };
 		4A72F132143686AE00A164E9 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F12A143686AE00A164E9 /* buffer.c */; };
@@ -50,7 +51,6 @@
 		4A7558151436FBAD0040A10C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558131436FBA10040A10C /* ApplicationServices.framework */; };
 		4A8696181437B60400204482 /* tribo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696171437B60400204482 /* tribo.m */; };
 		4A8696241437BE0B00204482 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8696231437BE0B00204482 /* Cocoa.framework */; };
-		4A86964D1437BE3400204482 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8696441437BE3400204482 /* MainMenu.xib */; };
 		4A86964E1437BE3400204482 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696461437BE3400204482 /* Core.m */; };
 		4A86964F1437BE3400204482 /* TBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696481437BE3400204482 /* TBAppDelegate.m */; };
 		4A8829021437C52200EBBD7E /* TBSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337A1430216500F6702F /* TBSite.m */; };
@@ -127,12 +127,13 @@
 		4A00337C143028CA00F6702F /* TBPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBPost.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A00337D143028CA00F6702F /* TBPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBPost.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache1-macosx10.6.a"; path = "Dependencies/GRMustache/lib/libGRMustache1-macosx10.6.a"; sourceTree = SOURCE_ROOT; };
-		4A198754145CF2810001B208 /* TBProjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBProjectsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4A198755145CF2810001B208 /* TBProjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBProjectsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4A198756145CF2810001B208 /* TBProjectsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBProjectsView.xib; sourceTree = "<group>"; };
+		4A198754145CF2810001B208 /* TBProjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TBProjectsViewController.h; path = Controllers/TBProjectsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4A198755145CF2810001B208 /* TBProjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TBProjectsViewController.m; path = Controllers/TBProjectsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4A198756145CF2810001B208 /* TBProjectsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBProjectsView.xib; path = Controllers/TBProjectsView.xib; sourceTree = "<group>"; };
 		4A30E879144B86F4001DDBAE /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBTabView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBTabView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4A43C23414EAB89600D1CC7B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4A6DC8E71430203B00CB5025 /* tribo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tribo; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6DC8EB1430203B00CB5025 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4A72F1221431559F00A164E9 /* GRMustache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRMustache.h; path = Dependencies/GRMustache/include/GRMustache.h; sourceTree = SOURCE_ROOT; };
@@ -203,12 +204,11 @@
 		4A8696171437B60400204482 /* tribo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = tribo.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A8696211437BE0B00204482 /* Tribo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tribo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8696231437BE0B00204482 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		4A8696451437BE3400204482 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4A8696461437BE3400204482 /* Core.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Core.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A8696471437BE3400204482 /* TBAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBAppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A8696481437BE3400204482 /* TBAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4A8696491437BE3400204482 /* App-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; sourceTree = "<group>"; };
-		4A86964A1437BE3400204482 /* App-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "App-Prefix.pch"; sourceTree = "<group>"; };
+		4A8696491437BE3400204482 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A86964A1437BE3400204482 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		4A8829451438EB9F00EBBD7E /* UKFileWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFileWatcher.h; sourceTree = "<group>"; };
 		4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
 		4A8829471438EB9F00EBBD7E /* UKFSEventsWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFSEventsWatcher.h; sourceTree = "<group>"; };
@@ -219,21 +219,21 @@
 		4A88295D143A679C00EBBD7E /* TBDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBDocumentController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A882967143A736E00EBBD7E /* TBSiteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBSiteDocument.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A882968143A736E00EBBD7E /* TBSiteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBSiteDocument.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4A882969143A736F00EBBD7E /* TBSiteWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSiteWindow.xib; sourceTree = "<group>"; };
+		4A882969143A736F00EBBD7E /* TBSiteWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBSiteWindow.xib; path = Controllers/TBSiteWindow.xib; sourceTree = "<group>"; };
 		4AA29D0114E42ED5005E341F /* Tribo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tribo.entitlements; sourceTree = "<group>"; };
 		4AAC8E411451EF9200AE978A /* TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AAC8E421451EF9200AE978A /* TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4AAC8E4C145286E000AE978A /* TBSiteWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBSiteWindowController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBSiteWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4AAC8E5B1456609300AE978A /* TBPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBPostsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4AAC8E5C1456609300AE978A /* TBPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBPostsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4AAC8E5E1456616F00AE978A /* TBPostsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBPostsView.xib; sourceTree = "<group>"; };
-		4ABD6A47143FE466007E2F5D /* TBAddPostSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBAddPostSheetController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBAddPostSheetController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBAddPostSheet.xib; sourceTree = "<group>"; };
+		4AAC8E4C145286E000AE978A /* TBSiteWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TBSiteWindowController.h; path = Controllers/TBSiteWindowController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TBSiteWindowController.m; path = Controllers/TBSiteWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4AAC8E5B1456609300AE978A /* TBPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TBPostsViewController.h; path = Controllers/TBPostsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4AAC8E5C1456609300AE978A /* TBPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TBPostsViewController.m; path = Controllers/TBPostsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4AAC8E5E1456616F00AE978A /* TBPostsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBPostsView.xib; path = Controllers/TBPostsView.xib; sourceTree = "<group>"; };
+		4ABD6A47143FE466007E2F5D /* TBAddPostSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TBAddPostSheetController.h; path = Controllers/TBAddPostSheetController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TBAddPostSheetController.m; path = Controllers/TBAddPostSheetController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBAddPostSheet.xib; path = Controllers/TBAddPostSheet.xib; sourceTree = "<group>"; };
 		4ABD6A4D1441689B007E2F5D /* TBTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBTableView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4ABD6A4E1441689B007E2F5D /* TBTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBTableView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBQLPreviewView.xib; sourceTree = "<group>"; };
+		4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBQLPreviewView.xib; path = Controllers/TBQLPreviewView.xib; sourceTree = "<group>"; };
 		4ABD6A5214417ECA007E2F5D /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		4ADE327B14E21B3A0059D03C /* Tribo.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tribo.sdef; sourceTree = "<group>"; };
 		4ADE327D14E21B510059D03C /* TBSite+Scripting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBSite+Scripting.h"; sourceTree = "<group>"; };
@@ -290,12 +290,50 @@
 			path = Tribo;
 			sourceTree = "<group>";
 		};
+		4A43C23014EAB73D00D1CC7B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A88295C143A679C00EBBD7E /* TBDocumentController.h */,
+				4A88295D143A679C00EBBD7E /* TBDocumentController.m */,
+				4AAC8E411451EF9200AE978A /* TBViewController.h */,
+				4AAC8E421451EF9200AE978A /* TBViewController.m */,
+				4AEF0C5114A183CD00F0E021 /* TBSiteWindow */,
+				4AEF0C5014A183C200F0E021 /* TBPostsView */,
+				4AEF0C4E14A183AE00F0E021 /* TBProjectsView */,
+				4AEF0C5214A183E400F0E021 /* TBAddPostSheet */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4A43C23114EAB7B300D1CC7B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4A43C23314EAB89600D1CC7B /* MainMenu.xib */,
+				4A30E879144B86F4001DDBAE /* Credits.rtf */,
+				4AA29D0114E42ED5005E341F /* Tribo.entitlements */,
+				4A8696491437BE3400204482 /* Info.plist */,
+				4A8829531438F54000EBBD7E /* Safari.h */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4A43C23214EAB7FB00D1CC7B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */,
+				4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */,
+				4ABD6A4D1441689B007E2F5D /* TBTableView.h */,
+				4ABD6A4E1441689B007E2F5D /* TBTableView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4A6DC8DC1430203B00CB5025 = {
 			isa = PBXGroup;
 			children = (
-				4A6DC8ED1430203B00CB5025 /* Tribo */,
-				4A8696151437B60400204482 /* CLI */,
-				4A86963F1437BE3400204482 /* App */,
+				4A6DC8ED1430203B00CB5025 /* Shared */,
+				4A86963F1437BE3400204482 /* Mac App */,
+				4A8696151437B60400204482 /* Command Line Interface */,
 				4A00338E14302F6600F6702F /* Dependencies */,
 				4A6DC8EA1430203B00CB5025 /* Frameworks */,
 				4A6DC8E81430203B00CB5025 /* Products */,
@@ -327,7 +365,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4A6DC8ED1430203B00CB5025 /* Tribo */ = {
+		4A6DC8ED1430203B00CB5025 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 				4A0033791430216500F6702F /* TBSite.h */,
@@ -338,7 +376,7 @@
 				4A72F14114368E1200A164E9 /* TBPage.m */,
 				9B507E7A14D7B2B100E85357 /* TBError.h */,
 			);
-			path = Tribo;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		4A72F125143155AE00A164E9 /* GRMustache */ = {
@@ -472,13 +510,13 @@
 			path = CocoaLumberjack;
 			sourceTree = "<group>";
 		};
-		4A8696151437B60400204482 /* CLI */ = {
+		4A8696151437B60400204482 /* Command Line Interface */ = {
 			isa = PBXGroup;
 			children = (
 				4A8696161437B60400204482 /* CLI-Prefix.pch */,
 				4A8696171437B60400204482 /* tribo.m */,
 			);
-			path = CLI;
+			path = "Command Line Interface";
 			sourceTree = "<group>";
 		};
 		4A8696251437BE0B00204482 /* Other Frameworks */ = {
@@ -488,36 +526,21 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		4A86963F1437BE3400204482 /* App */ = {
+		4A86963F1437BE3400204482 /* Mac App */ = {
 			isa = PBXGroup;
 			children = (
+				4A43C23014EAB73D00D1CC7B /* Controllers */,
+				4A43C23114EAB7B300D1CC7B /* Resources */,
 				4AE3B29E14E21AE100012A48 /* Scripting */,
-				4A30E879144B86F4001DDBAE /* Credits.rtf */,
-				4AA29D0114E42ED5005E341F /* Tribo.entitlements */,
-				4A8696441437BE3400204482 /* MainMenu.xib */,
-				4A8696461437BE3400204482 /* Core.m */,
+				4A43C23214EAB7FB00D1CC7B /* Views */,
 				4A8696471437BE3400204482 /* TBAppDelegate.h */,
 				4A8696481437BE3400204482 /* TBAppDelegate.m */,
-				4A8696491437BE3400204482 /* App-Info.plist */,
-				4A86964A1437BE3400204482 /* App-Prefix.pch */,
-				4A8829531438F54000EBBD7E /* Safari.h */,
 				4A882967143A736E00EBBD7E /* TBSiteDocument.h */,
 				4A882968143A736E00EBBD7E /* TBSiteDocument.m */,
-				4AEF0C5114A183CD00F0E021 /* TBSiteWindow */,
-				4AEF0C5014A183C200F0E021 /* TBPostsView */,
-				4AEF0C4E14A183AE00F0E021 /* TBProjectsView */,
-				4AEF0C5214A183E400F0E021 /* TBAddPostSheet */,
-				4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */,
-				4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */,
-				4ABD6A4D1441689B007E2F5D /* TBTableView.h */,
-				4ABD6A4E1441689B007E2F5D /* TBTableView.m */,
-				4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */,
-				4A88295C143A679C00EBBD7E /* TBDocumentController.h */,
-				4A88295D143A679C00EBBD7E /* TBDocumentController.m */,
-				4AAC8E411451EF9200AE978A /* TBViewController.h */,
-				4AAC8E421451EF9200AE978A /* TBViewController.m */,
+				4A8696461437BE3400204482 /* Core.m */,
+				4A86964A1437BE3400204482 /* Prefix.pch */,
 			);
-			path = App;
+			path = "Mac App";
 			sourceTree = "<group>";
 		};
 		4A8829441438EB9F00EBBD7E /* UKFileWatcher */ = {
@@ -554,6 +577,7 @@
 				4A198755145CF2810001B208 /* TBProjectsViewController.m */,
 			);
 			name = TBProjectsView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4AEF0C5014A183C200F0E021 /* TBPostsView */ = {
@@ -562,8 +586,10 @@
 				4AAC8E5E1456616F00AE978A /* TBPostsView.xib */,
 				4AAC8E5B1456609300AE978A /* TBPostsViewController.h */,
 				4AAC8E5C1456609300AE978A /* TBPostsViewController.m */,
+				4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */,
 			);
 			name = TBPostsView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4AEF0C5114A183CD00F0E021 /* TBSiteWindow */ = {
@@ -574,6 +600,7 @@
 				4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */,
 			);
 			name = TBSiteWindow;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4AEF0C5214A183E400F0E021 /* TBAddPostSheet */ = {
@@ -584,6 +611,7 @@
 				4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */,
 			);
 			name = TBAddPostSheet;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -655,7 +683,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A86964D1437BE3400204482 /* MainMenu.xib in Resources */,
 				4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */,
 				4ABD6A4C143FE495007E2F5D /* TBAddPostSheet.xib in Resources */,
 				4ABD6A5114417DBE007E2F5D /* TBQLPreviewView.xib in Resources */,
@@ -663,6 +690,7 @@
 				4AAC8E5F1456617000AE978A /* TBPostsView.xib in Resources */,
 				4A198758145CF2810001B208 /* TBProjectsView.xib in Resources */,
 				4ADE327C14E21B3A0059D03C /* Tribo.sdef in Resources */,
+				4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,10 +791,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4A8696441437BE3400204482 /* MainMenu.xib */ = {
+		4A43C23314EAB89600D1CC7B /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4A8696451437BE3400204482 /* en */,
+				4A43C23414EAB89600D1CC7B /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -852,10 +880,10 @@
 		4A86963B1437BE0C00204482 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = App/Tribo.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
 				CODE_SIGN_IDENTITY = "Tribo Open Source Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
+				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
@@ -864,7 +892,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
-				INFOPLIST_FILE = "App/App-Info.plist";
+				INFOPLIST_FILE = "Mac App/Resources/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
@@ -878,10 +906,10 @@
 		4A86963C1437BE0C00204482 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = App/Tribo.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
 				CODE_SIGN_IDENTITY = "Tribo Open Source Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
+				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
@@ -890,7 +918,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
-				INFOPLIST_FILE = "App/App-Info.plist";
+				INFOPLIST_FILE = "Mac App/Resources/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
