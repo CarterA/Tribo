@@ -38,4 +38,13 @@
 - (void)endPreviewPanelControl:(QLPreviewPanel *)panel {
 	return;
 }
+- (IBAction)deleteSelectedRows:(id)sender {
+	NSObject <TBTableViewDelegate> *delegate = (NSObject <TBTableViewDelegate> *)self.delegate;
+	if (![delegate respondsToSelector:@selector(tableView:shouldDeleteRows:)]) return;
+	[delegate tableView:self shouldDeleteRows:self.selectedRowIndexes];
+}
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
+	if (menuItem.action != @selector(deleteSelectedRows:)) return YES;
+	return ([self.selectedRowIndexes count] ? YES : NO); 
+}
 @end

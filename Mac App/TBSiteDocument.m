@@ -125,4 +125,12 @@
 	return YES;
 }
 
+- (void)updateChangeCount:(NSDocumentChangeType)change {
+	// Do nothing. We don't save things.
+}
+
+- (void)updateChangeCountWithToken:(id)changeCountToken forSaveOperation:(NSSaveOperationType)saveOperation {
+	// Again, do nothing. See -updateChangeCount:.
+}
+
 @end
