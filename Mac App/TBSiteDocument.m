@@ -45,6 +45,7 @@
 		if (!self.sourceWatcher) {
 			self.sourceWatcher = [UKFSEventsWatcher new];
 			self.sourceWatcher.delegate = self;
+			self.sourceWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
 		}
 		[self.sourceWatcher addPath:self.site.sourceDirectory.path];
 		[self.sourceWatcher addPath:self.site.postsDirectory.path];
