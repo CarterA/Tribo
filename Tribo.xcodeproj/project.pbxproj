@@ -657,7 +657,7 @@
 		4A6DC8DE1430203B00CB5025 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = "Opt-6 Products, LLC";
 			};
 			buildConfigurationList = 4A6DC8E11430203B00CB5025 /* Build configuration list for PBXProject "Tribo" */;
@@ -855,7 +855,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CLI/CLI-Prefix.pch";
+				GCC_PREFIX_HEADER = "Command Line Interface/CLI-Prefix.pch";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
@@ -868,7 +868,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CLI/CLI-Prefix.pch";
+				GCC_PREFIX_HEADER = "Command Line Interface/CLI-Prefix.pch";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
@@ -881,7 +881,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
-				CODE_SIGN_IDENTITY = "Tribo Open Source Developer";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -907,7 +907,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
-				CODE_SIGN_IDENTITY = "Tribo Open Source Developer";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
