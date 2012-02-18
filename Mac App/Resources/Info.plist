@@ -7,6 +7,8 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array/>
 			<key>CFBundleTypeName</key>
 			<string>Tribo Site</string>
 			<key>CFBundleTypeOSTypes</key>
@@ -14,11 +16,13 @@
 				<string>fold</string>
 			</array>
 			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
+			<string>Editor</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.folder</string>
+				<string>com.opt-6.tribo.site</string>
 			</array>
+			<key>LSTypeIsPackage</key>
+			<true/>
 			<key>NSDocumentClass</key>
 			<string>TBSiteDocument</string>
 		</dict>
@@ -56,5 +60,25 @@ All rights reserved.</string>
 	<true/>
 	<key>OSAScriptingDefinition</key>
 	<string>${PRODUCT_NAME}.sdef</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Tribo Site</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.opt-6.tribo.site</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>tribo</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

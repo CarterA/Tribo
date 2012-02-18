@@ -881,7 +881,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
-				CODE_SIGN_IDENTITY = "Tribo Open Source Developer";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -907,7 +907,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
-				CODE_SIGN_IDENTITY = "Tribo Open Source Developer";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
