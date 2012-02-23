@@ -11,6 +11,7 @@
 #import "TBPost.h"
 #import "TBError.h"
 #import "GRMustache.h"
+#import "TBAsset.h"
 
 static NSDateFormatter *postPathFormatter;
 
@@ -25,16 +26,7 @@ static NSDateFormatter *postPathFormatter;
 @end
 
 @implementation TBSite
-@synthesize root=_root;
-@synthesize destination=_destination;
-@synthesize sourceDirectory=_sourceDirectory;
-@synthesize postsDirectory=_postsDirectory;
-@synthesize templatesDirectory=_templatesDirectory;
-@synthesize posts=_posts;
-@synthesize latestPost=_latestPost;
-@synthesize recentPosts=_recentPosts;
-@synthesize postTemplate=_postTemplate;
-@synthesize lastParsedPostsModificationDate=_lastParsedPostsModificationDate;
+
 + (TBSite *)siteWithRoot:(NSURL *)root {
 	TBSite *site = [TBSite new];
 	site.root = root;
@@ -148,6 +140,10 @@ static NSDateFormatter *postPathFormatter;
     }
 	self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, recentPostCount)];
     self.latestPost = [self.recentPosts objectAtIndex:0];
+    
+    // Prepare the template object tree
+    self.templateAssets = [TBAsset assetsFromDirectoryURL:[self templatesDirectory]];
+    self.sourceAssets = [TBAsset assetsFromDirectoryURL:[self sourceDirectory]];
     return YES;
 	
 }

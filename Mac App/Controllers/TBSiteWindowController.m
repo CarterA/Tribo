@@ -10,7 +10,8 @@
 #import "TBSiteWindowController.h"
 #import "TBViewController.h"
 #import "TBPostsViewController.h"
-#import "TBProjectsViewController.h"
+#import "TBTemplatesViewController.h"
+#import "TBSourceViewControllerViewController.h"
 #import "TBTabView.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -71,9 +72,13 @@
 	TBPostsViewController *postsViewController = [TBPostsViewController new];
 	postsViewController.document = self.document;
 	
-	TBProjectsViewController *projectsViewController = [TBProjectsViewController new];
+	TBTemplatesViewController *templatesController = [TBTemplatesViewController new];
+    templatesController.document = self.document;
+    
+    TBSourceViewControllerViewController *sourcesController = [TBSourceViewControllerViewController new];
+    sourcesController.document = self.document;
 	
-	self.viewControllers = [NSArray arrayWithObjects:postsViewController, projectsViewController, nil];
+	self.viewControllers = [NSArray arrayWithObjects:postsViewController, templatesController, sourcesController, nil];
 	self.selectedViewControllerIndex = 0;
 	
 }
