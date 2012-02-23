@@ -16,6 +16,8 @@
 @end
 
 @implementation TBTemplatesViewController
+@synthesize assets = _assets;
+@synthesize tableView = _tableView;
 
 - (NSString *)defaultNibName {
 	return @"TBTemplatesView";

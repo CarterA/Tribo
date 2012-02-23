@@ -14,6 +14,8 @@
 @end
 
 @implementation TBSourceViewControllerViewController
+@synthesize outlineView = _outlineView;
+@synthesize assetTree = _assetTree;
 
 - (NSString *)defaultNibName {
 	return @"TBSourceViewControllerView";

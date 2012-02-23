@@ -31,6 +31,7 @@ static NSDateFormatter *relativeURLFormatter;
 @synthesize date=_date;
 @synthesize slug=_slug;
 @synthesize markdownContent=_markdownContent;
+
 + (TBPost *)postWithURL:(NSURL *)URL error:(NSError **)error{
 	return (TBPost *)[super pageWithURL:URL inSite:nil error:error];
 }

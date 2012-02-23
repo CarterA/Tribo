@@ -26,6 +26,14 @@ static NSDateFormatter *postPathFormatter;
 @end
 
 @implementation TBSite
+@synthesize root = _root;
+@synthesize destination = _destination;
+@synthesize sourceDirectory = _sourceDirectory;
+@synthesize postsDirectory = _postsDirectory;
+@synthesize templatesDirectory = _templatesDirectory;
+@synthesize posts = _posts;
+@synthesize templateAssets = _templateAssets;
+@synthesize sourceAssets = _sourceAssets;
 
 + (TBSite *)siteWithRoot:(NSURL *)root {
 	TBSite *site = [TBSite new];
