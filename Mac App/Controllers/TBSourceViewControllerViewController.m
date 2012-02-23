@@ -23,7 +23,7 @@
 	return @"Sources";
 }
 
-- (void)awakeFromNib{
+- (void)awakeFromNib {
     [self.outlineView setTarget:self];
     [self.outlineView setDoubleAction:@selector(doubleClickRow:)];
 }

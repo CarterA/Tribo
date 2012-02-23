@@ -8,10 +8,6 @@
 
 #import "TBAsset.h"
 
-@interface TBAsset()
-
-@end
-
 @implementation TBAsset
 
 + (NSSet *)assetsFromDirectoryURL:(NSURL*)folderURL{    

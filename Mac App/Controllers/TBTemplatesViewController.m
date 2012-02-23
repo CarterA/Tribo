@@ -25,7 +25,7 @@
 	return @"Templates";
 }
 
-- (void)awakeFromNib{
+- (void)awakeFromNib {
     [self.tableView setTarget:self];
     [self.tableView setDoubleAction:@selector(doubleClickRow:)];
 }
