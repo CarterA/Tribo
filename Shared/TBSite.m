@@ -11,6 +11,7 @@
 #import "TBPost.h"
 #import "TBError.h"
 #import "GRMustache.h"
+#import "TBAsset.h"
 
 static NSDateFormatter *postPathFormatter;
 
@@ -25,16 +26,15 @@ static NSDateFormatter *postPathFormatter;
 @end
 
 @implementation TBSite
-@synthesize root=_root;
-@synthesize destination=_destination;
-@synthesize sourceDirectory=_sourceDirectory;
-@synthesize postsDirectory=_postsDirectory;
-@synthesize templatesDirectory=_templatesDirectory;
-@synthesize posts=_posts;
-@synthesize latestPost=_latestPost;
-@synthesize recentPosts=_recentPosts;
-@synthesize postTemplate=_postTemplate;
-@synthesize lastParsedPostsModificationDate=_lastParsedPostsModificationDate;
+@synthesize root = _root;
+@synthesize destination = _destination;
+@synthesize sourceDirectory = _sourceDirectory;
+@synthesize postsDirectory = _postsDirectory;
+@synthesize templatesDirectory = _templatesDirectory;
+@synthesize posts = _posts;
+@synthesize templateAssets = _templateAssets;
+@synthesize sourceAssets = _sourceAssets;
+
 + (TBSite *)siteWithRoot:(NSURL *)root {
 	TBSite *site = [TBSite new];
 	site.root = root;
@@ -44,6 +44,7 @@ static NSDateFormatter *postPathFormatter;
 	site.templatesDirectory = [site.root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
 	return site;
 }
+
 - (BOOL)process:(NSError **)error {	
 	// Find and compile the post template.
 	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
@@ -109,6 +110,7 @@ static NSDateFormatter *postPathFormatter;
 	}
 	return YES;
 }
+
 - (BOOL)parsePosts:(NSError **)error {
 	
 	// Verify that the Posts directory exists and is a directory.
@@ -148,6 +150,10 @@ static NSDateFormatter *postPathFormatter;
     }
 	self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, recentPostCount)];
     self.latestPost = [self.recentPosts objectAtIndex:0];
+    
+    // Prepare the template object tree
+    self.templateAssets = [TBAsset assetsFromDirectoryURL:[self templatesDirectory]];
+    self.sourceAssets = [TBAsset assetsFromDirectoryURL:[self sourceDirectory]];
     return YES;
 	
 }
