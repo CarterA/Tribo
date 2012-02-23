@@ -44,6 +44,7 @@ static NSDateFormatter *postPathFormatter;
 	site.templatesDirectory = [site.root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
 	return site;
 }
+
 - (BOOL)process:(NSError **)error {	
 	// Find and compile the post template.
 	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
@@ -109,6 +110,7 @@ static NSDateFormatter *postPathFormatter;
 	}
 	return YES;
 }
+
 - (BOOL)parsePosts:(NSError **)error {
 	
 	// Verify that the Posts directory exists and is a directory.

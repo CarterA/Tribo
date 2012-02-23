@@ -40,8 +40,6 @@
         }
         
         [subAssets addObject:asset];
-        
-        NSLog(@"Sub assets now: %@", subAssets);
     }
     return subAssets;
 }
