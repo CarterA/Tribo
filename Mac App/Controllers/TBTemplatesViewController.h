@@ -9,8 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "TBViewController.h"
 
-@class TBSiteDocument;
-
 @interface TBTemplatesViewController : TBViewController
 @property (nonatomic, weak) IBOutlet NSArrayController *assets;
 @property (nonatomic, weak) IBOutlet NSTableView *tableView;

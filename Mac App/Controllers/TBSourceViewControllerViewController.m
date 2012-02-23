@@ -29,11 +29,15 @@
 }
 
 - (void)doubleClickRow:(NSOutlineView *)outlineView{
-    TBAsset *asset = [[self.assetTree selectedObjects] lastObject];
-    BOOL fileOpened = [[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:asset.fileURL] withAppBundleIdentifier:nil options:NSWorkspaceLaunchAsync additionalEventParamDescriptor:nil launchIdentifiers:NULL];
-    if(!fileOpened){
-        [[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:asset.fileURL] withAppBundleIdentifier:@"com.apple.TextEdit" options:NSWorkspaceLaunchAsync additionalEventParamDescriptor:nil launchIdentifiers:NULL];
-    }
+    NSArray *assets = [self.assetTree selectedObjects];
+    NSArray *assetURLS = [assets valueForKey:@"fileURL"];
+    [assetURLS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSArray *singleFileArray = [NSArray arrayWithObject:obj];
+        BOOL fileOpened = [[NSWorkspace sharedWorkspace] openURLs:singleFileArray withAppBundleIdentifier:nil options:NSWorkspaceLaunchAsync additionalEventParamDescriptor:nil launchIdentifiers:NULL];
+        if(!fileOpened){
+            [[NSWorkspace sharedWorkspace] openURLs:singleFileArray withAppBundleIdentifier:@"com.apple.TextEdit" options:NSWorkspaceLaunchAsync additionalEventParamDescriptor:nil launchIdentifiers:NULL];
+        }
+    }];
 }
 
 @end
