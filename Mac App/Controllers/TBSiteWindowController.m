@@ -58,6 +58,18 @@
 	self.tabView.selectedIndex = self.selectedViewControllerIndex;
 }
 
+- (IBAction)switchToPosts:(id)sender{
+    self.tabView.selectedIndex = 0;
+}
+
+- (IBAction)switchToTemplates:(id)sender{
+    self.tabView.selectedIndex = 1;
+}
+
+- (IBAction)switchToSources:(id)sender{
+    self.tabView.selectedIndex = 2;
+}
+
 #pragma mark - Tab View Delegate Methods
 
 - (void)tabView:(TBTabView *)tabView didSelectIndex:(NSUInteger)index {
