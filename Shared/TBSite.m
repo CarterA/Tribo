@@ -32,6 +32,10 @@ static NSDateFormatter *postPathFormatter;
 @synthesize postsDirectory = _postsDirectory;
 @synthesize templatesDirectory = _templatesDirectory;
 @synthesize posts = _posts;
+@synthesize latestPost = _latestPost;
+@synthesize recentPosts = _recentPosts;
+@synthesize postTemplate = _postTemplate;
+@synthesize lastParsedPostsModificationDate = _lastParsedPostsModificationDate;
 @synthesize templateAssets = _templateAssets;
 @synthesize sourceAssets = _sourceAssets;
 
