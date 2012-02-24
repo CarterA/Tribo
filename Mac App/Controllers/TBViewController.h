@@ -7,7 +7,9 @@
 //  See the included License.md file.
 //
 
+@class TBSiteDocument;
 @interface TBViewController : NSViewController
+@property (nonatomic, weak) TBSiteDocument *document;
 - (NSString *)defaultNibName;
 - (void)viewDidLoad;
 @end

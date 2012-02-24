@@ -13,7 +13,6 @@
 @class TBSiteDocument, TBAddPostSheetController;
 
 @interface TBPostsViewController : TBViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource>
-@property (nonatomic, weak) TBSiteDocument *document;
 @property (nonatomic, assign) IBOutlet NSTableView *postTableView;
 @property (nonatomic, assign) IBOutlet NSProgressIndicator *progressIndicator;
 @property (nonatomic, assign) IBOutlet NSButton *previewButton;

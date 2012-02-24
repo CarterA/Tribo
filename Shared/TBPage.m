@@ -21,6 +21,7 @@
 @synthesize content=_content;
 @synthesize template=_template;
 @synthesize stylesheets=_stylesheets;
+
 + (TBPage *)pageWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError**)error{
 	TBPage *page = [super new];
 	if (page) {

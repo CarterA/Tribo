@@ -93,8 +93,8 @@
 	
 	// Draw border lines and titles for each tab.
 	[self.tabs enumerateObjectsUsingBlock:^(TBTab *tab, NSUInteger index, BOOL *stop) {
-		if (index != (self.tabs.count - 1)) {
-			NSRect lineRect = NSMakeRect(tab.frame.size.width, 0.0, 1.0, tab.frame.size.height);
+		if (index != (self.tabs.count) && index != 0) {
+			NSRect lineRect = NSMakeRect(tab.frame.size.width * index, 0.0, 1.0, tab.frame.size.height);
 			NSRectFill(lineRect);
 		}
 	}];

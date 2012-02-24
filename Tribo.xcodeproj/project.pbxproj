@@ -11,8 +11,6 @@
 		4A00337E143028CA00F6702F /* TBPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337D143028CA00F6702F /* TBPost.m */; };
 		4A0F0C5D14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */; };
 		4A0F0C5E14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */; };
-		4A198757145CF2810001B208 /* TBProjectsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A198755145CF2810001B208 /* TBProjectsViewController.m */; };
-		4A198758145CF2810001B208 /* TBProjectsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A198756145CF2810001B208 /* TBProjectsView.xib */; };
 		4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4A30E879144B86F4001DDBAE /* Credits.rtf */; };
 		4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */; };
 		4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A43C23314EAB89600D1CC7B /* MainMenu.xib */; };
@@ -107,6 +105,12 @@
 		4ADE327F14E21B510059D03C /* TBSite+Scripting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE327E14E21B510059D03C /* TBSite+Scripting.m */; };
 		4ADE328214E21BC60059D03C /* TBPost+Scripting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE328114E21BC60059D03C /* TBPost+Scripting.m */; };
 		4ADE328514E21C450059D03C /* TBSiteDocument+Scripting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE328414E21C450059D03C /* TBSiteDocument+Scripting.m */; };
+		9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */; };
+		9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6B669614F3480800759DC3 /* TBTemplatesView.xib */; };
+		9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
+		9B6B669D14F3546C00759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
+		9BEF1C7A14F5CFCF0072B295 /* TBSourceViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */; };
+		9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -127,9 +131,6 @@
 		4A00337C143028CA00F6702F /* TBPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBPost.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A00337D143028CA00F6702F /* TBPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBPost.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache1-macosx10.6.a"; path = "Dependencies/GRMustache/lib/libGRMustache1-macosx10.6.a"; sourceTree = SOURCE_ROOT; };
-		4A198754145CF2810001B208 /* TBProjectsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TBProjectsViewController.h; path = Controllers/TBProjectsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4A198755145CF2810001B208 /* TBProjectsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TBProjectsViewController.m; path = Controllers/TBProjectsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4A198756145CF2810001B208 /* TBProjectsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBProjectsView.xib; path = Controllers/TBProjectsView.xib; sourceTree = "<group>"; };
 		4A30E879144B86F4001DDBAE /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBTabView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBTabView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -243,6 +244,14 @@
 		4ADE328314E21C450059D03C /* TBSiteDocument+Scripting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBSiteDocument+Scripting.h"; sourceTree = "<group>"; };
 		4ADE328414E21C450059D03C /* TBSiteDocument+Scripting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBSiteDocument+Scripting.m"; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
+		9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTemplatesViewController.h; sourceTree = "<group>"; };
+		9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTemplatesViewController.m; sourceTree = "<group>"; };
+		9B6B669614F3480800759DC3 /* TBTemplatesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBTemplatesView.xib; sourceTree = "<group>"; };
+		9B6B669A14F3546900759DC3 /* TBAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAsset.h; sourceTree = "<group>"; };
+		9B6B669B14F3546900759DC3 /* TBAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAsset.m; sourceTree = "<group>"; };
+		9BEF1C7714F5CFCF0072B295 /* TBSourceViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSourceViewControllerViewController.h; sourceTree = "<group>"; };
+		9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSourceViewControllerViewController.m; sourceTree = "<group>"; };
+		9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSourceViewControllerView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,8 +308,9 @@
 				4AAC8E421451EF9200AE978A /* TBViewController.m */,
 				4AEF0C5114A183CD00F0E021 /* TBSiteWindow */,
 				4AEF0C5014A183C200F0E021 /* TBPostsView */,
-				4AEF0C4E14A183AE00F0E021 /* TBProjectsView */,
 				4AEF0C5214A183E400F0E021 /* TBAddPostSheet */,
+				9BEF1C7514F5CD290072B295 /* TBTemplatesViewController */,
+				9BEF1C7C14F5CFD60072B295 /* TBSourceVIewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -375,6 +385,8 @@
 				4A72F14014368E1200A164E9 /* TBPage.h */,
 				4A72F14114368E1200A164E9 /* TBPage.m */,
 				9B507E7A14D7B2B100E85357 /* TBError.h */,
+				9B6B669A14F3546900759DC3 /* TBAsset.h */,
+				9B6B669B14F3546900759DC3 /* TBAsset.m */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -569,17 +581,6 @@
 			path = Scripting;
 			sourceTree = "<group>";
 		};
-		4AEF0C4E14A183AE00F0E021 /* TBProjectsView */ = {
-			isa = PBXGroup;
-			children = (
-				4A198756145CF2810001B208 /* TBProjectsView.xib */,
-				4A198754145CF2810001B208 /* TBProjectsViewController.h */,
-				4A198755145CF2810001B208 /* TBProjectsViewController.m */,
-			);
-			name = TBProjectsView;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		4AEF0C5014A183C200F0E021 /* TBPostsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,6 +613,26 @@
 			);
 			name = TBAddPostSheet;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		9BEF1C7514F5CD290072B295 /* TBTemplatesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */,
+				9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */,
+				9B6B669614F3480800759DC3 /* TBTemplatesView.xib */,
+			);
+			name = TBTemplatesViewController;
+			sourceTree = "<group>";
+		};
+		9BEF1C7C14F5CFD60072B295 /* TBSourceVIewController */ = {
+			isa = PBXGroup;
+			children = (
+				9BEF1C7714F5CFCF0072B295 /* TBSourceViewControllerViewController.h */,
+				9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */,
+				9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */,
+			);
+			name = TBSourceVIewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -688,9 +709,10 @@
 				4ABD6A5114417DBE007E2F5D /* TBQLPreviewView.xib in Resources */,
 				4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */,
 				4AAC8E5F1456617000AE978A /* TBPostsView.xib in Resources */,
-				4A198758145CF2810001B208 /* TBProjectsView.xib in Resources */,
 				4ADE327C14E21B3A0059D03C /* Tribo.sdef in Resources */,
 				4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */,
+				9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */,
+				9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,6 +754,7 @@
 				4A7558041436F6190040A10C /* DDLog.m in Sources */,
 				4A7558051436F6190040A10C /* DDTTYLogger.m in Sources */,
 				4A8696181437B60400204482 /* tribo.m in Sources */,
+				9B6B669D14F3546C00759DC3 /* TBAsset.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,10 +804,12 @@
 				4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */,
 				4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */,
 				4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */,
-				4A198757145CF2810001B208 /* TBProjectsViewController.m in Sources */,
 				4ADE327F14E21B510059D03C /* TBSite+Scripting.m in Sources */,
 				4ADE328214E21BC60059D03C /* TBPost+Scripting.m in Sources */,
 				4ADE328514E21C450059D03C /* TBSiteDocument+Scripting.m in Sources */,
+				9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */,
+				9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */,
+				9BEF1C7A14F5CFCF0072B295 /* TBSourceViewControllerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,6 +833,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -820,8 +847,16 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "./Dependencies/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
@@ -836,14 +871,24 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "./Dependencies/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;

@@ -7,6 +7,8 @@
 //  See the included License.md file.
 //
 
+@class TBAsset;
+
 @interface TBSite : NSObject
 
 + (TBSite *)siteWithRoot:(NSURL *)root;
@@ -20,6 +22,8 @@
 @property (nonatomic, strong) NSURL *sourceDirectory;
 @property (nonatomic, strong) NSURL *postsDirectory;
 @property (nonatomic, strong) NSURL *templatesDirectory;
-@property (nonatomic, strong) NSMutableArray *posts;
 
+@property (nonatomic, strong) NSMutableArray *posts;
+@property (nonatomic, strong) NSSet *templateAssets;
+@property (nonatomic, strong) NSSet *sourceAssets;
 @end
