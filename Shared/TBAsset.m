@@ -14,14 +14,14 @@
 @synthesize fileURL = _fileURL;
 @synthesize templateAssets = _templateAssets;
 
-+ (NSSet *)assetsFromDirectoryURL:(NSURL*)folderURL{    
++ (NSSet *)assetsFromDirectoryURL:(NSURL*)folderURL {    
     NSMutableSet *subAssets = [NSMutableSet set];
     NSArray *properties = [NSArray arrayWithObjects:NSURLTypeIdentifierKey, NSURLNameKey, NSURLIsDirectoryKey, nil];
     NSDirectoryEnumerator *subAssetsEnumerator = [[NSFileManager defaultManager] enumeratorAtURL:folderURL includingPropertiesForKeys:properties options:NSDirectoryEnumerationSkipsHiddenFiles|NSDirectoryEnumerationSkipsSubdirectoryDescendants errorHandler:^BOOL(NSURL *url, NSError *error) {
         NSLog(@"Error!: %@", [error localizedDescription]);
         return NO;
     }];
-    for (NSURL *assetURL in subAssetsEnumerator){
+    for (NSURL *assetURL in subAssetsEnumerator) {
         NSNumber *isADirectory;
         [assetURL getResourceValue:&isADirectory forKey:NSURLIsDirectoryKey error:NULL];
         
@@ -35,7 +35,7 @@
         [asset setFilename:[assetURL lastPathComponent]];
         [asset setFileURL:assetURL];
         [asset setFileType:fileType];
-        if([isADirectory boolValue]){
+        if([isADirectory boolValue]) {
             [asset setTemplateAssets:[self assetsFromDirectoryURL:assetURL]];
         }
         
@@ -44,16 +44,16 @@
     return subAssets;
 }
 
-- (NSString *)description{
+- (NSString *)description {
     return [NSString stringWithFormat:@"<%@: %@ children: %@>", [self class], [self filename], [self templateAssets]];
 }
 
-- (NSArray *)children{
+- (NSArray *)children {
     NSSortDescriptor *filenameSort = [NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES];
     return [[self templateAssets] sortedArrayUsingDescriptors:[NSArray arrayWithObject:filenameSort]];
 }
 
-- (BOOL)isLeaf{
+- (BOOL)isLeaf {
     return ![[self fileType] isEqualToString:@"public.folder"];
 }
 

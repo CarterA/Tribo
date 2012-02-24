@@ -9,10 +9,6 @@
 #import "TBSourceViewControllerViewController.h"
 #import "TBAsset.h"
 
-@interface TBSourceViewControllerViewController ()
-
-@end
-
 @implementation TBSourceViewControllerViewController
 @synthesize outlineView = _outlineView;
 @synthesize assetTree = _assetTree;
@@ -30,7 +26,7 @@
     [self.outlineView setDoubleAction:@selector(doubleClickRow:)];
 }
 
-- (void)doubleClickRow:(NSOutlineView *)outlineView{
+- (void)doubleClickRow:(NSOutlineView *)outlineView {
     NSArray *assets = [self.assetTree selectedObjects];
     NSArray *assetURLS = [assets valueForKey:@"fileURL"];
     [assetURLS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

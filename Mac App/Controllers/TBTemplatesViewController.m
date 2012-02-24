@@ -11,10 +11,6 @@
 #import "TBAsset.h"
 #import "TBSite.h"
 
-@interface TBTemplatesViewController ()
-
-@end
-
 @implementation TBTemplatesViewController
 @synthesize assets = _assets;
 @synthesize tableView = _tableView;
@@ -32,12 +28,12 @@
     [self.tableView setDoubleAction:@selector(doubleClickRow:)];
 }
 
-- (NSArray *)templates{
+- (NSArray *)templates {
     NSArray *nameSort = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES]];
     return [self.document.site.templateAssets sortedArrayUsingDescriptors:nameSort];
 }
 
-- (void)doubleClickRow:(NSOutlineView *)outlineView{
+- (void)doubleClickRow:(NSOutlineView *)outlineView {
     NSArray *assets = [self.assets selectedObjects];
     NSArray *assetURLS = [assets valueForKey:@"fileURL"];
     [assetURLS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
