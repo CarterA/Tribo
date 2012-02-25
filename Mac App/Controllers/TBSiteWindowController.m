@@ -58,15 +58,15 @@
 	self.tabView.selectedIndex = self.selectedViewControllerIndex;
 }
 
-- (IBAction)switchToPosts:(id)sender{
+- (IBAction)switchToPosts:(id)sender {
     self.tabView.selectedIndex = 0;
 }
 
-- (IBAction)switchToTemplates:(id)sender{
+- (IBAction)switchToTemplates:(id)sender {
     self.tabView.selectedIndex = 1;
 }
 
-- (IBAction)switchToSources:(id)sender{
+- (IBAction)switchToSources:(id)sender {
     self.tabView.selectedIndex = 2;
 }
 
