@@ -105,6 +105,9 @@
 		4ADE327F14E21B510059D03C /* TBSite+Scripting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE327E14E21B510059D03C /* TBSite+Scripting.m */; };
 		4ADE328214E21BC60059D03C /* TBPost+Scripting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE328114E21BC60059D03C /* TBPost+Scripting.m */; };
 		4ADE328514E21C450059D03C /* TBSiteDocument+Scripting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE328414E21C450059D03C /* TBSiteDocument+Scripting.m */; };
+		4AE50F8114F882A300FCA39C /* TBSocketConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8014F882A300FCA39C /* TBSocketConnection.m */; };
+		4AE50F8514F88A6C00FCA39C /* TBWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8414F88A6C00FCA39C /* TBWebSocket.m */; };
+		4AE50F8814F8906400FCA39C /* TBHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8714F8906400FCA39C /* TBHTTPServer.m */; };
 		9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */; };
 		9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6B669614F3480800759DC3 /* TBTemplatesView.xib */; };
 		9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
@@ -214,7 +217,6 @@
 		4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
 		4A8829471438EB9F00EBBD7E /* UKFSEventsWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFSEventsWatcher.h; sourceTree = "<group>"; };
 		4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFSEventsWatcher.m; sourceTree = "<group>"; };
-		4A8829531438F54000EBBD7E /* Safari.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Safari.h; sourceTree = "<group>"; };
 		4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		4A88295C143A679C00EBBD7E /* TBDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBDocumentController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A88295D143A679C00EBBD7E /* TBDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBDocumentController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -243,6 +245,12 @@
 		4ADE328114E21BC60059D03C /* TBPost+Scripting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBPost+Scripting.m"; sourceTree = "<group>"; };
 		4ADE328314E21C450059D03C /* TBSiteDocument+Scripting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBSiteDocument+Scripting.h"; sourceTree = "<group>"; };
 		4ADE328414E21C450059D03C /* TBSiteDocument+Scripting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBSiteDocument+Scripting.m"; sourceTree = "<group>"; };
+		4AE50F7F14F882A300FCA39C /* TBSocketConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSocketConnection.h; sourceTree = "<group>"; };
+		4AE50F8014F882A300FCA39C /* TBSocketConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSocketConnection.m; sourceTree = "<group>"; };
+		4AE50F8314F88A6C00FCA39C /* TBWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBWebSocket.h; sourceTree = "<group>"; };
+		4AE50F8414F88A6C00FCA39C /* TBWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBWebSocket.m; sourceTree = "<group>"; };
+		4AE50F8614F8906400FCA39C /* TBHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBHTTPServer.h; sourceTree = "<group>"; };
+		4AE50F8714F8906400FCA39C /* TBHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHTTPServer.m; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
 		9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTemplatesViewController.h; sourceTree = "<group>"; };
 		9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTemplatesViewController.m; sourceTree = "<group>"; };
@@ -322,7 +330,6 @@
 				4A30E879144B86F4001DDBAE /* Credits.rtf */,
 				4AA29D0114E42ED5005E341F /* Tribo.entitlements */,
 				4A8696491437BE3400204482 /* Info.plist */,
-				4A8829531438F54000EBBD7E /* Safari.h */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -545,6 +552,7 @@
 				4A43C23114EAB7B300D1CC7B /* Resources */,
 				4AE3B29E14E21AE100012A48 /* Scripting */,
 				4A43C23214EAB7FB00D1CC7B /* Views */,
+				4AE50F8914F8924200FCA39C /* HTTP Server */,
 				4A8696471437BE3400204482 /* TBAppDelegate.h */,
 				4A8696481437BE3400204482 /* TBAppDelegate.m */,
 				4A882967143A736E00EBBD7E /* TBSiteDocument.h */,
@@ -579,6 +587,19 @@
 				4ADE328114E21BC60059D03C /* TBPost+Scripting.m */,
 			);
 			path = Scripting;
+			sourceTree = "<group>";
+		};
+		4AE50F8914F8924200FCA39C /* HTTP Server */ = {
+			isa = PBXGroup;
+			children = (
+				4AE50F8614F8906400FCA39C /* TBHTTPServer.h */,
+				4AE50F8714F8906400FCA39C /* TBHTTPServer.m */,
+				4AE50F7F14F882A300FCA39C /* TBSocketConnection.h */,
+				4AE50F8014F882A300FCA39C /* TBSocketConnection.m */,
+				4AE50F8314F88A6C00FCA39C /* TBWebSocket.h */,
+				4AE50F8414F88A6C00FCA39C /* TBWebSocket.m */,
+			);
+			path = "HTTP Server";
 			sourceTree = "<group>";
 		};
 		4AEF0C5014A183C200F0E021 /* TBPostsView */ = {
@@ -810,6 +831,9 @@
 				9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */,
 				9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */,
 				9BEF1C7A14F5CFCF0072B295 /* TBSourceViewControllerViewController.m in Sources */,
+				4AE50F8114F882A300FCA39C /* TBSocketConnection.m in Sources */,
+				4AE50F8514F88A6C00FCA39C /* TBWebSocket.m in Sources */,
+				4AE50F8814F8906400FCA39C /* TBHTTPServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

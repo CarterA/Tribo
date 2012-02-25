@@ -10,7 +10,7 @@
 #import "TBSiteWindowController.h"
 #import "TBPostsViewController.h"
 #import "TBSite.h"
-#import "HTTPServer.h"
+#import "TBHTTPServer.h"
 
 @implementation TBSiteDocument (Scripting)
 - (void)startPreviewFromScript:(NSScriptCommand *)command {

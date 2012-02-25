@@ -13,7 +13,7 @@
 #import "TBSite.h"
 #import "TBPost.h"
 #import "TBTableView.h"
-#import "HTTPServer.h"
+#import "TBHTTPServer.h"
 
 @interface TBPostsViewController () <TBTableViewDelegate>
 - (void)moveURLsToTrash:(NSArray *)URLs;

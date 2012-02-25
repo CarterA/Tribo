@@ -12,15 +12,14 @@
 #import "TBAddPostSheetController.h"
 #import "TBSite.h"
 #import "TBPost.h"
-#import "HTTPServer.h"
-#import "Safari.h"
+#import "TBHTTPServer.h"
+#import "TBSocketConnection.h"
 #import "UKFSEventsWatcher.h"
 #import <Quartz/Quartz.h>
 
 @interface TBSiteDocument () <NSTableViewDelegate>
 @property (nonatomic, strong) UKFSEventsWatcher *sourceWatcher;
 @property (nonatomic, strong) UKFSEventsWatcher *postsWatcher;
-- (void)refreshLocalhostPages;
 @end
 
 @implementation TBSiteDocument
@@ -51,11 +50,12 @@
 		[self.sourceWatcher addPath:self.site.postsDirectory.path];
 		[self.sourceWatcher addPath:self.site.templatesDirectory.path];
 		if (!self.server) {
-			self.server = [HTTPServer new];
+			self.server = [TBHTTPServer new];
+			self.server.connectionClass = [TBSocketConnection class];
 			self.server.documentRoot = self.site.destination.path;
 		}
 		[self.server start:nil];
-		[self refreshLocalhostPages];
+		[self.server refreshPages];
 		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]]];
 		
 		if (!callback){
@@ -75,18 +75,6 @@
 	[self.server stop];
 }
 
-- (void)refreshLocalhostPages {
-	// Refresh any Safari tabs open to http://localhost:port/**.
-	SafariApplication *safari = (SafariApplication *)[[SBApplication alloc] initWithBundleIdentifier:@"com.apple.Safari"];
-	for (SafariWindow *window in safari.windows) {
-		for (SafariTab *tab in window.tabs) {
-			if ([tab.URL hasPrefix:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]]) {
-				tab.URL = tab.URL;
-			}
-		}
-	}
-}
-
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
 	self.postsWatcher = [UKFSEventsWatcher new];
 	self.postsWatcher.delegate = self;
@@ -100,7 +88,7 @@
 	if (watcher == self.sourceWatcher || self.server.isRunning) {
         success = [self.site process:&error];
         if (success) {
-            [self refreshLocalhostPages];
+            [self.server refreshPages];
         }
 	}
 	else if (watcher == self.postsWatcher) {

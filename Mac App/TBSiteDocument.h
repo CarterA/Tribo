@@ -9,11 +9,11 @@
 
 typedef void(^TBSiteDocumentPreviewCallback)(NSError *error);
 
-@class TBSite, HTTPServer;
+@class TBSite, TBHTTPServer;
 
 @interface TBSiteDocument : NSDocument
 @property (nonatomic, strong) TBSite *site;
-@property (nonatomic, strong) HTTPServer *server;
+@property (nonatomic, strong) TBHTTPServer *server;
 - (void)startPreview:(TBSiteDocumentPreviewCallback)callback;
 - (void)stopPreview;
 @end
