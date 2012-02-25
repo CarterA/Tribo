@@ -108,6 +108,7 @@
 		4AE50F8114F882A300FCA39C /* TBSocketConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8014F882A300FCA39C /* TBSocketConnection.m */; };
 		4AE50F8514F88A6C00FCA39C /* TBWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8414F88A6C00FCA39C /* TBWebSocket.m */; };
 		4AE50F8814F8906400FCA39C /* TBHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8714F8906400FCA39C /* TBHTTPServer.m */; };
+		4AE50F9214F8BB3900FCA39C /* livereload.js in Resources */ = {isa = PBXBuildFile; fileRef = 4AE50F8F14F8BB2200FCA39C /* livereload.js */; };
 		9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */; };
 		9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6B669614F3480800759DC3 /* TBTemplatesView.xib */; };
 		9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
@@ -251,6 +252,7 @@
 		4AE50F8414F88A6C00FCA39C /* TBWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBWebSocket.m; sourceTree = "<group>"; };
 		4AE50F8614F8906400FCA39C /* TBHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBHTTPServer.h; sourceTree = "<group>"; };
 		4AE50F8714F8906400FCA39C /* TBHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHTTPServer.m; sourceTree = "<group>"; };
+		4AE50F8F14F8BB2200FCA39C /* livereload.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = livereload.js; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
 		9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTemplatesViewController.h; sourceTree = "<group>"; };
 		9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTemplatesViewController.m; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 		4A43C23114EAB7B300D1CC7B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4AE50F8F14F8BB2200FCA39C /* livereload.js */,
 				4A43C23314EAB89600D1CC7B /* MainMenu.xib */,
 				4A30E879144B86F4001DDBAE /* Credits.rtf */,
 				4AA29D0114E42ED5005E341F /* Tribo.entitlements */,
@@ -734,6 +737,7 @@
 				4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */,
 				9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */,
 				9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */,
+				4AE50F9214F8BB3900FCA39C /* livereload.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

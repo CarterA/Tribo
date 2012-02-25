@@ -8,6 +8,7 @@
 
 #import "TBSocketConnection.h"
 #import "TBWebSocket.h"
+#import "HTTPAsyncFileResponse.h"
 
 @interface TBSocketConnection () <WebSocketDelegate>
 @property (nonatomic, strong) WebSocket *socket;
@@ -22,6 +23,17 @@
 		return self.socket;
 	}
 	return [super webSocketForURI:path];
+}
+
+- (NSObject <HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
+	
+	if ([path hasPrefix:@"/livereload.js"]) {
+		NSURL *livereloadURL = [[NSBundle mainBundle] URLForResource:@"livereload" withExtension:@"js"];
+		return [[HTTPAsyncFileResponse alloc] initWithFilePath:livereloadURL.path forConnection:self];
+	}
+	
+	return [super httpResponseForMethod:method URI:path];
+	
 }
 
 @end
