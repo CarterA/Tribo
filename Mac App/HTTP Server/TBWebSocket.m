@@ -11,7 +11,6 @@
 @implementation TBWebSocket
 
 - (void)didOpen {
-	NSLog(@"didOpen");
 	NSString *helloMessage = @"{ \"command\": \"hello\", \"protocols\": [\"http://livereload.com/protocols/official-7\", \"http://livereload.com/protocols/official-8\", \"http://livereload.com/protocols/2.x-origin-version-negotiation\"], \"serverName\": \"Tribo\" }";
 	[self sendMessage:helloMessage];
 }

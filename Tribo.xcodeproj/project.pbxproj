@@ -72,7 +72,7 @@
 		4A8829141437C52200EBBD7E /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557D61436F4D70040A10C /* HTTPDynamicFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A8829151437C52200EBBD7E /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557D81436F4D70040A10C /* HTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A8829161437C52200EBBD7E /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557DA1436F4D70040A10C /* HTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A8829171437C52200EBBD7E /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557DC1436F4D70040A10C /* WebSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A8829171437C52200EBBD7E /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557DC1436F4D70040A10C /* WebSocket.m */; };
 		4A8829181437C52200EBBD7E /* houdini_href_e.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F137143688D900A164E9 /* houdini_href_e.c */; };
 		4A8829191437C52200EBBD7E /* houdini_html_e.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F138143688D900A164E9 /* houdini_html_e.c */; };
 		4A88291A1437C52200EBBD7E /* html.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F139143688D900A164E9 /* html.c */; };
