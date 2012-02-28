@@ -17,9 +17,10 @@
 #import "UKFSEventsWatcher.h"
 #import <Quartz/Quartz.h>
 
-@interface TBSiteDocument () <NSTableViewDelegate>
+@interface TBSiteDocument () <NSTableViewDelegate, TBSiteDelegate>
 @property (nonatomic, strong) UKFSEventsWatcher *sourceWatcher;
 @property (nonatomic, strong) UKFSEventsWatcher *postsWatcher;
+- (void)reloadSite;
 @end
 
 @implementation TBSiteDocument
@@ -82,16 +83,24 @@
 }
 
 - (void)watcher:(id<UKFileWatcher>)watcher receivedNotification:(NSString *)notification forPath:(NSString *)path {
-    [[NSProcessInfo processInfo] disableSuddenTermination];
+    [self reloadSite];
+}
+
+- (void)metadataDidChangeForSite:(TBSite *)site {
+	[self reloadSite];
+}
+
+- (void)reloadSite {
+	[[NSProcessInfo processInfo] disableSuddenTermination];
     NSError *error = nil;
     BOOL success = YES;
-	if (watcher == self.sourceWatcher || self.server.isRunning) {
+	if (self.server.isRunning) {
         success = [self.site process:&error];
         if (success) {
             [self.server refreshPages];
         }
 	}
-	else if (watcher == self.postsWatcher) {
+	else {
 		success = [self.site parsePosts:&error];
 	}
     if (!success) {
@@ -104,6 +113,7 @@
 
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
 	self.site = [TBSite siteWithRoot:URL];
+	self.site.delegate = self;
     
     BOOL success = [self.site parsePosts:outError];
     if (!success) {

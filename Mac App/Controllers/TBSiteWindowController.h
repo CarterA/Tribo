@@ -17,4 +17,7 @@
 - (IBAction)switchToPosts:(id)sender;
 - (IBAction)switchToTemplates:(id)sender;
 - (IBAction)switchToSources:(id)sender;
+
+- (IBAction)showSettingsSheet:(id)sender;
+
 @end

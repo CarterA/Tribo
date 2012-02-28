@@ -12,21 +12,31 @@
 #import "TBPostsViewController.h"
 #import "TBTemplatesViewController.h"
 #import "TBSourceViewControllerViewController.h"
+#import "TBSettingsSheetController.h"
 #import "TBTabView.h"
 #import <QuartzCore/QuartzCore.h>
 
+const NSEdgeInsets TBAccessoryViewInsets = {
+	.top = 0.0,
+	.right = 4.0
+};
+
 @interface TBSiteWindowController () <TBTabViewDelegate>
+@property (nonatomic, assign) IBOutlet NSView *accessoryView;
 @property (nonatomic, assign) IBOutlet TBTabView *tabView;
 @property (nonatomic, assign) IBOutlet NSView *containerView;
 @property (nonatomic, assign) NSView *currentView;
+@property (nonatomic, strong) TBSettingsSheetController *settingsSheetController;
 @end
 
 @implementation TBSiteWindowController
 @synthesize viewControllers=_viewControllers;
 @synthesize selectedViewControllerIndex=_selectedViewControllerIndex;
+@synthesize accessoryView=_accessoryView;
 @synthesize tabView=_tabView;
 @synthesize containerView=_containerView;
 @synthesize currentView=_currentView;
+@synthesize settingsSheetController=_settingsSheetController;
 
 - (id)init {
 	self = [super initWithWindowNibName:@"TBSiteWindow"];
@@ -70,6 +80,10 @@
     self.tabView.selectedIndex = 2;
 }
 
+- (IBAction)showSettingsSheet:(id)sender {
+	[self.settingsSheetController runModalForWindow:self.window site:[self.document site]];
+}
+
 #pragma mark - Tab View Delegate Methods
 
 - (void)tabView:(TBTabView *)tabView didSelectIndex:(NSUInteger)index {
@@ -80,6 +94,19 @@
 
 - (void)windowDidLoad {
 	[super windowDidLoad];
+	
+	self.settingsSheetController = [TBSettingsSheetController new];
+	
+	NSView *themeFrame = [self.window.contentView superview];
+	NSRect accessoryFrame = self.accessoryView.frame;
+	NSRect containerFrame = themeFrame.frame;
+	accessoryFrame = NSMakeRect(containerFrame.size.width - accessoryFrame.size.width -  TBAccessoryViewInsets.right, containerFrame.size.height - accessoryFrame.size.height - TBAccessoryViewInsets.top, accessoryFrame.size.width, accessoryFrame.size.height);
+	self.accessoryView.frame = accessoryFrame;
+	self.accessoryView.autoresizingMask = NSViewMinXMargin|NSViewMinYMargin;
+	[[(NSButton *)self.accessoryView cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	[[(NSButton *)self.accessoryView cell] setShowsStateBy:NSPushInCellMask];
+	[[(NSButton *)self.accessoryView cell] setHighlightsBy:NSContentsCellMask];
+	[themeFrame addSubview:self.accessoryView];
 	
 	TBPostsViewController *postsViewController = [TBPostsViewController new];
 	postsViewController.document = self.document;

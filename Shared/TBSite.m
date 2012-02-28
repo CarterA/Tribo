@@ -21,11 +21,15 @@ static NSDateFormatter *postPathFormatter;
 @property (nonatomic, readonly) NSString *XMLDate;
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
 @property (nonatomic, strong) NSDate *lastParsedPostsModificationDate;
+@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSString *author;
+@property (nonatomic, readonly) NSString *baseURL;
 - (void)writePosts;
 - (NSError *)badDirectoryError;
 @end
 
 @implementation TBSite
+@synthesize delegate = _delegate;
 @synthesize root = _root;
 @synthesize destination = _destination;
 @synthesize sourceDirectory = _sourceDirectory;
@@ -38,6 +42,7 @@ static NSDateFormatter *postPathFormatter;
 @synthesize lastParsedPostsModificationDate = _lastParsedPostsModificationDate;
 @synthesize templateAssets = _templateAssets;
 @synthesize sourceAssets = _sourceAssets;
+@synthesize metadata = _metadata;
 
 + (TBSite *)siteWithRoot:(NSURL *)root {
 	TBSite *site = [TBSite new];
@@ -46,6 +51,11 @@ static NSDateFormatter *postPathFormatter;
 	site.sourceDirectory = [site.root URLByAppendingPathComponent:@"Source" isDirectory:YES];
 	site.postsDirectory = [site.root URLByAppendingPathComponent:@"Posts" isDirectory:YES];
 	site.templatesDirectory = [site.root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
+	NSURL *metadataURL = [site.root URLByAppendingPathComponent:@"Info.plist" isDirectory:NO];
+	NSData *metadataData = [NSData dataWithContentsOfURL:metadataURL];
+	site.metadata = [NSPropertyListSerialization propertyListFromData:metadataData mutabilityOption:NSPropertyListMutableContainersAndLeaves format:nil errorDescription:nil];
+	if (!site.metadata)
+		[[NSDictionary dictionary] writeToURL:metadataURL atomically:NO];
 	return site;
 }
 
@@ -129,26 +139,27 @@ static NSDateFormatter *postPathFormatter;
 	
 	// Check the modification date of the Posts directory, and bail out if we don't need to re-parse it.
 	NSDate *currentModificationDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.postsDirectory.path stringByResolvingSymlinksInPath] error:nil] fileModificationDate];
-	if (!self.lastParsedPostsModificationDate)
+	if (!self.lastParsedPostsModificationDate) {
 		self.lastParsedPostsModificationDate = currentModificationDate;
-	else if ([self.lastParsedPostsModificationDate isEqualToDate:currentModificationDate])
-		return YES;
-	
-	// Parse the contents of the Posts directory into individual TBPost objects.
-	NSMutableArray *posts = [NSMutableArray array];
-	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
-		TBPost *post = [TBPost postWithURL:postURL error:error];
-		post.site = self;
-        if (!post) {
-            return NO;
-        }
-		[posts addObject:post];
+		
+		// Parse the contents of the Posts directory into individual TBPost objects.
+		NSMutableArray *posts = [NSMutableArray array];
+		for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
+			TBPost *post = [TBPost postWithURL:postURL error:error];
+			post.site = self;
+			if (!post) {
+				return NO;
+			}
+			[posts addObject:post];
+		}
+		posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
+		self.posts = posts;
+		
 	}
-	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
-    self.posts = posts;
 	
 	// Prepare the convenience sets of posts used by templates.
-    NSUInteger recentPostCount = 5;
+    NSUInteger recentPostCount = [[self.metadata objectForKey:TBSiteNumberOfRecentPostsMetadataKey] unsignedIntegerValue];
+	if (!recentPostCount) recentPostCount = 5;
     if ([self.posts count] < recentPostCount) {
         recentPostCount = [self.posts count];
     }
@@ -218,4 +229,23 @@ static NSDateFormatter *postPathFormatter;
     NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
     return contentError;
 }
+
+- (void)setMetadata:(NSDictionary *)metadata {
+	_metadata = metadata;
+	NSURL *metadataURL = [self.root URLByAppendingPathComponent:@"Info.plist" isDirectory:NO];
+	[self.metadata writeToURL:metadataURL atomically:NO];
+	if (self.delegate && [self.delegate respondsToSelector:@selector(metadataDidChangeForSite:)])
+		[self.delegate metadataDidChangeForSite:self];
+}
+
+- (NSString *)name {
+	return [self.metadata objectForKey:TBSiteNameMetadataKey];
+}
+- (NSString *)author {
+	return [self.metadata objectForKey:TBSiteAuthorMetadataKey];
+}
+- (NSString *)baseURL {
+	return [self.metadata objectForKey:TBSiteBaseURLMetadataKey];
+}
+
 @end
