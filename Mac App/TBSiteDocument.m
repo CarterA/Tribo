@@ -13,6 +13,7 @@
 #import "TBSite.h"
 #import "TBPost.h"
 #import "TBHTTPServer.h"
+#import "TBPublisher.h"
 #import "TBSocketConnection.h"
 #import "UKFSEventsWatcher.h"
 #import <Quartz/Quartz.h>
@@ -114,6 +115,9 @@
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
 	self.site = [TBSite siteWithRoot:URL];
 	self.site.delegate = self;
+	TBPublisher *publisher = [TBPublisher new];
+	publisher.site = self.site;
+	[publisher publish];
     
     BOOL success = [self.site parsePosts:outError];
     if (!success) {
