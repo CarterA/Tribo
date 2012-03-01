@@ -32,7 +32,9 @@
 
 - (void)makeWindowControllers {
 	TBSiteWindowController *windowController = [TBSiteWindowController new];
+	[self windowControllerWillLoadNib:windowController];
 	[self addWindowController:windowController];
+	[self windowControllerDidLoadNib:windowController];
 }
 
 - (void)startPreview:(TBSiteDocumentPreviewCallback)callback {
@@ -80,6 +82,7 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
 	self.postsWatcher = [UKFSEventsWatcher new];
 	self.postsWatcher.delegate = self;
+	self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
 	[self.postsWatcher addPath:self.site.postsDirectory.path];
 }
 
@@ -89,6 +92,7 @@
 
 - (void)metadataDidChangeForSite:(TBSite *)site {
 	[self reloadSite];
+	
 }
 
 - (void)reloadSite {
@@ -115,9 +119,6 @@
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
 	self.site = [TBSite siteWithRoot:URL];
 	self.site.delegate = self;
-	TBPublisher *publisher = [TBPublisher new];
-	publisher.site = self.site;
-	[publisher publish];
     
     BOOL success = [self.site parsePosts:outError];
     if (!success) {

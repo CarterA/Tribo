@@ -15,7 +15,7 @@ typedef enum {
 	TBPublisherProtocolSFTP
 } TBPublisherProtocol;
 
-typedef void(^TBPublisherProgressHandler)(NSUInteger progress, NSUInteger total);
+typedef void(^TBPublisherProgressHandler)(NSInteger progress, NSInteger total);
 typedef void(^TBPublisherCompletionHandler)();
 typedef void(^TBPublisherErrorHandler)(NSError *error);
 

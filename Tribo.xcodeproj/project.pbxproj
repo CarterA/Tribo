@@ -120,6 +120,8 @@
 		4AE91C6114FEE51C00499469 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A75580D1436F6820040A10C /* Security.framework */; };
 		4AE91C6214FEE83400499469 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558101436F82D0040A10C /* CoreServices.framework */; };
 		4AE91C6614FF044700499469 /* TBPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6514FF044700499469 /* TBPublisher.m */; };
+		4AE91C7114FF16ED00499469 /* TBPublishSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */; };
+		4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */; };
 		9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */; };
 		9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6B669614F3480800759DC3 /* TBTemplatesView.xib */; };
 		9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
@@ -294,6 +296,9 @@
 		4AE91C5C14FEE0F500499469 /* Authentication Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Authentication Tool.m"; sourceTree = "<group>"; };
 		4AE91C6414FF044700499469 /* TBPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPublisher.h; sourceTree = "<group>"; };
 		4AE91C6514FF044700499469 /* TBPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPublisher.m; sourceTree = "<group>"; };
+		4AE91C6E14FF16ED00499469 /* TBPublishSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPublishSheetController.h; sourceTree = "<group>"; };
+		4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPublishSheetController.m; sourceTree = "<group>"; };
+		4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBPublishSheet.xib; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
 		9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTemplatesViewController.h; sourceTree = "<group>"; };
 		9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTemplatesViewController.m; sourceTree = "<group>"; };
@@ -383,6 +388,7 @@
 				4AEF0C5214A183E400F0E021 /* TBAddPostSheet */,
 				9BEF1C7514F5CD290072B295 /* TBTemplatesViewController */,
 				9BEF1C7C14F5CFD60072B295 /* TBSourceVIewController */,
+				4AE91C7314FF16F300499469 /* TBPublishSheet */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -700,6 +706,16 @@
 			path = Publishing;
 			sourceTree = "<group>";
 		};
+		4AE91C7314FF16F300499469 /* TBPublishSheet */ = {
+			isa = PBXGroup;
+			children = (
+				4AE91C6E14FF16ED00499469 /* TBPublishSheetController.h */,
+				4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */,
+				4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */,
+			);
+			name = TBPublishSheet;
+			sourceTree = "<group>";
+		};
 		4AEF0C5014A183C200F0E021 /* TBPostsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -856,6 +872,7 @@
 				4AE50F9214F8BB3900FCA39C /* livereload.js in Resources */,
 				4AE50FE114FBD4E100FCA39C /* TBSettingsSheet.xib in Resources */,
 				4A2E84CD14FDD969008FE2C4 /* rsync in Resources */,
+				4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,6 +976,7 @@
 				4AE50F9B14F95ED500FCA39C /* TBPage+LiveReload.m in Sources */,
 				4AE50FE014FBD4E100FCA39C /* TBSettingsSheetController.m in Sources */,
 				4AE91C6614FF044700499469 /* TBPublisher.m in Sources */,
+				4AE91C7114FF16ED00499469 /* TBPublishSheetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

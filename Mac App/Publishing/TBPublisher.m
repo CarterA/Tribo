@@ -77,7 +77,7 @@
 				if (![component hasSuffix:@"%"]) continue;
 				NSInteger integerValue = [component integerValue];
 				if (integerValue == lastPercentage) return;
-				NSLog(@"%ld", integerValue);
+				if (self.progressHandler) self.progressHandler(integerValue, 100);
 				lastPercentage = integerValue;
 			}
 		}
@@ -90,6 +90,10 @@
 		NSString *availableOutput = [[NSString alloc] initWithData:fileHandle.availableData encoding:NSASCIIStringEncoding];
 		NSLog(@"stderr: %@", availableOutput);
 		
+	}];
+	
+	[rsync setTerminationHandler:^(NSTask *task) {
+		if (self.completionHandler) self.completionHandler();
 	}];
 	
 	[rsync launch];
