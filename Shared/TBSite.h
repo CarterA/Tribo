@@ -11,10 +11,18 @@
 
 @protocol TBSiteDelegate;
 
-static NSString * const TBSiteNameMetadataKey = @"TBSiteName";
-static NSString * const TBSiteAuthorMetadataKey = @"TBSiteAuthor";
-static NSString * const TBSiteBaseURLMetadataKey = @"TBSiteBaseURL";
-static NSString * const TBSiteNumberOfRecentPostsMetadataKey = @"TBSiteNumberOfRecentPosts";
+extern NSString * const TBSiteNameMetadataKey;
+extern NSString * const TBSiteAuthorMetadataKey;
+extern NSString * const TBSiteBaseURLMetadataKey;
+extern NSString * const TBSiteNumberOfRecentPostsMetadataKey;
+
+extern NSString * const TBSiteProtocolKey;
+extern NSString * const TBSiteProtocolFTP;
+extern NSString * const TBSiteProtocolSFTP;
+extern NSString * const TBSiteServerKey;
+extern NSString * const TBSitePortKey; // Not a teleportation device
+extern NSString * const TBSiteUserNameKey;
+extern NSString * const TBSiteRemotePathKey;
 
 @interface TBSite : NSObject
 

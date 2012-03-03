@@ -8,6 +8,7 @@
 
 #import "TBSettingsSheetController.h"
 #import "TBSite.h"
+#import <Security/Security.h>
 
 @interface TBSettingsSheetController () <NSTextFieldDelegate>
 
@@ -22,16 +23,21 @@
 @property (nonatomic, assign) IBOutlet NSTextField *portField;
 @property (nonatomic, assign) IBOutlet NSTextField *userNameField;
 @property (nonatomic, assign) IBOutlet NSSecureTextField *passwordField;
-@property (nonatomic, assign) IBOutlet NSButton *rememberInKeychainCheckbox;
 @property (nonatomic, assign) IBOutlet NSTextField *remotePathField;
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)uploadViaPopUpDidChange:(id)sender;
+- (IBAction)passwordDidChange:(id)sender;
 
 - (void)loadFormValues;
 - (void)updatePlaceholders;
+- (void)updatePasswordField;
+- (NSDictionary *)dictionaryOfFormValues;
+- (NSString *)passwordFromKeychain;
+- (void)setStoredPassword:(NSString *)newPassword;
+- (void)addNewKeychainItemForPassword:(NSString *)newPassword;
 
 @end
 
@@ -50,7 +56,6 @@
 @synthesize portField = _portField;
 @synthesize userNameField = _userNameField;
 @synthesize passwordField = _passwordField;
-@synthesize rememberInKeychainCheckbox = _rememberInKeychainCheckbox;
 @synthesize remotePathField = _remotePathField;
 
 - (id)init {
@@ -70,14 +75,36 @@
 	[self updatePlaceholders];
 }
 
+- (IBAction)passwordDidChange:(id)sender {
+	NSString *currentPassword = [self passwordFromKeychain];
+	NSString *newPassword = self.passwordField.stringValue;
+	if ([currentPassword isEqualToString:newPassword]) return;
+	[self setStoredPassword:newPassword];
+}
+
 - (void)loadFormValues {
+	
 	NSDictionary *metadata = self.site.metadata;
+	
 	self.siteNameField.stringValue = [metadata objectForKey:TBSiteNameMetadataKey] ?: @"";
 	self.authorField.stringValue = [metadata objectForKey:TBSiteAuthorMetadataKey] ?: @"";
 	self.baseURLField.stringValue = [metadata objectForKey:TBSiteBaseURLMetadataKey] ?: @"";
 	NSNumber *numberOfRecentPosts = [metadata objectForKey:TBSiteNumberOfRecentPostsMetadataKey] ?: [NSNumber numberWithInteger:5];
 	self.numberOfRecentPostsField.objectValue = numberOfRecentPosts;
 	self.recentPostsStepper.objectValue = numberOfRecentPosts;
+	
+	NSString *protocol = [metadata objectForKey:TBSiteProtocolKey];
+	NSString *protocolTitle = @"SFTP";
+	if ([protocol isEqualToString:TBSiteProtocolFTP])
+		protocolTitle = @"FTP";
+	else if ([protocol isEqualToString:TBSiteProtocolSFTP])
+		protocolTitle = @"SFTP";
+	[self.uploadViaPopUp selectItemWithTitle:protocolTitle];
+	self.serverField.stringValue = [metadata objectForKey:TBSiteServerKey] ?: @"";
+	self.portField.objectValue = [metadata objectForKey:TBSitePortKey] ?: @"";
+	self.userNameField.stringValue = [metadata objectForKey:TBSiteUserNameKey] ?: @"";
+	self.passwordField.stringValue = [self passwordFromKeychain] ?: @"";
+	self.remotePathField.stringValue = [metadata objectForKey:TBSiteRemotePathKey] ?: @"";
 	
 }
 
@@ -93,14 +120,103 @@
 		[self.passwordField.cell setPlaceholderString:@"Key-based authentication"];
 	}
 	[self.portField.cell setPlaceholderString:[NSString stringWithFormat:@"%d", port]];
-	if (self.passwordField.stringValue.length > 0)
-		self.rememberInKeychainCheckbox.enabled = YES;
-	else
-		self.rememberInKeychainCheckbox.enabled = NO;
+}
+
+- (void)updatePasswordField {
+	NSString *password = [self passwordFromKeychain];
+	if (!password) return;
+	self.passwordField.stringValue = password;
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification {
 	[self updatePlaceholders];
+	[self updatePasswordField];
+}
+
+- (NSDictionary *)dictionaryOfFormValues {
+	
+	NSNumber *numberOfRecentPosts = [NSNumber numberWithInteger:[self.numberOfRecentPostsField.stringValue integerValue]];
+	NSString *protocol = @"";
+	if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"FTP"])
+		protocol = TBSiteProtocolFTP;
+	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"SFTP"])
+		protocol = TBSiteProtocolSFTP;
+	NSDictionary *values = [NSDictionary dictionaryWithObjectsAndKeys:
+							self.siteNameField.stringValue, TBSiteNameMetadataKey,
+							self.authorField.stringValue, TBSiteAuthorMetadataKey,
+							self.baseURLField.stringValue, TBSiteBaseURLMetadataKey,
+							numberOfRecentPosts, TBSiteNumberOfRecentPostsMetadataKey,
+							protocol, TBSiteProtocolKey,
+							self.serverField.stringValue, TBSiteServerKey,
+							self.portField.stringValue, TBSitePortKey,
+							self.userNameField.stringValue, TBSiteUserNameKey,
+							self.remotePathField.stringValue, TBSiteRemotePathKey,
+							nil];
+	
+	return values;
+	
+}
+
+- (NSString *)passwordFromKeychain {
+	
+	char *passwordBuffer = NULL;
+	UInt32 passwordLength = 0;
+	NSString *serverName = self.serverField.stringValue;
+	NSString *accountName = self.userNameField.stringValue;
+	if (!serverName || !accountName) return nil;
+	UInt16 port = (UInt16)[self.portField integerValue];
+	SecProtocolType protocol = 0;
+	if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"FTP"])
+		protocol = kSecProtocolTypeFTP;
+	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"SFTP"])
+		protocol = kSecProtocolTypeSSH;
+	OSStatus returnStatus = SecKeychainFindInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, "", port, protocol, kSecAuthenticationTypeDefault, &passwordLength, (void **)&passwordBuffer, NULL);
+	if (returnStatus != noErr)
+		return nil;
+	NSString *password = [[NSString alloc] initWithBytes:passwordBuffer length:passwordLength encoding: NSUTF8StringEncoding];
+	SecKeychainItemFreeContent(NULL, passwordBuffer);
+	return password;
+	
+}
+
+- (void)setStoredPassword:(NSString *)newPassword {
+	
+	NSString *serverName = self.serverField.stringValue;
+	NSString *accountName = self.userNameField.stringValue;
+	UInt16 port = (UInt16)[self.portField integerValue];
+	SecProtocolType protocol = 0;
+	if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"FTP"])
+		protocol = kSecProtocolTypeFTP;
+	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"SFTP"])
+		protocol = kSecProtocolTypeSSH;
+	SecKeychainItemRef item;
+	OSStatus returnStatus = SecKeychainFindInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, NULL, port, protocol, kSecAuthenticationTypeDefault, NULL, NULL, &item);
+	
+	if (returnStatus != noErr) {
+		[self addNewKeychainItemForPassword:newPassword];
+		return;
+	}
+	if (!item)
+		return;
+	
+	if (!newPassword) newPassword = @"";
+	SecKeychainItemModifyAttributesAndData(item, NULL, (UInt32)newPassword.length, [newPassword UTF8String]);
+	
+}
+
+- (void)addNewKeychainItemForPassword:(NSString *)newPassword {
+	
+	NSString *serverName = self.serverField.stringValue;
+	NSString *accountName = self.userNameField.stringValue;
+	UInt16 port = (UInt16)[self.portField integerValue];
+	SecProtocolType protocol = 0;
+	if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"FTP"])
+		protocol = kSecProtocolTypeFTP;
+	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"SFTP"])
+		protocol = kSecProtocolTypeSSH;
+	if (!newPassword) newPassword = @"";
+	SecKeychainAddInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, NULL, port, protocol, kSecAuthenticationTypeDefault, (UInt32)newPassword.length, [newPassword UTF8String], NULL);
+	
 }
 
 - (IBAction)save:(id)sender {
@@ -114,9 +230,7 @@
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
 	[self.window orderOut:self];
 	if (returnCode != NSOKButton) return;
-	NSNumber *numberOfRecentPosts = [NSNumber numberWithInteger:[self.numberOfRecentPostsField.stringValue integerValue]];
-	NSDictionary *metadata = [NSDictionary dictionaryWithObjectsAndKeys:self.siteNameField.stringValue, TBSiteNameMetadataKey, self.authorField.stringValue, TBSiteAuthorMetadataKey, self.baseURLField.stringValue, TBSiteBaseURLMetadataKey, numberOfRecentPosts, TBSiteNumberOfRecentPostsMetadataKey, nil];
-	self.site.metadata = metadata;
+	self.site.metadata = [self dictionaryOfFormValues];
 }
 
 @end
