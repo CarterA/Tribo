@@ -29,11 +29,9 @@
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)uploadViaPopUpDidChange:(id)sender;
-- (IBAction)passwordDidChange:(id)sender;
 
 - (void)loadFormValues;
 - (void)updatePlaceholders;
-- (void)updatePasswordField;
 - (NSDictionary *)dictionaryOfFormValues;
 - (NSString *)passwordFromKeychain;
 - (void)setStoredPassword:(NSString *)newPassword;
@@ -75,13 +73,6 @@
 	[self updatePlaceholders];
 }
 
-- (IBAction)passwordDidChange:(id)sender {
-	NSString *currentPassword = [self passwordFromKeychain];
-	NSString *newPassword = self.passwordField.stringValue;
-	if ([currentPassword isEqualToString:newPassword]) return;
-	[self setStoredPassword:newPassword];
-}
-
 - (void)loadFormValues {
 	
 	NSDictionary *metadata = self.site.metadata;
@@ -106,6 +97,8 @@
 	self.passwordField.stringValue = [self passwordFromKeychain] ?: @"";
 	self.remotePathField.stringValue = [metadata objectForKey:TBSiteRemotePathKey] ?: @"";
 	
+	self.passwordField.stringValue = [self passwordFromKeychain] ?: @"";
+	
 }
 
 - (void)updatePlaceholders {
@@ -122,15 +115,8 @@
 	[self.portField.cell setPlaceholderString:[NSString stringWithFormat:@"%d", port]];
 }
 
-- (void)updatePasswordField {
-	NSString *password = [self passwordFromKeychain];
-	if (!password) return;
-	self.passwordField.stringValue = password;
-}
-
 - (void)controlTextDidChange:(NSNotification *)notification {
 	[self updatePlaceholders];
-	[self updatePasswordField];
 }
 
 - (NSDictionary *)dictionaryOfFormValues {
@@ -231,6 +217,7 @@
 	[self.window orderOut:self];
 	if (returnCode != NSOKButton) return;
 	self.site.metadata = [self dictionaryOfFormValues];
+	[self setStoredPassword:self.passwordField.stringValue];
 }
 
 @end
