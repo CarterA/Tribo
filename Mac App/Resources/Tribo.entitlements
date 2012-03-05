@@ -24,9 +24,5 @@
 	<array>
 		<string>com.apple.safari</string>
 	</array>
-	<key>com.apple.security.temporary-exception.files.absolute-path.read-only</key>
-	<array>
-		<string>/Users/carterallen/.ssh/</string>
-	</array>
 </dict>
 </plist>

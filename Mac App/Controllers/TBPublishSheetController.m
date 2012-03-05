@@ -46,6 +46,11 @@
 		[self.window orderOut:nil];
 	}];
 	
+	[self.publisher setErrorHandler:^(NSError *error) {
+		[NSApp endSheet:self.window];
+		[self.window orderOut:nil];
+	}];
+	
 	[NSApp beginSheet:self.window modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 	
 	[self.publisher publish];
