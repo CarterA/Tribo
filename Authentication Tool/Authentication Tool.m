@@ -11,6 +11,7 @@
 
 static NSString * const TBAuthenticationSSHServiceName = @"SSH";
 
+NSString * fetchPasswordFromKeychain(void);
 NSString * fetchPassphraseForIdentityFromKeychain(NSString *identityPath);
 NSString * promptForPassphraseForIdentity(NSString *identityPath);
 void addPassphraseForIdentityToKeychain(NSString *identityPath, NSString *password);
@@ -25,6 +26,12 @@ int main(int argc, const char * argv[]) {
 				printf("YES");
 				return 0;
 			}
+		}
+		
+		NSString *password = fetchPasswordFromKeychain();
+		if (password && [password length] > 0) {
+			printf("%s", [password UTF8String]);
+			return 0;
 		}
 		
 		NSString *identityPath = [[[NSProcessInfo processInfo] environment] objectForKey:@"TB_IDENTITY_PATH"];
@@ -42,6 +49,26 @@ int main(int argc, const char * argv[]) {
 		
 	}
     return 1;
+}
+
+NSString * fetchPasswordFromKeychain(void) {
+	NSDictionary *metadata = [[NSProcessInfo processInfo] environment];
+	char *passwordBuffer = NULL;
+	UInt32 passwordLength = 0;
+	NSString *serverName = [metadata objectForKey:@"TBSiteServer"];
+	NSString *accountName = [metadata objectForKey:@"TBSiteUserName"];
+	UInt16 port = (UInt16)[[metadata objectForKey:@"TBSitePort"] integerValue];
+	SecProtocolType protocol = 0;
+	if ([[metadata objectForKey:@"TBSiteProtocol"] isEqualToString:@"TBSiteProtocolFTP"])
+		protocol = kSecProtocolTypeFTP;
+	else if ([[metadata objectForKey:@"TBSiteProtocol"] isEqualToString:@"TBSiteProtocolSFTP"])
+		protocol = kSecProtocolTypeSSH;
+	OSStatus returnStatus = SecKeychainFindInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, "", port, protocol, kSecAuthenticationTypeDefault, &passwordLength, (void **)&passwordBuffer, NULL);
+	if (returnStatus != noErr)
+		return nil;
+	NSString *password = [[NSString alloc] initWithBytes:passwordBuffer length:passwordLength encoding: NSUTF8StringEncoding];
+	SecKeychainItemFreeContent(NULL, passwordBuffer);
+	return password;
 }
 
 NSString * fetchPassphraseForIdentityFromKeychain(NSString *identityPath) {
