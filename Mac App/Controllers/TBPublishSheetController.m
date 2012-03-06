@@ -32,8 +32,7 @@
 	self.indicator.indeterminate = YES;
 	[self.indicator startAnimation:nil];
 	
-	self.publisher = [TBPublisher new];
-	self.publisher.site = self.site;
+	self.publisher = [TBPublisher publisherWithSite:site];
 	
 	[self.publisher setProgressHandler:^(NSInteger progress, NSInteger total) {
 		self.indicator.indeterminate = NO;

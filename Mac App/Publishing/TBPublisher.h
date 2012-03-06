@@ -22,6 +22,8 @@ typedef void(^TBPublisherErrorHandler)(NSError *error);
 @property (nonatomic, copy) TBPublisherCompletionHandler completionHandler;
 @property (nonatomic, copy) TBPublisherErrorHandler errorHandler;
 
++ (TBPublisher *)publisherWithSite:(TBSite *)site;
+- (id)initWithSite:(TBSite *)site;
 - (void)publish;
 
 @end
