@@ -33,6 +33,7 @@
 	
 	NSOpenPanel *panel = [NSOpenPanel openPanel];
 	panel.message = @"Please select the SSH identity file (usually called id_rsa or ida_dsa) that should be used to authenticate with the server. Identity files are typically found in the .ssh folder in your home directory.";
+	panel.directoryURL = [[NSURL fileURLWithPath:NSHomeDirectory()] URLByAppendingPathComponent:@".ssh" isDirectory:YES];
 	panel.showsHiddenFiles = YES;
 	panel.allowsMultipleSelection = YES;
 	NSInteger button = [panel runModal];
