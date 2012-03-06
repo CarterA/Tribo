@@ -16,7 +16,6 @@
 
 @implementation TBPublisher
 @synthesize site = _site;
-@synthesize protocol = _protocol;
 @synthesize progressHandler = _progressHandler;
 @synthesize completionHandler = _completionHandler;
 @synthesize errorHandler = _errorHandler;

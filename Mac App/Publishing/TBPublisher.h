@@ -10,11 +10,6 @@
 
 @class TBSite;
 
-typedef enum {
-	TBPublisherProtocolFTP,
-	TBPublisherProtocolSFTP
-} TBPublisherProtocol;
-
 typedef void(^TBPublisherProgressHandler)(NSInteger progress, NSInteger total);
 typedef void(^TBPublisherCompletionHandler)();
 typedef void(^TBPublisherErrorHandler)(NSError *error);
@@ -22,7 +17,6 @@ typedef void(^TBPublisherErrorHandler)(NSError *error);
 @interface TBPublisher : NSObject
 
 @property (nonatomic, strong) TBSite *site;
-@property (nonatomic, assign) TBPublisherProtocol protocol;
 
 @property (nonatomic, copy) TBPublisherProgressHandler progressHandler;
 @property (nonatomic, copy) TBPublisherCompletionHandler completionHandler;
