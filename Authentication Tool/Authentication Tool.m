@@ -1,5 +1,4 @@
 //
-//  main.m
 //  Tribo Authentication Tool
 //
 //  Created by Carter Allen on 2/29/12.
@@ -86,7 +85,7 @@ NSString * fetchPassphraseForIdentityFromKeychain(NSString *identityPath) {
 		SecKeychainItemFreeContent(NULL, password);
 		return nil;
 	}
-	NSString *passwordString = [[NSString alloc] initWithBytes:password length:passwordLength encoding: NSUTF8StringEncoding];
+	NSString *passwordString = [[NSString alloc] initWithBytes:password length:passwordLength encoding:NSUTF8StringEncoding];
 	SecKeychainItemFreeContent(NULL, password);
 	
 	return passwordString;
