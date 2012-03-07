@@ -3,7 +3,8 @@
 //  Tribo
 //
 //  Created by Carter Allen on 2/29/12.
-//  Copyright (c) 2012 Opt-6 Products, LLC. All rights reserved.
+//  Copyright (c) 2012 The Tribo Authors.
+//  See the included License.md file.
 //
 
 #import "TBPublishSheetController.h"
