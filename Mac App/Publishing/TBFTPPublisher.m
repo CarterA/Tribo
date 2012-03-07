@@ -11,7 +11,7 @@
 #import "TBSite.h"
 #import "CURLFTPSession.h"
 
-@interface TBFTPPublisher () <CURLFTPSessionDelegate>
+@interface TBFTPPublisher ()
 - (NSString *)passwordFromKeychain;
 @property (nonatomic, strong) NSMutableData *data;
 @end
@@ -35,7 +35,6 @@
 	NSURLRequest *FTPRequest = [NSURLRequest requestWithURL:FTPURL];
 	NSURLCredential *FTPCredential = [NSURLCredential credentialWithUser:userName password:password persistence:NSURLCredentialPersistenceNone];
 	CURLFTPSession *FTPSession = [[CURLFTPSession alloc] initWithRequest:FTPRequest];
-	FTPSession.delegate = self;
 	[FTPSession useCredential:FTPCredential];
 	NSNumber *permissions = [NSNumber numberWithUnsignedLong:755];
 	
@@ -57,12 +56,9 @@
 		NSString *remoteFilePath = [[outputRoot stringByAppendingString:[path substringWithRange:NSMakeRange(localRootRange.length, path.length - localRootRange.length)]] stringByStandardizingPath];
 		
 		if ([isDirectory boolValue]) {
-			//[FTPSession createDirectoryAtPath:remoteFilePath permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
 			[directories addObject:remoteFilePath];
 		}
 		else {
-			//NSData *fileContents = [NSData dataWithContentsOfURL:URL];
-			//[FTPSession createFileAtPath:remoteFilePath contents:fileContents permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
 			[files setObject:URL forKey:remoteFilePath];
 		}
 		
@@ -99,10 +95,6 @@
 		}
 	});
 	
-}
-
-- (void)FTPSession:(CURLFTPSession *)session didReceiveDebugInfo:(NSString *)info ofType:(curl_infotype)type {
-	//NSLog(@"%@", info);
 }
 
 - (NSString *)passwordFromKeychain {
