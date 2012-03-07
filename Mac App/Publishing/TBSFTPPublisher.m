@@ -10,14 +10,24 @@
 #import "TBSFTPPublisher.h"
 #import "TBSite.h"
 
+NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityBookmark";
+
 @interface TBSFTPPublisher ()
 - (NSURL *)userSelectedIdentityURL;
 - (NSString *)passwordFromKeychain;
+@property (nonatomic, strong) NSURL *identityURL;
 @end
 
 @implementation TBSFTPPublisher
+@synthesize identityURL = _identityURL;
 
 - (NSURL *)userSelectedIdentityURL {
+	
+	NSData *bookmarkData = [[NSUserDefaults standardUserDefaults] dataForKey:TBSFTPPublisherIdentityBookmarkKey];
+	NSURL *identityURL = [NSURL URLByResolvingBookmarkData:bookmarkData options:NSURLBookmarkResolutionWithSecurityScope relativeToURL:nil bookmarkDataIsStale:NULL error:nil];
+	if (identityURL) {
+		return identityURL;
+	}
 	
 	NSOpenPanel *panel = [NSOpenPanel openPanel];
 	panel.message = @"Please select the SSH identity file (usually called id_rsa or ida_dsa) that should be used to authenticate with the server. Identity files are typically found in the .ssh folder in your home directory.";
@@ -28,7 +38,11 @@
 	
 	if (button == NSFileHandlingPanelCancelButton) return nil;
 	
-	return [[panel URLs] objectAtIndex:0];
+	identityURL = [[panel URLs] objectAtIndex:0];
+	bookmarkData = [identityURL bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope|NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess includingResourceValuesForKeys:nil relativeToURL:nil error:nil];
+	[[NSUserDefaults standardUserDefaults] setObject:bookmarkData forKey:TBSFTPPublisherIdentityBookmarkKey];
+	
+	return identityURL;
 	
 }
 
@@ -95,13 +109,14 @@
 	NSString *knownHostsOption = [NSString stringWithFormat:@"'UserKnownHostsFile \"%@\"'", knownHostsPath];
 	
 	if (![self passwordFromKeychain]) {
-		NSURL *identityURL = [self userSelectedIdentityURL];
-		if (!identityURL) {
+		self.identityURL = [self userSelectedIdentityURL];
+		if (!self.identityURL) {
 			if (self.errorHandler) self.errorHandler(nil);
 			return;
 		}
-		[environment setObject:[NSString stringWithFormat:@"/usr/bin/ssh -i %@ -F /dev/null -o %@", identityURL.path, knownHostsOption] forKey:@"RSYNC_RSH"];
-		[environment setObject:identityURL.path forKey:TBSiteIdentityFileEnvironmentKey];
+		[self.identityURL startAccessingSecurityScopedResource];
+		[environment setObject:[NSString stringWithFormat:@"/usr/bin/ssh -i %@ -F /dev/null -o %@", self.identityURL.path, knownHostsOption] forKey:@"RSYNC_RSH"];
+		[environment setObject:self.identityURL.path forKey:TBSiteIdentityFileEnvironmentKey];
 	}
 	else {
 		[environment setObject:[NSString stringWithFormat:@"/usr/bin/ssh -F /dev/null -o %@", knownHostsOption] forKey:@"RSYNC_RSH"];
@@ -142,6 +157,7 @@
 	}];
 	
 	[rsync setTerminationHandler:^(NSTask *task) {
+		if (self.identityURL) [self.identityURL stopAccessingSecurityScopedResource];
 		if (self.completionHandler) self.completionHandler();
 	}];
 	
