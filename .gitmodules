@@ -7,3 +7,6 @@
 [submodule "Dependencies/CocoaHTTPServer"]
 	path = Dependencies/CocoaHTTPServer
 	url = https://github.com/CarterA/CocoaHTTPServer
+[submodule "Dependencies/CurlHandle"]
+	path = Dependencies/CurlHandle
+	url = git@github.com:CarterA/CurlHandle.git

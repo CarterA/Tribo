@@ -13,6 +13,7 @@
 #import "TBSite.h"
 #import "TBPost.h"
 #import "TBHTTPServer.h"
+#import "TBPublisher.h"
 #import "TBSocketConnection.h"
 #import "UKFSEventsWatcher.h"
 #import <Quartz/Quartz.h>
@@ -31,7 +32,9 @@
 
 - (void)makeWindowControllers {
 	TBSiteWindowController *windowController = [TBSiteWindowController new];
+	[self windowControllerWillLoadNib:windowController];
 	[self addWindowController:windowController];
+	[self windowControllerDidLoadNib:windowController];
 }
 
 - (void)startPreview:(TBSiteDocumentPreviewCallback)callback {
@@ -79,6 +82,7 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
 	self.postsWatcher = [UKFSEventsWatcher new];
 	self.postsWatcher.delegate = self;
+	self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
 	[self.postsWatcher addPath:self.site.postsDirectory.path];
 }
 
@@ -88,6 +92,7 @@
 
 - (void)metadataDidChangeForSite:(TBSite *)site {
 	[self reloadSite];
+	
 }
 
 - (void)reloadSite {

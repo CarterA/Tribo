@@ -1,8 +1,8 @@
 //
-//  TBSettingsSheetController.h
+//  TBPublishSheetController.h
 //  Tribo
 //
-//  Created by Carter Allen on 2/27/12.
+//  Created by Carter Allen on 2/29/12.
 //  Copyright (c) 2012 The Tribo Authors.
 //  See the included License.md file.
 //
@@ -11,7 +11,7 @@
 
 @class TBSite;
 
-@interface TBSettingsSheetController : NSWindowController
+@interface TBPublishSheetController : NSWindowController
 @property (nonatomic, strong) TBSite *site;
 - (void)runModalForWindow:(NSWindow *)window site:(TBSite *)site;
 @end

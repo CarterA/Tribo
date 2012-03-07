@@ -13,6 +13,7 @@
 #import "TBTemplatesViewController.h"
 #import "TBSourceViewControllerViewController.h"
 #import "TBSettingsSheetController.h"
+#import "TBPublishSheetController.h"
 #import "TBTabView.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -27,6 +28,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 @property (nonatomic, assign) IBOutlet NSView *containerView;
 @property (nonatomic, assign) NSView *currentView;
 @property (nonatomic, strong) TBSettingsSheetController *settingsSheetController;
+@property (nonatomic, strong) TBPublishSheetController *publishSheetController;
 @end
 
 @implementation TBSiteWindowController
@@ -37,10 +39,15 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 @synthesize containerView=_containerView;
 @synthesize currentView=_currentView;
 @synthesize settingsSheetController=_settingsSheetController;
+@synthesize publishSheetController=_publishSheetController;
 
 - (id)init {
 	self = [super initWithWindowNibName:@"TBSiteWindow"];
 	return self;
+}
+
+- (IBAction)publish:(id)sender {
+	[self.publishSheetController runModalForWindow:self.window site:[self.document site]];
 }
 
 #pragma mark - View Controller Management
@@ -96,6 +103,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	[super windowDidLoad];
 	
 	self.settingsSheetController = [TBSettingsSheetController new];
+	self.publishSheetController = [TBPublishSheetController new];
 	
 	NSView *themeFrame = [self.window.contentView superview];
 	NSRect accessoryFrame = self.accessoryView.frame;
