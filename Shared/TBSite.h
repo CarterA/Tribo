@@ -7,22 +7,11 @@
 //  See the included License.md file.
 //
 
+#import "TBConstants.h"
+
 @class TBAsset;
 
 @protocol TBSiteDelegate;
-
-extern NSString * const TBSiteNameMetadataKey;
-extern NSString * const TBSiteAuthorMetadataKey;
-extern NSString * const TBSiteBaseURLMetadataKey;
-extern NSString * const TBSiteNumberOfRecentPostsMetadataKey;
-
-extern NSString * const TBSiteProtocolKey;
-extern NSString * const TBSiteProtocolFTP;
-extern NSString * const TBSiteProtocolSFTP;
-extern NSString * const TBSiteServerKey;
-extern NSString * const TBSitePortKey; // Not a teleportation device
-extern NSString * const TBSiteUserNameKey;
-extern NSString * const TBSiteRemotePathKey;
 
 @interface TBSite : NSObject
 

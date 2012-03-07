@@ -15,19 +15,6 @@
 
 static NSDateFormatter *postPathFormatter;
 
-NSString * const TBSiteNameMetadataKey = @"TBSiteName";
-NSString * const TBSiteAuthorMetadataKey = @"TBSiteAuthor";
-NSString * const TBSiteBaseURLMetadataKey = @"TBSiteBaseURL";
-NSString * const TBSiteNumberOfRecentPostsMetadataKey = @"TBSiteNumberOfRecentPosts";
-
-NSString * const TBSiteProtocolKey = @"TBSiteProtocol";
-NSString * const TBSiteProtocolFTP = @"TBSiteProtocolFTP";
-NSString * const TBSiteProtocolSFTP = @"TBSiteProtocolSFTP";
-NSString * const TBSiteServerKey = @"TBSiteServer";
-NSString * const TBSitePortKey = @"TBSitePort"; // NSNumber, not teleportation device
-NSString * const TBSiteUserNameKey = @"TBSiteUserName";
-NSString * const TBSiteRemotePathKey = @"TBSiteRemotePathKey";
-
 @interface TBSite ()
 @property (nonatomic, strong) TBPost *latestPost;
 @property (nonatomic, strong) NSArray *recentPosts;

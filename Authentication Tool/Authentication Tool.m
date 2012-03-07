@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Security/Security.h>
+#import "TBConstants.h"
 
 static NSString * const TBAuthenticationSSHServiceName = @"SSH";
 
@@ -33,7 +34,7 @@ int main(int argc, const char * argv[]) {
 			return 0;
 		}
 		
-		NSString *identityPath = [[[NSProcessInfo processInfo] environment] objectForKey:@"TB_IDENTITY_PATH"];
+		NSString *identityPath = [[[NSProcessInfo processInfo] environment] objectForKey:TBSiteIdentityFileEnvironmentKey];
 		
 		NSString *passphrase = fetchPassphraseForIdentityFromKeychain(identityPath);
 		
@@ -54,13 +55,13 @@ NSString * fetchPasswordFromKeychain(void) {
 	NSDictionary *metadata = [[NSProcessInfo processInfo] environment];
 	char *passwordBuffer = NULL;
 	UInt32 passwordLength = 0;
-	NSString *serverName = [metadata objectForKey:@"TBSiteServer"];
-	NSString *accountName = [metadata objectForKey:@"TBSiteUserName"];
-	UInt16 port = (UInt16)[[metadata objectForKey:@"TBSitePort"] integerValue];
+	NSString *serverName = [metadata objectForKey:TBSiteServerKey];
+	NSString *accountName = [metadata objectForKey:TBSiteUserNameKey];
+	UInt16 port = (UInt16)[[metadata objectForKey:TBSitePortKey] integerValue];
 	SecProtocolType protocol = 0;
-	if ([[metadata objectForKey:@"TBSiteProtocol"] isEqualToString:@"TBSiteProtocolFTP"])
+	if ([[metadata objectForKey:TBSiteProtocolKey] isEqualToString:TBSiteProtocolFTP])
 		protocol = kSecProtocolTypeFTP;
-	else if ([[metadata objectForKey:@"TBSiteProtocol"] isEqualToString:@"TBSiteProtocolSFTP"])
+	else if ([[metadata objectForKey:TBSiteProtocolKey] isEqualToString:TBSiteProtocolSFTP])
 		protocol = kSecProtocolTypeSSH;
 	OSStatus returnStatus = SecKeychainFindInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, "", port, protocol, kSecAuthenticationTypeDefault, &passwordLength, (void **)&passwordBuffer, NULL);
 	if (returnStatus != noErr)

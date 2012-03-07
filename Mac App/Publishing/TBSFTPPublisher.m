@@ -101,7 +101,7 @@
 			return;
 		}
 		[environment setObject:[NSString stringWithFormat:@"/usr/bin/ssh -i %@ -F /dev/null -o %@", identityURL.path, knownHostsOption] forKey:@"RSYNC_RSH"];
-		[environment setObject:identityURL.path forKey:@"TB_IDENTITY_PATH"];
+		[environment setObject:identityURL.path forKey:TBSiteIdentityFileEnvironmentKey];
 	}
 	else {
 		[environment setObject:[NSString stringWithFormat:@"/usr/bin/ssh -F /dev/null -o %@", knownHostsOption] forKey:@"RSYNC_RSH"];

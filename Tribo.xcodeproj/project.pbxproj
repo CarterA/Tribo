@@ -101,6 +101,8 @@
 		4A9ED5241506F81E009C5754 /* CURLFTPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED5231506F81E009C5754 /* CURLFTPSession.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A9ED5271506F82B009C5754 /* CURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED5261506F82B009C5754 /* CURLProtocol.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A9ED52A1506FAE8009C5754 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9ED5281506FADB009C5754 /* SystemConfiguration.framework */; };
+		4A9ED52D1507AF83009C5754 /* TBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED52C1507AF83009C5754 /* TBConstants.m */; };
+		4A9ED52E1507AF83009C5754 /* TBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED52C1507AF83009C5754 /* TBConstants.m */; };
 		4AAC8E461451EFA800AE978A /* TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E421451EF9200AE978A /* TBViewController.m */; };
 		4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */; };
 		4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5C1456609300AE978A /* TBPostsViewController.m */; };
@@ -279,6 +281,8 @@
 		4A9ED5251506F82B009C5754 /* CURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURLProtocol.h; sourceTree = "<group>"; };
 		4A9ED5261506F82B009C5754 /* CURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURLProtocol.m; sourceTree = "<group>"; };
 		4A9ED5281506FADB009C5754 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4A9ED52B1507AF83009C5754 /* TBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBConstants.h; sourceTree = "<group>"; };
+		4A9ED52C1507AF83009C5754 /* TBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBConstants.m; sourceTree = "<group>"; };
 		4AA29D0114E42ED5005E341F /* Tribo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tribo.entitlements; sourceTree = "<group>"; };
 		4AAC8E411451EF9200AE978A /* TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AAC8E421451EF9200AE978A /* TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -494,6 +498,8 @@
 				9B507E7A14D7B2B100E85357 /* TBError.h */,
 				9B6B669A14F3546900759DC3 /* TBAsset.h */,
 				9B6B669B14F3546900759DC3 /* TBAsset.m */,
+				4A9ED52B1507AF83009C5754 /* TBConstants.h */,
+				4A9ED52C1507AF83009C5754 /* TBConstants.m */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1030,6 +1036,7 @@
 				4A9ED52015069CD6009C5754 /* CURLHandle.m in Sources */,
 				4A9ED5241506F81E009C5754 /* CURLFTPSession.m in Sources */,
 				4A9ED5271506F82B009C5754 /* CURLProtocol.m in Sources */,
+				4A9ED52D1507AF83009C5754 /* TBConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1038,6 +1045,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AE91C5D14FEE0F500499469 /* Authentication Tool.m in Sources */,
+				4A9ED52E1507AF83009C5754 /* TBConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
