@@ -13,16 +13,6 @@
 		4A0F0C5E14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */; };
 		4A2E6E3C15058D80000397B4 /* TBSFTPPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E6E3B15058D80000397B4 /* TBSFTPPublisher.m */; };
 		4A2E6E4015058D8C000397B4 /* TBFTPPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E6E3F15058D8C000397B4 /* TBFTPPublisher.m */; };
-		4A2E71191505A771000397B4 /* ACFTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E71041505A771000397B4 /* ACFTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A2E711A1505A771000397B4 /* ACFTPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E71061505A771000397B4 /* ACFTPEntry.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A2E711B1505A771000397B4 /* ACFTPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E71081505A771000397B4 /* ACFTPError.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A2E711C1505A771000397B4 /* ACFTPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E710A1505A771000397B4 /* ACFTPHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A2E711D1505A771000397B4 /* ACFTPLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E710C1505A771000397B4 /* ACFTPLocation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A2E711F1505A771000397B4 /* ACFTPDeleteFileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E71101505A771000397B4 /* ACFTPDeleteFileRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A2E71201505A771000397B4 /* ACFTPGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E71121505A771000397B4 /* ACFTPGetRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A2E71211505A771000397B4 /* ACFTPListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E71141505A771000397B4 /* ACFTPListRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A2E71221505A771000397B4 /* ACFTPMakeDirectoryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E71161505A771000397B4 /* ACFTPMakeDirectoryRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A2E71231505A771000397B4 /* ACFTPPutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E71181505A771000397B4 /* ACFTPPutRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A2E84CD14FDD969008FE2C4 /* rsync in Resources */ = {isa = PBXBuildFile; fileRef = 4A2E84CC14FDD969008FE2C4 /* rsync */; };
 		4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4A30E879144B86F4001DDBAE /* Credits.rtf */; };
 		4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */; };
@@ -105,6 +95,12 @@
 		4A88295E143A679C00EBBD7E /* TBDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A88295D143A679C00EBBD7E /* TBDocumentController.m */; };
 		4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A882968143A736E00EBBD7E /* TBSiteDocument.m */; };
 		4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A882969143A736F00EBBD7E /* TBSiteWindow.xib */; };
+		4A9ED51F15069CD6009C5754 /* CURLHandle+extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A9ED52015069CD6009C5754 /* CURLHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED51E15069CD6009C5754 /* CURLHandle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A9ED52115069CE3009C5754 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9ED51815069CB6009C5754 /* libcurl.dylib */; };
+		4A9ED5241506F81E009C5754 /* CURLFTPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED5231506F81E009C5754 /* CURLFTPSession.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A9ED5271506F82B009C5754 /* CURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED5261506F82B009C5754 /* CURLProtocol.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A9ED52A1506FAE8009C5754 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9ED5281506FADB009C5754 /* SystemConfiguration.framework */; };
 		4AAC8E461451EFA800AE978A /* TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E421451EF9200AE978A /* TBViewController.m */; };
 		4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */; };
 		4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5C1456609300AE978A /* TBPostsViewController.m */; };
@@ -183,26 +179,6 @@
 		4A2E6E3B15058D80000397B4 /* TBSFTPPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSFTPPublisher.m; sourceTree = "<group>"; };
 		4A2E6E3E15058D8C000397B4 /* TBFTPPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFTPPublisher.h; sourceTree = "<group>"; };
 		4A2E6E3F15058D8C000397B4 /* TBFTPPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBFTPPublisher.m; sourceTree = "<group>"; };
-		4A2E71031505A771000397B4 /* ACFTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPClient.h; sourceTree = "<group>"; };
-		4A2E71041505A771000397B4 /* ACFTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPClient.m; sourceTree = "<group>"; };
-		4A2E71051505A771000397B4 /* ACFTPEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPEntry.h; sourceTree = "<group>"; };
-		4A2E71061505A771000397B4 /* ACFTPEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPEntry.m; sourceTree = "<group>"; };
-		4A2E71071505A771000397B4 /* ACFTPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPError.h; sourceTree = "<group>"; };
-		4A2E71081505A771000397B4 /* ACFTPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPError.m; sourceTree = "<group>"; };
-		4A2E71091505A771000397B4 /* ACFTPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPHelper.h; sourceTree = "<group>"; };
-		4A2E710A1505A771000397B4 /* ACFTPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPHelper.m; sourceTree = "<group>"; };
-		4A2E710B1505A771000397B4 /* ACFTPLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPLocation.h; sourceTree = "<group>"; };
-		4A2E710C1505A771000397B4 /* ACFTPLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPLocation.m; sourceTree = "<group>"; };
-		4A2E710F1505A771000397B4 /* ACFTPDeleteFileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPDeleteFileRequest.h; sourceTree = "<group>"; };
-		4A2E71101505A771000397B4 /* ACFTPDeleteFileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPDeleteFileRequest.m; sourceTree = "<group>"; };
-		4A2E71111505A771000397B4 /* ACFTPGetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPGetRequest.h; sourceTree = "<group>"; };
-		4A2E71121505A771000397B4 /* ACFTPGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPGetRequest.m; sourceTree = "<group>"; };
-		4A2E71131505A771000397B4 /* ACFTPListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPListRequest.h; sourceTree = "<group>"; };
-		4A2E71141505A771000397B4 /* ACFTPListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPListRequest.m; sourceTree = "<group>"; };
-		4A2E71151505A771000397B4 /* ACFTPMakeDirectoryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPMakeDirectoryRequest.h; sourceTree = "<group>"; };
-		4A2E71161505A771000397B4 /* ACFTPMakeDirectoryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPMakeDirectoryRequest.m; sourceTree = "<group>"; };
-		4A2E71171505A771000397B4 /* ACFTPPutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFTPPutRequest.h; sourceTree = "<group>"; };
-		4A2E71181505A771000397B4 /* ACFTPPutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFTPPutRequest.m; sourceTree = "<group>"; };
 		4A2E84CC14FDD969008FE2C4 /* rsync */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = rsync; sourceTree = "<group>"; };
 		4A30E879144B86F4001DDBAE /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBTabView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -293,6 +269,16 @@
 		4A882967143A736E00EBBD7E /* TBSiteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBSiteDocument.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A882968143A736E00EBBD7E /* TBSiteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBSiteDocument.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A882969143A736F00EBBD7E /* TBSiteWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBSiteWindow.xib; path = Controllers/TBSiteWindow.xib; sourceTree = "<group>"; };
+		4A9ED51815069CB6009C5754 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
+		4A9ED51B15069CD6009C5754 /* CURLHandle+extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CURLHandle+extras.h"; sourceTree = "<group>"; };
+		4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CURLHandle+extras.m"; sourceTree = "<group>"; };
+		4A9ED51D15069CD6009C5754 /* CURLHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURLHandle.h; sourceTree = "<group>"; };
+		4A9ED51E15069CD6009C5754 /* CURLHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURLHandle.m; sourceTree = "<group>"; };
+		4A9ED5221506F81E009C5754 /* CURLFTPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURLFTPSession.h; sourceTree = "<group>"; };
+		4A9ED5231506F81E009C5754 /* CURLFTPSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURLFTPSession.m; sourceTree = "<group>"; };
+		4A9ED5251506F82B009C5754 /* CURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURLProtocol.h; sourceTree = "<group>"; };
+		4A9ED5261506F82B009C5754 /* CURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURLProtocol.m; sourceTree = "<group>"; };
+		4A9ED5281506FADB009C5754 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4AA29D0114E42ED5005E341F /* Tribo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tribo.entitlements; sourceTree = "<group>"; };
 		4AAC8E411451EF9200AE978A /* TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AAC8E421451EF9200AE978A /* TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -366,6 +352,7 @@
 			files = (
 				4A8696241437BE0B00204482 /* Cocoa.framework in Frameworks */,
 				4A8829211437C53000EBBD7E /* ApplicationServices.framework in Frameworks */,
+				4A9ED52A1506FAE8009C5754 /* SystemConfiguration.framework in Frameworks */,
 				4A8829221437C53000EBBD7E /* CoreServices.framework in Frameworks */,
 				4A8829231437C53000EBBD7E /* CoreFoundation.framework in Frameworks */,
 				4ABD6A5414417ED9007E2F5D /* Quartz.framework in Frameworks */,
@@ -373,6 +360,7 @@
 				4A8829251437C53000EBBD7E /* Security.framework in Frameworks */,
 				4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */,
 				4A0F0C5E14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */,
+				4A9ED52115069CE3009C5754 /* libcurl.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,8 +380,8 @@
 		4A00338E14302F6600F6702F /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				4A2E71021505A771000397B4 /* ACFTP */,
 				4A7557BE1436F4D70040A10C /* CocoaHTTPServer */,
+				4A9ED51A15069CD6009C5754 /* CurlHandle */,
 				4A72F1271436868B00A164E9 /* Sundown */,
 				4A2E84CB14FDD969008FE2C4 /* Rsync */,
 				4A72F125143155AE00A164E9 /* GRMustache */,
@@ -401,42 +389,6 @@
 			);
 			name = Dependencies;
 			path = Tribo;
-			sourceTree = "<group>";
-		};
-		4A2E71021505A771000397B4 /* ACFTP */ = {
-			isa = PBXGroup;
-			children = (
-				4A2E71031505A771000397B4 /* ACFTPClient.h */,
-				4A2E71041505A771000397B4 /* ACFTPClient.m */,
-				4A2E71051505A771000397B4 /* ACFTPEntry.h */,
-				4A2E71061505A771000397B4 /* ACFTPEntry.m */,
-				4A2E71071505A771000397B4 /* ACFTPError.h */,
-				4A2E71081505A771000397B4 /* ACFTPError.m */,
-				4A2E71091505A771000397B4 /* ACFTPHelper.h */,
-				4A2E710A1505A771000397B4 /* ACFTPHelper.m */,
-				4A2E710B1505A771000397B4 /* ACFTPLocation.h */,
-				4A2E710C1505A771000397B4 /* ACFTPLocation.m */,
-				4A2E710E1505A771000397B4 /* Requests */,
-			);
-			name = ACFTP;
-			path = Dependencies/ACConnect/src/ACFTP;
-			sourceTree = SOURCE_ROOT;
-		};
-		4A2E710E1505A771000397B4 /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				4A2E710F1505A771000397B4 /* ACFTPDeleteFileRequest.h */,
-				4A2E71101505A771000397B4 /* ACFTPDeleteFileRequest.m */,
-				4A2E71111505A771000397B4 /* ACFTPGetRequest.h */,
-				4A2E71121505A771000397B4 /* ACFTPGetRequest.m */,
-				4A2E71131505A771000397B4 /* ACFTPListRequest.h */,
-				4A2E71141505A771000397B4 /* ACFTPListRequest.m */,
-				4A2E71151505A771000397B4 /* ACFTPMakeDirectoryRequest.h */,
-				4A2E71161505A771000397B4 /* ACFTPMakeDirectoryRequest.m */,
-				4A2E71171505A771000397B4 /* ACFTPPutRequest.h */,
-				4A2E71181505A771000397B4 /* ACFTPPutRequest.m */,
-			);
-			path = Requests;
 			sourceTree = "<group>";
 		};
 		4A2E84CB14FDD969008FE2C4 /* Rsync */ = {
@@ -517,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				4A7558131436FBA10040A10C /* ApplicationServices.framework */,
+				4A9ED5281506FADB009C5754 /* SystemConfiguration.framework */,
 				4A7558101436F82D0040A10C /* CoreServices.framework */,
 				4A75580A1436F6590040A10C /* CoreFoundation.framework */,
 				4ABD6A5214417ECA007E2F5D /* Quartz.framework */,
@@ -721,6 +674,23 @@
 			);
 			name = UKFileWatcher;
 			path = Dependencies/UKFileWatcher;
+			sourceTree = SOURCE_ROOT;
+		};
+		4A9ED51A15069CD6009C5754 /* CurlHandle */ = {
+			isa = PBXGroup;
+			children = (
+				4A9ED5221506F81E009C5754 /* CURLFTPSession.h */,
+				4A9ED5231506F81E009C5754 /* CURLFTPSession.m */,
+				4A9ED51B15069CD6009C5754 /* CURLHandle+extras.h */,
+				4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */,
+				4A9ED51D15069CD6009C5754 /* CURLHandle.h */,
+				4A9ED51E15069CD6009C5754 /* CURLHandle.m */,
+				4A9ED5251506F82B009C5754 /* CURLProtocol.h */,
+				4A9ED5261506F82B009C5754 /* CURLProtocol.m */,
+				4A9ED51815069CB6009C5754 /* libcurl.dylib */,
+			);
+			name = CurlHandle;
+			path = Dependencies/CurlHandle/CURLHandleSource;
 			sourceTree = SOURCE_ROOT;
 		};
 		4AE3B29E14E21AE100012A48 /* Scripting */ = {
@@ -1056,16 +1026,10 @@
 				4AE91C7114FF16ED00499469 /* TBPublishSheetController.m in Sources */,
 				4A2E6E3C15058D80000397B4 /* TBSFTPPublisher.m in Sources */,
 				4A2E6E4015058D8C000397B4 /* TBFTPPublisher.m in Sources */,
-				4A2E71191505A771000397B4 /* ACFTPClient.m in Sources */,
-				4A2E711A1505A771000397B4 /* ACFTPEntry.m in Sources */,
-				4A2E711B1505A771000397B4 /* ACFTPError.m in Sources */,
-				4A2E711C1505A771000397B4 /* ACFTPHelper.m in Sources */,
-				4A2E711D1505A771000397B4 /* ACFTPLocation.m in Sources */,
-				4A2E711F1505A771000397B4 /* ACFTPDeleteFileRequest.m in Sources */,
-				4A2E71201505A771000397B4 /* ACFTPGetRequest.m in Sources */,
-				4A2E71211505A771000397B4 /* ACFTPListRequest.m in Sources */,
-				4A2E71221505A771000397B4 /* ACFTPMakeDirectoryRequest.m in Sources */,
-				4A2E71231505A771000397B4 /* ACFTPPutRequest.m in Sources */,
+				4A9ED51F15069CD6009C5754 /* CURLHandle+extras.m in Sources */,
+				4A9ED52015069CD6009C5754 /* CURLHandle.m in Sources */,
+				4A9ED5241506F81E009C5754 /* CURLFTPSession.m in Sources */,
+				4A9ED5271506F82B009C5754 /* CURLProtocol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

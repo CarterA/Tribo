@@ -8,15 +8,15 @@
 
 #import "TBFTPPublisher.h"
 #import "TBSite.h"
-#import "ACFTPClient.h"
+#import "CURLFTPSession.h"
 
-@interface TBFTPPublisher () <ACFTPClientDelegate> {
-	NSUInteger requests;
-}
+@interface TBFTPPublisher () <CURLFTPSessionDelegate>
 - (NSString *)passwordFromKeychain;
+@property (nonatomic, strong) NSMutableData *data;
 @end
 
 @implementation TBFTPPublisher
+@synthesize data = _data;
 
 - (void)publish {
 	
@@ -29,16 +29,17 @@
 	
 	NSString *outputParent = [remotePath stringByReplacingOccurrencesOfString:[remotePath lastPathComponent] withString:@""];
 	NSString *outputRoot = [outputParent stringByAppendingPathComponent:remotePath.lastPathComponent];
-	ACFTPLocation *location = [ACFTPLocation locationWithHost:hostname href:outputParent username:userName password:password];
-	ACFTPClient *client = [ACFTPClient clientWithLocation:location];
-	client.delegate = self;
-	requests = 0;
 	
-	NSURL *localURL = self.site.destination;
-	requests += 2;
-	[client makeDirectory:remotePath.lastPathComponent inParentDirectory:outputParent];
-	 
-	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:localURL includingPropertiesForKeys:[NSArray arrayWithObjects:NSURLIsDirectoryKey, NSURLNameKey, nil] options:0 errorHandler:nil];
+	NSURL *FTPURL = [NSURL URLWithString:[NSString stringWithFormat:@"ftp://%@/", hostname]];
+	NSURLRequest *FTPRequest = [NSURLRequest requestWithURL:FTPURL];
+	NSURLCredential *FTPCredential = [NSURLCredential credentialWithUser:userName password:password persistence:NSURLCredentialPersistenceNone];
+	CURLFTPSession *FTPSession = [[CURLFTPSession alloc] initWithRequest:FTPRequest];
+	FTPSession.delegate = self;
+	[FTPSession useCredential:FTPCredential];
+	
+	[FTPSession createDirectoryAtPath:outputRoot permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
+	
+	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.site.destination includingPropertiesForKeys:[NSArray arrayWithObjects:NSURLIsDirectoryKey, NSURLNameKey, nil] options:0 errorHandler:nil];
 	for (NSURL *URL in enumerator) {
 		
 		NSString *fileName = @"";
@@ -48,23 +49,22 @@
 		[URL getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:nil];
 		
 		NSString *path = [URL path];
-		NSRange localRootRange = [path rangeOfString:localURL.path options:NSAnchoredSearch];
-		NSString *relativeLocalPath = [path substringWithRange:NSMakeRange(localRootRange.length, path.length - localRootRange.length)];
+		NSRange localRootRange = [path rangeOfString:self.site.destination.path options:NSAnchoredSearch];
+		NSString *remoteFilePath = [[outputRoot stringByAppendingString:[path substringWithRange:NSMakeRange(localRootRange.length, path.length - localRootRange.length)]] stringByStandardizingPath];
 		
 		if ([isDirectory boolValue]) {
-			requests++;
-			[client makeDirectory:relativeLocalPath inParentDirectory:outputRoot];
+			[FTPSession createDirectoryAtPath:remoteFilePath permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
 		}
 		else {
-			requests++;
-			NSString *remoteFilePath = [outputRoot stringByAppendingPathComponent:relativeLocalPath];
-			NSString *remoteParentDirectory = [remoteFilePath stringByReplacingOccurrencesOfString:remoteFilePath.lastPathComponent withString:@""];
-			[client put:path toDestination:remoteParentDirectory];
+			NSData *fileContents = [NSData dataWithContentsOfURL:URL];
+			[FTPSession createFileAtPath:remoteFilePath contents:fileContents permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
 		}
 		
 	}
-	requests--;
 	
+}
+
+- (void)FTPSession:(CURLFTPSession *)session didReceiveDebugInfo:(NSString *)info ofType:(curl_infotype)type {
 }
 
 - (NSString *)passwordFromKeychain {
@@ -82,30 +82,6 @@
 	SecKeychainItemFreeContent(NULL, passwordBuffer);
 	if ([password length] == 0) password = nil;
 	return password;
-}
-
-- (void)client:(ACFTPClient *)client request:(id)request didFailWithError:(NSError *)error {
-	NSLog(@"%@", error);
-	requests--;
-	if (self.completionHandler && requests == 0) self.completionHandler();
-}
-
-- (void)client:(ACFTPClient *)client request:(id)request didUpdateStatus:(NSString *)status {
-	//NSLog(@"%@", status);
-}
-
-- (void)client:(ACFTPClient *)client request:(id)request didUpdateProgress:(float)progress {
-	//NSLog(@"%f", progress);
-}
-
-- (void)client:(ACFTPClient *)client request:(id)request didUploadFile:(NSString *)sourcePath toDestination:(NSURL *)destination {
-	requests--;
-	if (self.completionHandler && requests == 0) self.completionHandler();
-}
-
-- (void)client:(ACFTPClient *)client request:(id)request didMakeDirectory:(NSURL *)destination {
-	requests--;
-	if (self.completionHandler && requests == 0) self.completionHandler();
 }
 
 @end
