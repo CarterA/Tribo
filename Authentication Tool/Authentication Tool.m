@@ -58,12 +58,7 @@ NSString * fetchPasswordFromKeychain(void) {
 	NSString *serverName = [metadata objectForKey:TBSiteServerKey];
 	NSString *accountName = [metadata objectForKey:TBSiteUserNameKey];
 	UInt16 port = (UInt16)[[metadata objectForKey:TBSitePortKey] integerValue];
-	SecProtocolType protocol = 0;
-	if ([[metadata objectForKey:TBSiteProtocolKey] isEqualToString:TBSiteProtocolFTP])
-		protocol = kSecProtocolTypeFTP;
-	else if ([[metadata objectForKey:TBSiteProtocolKey] isEqualToString:TBSiteProtocolSFTP])
-		protocol = kSecProtocolTypeSSH;
-	OSStatus returnStatus = SecKeychainFindInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, "", port, protocol, kSecAuthenticationTypeDefault, &passwordLength, (void **)&passwordBuffer, NULL);
+	OSStatus returnStatus = SecKeychainFindInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, "", port, kSecProtocolTypeSSH, kSecAuthenticationTypeDefault, &passwordLength, (void **)&passwordBuffer, NULL);
 	if (returnStatus != noErr)
 		return nil;
 	NSString *password = [[NSString alloc] initWithBytes:passwordBuffer length:passwordLength encoding: NSUTF8StringEncoding];
