@@ -36,7 +36,7 @@
 	
 	[self.publisher setProgressHandler:^(NSInteger progress, NSInteger total) {
 		self.indicator.indeterminate = NO;
-		self.indicator.doubleValue = (progress/total) * 100;
+		self.indicator.doubleValue = ((double)progress/(double)total) * 100.0;
 	}];
 	
 	[self.publisher setCompletionHandler:^() {

@@ -36,10 +36,13 @@
 	CURLFTPSession *FTPSession = [[CURLFTPSession alloc] initWithRequest:FTPRequest];
 	FTPSession.delegate = self;
 	[FTPSession useCredential:FTPCredential];
+	NSNumber *permissions = [NSNumber numberWithUnsignedLong:755];
 	
-	[FTPSession createDirectoryAtPath:outputRoot permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
+	[FTPSession createDirectoryAtPath:outputRoot permissions:permissions withIntermediateDirectories:NO error:nil];
 	
 	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.site.destination includingPropertiesForKeys:[NSArray arrayWithObjects:NSURLIsDirectoryKey, NSURLNameKey, nil] options:0 errorHandler:nil];
+	NSMutableArray *directories = [NSMutableArray array]; // Array of remote paths
+	NSMutableDictionary *files = [NSMutableDictionary dictionary]; // Dictionary of remote paths (keys) and local file URLs (objects)
 	for (NSURL *URL in enumerator) {
 		
 		NSString *fileName = @"";
@@ -53,18 +56,52 @@
 		NSString *remoteFilePath = [[outputRoot stringByAppendingString:[path substringWithRange:NSMakeRange(localRootRange.length, path.length - localRootRange.length)]] stringByStandardizingPath];
 		
 		if ([isDirectory boolValue]) {
-			[FTPSession createDirectoryAtPath:remoteFilePath permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
+			//[FTPSession createDirectoryAtPath:remoteFilePath permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
+			[directories addObject:remoteFilePath];
 		}
 		else {
-			NSData *fileContents = [NSData dataWithContentsOfURL:URL];
-			[FTPSession createFileAtPath:remoteFilePath contents:fileContents permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
+			//NSData *fileContents = [NSData dataWithContentsOfURL:URL];
+			//[FTPSession createFileAtPath:remoteFilePath contents:fileContents permissions:[NSNumber numberWithUnsignedLong:755] withIntermediateDirectories:NO error:nil];
+			[files setObject:URL forKey:remoteFilePath];
 		}
 		
 	}
 	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+		NSInteger totalOperations = [directories count] + [files count];
+		__block NSInteger completedOperations = 0;
+		
+		[directories enumerateObjectsUsingBlock:^(NSString *remoteDirectoryPath, NSUInteger index, BOOL *stop) {
+			[FTPSession createDirectoryAtPath:remoteDirectoryPath permissions:permissions withIntermediateDirectories:NO error:nil];
+			completedOperations++;
+			if (self.progressHandler) {
+				dispatch_async(dispatch_get_main_queue(), ^{
+					self.progressHandler(completedOperations, totalOperations);
+				});
+			}
+		}];
+		[files enumerateKeysAndObjectsUsingBlock:^(NSString *remoteFilePath, NSURL *localFileURL, BOOL *stop) {
+			NSData *fileContents = [NSData dataWithContentsOfURL:localFileURL];
+			[FTPSession createFileAtPath:remoteFilePath contents:fileContents permissions:permissions withIntermediateDirectories:NO error:nil];
+			completedOperations++;
+			if (self.progressHandler) {
+				dispatch_async(dispatch_get_main_queue(), ^{
+					self.progressHandler(completedOperations, totalOperations);
+				});
+			}
+		}];
+		
+		if (self.completionHandler) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				self.completionHandler();
+			});
+		}
+	});
+	
 }
 
 - (void)FTPSession:(CURLFTPSession *)session didReceiveDebugInfo:(NSString *)info ofType:(curl_infotype)type {
+	//NSLog(@"%@", info);
 }
 
 - (NSString *)passwordFromKeychain {
