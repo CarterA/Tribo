@@ -149,14 +149,20 @@ static NSDateFormatter *postPathFormatter;
 	self.posts = posts;
 	
 	// Prepare the convenience sets of posts used by templates.
-    NSUInteger recentPostCount = [[self.metadata objectForKey:TBSiteNumberOfRecentPostsMetadataKey] unsignedIntegerValue];
-	if (!recentPostCount) recentPostCount = 5;
-    if ([self.posts count] < recentPostCount) {
-        recentPostCount = [self.posts count];
-    }
-	self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, recentPostCount)];
-    self.latestPost = [self.recentPosts objectAtIndex:0];
-    
+	if ([self.posts count] <= 0) {
+		self.recentPosts = [NSArray array];
+		self.latestPost = nil;
+	}
+	else {
+		NSUInteger recentPostCount = [[self.metadata objectForKey:TBSiteNumberOfRecentPostsMetadataKey] unsignedIntegerValue];
+		if (!recentPostCount) recentPostCount = 5;
+		if ([self.posts count] < recentPostCount) {
+			recentPostCount = [self.posts count];
+		}
+		self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, recentPostCount)];
+		self.latestPost = [self.recentPosts objectAtIndex:0];
+	}
+	
     // Prepare the template object tree
     self.templateAssets = [TBAsset assetsFromDirectoryURL:[self templatesDirectory]];
     self.sourceAssets = [TBAsset assetsFromDirectoryURL:[self sourceDirectory]];
