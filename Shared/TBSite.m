@@ -20,7 +20,6 @@ static NSDateFormatter *postPathFormatter;
 @property (nonatomic, strong) NSArray *recentPosts;
 @property (nonatomic, readonly) NSString *XMLDate;
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
-@property (nonatomic, strong) NSDate *lastParsedPostsModificationDate;
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *author;
 @property (nonatomic, readonly) NSString *baseURL;
@@ -39,7 +38,6 @@ static NSDateFormatter *postPathFormatter;
 @synthesize latestPost = _latestPost;
 @synthesize recentPosts = _recentPosts;
 @synthesize postTemplate = _postTemplate;
-@synthesize lastParsedPostsModificationDate = _lastParsedPostsModificationDate;
 @synthesize templateAssets = _templateAssets;
 @synthesize sourceAssets = _sourceAssets;
 @synthesize metadata = _metadata;
@@ -136,26 +134,19 @@ static NSDateFormatter *postPathFormatter;
         }
         return NO;
     }
-	
-	// Check the modification date of the Posts directory, and bail out if we don't need to re-parse it.
-	NSDate *currentModificationDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.postsDirectory.path stringByResolvingSymlinksInPath] error:nil] fileModificationDate];
-	if (!self.lastParsedPostsModificationDate) {
-		self.lastParsedPostsModificationDate = currentModificationDate;
 		
-		// Parse the contents of the Posts directory into individual TBPost objects.
-		NSMutableArray *posts = [NSMutableArray array];
-		for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
-			TBPost *post = [TBPost postWithURL:postURL error:error];
-			post.site = self;
-			if (!post) {
-				return NO;
-			}
-			[posts addObject:post];
+	// Parse the contents of the Posts directory into individual TBPost objects.
+	NSMutableArray *posts = [NSMutableArray array];
+	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
+		TBPost *post = [TBPost postWithURL:postURL error:error];
+		post.site = self;
+		if (!post) {
+			return NO;
 		}
-		posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
-		self.posts = posts;
-		
+		[posts addObject:post];
 	}
+	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
+	self.posts = posts;
 	
 	// Prepare the convenience sets of posts used by templates.
     NSUInteger recentPostCount = [[self.metadata objectForKey:TBSiteNumberOfRecentPostsMetadataKey] unsignedIntegerValue];

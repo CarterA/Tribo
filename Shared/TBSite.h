@@ -7,14 +7,11 @@
 //  See the included License.md file.
 //
 
+#import "TBConstants.h"
+
 @class TBAsset;
 
 @protocol TBSiteDelegate;
-
-static NSString * const TBSiteNameMetadataKey = @"TBSiteName";
-static NSString * const TBSiteAuthorMetadataKey = @"TBSiteAuthor";
-static NSString * const TBSiteBaseURLMetadataKey = @"TBSiteBaseURL";
-static NSString * const TBSiteNumberOfRecentPostsMetadataKey = @"TBSiteNumberOfRecentPosts";
 
 @interface TBSite : NSObject
 

@@ -11,6 +11,9 @@
 		4A00337E143028CA00F6702F /* TBPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337D143028CA00F6702F /* TBPost.m */; };
 		4A0F0C5D14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */; };
 		4A0F0C5E14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */; };
+		4A2E6E3C15058D80000397B4 /* TBSFTPPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E6E3B15058D80000397B4 /* TBSFTPPublisher.m */; };
+		4A2E6E4015058D8C000397B4 /* TBFTPPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E6E3F15058D8C000397B4 /* TBFTPPublisher.m */; };
+		4A2E84CD14FDD969008FE2C4 /* rsync in Resources */ = {isa = PBXBuildFile; fileRef = 4A2E84CC14FDD969008FE2C4 /* rsync */; };
 		4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4A30E879144B86F4001DDBAE /* Credits.rtf */; };
 		4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */; };
 		4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A43C23314EAB89600D1CC7B /* MainMenu.xib */; };
@@ -92,6 +95,14 @@
 		4A88295E143A679C00EBBD7E /* TBDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A88295D143A679C00EBBD7E /* TBDocumentController.m */; };
 		4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A882968143A736E00EBBD7E /* TBSiteDocument.m */; };
 		4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A882969143A736F00EBBD7E /* TBSiteWindow.xib */; };
+		4A9ED51F15069CD6009C5754 /* CURLHandle+extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A9ED52015069CD6009C5754 /* CURLHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED51E15069CD6009C5754 /* CURLHandle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A9ED52115069CE3009C5754 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9ED51815069CB6009C5754 /* libcurl.dylib */; };
+		4A9ED5241506F81E009C5754 /* CURLFTPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED5231506F81E009C5754 /* CURLFTPSession.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A9ED5271506F82B009C5754 /* CURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED5261506F82B009C5754 /* CURLProtocol.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A9ED52A1506FAE8009C5754 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9ED5281506FADB009C5754 /* SystemConfiguration.framework */; };
+		4A9ED52D1507AF83009C5754 /* TBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED52C1507AF83009C5754 /* TBConstants.m */; };
+		4A9ED52E1507AF83009C5754 /* TBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED52C1507AF83009C5754 /* TBConstants.m */; };
 		4AAC8E461451EFA800AE978A /* TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E421451EF9200AE978A /* TBViewController.m */; };
 		4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */; };
 		4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5C1456609300AE978A /* TBPostsViewController.m */; };
@@ -111,6 +122,16 @@
 		4AE50F9214F8BB3900FCA39C /* livereload.js in Resources */ = {isa = PBXBuildFile; fileRef = 4AE50F8F14F8BB2200FCA39C /* livereload.js */; };
 		4AE50F9814F95E0B00FCA39C /* LiveReload Snippet.html in Resources */ = {isa = PBXBuildFile; fileRef = 4AE50F9714F95E0B00FCA39C /* LiveReload Snippet.html */; };
 		4AE50F9B14F95ED500FCA39C /* TBPage+LiveReload.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F9A14F95ED500FCA39C /* TBPage+LiveReload.m */; };
+		4AE50FE014FBD4E100FCA39C /* TBSettingsSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50FDE14FBD4E100FCA39C /* TBSettingsSheetController.m */; };
+		4AE50FE114FBD4E100FCA39C /* TBSettingsSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE50FDF14FBD4E100FCA39C /* TBSettingsSheet.xib */; };
+		4AE91C4E14FEE08200499469 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6DC8EB1430203B00CB5025 /* Foundation.framework */; };
+		4AE91C5D14FEE0F500499469 /* Authentication Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C5C14FEE0F500499469 /* Authentication Tool.m */; };
+		4AE91C5E14FEE15700499469 /* Tribo Authentication Tool in Resources */ = {isa = PBXBuildFile; fileRef = 4AE91C4C14FEE08200499469 /* Tribo Authentication Tool */; };
+		4AE91C6114FEE51C00499469 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A75580D1436F6820040A10C /* Security.framework */; };
+		4AE91C6214FEE83400499469 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558101436F82D0040A10C /* CoreServices.framework */; };
+		4AE91C6614FF044700499469 /* TBPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6514FF044700499469 /* TBPublisher.m */; };
+		4AE91C7114FF16ED00499469 /* TBPublishSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */; };
+		4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */; };
 		9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */; };
 		9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6B669614F3480800759DC3 /* TBTemplatesView.xib */; };
 		9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
@@ -119,8 +140,27 @@
 		9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4AE91C5F14FEE15F00499469 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A6DC8DE1430203B00CB5025 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AE91C4B14FEE08200499469;
+			remoteInfo = "Authentication Tool";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		4A6DC8E51430203B00CB5025 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		4AE91C4A14FEE08200499469 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -137,6 +177,11 @@
 		4A00337C143028CA00F6702F /* TBPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBPost.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A00337D143028CA00F6702F /* TBPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBPost.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache1-macosx10.6.a"; path = "Dependencies/GRMustache/lib/libGRMustache1-macosx10.6.a"; sourceTree = SOURCE_ROOT; };
+		4A2E6E3A15058D80000397B4 /* TBSFTPPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSFTPPublisher.h; sourceTree = "<group>"; };
+		4A2E6E3B15058D80000397B4 /* TBSFTPPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSFTPPublisher.m; sourceTree = "<group>"; };
+		4A2E6E3E15058D8C000397B4 /* TBFTPPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFTPPublisher.h; sourceTree = "<group>"; };
+		4A2E6E3F15058D8C000397B4 /* TBFTPPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBFTPPublisher.m; sourceTree = "<group>"; };
+		4A2E84CC14FDD969008FE2C4 /* rsync */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = rsync; sourceTree = "<group>"; };
 		4A30E879144B86F4001DDBAE /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBTabView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBTabView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -226,6 +271,18 @@
 		4A882967143A736E00EBBD7E /* TBSiteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBSiteDocument.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A882968143A736E00EBBD7E /* TBSiteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBSiteDocument.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A882969143A736F00EBBD7E /* TBSiteWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBSiteWindow.xib; path = Controllers/TBSiteWindow.xib; sourceTree = "<group>"; };
+		4A9ED51815069CB6009C5754 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
+		4A9ED51B15069CD6009C5754 /* CURLHandle+extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CURLHandle+extras.h"; sourceTree = "<group>"; };
+		4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CURLHandle+extras.m"; sourceTree = "<group>"; };
+		4A9ED51D15069CD6009C5754 /* CURLHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURLHandle.h; sourceTree = "<group>"; };
+		4A9ED51E15069CD6009C5754 /* CURLHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURLHandle.m; sourceTree = "<group>"; };
+		4A9ED5221506F81E009C5754 /* CURLFTPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURLFTPSession.h; sourceTree = "<group>"; };
+		4A9ED5231506F81E009C5754 /* CURLFTPSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURLFTPSession.m; sourceTree = "<group>"; };
+		4A9ED5251506F82B009C5754 /* CURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURLProtocol.h; sourceTree = "<group>"; };
+		4A9ED5261506F82B009C5754 /* CURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURLProtocol.m; sourceTree = "<group>"; };
+		4A9ED5281506FADB009C5754 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4A9ED52B1507AF83009C5754 /* TBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBConstants.h; sourceTree = "<group>"; };
+		4A9ED52C1507AF83009C5754 /* TBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBConstants.m; sourceTree = "<group>"; };
 		4AA29D0114E42ED5005E341F /* Tribo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tribo.entitlements; sourceTree = "<group>"; };
 		4AAC8E411451EF9200AE978A /* TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AAC8E421451EF9200AE978A /* TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -256,8 +313,18 @@
 		4AE50F8714F8906400FCA39C /* TBHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHTTPServer.m; sourceTree = "<group>"; };
 		4AE50F8F14F8BB2200FCA39C /* livereload.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = livereload.js; sourceTree = "<group>"; };
 		4AE50F9714F95E0B00FCA39C /* LiveReload Snippet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "LiveReload Snippet.html"; sourceTree = "<group>"; };
-		4AE50F9914F95ED500FCA39C /* TBPage+LiveReload.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "TBPage+LiveReload.h"; sourceTree = "<group>"; };
+		4AE50F9914F95ED500FCA39C /* TBPage+LiveReload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBPage+LiveReload.h"; sourceTree = "<group>"; };
 		4AE50F9A14F95ED500FCA39C /* TBPage+LiveReload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBPage+LiveReload.m"; sourceTree = "<group>"; };
+		4AE50FDD14FBD4E100FCA39C /* TBSettingsSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSettingsSheetController.h; sourceTree = "<group>"; };
+		4AE50FDE14FBD4E100FCA39C /* TBSettingsSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSettingsSheetController.m; sourceTree = "<group>"; };
+		4AE50FDF14FBD4E100FCA39C /* TBSettingsSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSettingsSheet.xib; sourceTree = "<group>"; };
+		4AE91C4C14FEE08200499469 /* Tribo Authentication Tool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Tribo Authentication Tool"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AE91C5C14FEE0F500499469 /* Authentication Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Authentication Tool.m"; sourceTree = "<group>"; };
+		4AE91C6414FF044700499469 /* TBPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPublisher.h; sourceTree = "<group>"; };
+		4AE91C6514FF044700499469 /* TBPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPublisher.m; sourceTree = "<group>"; };
+		4AE91C6E14FF16ED00499469 /* TBPublishSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPublishSheetController.h; sourceTree = "<group>"; };
+		4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPublishSheetController.m; sourceTree = "<group>"; };
+		4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBPublishSheet.xib; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
 		9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTemplatesViewController.h; sourceTree = "<group>"; };
 		9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTemplatesViewController.m; sourceTree = "<group>"; };
@@ -289,6 +356,7 @@
 			files = (
 				4A8696241437BE0B00204482 /* Cocoa.framework in Frameworks */,
 				4A8829211437C53000EBBD7E /* ApplicationServices.framework in Frameworks */,
+				4A9ED52A1506FAE8009C5754 /* SystemConfiguration.framework in Frameworks */,
 				4A8829221437C53000EBBD7E /* CoreServices.framework in Frameworks */,
 				4A8829231437C53000EBBD7E /* CoreFoundation.framework in Frameworks */,
 				4ABD6A5414417ED9007E2F5D /* Quartz.framework in Frameworks */,
@@ -296,6 +364,17 @@
 				4A8829251437C53000EBBD7E /* Security.framework in Frameworks */,
 				4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */,
 				4A0F0C5E14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */,
+				4A9ED52115069CE3009C5754 /* libcurl.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AE91C4914FEE08200499469 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AE91C6214FEE83400499469 /* CoreServices.framework in Frameworks */,
+				4AE91C6114FEE51C00499469 /* Security.framework in Frameworks */,
+				4AE91C4E14FEE08200499469 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,13 +385,24 @@
 			isa = PBXGroup;
 			children = (
 				4A7557BE1436F4D70040A10C /* CocoaHTTPServer */,
+				4A9ED51A15069CD6009C5754 /* CurlHandle */,
 				4A72F1271436868B00A164E9 /* Sundown */,
+				4A2E84CB14FDD969008FE2C4 /* Rsync */,
 				4A72F125143155AE00A164E9 /* GRMustache */,
 				4A8829441438EB9F00EBBD7E /* UKFileWatcher */,
 			);
 			name = Dependencies;
 			path = Tribo;
 			sourceTree = "<group>";
+		};
+		4A2E84CB14FDD969008FE2C4 /* Rsync */ = {
+			isa = PBXGroup;
+			children = (
+				4A2E84CC14FDD969008FE2C4 /* rsync */,
+			);
+			name = Rsync;
+			path = Dependencies/Rsync;
+			sourceTree = SOURCE_ROOT;
 		};
 		4A43C23014EAB73D00D1CC7B /* Controllers */ = {
 			isa = PBXGroup;
@@ -322,10 +412,12 @@
 				4AAC8E411451EF9200AE978A /* TBViewController.h */,
 				4AAC8E421451EF9200AE978A /* TBViewController.m */,
 				4AEF0C5114A183CD00F0E021 /* TBSiteWindow */,
+				4AE50FA614F98CB600FCA39C /* TBSettingsSheet */,
 				4AEF0C5014A183C200F0E021 /* TBPostsView */,
 				4AEF0C5214A183E400F0E021 /* TBAddPostSheet */,
 				9BEF1C7514F5CD290072B295 /* TBTemplatesViewController */,
 				9BEF1C7C14F5CFD60072B295 /* TBSourceVIewController */,
+				4AE91C7314FF16F300499469 /* TBPublishSheet */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -358,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6DC8ED1430203B00CB5025 /* Shared */,
+				4AE91C5A14FEE0F500499469 /* Authentication Tool */,
 				4A86963F1437BE3400204482 /* Mac App */,
 				4A8696151437B60400204482 /* Command Line Interface */,
 				4A00338E14302F6600F6702F /* Dependencies */,
@@ -371,6 +464,7 @@
 			children = (
 				4A6DC8E71430203B00CB5025 /* tribo */,
 				4A8696211437BE0B00204482 /* Tribo.app */,
+				4AE91C4C14FEE08200499469 /* Tribo Authentication Tool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -379,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				4A7558131436FBA10040A10C /* ApplicationServices.framework */,
+				4A9ED5281506FADB009C5754 /* SystemConfiguration.framework */,
 				4A7558101436F82D0040A10C /* CoreServices.framework */,
 				4A75580A1436F6590040A10C /* CoreFoundation.framework */,
 				4ABD6A5214417ECA007E2F5D /* Quartz.framework */,
@@ -403,6 +498,8 @@
 				9B507E7A14D7B2B100E85357 /* TBError.h */,
 				9B6B669A14F3546900759DC3 /* TBAsset.h */,
 				9B6B669B14F3546900759DC3 /* TBAsset.m */,
+				4A9ED52B1507AF83009C5754 /* TBConstants.h */,
+				4A9ED52C1507AF83009C5754 /* TBConstants.m */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -562,6 +659,7 @@
 				4AE3B29E14E21AE100012A48 /* Scripting */,
 				4A43C23214EAB7FB00D1CC7B /* Views */,
 				4AE50F8914F8924200FCA39C /* HTTP Server */,
+				4AE91C6314FF044700499469 /* Publishing */,
 				4A8696471437BE3400204482 /* TBAppDelegate.h */,
 				4A8696481437BE3400204482 /* TBAppDelegate.m */,
 				4A882967143A736E00EBBD7E /* TBSiteDocument.h */,
@@ -582,6 +680,23 @@
 			);
 			name = UKFileWatcher;
 			path = Dependencies/UKFileWatcher;
+			sourceTree = SOURCE_ROOT;
+		};
+		4A9ED51A15069CD6009C5754 /* CurlHandle */ = {
+			isa = PBXGroup;
+			children = (
+				4A9ED5221506F81E009C5754 /* CURLFTPSession.h */,
+				4A9ED5231506F81E009C5754 /* CURLFTPSession.m */,
+				4A9ED51B15069CD6009C5754 /* CURLHandle+extras.h */,
+				4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */,
+				4A9ED51D15069CD6009C5754 /* CURLHandle.h */,
+				4A9ED51E15069CD6009C5754 /* CURLHandle.m */,
+				4A9ED5251506F82B009C5754 /* CURLProtocol.h */,
+				4A9ED5261506F82B009C5754 /* CURLProtocol.m */,
+				4A9ED51815069CB6009C5754 /* libcurl.dylib */,
+			);
+			name = CurlHandle;
+			path = Dependencies/CurlHandle/CURLHandleSource;
 			sourceTree = SOURCE_ROOT;
 		};
 		4AE3B29E14E21AE100012A48 /* Scripting */ = {
@@ -611,6 +726,47 @@
 				4AE50F9A14F95ED500FCA39C /* TBPage+LiveReload.m */,
 			);
 			path = "HTTP Server";
+			sourceTree = "<group>";
+		};
+		4AE50FA614F98CB600FCA39C /* TBSettingsSheet */ = {
+			isa = PBXGroup;
+			children = (
+				4AE50FDD14FBD4E100FCA39C /* TBSettingsSheetController.h */,
+				4AE50FDE14FBD4E100FCA39C /* TBSettingsSheetController.m */,
+				4AE50FDF14FBD4E100FCA39C /* TBSettingsSheet.xib */,
+			);
+			name = TBSettingsSheet;
+			sourceTree = "<group>";
+		};
+		4AE91C5A14FEE0F500499469 /* Authentication Tool */ = {
+			isa = PBXGroup;
+			children = (
+				4AE91C5C14FEE0F500499469 /* Authentication Tool.m */,
+			);
+			path = "Authentication Tool";
+			sourceTree = "<group>";
+		};
+		4AE91C6314FF044700499469 /* Publishing */ = {
+			isa = PBXGroup;
+			children = (
+				4AE91C6414FF044700499469 /* TBPublisher.h */,
+				4AE91C6514FF044700499469 /* TBPublisher.m */,
+				4A2E6E3E15058D8C000397B4 /* TBFTPPublisher.h */,
+				4A2E6E3F15058D8C000397B4 /* TBFTPPublisher.m */,
+				4A2E6E3A15058D80000397B4 /* TBSFTPPublisher.h */,
+				4A2E6E3B15058D80000397B4 /* TBSFTPPublisher.m */,
+			);
+			path = Publishing;
+			sourceTree = "<group>";
+		};
+		4AE91C7314FF16F300499469 /* TBPublishSheet */ = {
+			isa = PBXGroup;
+			children = (
+				4AE91C6E14FF16ED00499469 /* TBPublishSheetController.h */,
+				4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */,
+				4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */,
+			);
+			name = TBPublishSheet;
 			sourceTree = "<group>";
 		};
 		4AEF0C5014A183C200F0E021 /* TBPostsView */ = {
@@ -698,11 +854,29 @@
 			buildRules = (
 			);
 			dependencies = (
+				4AE91C6014FEE15F00499469 /* PBXTargetDependency */,
 			);
 			name = Tribo;
 			productName = Tribo;
 			productReference = 4A8696211437BE0B00204482 /* Tribo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		4AE91C4B14FEE08200499469 /* Authentication Tool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AE91C5814FEE08200499469 /* Build configuration list for PBXNativeTarget "Authentication Tool" */;
+			buildPhases = (
+				4AE91C4814FEE08200499469 /* Sources */,
+				4AE91C4914FEE08200499469 /* Frameworks */,
+				4AE91C4A14FEE08200499469 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Authentication Tool";
+			productName = "Tribo Authentication Tool";
+			productReference = 4AE91C4C14FEE08200499469 /* Tribo Authentication Tool */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -710,7 +884,7 @@
 		4A6DC8DE1430203B00CB5025 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Opt-6 Products, LLC";
 			};
 			buildConfigurationList = 4A6DC8E11430203B00CB5025 /* Build configuration list for PBXProject "Tribo" */;
@@ -727,6 +901,7 @@
 			targets = (
 				4A6DC8E61430203B00CB5025 /* CLI */,
 				4A8696201437BE0B00204482 /* Tribo */,
+				4AE91C4B14FEE08200499469 /* Authentication Tool */,
 			);
 		};
 /* End PBXProject section */
@@ -736,6 +911,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AE91C5E14FEE15700499469 /* Tribo Authentication Tool in Resources */,
 				4AE50F9814F95E0B00FCA39C /* LiveReload Snippet.html in Resources */,
 				4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */,
 				4ABD6A4C143FE495007E2F5D /* TBAddPostSheet.xib in Resources */,
@@ -747,6 +923,9 @@
 				9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */,
 				9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */,
 				4AE50F9214F8BB3900FCA39C /* livereload.js in Resources */,
+				4AE50FE114FBD4E100FCA39C /* TBSettingsSheet.xib in Resources */,
+				4A2E84CD14FDD969008FE2C4 /* rsync in Resources */,
+				4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,10 +1027,37 @@
 				4AE50F8514F88A6C00FCA39C /* TBWebSocket.m in Sources */,
 				4AE50F8814F8906400FCA39C /* TBHTTPServer.m in Sources */,
 				4AE50F9B14F95ED500FCA39C /* TBPage+LiveReload.m in Sources */,
+				4AE50FE014FBD4E100FCA39C /* TBSettingsSheetController.m in Sources */,
+				4AE91C6614FF044700499469 /* TBPublisher.m in Sources */,
+				4AE91C7114FF16ED00499469 /* TBPublishSheetController.m in Sources */,
+				4A2E6E3C15058D80000397B4 /* TBSFTPPublisher.m in Sources */,
+				4A2E6E4015058D8C000397B4 /* TBFTPPublisher.m in Sources */,
+				4A9ED51F15069CD6009C5754 /* CURLHandle+extras.m in Sources */,
+				4A9ED52015069CD6009C5754 /* CURLHandle.m in Sources */,
+				4A9ED5241506F81E009C5754 /* CURLFTPSession.m in Sources */,
+				4A9ED5271506F82B009C5754 /* CURLProtocol.m in Sources */,
+				4A9ED52D1507AF83009C5754 /* TBConstants.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AE91C4814FEE08200499469 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AE91C5D14FEE0F500499469 /* Authentication Tool.m in Sources */,
+				4A9ED52E1507AF83009C5754 /* TBConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4AE91C6014FEE15F00499469 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AE91C4B14FEE08200499469 /* Authentication Tool */;
+			targetProxy = 4AE91C5F14FEE15F00499469 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4A43C23314EAB89600D1CC7B /* MainMenu.xib */ = {
@@ -1012,6 +1218,22 @@
 			};
 			name = Release;
 		};
+		4AE91C5614FEE08200499469 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				PRODUCT_NAME = "Tribo Authentication Tool";
+			};
+			name = Debug;
+		};
+		4AE91C5714FEE08200499469 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				PRODUCT_NAME = "Tribo Authentication Tool";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1038,6 +1260,15 @@
 			buildConfigurations = (
 				4A86963B1437BE0C00204482 /* Debug */,
 				4A86963C1437BE0C00204482 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AE91C5814FEE08200499469 /* Build configuration list for PBXNativeTarget "Authentication Tool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AE91C5614FEE08200499469 /* Debug */,
+				4AE91C5714FEE08200499469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
