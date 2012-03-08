@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A00337B1430216500F6702F /* TBSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337A1430216500F6702F /* TBSite.m */; };
 		4A00337E143028CA00F6702F /* TBPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337D143028CA00F6702F /* TBPost.m */; };
+		4A03890015085F87006C7A0D /* TBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED52C1507AF83009C5754 /* TBConstants.m */; };
 		4A0F0C5D14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */; };
 		4A0F0C5E14D05EAF0039D938 /* libGRMustache1-macosx10.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0F0C5C14D05EAF0039D938 /* libGRMustache1-macosx10.6.a */; };
 		4A2E6E3C15058D80000397B4 /* TBSFTPPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E6E3B15058D80000397B4 /* TBSFTPPublisher.m */; };
@@ -39,7 +40,7 @@
 		4A7557E61436F4D70040A10C /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557D61436F4D70040A10C /* HTTPDynamicFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A7557E71436F4D70040A10C /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557D81436F4D70040A10C /* HTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A7557E81436F4D70040A10C /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557DA1436F4D70040A10C /* HTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A7557E91436F4D70040A10C /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557DC1436F4D70040A10C /* WebSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A7557E91436F4D70040A10C /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557DC1436F4D70040A10C /* WebSocket.m */; };
 		4A7558001436F6190040A10C /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557F31436F6190040A10C /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A7558011436F6190040A10C /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557F71436F6190040A10C /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A7558021436F6190040A10C /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557F91436F6190040A10C /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -938,6 +939,7 @@
 			files = (
 				4A00337B1430216500F6702F /* TBSite.m in Sources */,
 				4A00337E143028CA00F6702F /* TBPost.m in Sources */,
+				4A03890015085F87006C7A0D /* TBConstants.m in Sources */,
 				4A72F131143686AE00A164E9 /* autolink.c in Sources */,
 				4A72F132143686AE00A164E9 /* buffer.c in Sources */,
 				4A72F133143686AE00A164E9 /* markdown.c in Sources */,
