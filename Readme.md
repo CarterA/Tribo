@@ -26,7 +26,6 @@ At this point, you should be ready to open up the Xcode project and try to run t
 
 ### General To-Do List ###
 
-- Publishing. The app should be able to publish the generated site to any FTP server. An option to deploy to GitHub Pages would also be nice. Possibilities for implementing this include using ConnectionKit, which I haven't looked at in a while, or wrapping Rsync with an `NSTask`.
 - New site creation. A document-based app should really be able to create new documents. This may go along with making the Tribo format into a package/bundle instead of just a folder, but I'm still not sure I want to go that route.
 - Bare-bones Markdown editor. It seems like a bit of a cop-out to just say "edit posts in your favorite Markdown editor!" since the best ones aren't free. This is a big project though, so I'm keeping my eye out for an embeddable editor that I could just drop in (I know that's a lot to ask, but hey!).
 - iCloud syncing. If I go the package route I described before, then the packages could be synced between computers via iCloud. This also brings up the next point...
