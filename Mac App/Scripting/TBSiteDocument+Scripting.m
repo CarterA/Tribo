@@ -29,20 +29,11 @@
 	}
 	if (!postsViewController) return;
 	
-	postsViewController.previewButton.hidden = YES;
-	postsViewController.progressIndicator.hidden = NO;
-	[postsViewController.progressIndicator startAnimation:self];
-	
-	[self startPreview:^(NSError *error) {
+	[self startPreview:^(NSURL *localURL, NSError *error) {
 		if (error) {
 			command.scriptErrorNumber = (int)error.code;
 			command.scriptErrorString = error.localizedDescription;
 		}
-		[postsViewController.progressIndicator stopAnimation:self];
-		postsViewController.progressIndicator.hidden = YES;
-		postsViewController.previewButton.hidden = NO;
-		postsViewController.previewButton.title = @"Stop Server";
-		[postsViewController.previewButton sizeToFit];
 		[command resumeExecutionWithResult:nil];
 	}];
 	
@@ -62,8 +53,6 @@
 	if (!postsViewController) return;
 	
 	[self stopPreview];
-	postsViewController.previewButton.title = @"Preview";
-	[postsViewController.previewButton sizeToFit];
 	
 }
 @end

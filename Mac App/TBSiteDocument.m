@@ -60,14 +60,15 @@
 		}
 		[self.server start:nil];
 		[self.server refreshPages];
-		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]]];
+		NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]];
+		[[NSWorkspace sharedWorkspace] openURL:localURL];
 		
 		if (!callback){
             return;
         }
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
-			callback(error);
+			callback(localURL, error);
 		});
 		
 	});

@@ -7,7 +7,7 @@
 //  See the included License.md file.
 //
 
-typedef void(^TBSiteDocumentPreviewCallback)(NSError *error);
+typedef void(^TBSiteDocumentPreviewCallback)(NSURL *localURL, NSError *error);
 
 @class TBSite, TBHTTPServer;
 

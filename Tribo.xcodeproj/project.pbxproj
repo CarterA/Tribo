@@ -16,8 +16,11 @@
 		4A2E6E4015058D8C000397B4 /* TBFTPPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E6E3F15058D8C000397B4 /* TBFTPPublisher.m */; };
 		4A2E84CD14FDD969008FE2C4 /* rsync in Resources */ = {isa = PBXBuildFile; fileRef = 4A2E84CC14FDD969008FE2C4 /* rsync */; };
 		4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4A30E879144B86F4001DDBAE /* Credits.rtf */; };
+		4A36B99115124DCB00A3D79A /* TBStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A36B99015124DCB00A3D79A /* TBStatusView.m */; };
 		4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */; };
 		4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A43C23314EAB89600D1CC7B /* MainMenu.xib */; };
+		4A57A566150F8BAA00DACDBC /* TBStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A57A564150F8BAA00DACDBC /* TBStatusViewController.m */; };
+		4A57A567150F8BAA00DACDBC /* TBStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A57A565150F8BAA00DACDBC /* TBStatusView.xib */; };
 		4A6DC8EC1430203B00CB5025 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6DC8EB1430203B00CB5025 /* Foundation.framework */; };
 		4A72F131143686AE00A164E9 /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F128143686AE00A164E9 /* autolink.c */; };
 		4A72F132143686AE00A164E9 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F12A143686AE00A164E9 /* buffer.c */; };
@@ -108,6 +111,12 @@
 		4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */; };
 		4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5C1456609300AE978A /* TBPostsViewController.m */; };
 		4AAC8E5F1456617000AE978A /* TBPostsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5E1456616F00AE978A /* TBPostsView.xib */; };
+		4AB2796015152660009D7F93 /* TBShadowedTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2795F15152660009D7F93 /* TBShadowedTextFieldCell.m */; };
+		4AB2796715154796009D7F93 /* TBShadowedButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2796615154796009D7F93 /* TBShadowedButtonCell.m */; };
+		4AB27974151557D7009D7F93 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB27970151557D7009D7F93 /* Arrow.png */; };
+		4AB27975151557D7009D7F93 /* Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB27971151557D7009D7F93 /* Arrow@2x.png */; };
+		4AB27976151557D7009D7F93 /* Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB27972151557D7009D7F93 /* Stop.png */; };
+		4AB27977151557D7009D7F93 /* Stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB27973151557D7009D7F93 /* Stop@2x.png */; };
 		4ABD6A49143FE466007E2F5D /* TBAddPostSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */; };
 		4ABD6A4C143FE495007E2F5D /* TBAddPostSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */; };
 		4ABD6A4F1441689B007E2F5D /* TBTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABD6A4E1441689B007E2F5D /* TBTableView.m */; };
@@ -184,9 +193,14 @@
 		4A2E6E3F15058D8C000397B4 /* TBFTPPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBFTPPublisher.m; sourceTree = "<group>"; };
 		4A2E84CC14FDD969008FE2C4 /* rsync */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = rsync; sourceTree = "<group>"; };
 		4A30E879144B86F4001DDBAE /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		4A36B98F15124DCB00A3D79A /* TBStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStatusView.h; sourceTree = "<group>"; };
+		4A36B99015124DCB00A3D79A /* TBStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStatusView.m; sourceTree = "<group>"; };
 		4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBTabView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBTabView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A43C23414EAB89600D1CC7B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4A57A563150F8BAA00DACDBC /* TBStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStatusViewController.h; sourceTree = "<group>"; };
+		4A57A564150F8BAA00DACDBC /* TBStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStatusViewController.m; sourceTree = "<group>"; };
+		4A57A565150F8BAA00DACDBC /* TBStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBStatusView.xib; sourceTree = "<group>"; };
 		4A6DC8E71430203B00CB5025 /* tribo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tribo; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6DC8EB1430203B00CB5025 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4A72F1221431559F00A164E9 /* GRMustache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRMustache.h; path = Dependencies/GRMustache/include/GRMustache.h; sourceTree = SOURCE_ROOT; };
@@ -292,6 +306,14 @@
 		4AAC8E5B1456609300AE978A /* TBPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TBPostsViewController.h; path = Controllers/TBPostsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AAC8E5C1456609300AE978A /* TBPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TBPostsViewController.m; path = Controllers/TBPostsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4AAC8E5E1456616F00AE978A /* TBPostsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBPostsView.xib; path = Controllers/TBPostsView.xib; sourceTree = "<group>"; };
+		4AB2795E15152660009D7F93 /* TBShadowedTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBShadowedTextFieldCell.h; sourceTree = "<group>"; };
+		4AB2795F15152660009D7F93 /* TBShadowedTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBShadowedTextFieldCell.m; sourceTree = "<group>"; };
+		4AB2796515154796009D7F93 /* TBShadowedButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBShadowedButtonCell.h; sourceTree = "<group>"; };
+		4AB2796615154796009D7F93 /* TBShadowedButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBShadowedButtonCell.m; sourceTree = "<group>"; };
+		4AB27970151557D7009D7F93 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = "<group>"; };
+		4AB27971151557D7009D7F93 /* Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow@2x.png"; sourceTree = "<group>"; };
+		4AB27972151557D7009D7F93 /* Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop.png; sourceTree = "<group>"; };
+		4AB27973151557D7009D7F93 /* Stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stop@2x.png"; sourceTree = "<group>"; };
 		4ABD6A47143FE466007E2F5D /* TBAddPostSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TBAddPostSheetController.h; path = Controllers/TBAddPostSheetController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4ABD6A48143FE466007E2F5D /* TBAddPostSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TBAddPostSheetController.m; path = Controllers/TBAddPostSheetController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4ABD6A4B143FE495007E2F5D /* TBAddPostSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBAddPostSheet.xib; path = Controllers/TBAddPostSheet.xib; sourceTree = "<group>"; };
@@ -413,6 +435,7 @@
 				4AAC8E411451EF9200AE978A /* TBViewController.h */,
 				4AAC8E421451EF9200AE978A /* TBViewController.m */,
 				4AEF0C5114A183CD00F0E021 /* TBSiteWindow */,
+				4A57A568150F8BB000DACDBC /* TBStatusViewController */,
 				4AE50FA614F98CB600FCA39C /* TBSettingsSheet */,
 				4AEF0C5014A183C200F0E021 /* TBPostsView */,
 				4AEF0C5214A183E400F0E021 /* TBAddPostSheet */,
@@ -426,6 +449,10 @@
 		4A43C23114EAB7B300D1CC7B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4AB27970151557D7009D7F93 /* Arrow.png */,
+				4AB27971151557D7009D7F93 /* Arrow@2x.png */,
+				4AB27972151557D7009D7F93 /* Stop.png */,
+				4AB27973151557D7009D7F93 /* Stop@2x.png */,
 				4AE50F8F14F8BB2200FCA39C /* livereload.js */,
 				4A43C23314EAB89600D1CC7B /* MainMenu.xib */,
 				4A30E879144B86F4001DDBAE /* Credits.rtf */,
@@ -445,6 +472,22 @@
 				4ABD6A4E1441689B007E2F5D /* TBTableView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4A57A568150F8BB000DACDBC /* TBStatusViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4A57A563150F8BAA00DACDBC /* TBStatusViewController.h */,
+				4A57A564150F8BAA00DACDBC /* TBStatusViewController.m */,
+				4A36B98F15124DCB00A3D79A /* TBStatusView.h */,
+				4A36B99015124DCB00A3D79A /* TBStatusView.m */,
+				4A57A565150F8BAA00DACDBC /* TBStatusView.xib */,
+				4AB2795E15152660009D7F93 /* TBShadowedTextFieldCell.h */,
+				4AB2795F15152660009D7F93 /* TBShadowedTextFieldCell.m */,
+				4AB2796515154796009D7F93 /* TBShadowedButtonCell.h */,
+				4AB2796615154796009D7F93 /* TBShadowedButtonCell.m */,
+			);
+			name = TBStatusViewController;
 			sourceTree = "<group>";
 		};
 		4A6DC8DC1430203B00CB5025 = {
@@ -927,6 +970,11 @@
 				4AE50FE114FBD4E100FCA39C /* TBSettingsSheet.xib in Resources */,
 				4A2E84CD14FDD969008FE2C4 /* rsync in Resources */,
 				4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */,
+				4A57A567150F8BAA00DACDBC /* TBStatusView.xib in Resources */,
+				4AB27974151557D7009D7F93 /* Arrow.png in Resources */,
+				4AB27975151557D7009D7F93 /* Arrow@2x.png in Resources */,
+				4AB27976151557D7009D7F93 /* Stop.png in Resources */,
+				4AB27977151557D7009D7F93 /* Stop@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,6 +1087,10 @@
 				4A9ED5241506F81E009C5754 /* CURLFTPSession.m in Sources */,
 				4A9ED5271506F82B009C5754 /* CURLProtocol.m in Sources */,
 				4A9ED52D1507AF83009C5754 /* TBConstants.m in Sources */,
+				4A57A566150F8BAA00DACDBC /* TBStatusViewController.m in Sources */,
+				4A36B99115124DCB00A3D79A /* TBStatusView.m in Sources */,
+				4AB2796015152660009D7F93 /* TBShadowedTextFieldCell.m in Sources */,
+				4AB2796715154796009D7F93 /* TBShadowedButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,6 +1225,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1199,6 +1252,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;

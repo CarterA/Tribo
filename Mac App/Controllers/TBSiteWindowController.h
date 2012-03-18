@@ -18,6 +18,9 @@
 - (IBAction)switchToTemplates:(id)sender;
 - (IBAction)switchToSources:(id)sender;
 
+- (IBAction)showActionMenu:(id)sender;
+- (IBAction)preview:(id)sender;
+- (IBAction)publish:(id)sender;
 - (IBAction)showSettingsSheet:(id)sender;
 
 @end

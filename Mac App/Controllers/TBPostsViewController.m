@@ -23,9 +23,6 @@
 @implementation TBPostsViewController
 @synthesize document=_document;
 @synthesize postTableView=_postTableView;
-@synthesize progressIndicator=_progressIndicator;
-@synthesize previewButton=_previewButton;
-@synthesize postCountLabel=_postCountLabel;
 @synthesize addPostSheetController=_addPostSheetController;
 
 #pragma mark - View Controller Configuration
@@ -41,42 +38,10 @@
 - (void)viewDidLoad {
 	self.postTableView.target = self;
 	self.postTableView.doubleAction = @selector(editPost:);
-	((NSCell *)self.postCountLabel.cell).backgroundStyle = NSBackgroundStyleRaised;
 	self.addPostSheetController = [TBAddPostSheetController new];
-	[self.postCountLabel.cell setBackgroundStyle:NSBackgroundStyleRaised];
-	[self.postCountLabel.cell setTextColor:[NSColor controlTextColor]];
 }
 
 #pragma mark - Actions
-
-- (IBAction)preview:(id)sender {
-	
-	TBSiteDocument *document = (TBSiteDocument *)self.document;
-	if (!document.server.isRunning) {
-		
-		self.previewButton.hidden = YES;
-		self.progressIndicator.hidden = NO;
-		[self.progressIndicator startAnimation:self];
-		
-		[document startPreview:^(NSError *error) {
-			
-			if (error)
-				[self presentError:error];
-			
-			[self.progressIndicator stopAnimation:self];
-			self.progressIndicator.hidden = YES;
-			self.previewButton.hidden = NO;
-			self.previewButton.title = @"Stop Server";
-			[self.previewButton sizeToFit];
-			
-		}];
-		
-	}
-	else {
-		[document stopPreview];
-		self.previewButton.title = @"Preview";
-	}
-}
 
 - (IBAction)editPost:(id)sender {
 	TBSiteDocument *document = (TBSiteDocument *)self.document;
@@ -85,7 +50,6 @@
 }
 
 - (IBAction)previewPost:(id)sender {
-	if (!self.document.server.isRunning) [self preview:nil];
 	TBPost *clickedPost = [self.document.site.posts objectAtIndex:[self.postTableView clickedRow]];
 	NSDateFormatter *formatter = [NSDateFormatter new];
 	formatter.dateFormat = @"yyyy/MM/dd";
