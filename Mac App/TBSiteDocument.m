@@ -81,10 +81,10 @@
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
-	self.postsWatcher = [UKFSEventsWatcher new];
+	/*self.postsWatcher = [UKFSEventsWatcher new];
 	self.postsWatcher.delegate = self;
 	self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
-	[self.postsWatcher addPath:self.site.postsDirectory.path];
+	[self.postsWatcher addPath:self.site.postsDirectory.path];*/
 }
 
 - (void)watcher:(id<UKFileWatcher>)watcher receivedNotification:(NSString *)notification forPath:(NSString *)path {

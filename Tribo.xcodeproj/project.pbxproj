@@ -18,6 +18,8 @@
 		4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4A30E879144B86F4001DDBAE /* Credits.rtf */; };
 		4A36B99115124DCB00A3D79A /* TBStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A36B99015124DCB00A3D79A /* TBStatusView.m */; };
 		4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */; };
+		4A43019F1518287C003EA175 /* TBNewSiteSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A43019D1518287C003EA175 /* TBNewSiteSheetController.m */; };
+		4A4301A01518287C003EA175 /* TBNewSiteSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A43019E1518287C003EA175 /* TBNewSiteSheet.xib */; };
 		4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A43C23314EAB89600D1CC7B /* MainMenu.xib */; };
 		4A57A566150F8BAA00DACDBC /* TBStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A57A564150F8BAA00DACDBC /* TBStatusViewController.m */; };
 		4A57A567150F8BAA00DACDBC /* TBStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A57A565150F8BAA00DACDBC /* TBStatusView.xib */; };
@@ -197,6 +199,9 @@
 		4A36B99015124DCB00A3D79A /* TBStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStatusView.m; sourceTree = "<group>"; };
 		4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBTabView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBTabView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4A43019C1518287C003EA175 /* TBNewSiteSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBNewSiteSheetController.h; sourceTree = "<group>"; };
+		4A43019D1518287C003EA175 /* TBNewSiteSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBNewSiteSheetController.m; sourceTree = "<group>"; };
+		4A43019E1518287C003EA175 /* TBNewSiteSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBNewSiteSheet.xib; sourceTree = "<group>"; };
 		4A43C23414EAB89600D1CC7B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4A57A563150F8BAA00DACDBC /* TBStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStatusViewController.h; sourceTree = "<group>"; };
 		4A57A564150F8BAA00DACDBC /* TBStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStatusViewController.m; sourceTree = "<group>"; };
@@ -427,6 +432,16 @@
 			path = Dependencies/Rsync;
 			sourceTree = SOURCE_ROOT;
 		};
+		4A43019B15182854003EA175 /* TBNewSiteSheet */ = {
+			isa = PBXGroup;
+			children = (
+				4A43019C1518287C003EA175 /* TBNewSiteSheetController.h */,
+				4A43019D1518287C003EA175 /* TBNewSiteSheetController.m */,
+				4A43019E1518287C003EA175 /* TBNewSiteSheet.xib */,
+			);
+			name = TBNewSiteSheet;
+			sourceTree = "<group>";
+		};
 		4A43C23014EAB73D00D1CC7B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,6 +450,7 @@
 				4AAC8E411451EF9200AE978A /* TBViewController.h */,
 				4AAC8E421451EF9200AE978A /* TBViewController.m */,
 				4AEF0C5114A183CD00F0E021 /* TBSiteWindow */,
+				4A43019B15182854003EA175 /* TBNewSiteSheet */,
 				4A57A568150F8BB000DACDBC /* TBStatusViewController */,
 				4AE50FA614F98CB600FCA39C /* TBSettingsSheet */,
 				4AEF0C5014A183C200F0E021 /* TBPostsView */,
@@ -975,6 +991,7 @@
 				4AB27975151557D7009D7F93 /* Arrow@2x.png in Resources */,
 				4AB27976151557D7009D7F93 /* Stop.png in Resources */,
 				4AB27977151557D7009D7F93 /* Stop@2x.png in Resources */,
+				4A4301A01518287C003EA175 /* TBNewSiteSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1091,6 +1108,7 @@
 				4A36B99115124DCB00A3D79A /* TBStatusView.m in Sources */,
 				4AB2796015152660009D7F93 /* TBShadowedTextFieldCell.m in Sources */,
 				4AB2796715154796009D7F93 /* TBShadowedButtonCell.m in Sources */,
+				4A43019F1518287C003EA175 /* TBNewSiteSheetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
