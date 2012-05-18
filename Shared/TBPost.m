@@ -112,19 +112,21 @@ static NSDateFormatter *relativeURLFormatter;
 	struct sd_callbacks callbacks;
 	struct html_renderopt options;
 	const char *rawMarkdown = [markdownContent cStringUsingEncoding:NSUTF8StringEncoding];
-	struct buf *inputBuffer = bufnew(strlen(rawMarkdown));
-	bufputs(inputBuffer, rawMarkdown);
+	struct buf *smartyPantsOutputBuffer = bufnew(1);
+	sdhtml_smartypants(smartyPantsOutputBuffer, (const unsigned char *)rawMarkdown, strlen(rawMarkdown));
+	//struct buf *inputBuffer = bufnew(strlen(rawMarkdown));
+	//bufputs(inputBuffer, rawMarkdown);
 	
 	// Parse the markdown into a new buffer using Sundown.
 	struct buf *outputBuffer = bufnew(64);
 	sdhtml_renderer(&callbacks, &options, 0);
 	struct sd_markdown *markdown = sd_markdown_new(0, 16, &callbacks, &options);
-	sd_markdown_render(outputBuffer, inputBuffer->data, inputBuffer->size, markdown);
+	sd_markdown_render(outputBuffer, smartyPantsOutputBuffer->data, smartyPantsOutputBuffer->size, markdown);
 	sd_markdown_free(markdown);
 	
 	self.content = [NSString stringWithCString:bufcstr(outputBuffer) encoding:NSUTF8StringEncoding];
 	
-	bufrelease(inputBuffer);
+	bufrelease(smartyPantsOutputBuffer);
 	bufrelease(outputBuffer);
     return YES;
 }
