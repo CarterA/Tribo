@@ -23,7 +23,6 @@
 @implementation TBPostsViewController
 @synthesize document=_document;
 @synthesize postTableView=_postTableView;
-@synthesize addPostSheetController=_addPostSheetController;
 
 #pragma mark - View Controller Configuration
 
@@ -38,7 +37,6 @@
 - (void)viewDidLoad {
 	self.postTableView.target = self;
 	self.postTableView.doubleAction = @selector(editPost:);
-	self.addPostSheetController = [TBAddPostSheetController new];
 }
 
 #pragma mark - Actions
@@ -62,16 +60,6 @@
 - (IBAction)revealPost:(id)sender {
 	TBPost *clickedPost = [self.document.site.posts objectAtIndex:[self.postTableView clickedRow]];
 	[[NSWorkspace sharedWorkspace] selectFile:clickedPost.URL.path inFileViewerRootedAtPath:nil];
-}
-
-- (IBAction)showAddPostSheet:(id)sender {
-	[self.addPostSheetController runModalForWindow:self.document.windowForSheet completionBlock:^(NSString *title, NSString *slug) {
-        NSError *error = nil;
-        NSURL *siteURL = [self.document.site addPostWithTitle:title slug:slug error:&error];
-        if (!siteURL) {
-            [self presentError:error];
-        }
-	}];
 }
 
 - (void)tableView:(NSTableView *)tableView shouldDeleteRows:(NSIndexSet *)rowIndexes {

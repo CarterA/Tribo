@@ -12,11 +12,13 @@
 #import "TBPostsViewController.h"
 #import "TBTemplatesViewController.h"
 #import "TBSourceViewControllerViewController.h"
+#import "TBAddPostSheetController.h"
 #import "TBSettingsSheetController.h"
 #import "TBPublishSheetController.h"
 #import "TBStatusViewController.h"
 #import "TBTabView.h"
 #import "TBSiteDocument.h"
+#import "TBSite.h"
 #import "TBHTTPServer.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -32,6 +34,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 @property (nonatomic, assign) IBOutlet NSView *containerView;
 @property (nonatomic, assign) IBOutlet NSLayoutConstraint *containerViewBottomConstraint;
 @property (nonatomic, assign) NSView *currentView;
+@property (nonatomic, strong) TBAddPostSheetController *addPostSheetController;
 @property (nonatomic, strong) TBSettingsSheetController *settingsSheetController;
 @property (nonatomic, strong) TBPublishSheetController *publishSheetController;
 @property (nonatomic, strong) TBStatusViewController *statusViewController;
@@ -47,6 +50,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 @synthesize containerView=_containerView;
 @synthesize containerViewBottomConstraint=_containerViewBottomConstraint;
 @synthesize currentView=_currentView;
+@synthesize addPostSheetController=_addPostSheetController;
 @synthesize settingsSheetController=_settingsSheetController;
 @synthesize publishSheetController=_publishSheetController;
 @synthesize statusViewController=_statusViewController;
@@ -91,6 +95,17 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 
 - (IBAction)switchToSources:(id)sender {
     self.tabView.selectedIndex = 2;
+}
+
+- (IBAction)showAddPostSheet:(id)sender {
+	TBSiteDocument *document = (TBSiteDocument *)self.document;
+	[self.addPostSheetController runModalForWindow:[document windowForSheet] completionBlock:^(NSString *title, NSString *slug) {
+        NSError *error = nil;
+        NSURL *siteURL = [document.site addPostWithTitle:title slug:slug error:&error];
+        if (!siteURL) {
+            [self presentError:error];
+        }
+	}];
 }
 
 - (IBAction)showActionMenu:(id)sender {
@@ -173,6 +188,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 - (void)windowDidLoad {
 	[super windowDidLoad];
 	
+	self.addPostSheetController = [TBAddPostSheetController new];
 	self.settingsSheetController = [TBSettingsSheetController new];
 	self.publishSheetController = [TBPublishSheetController new];
 	self.statusViewController = [TBStatusViewController new];
