@@ -1,0 +1,25 @@
+#archives {
+	margin: 0px auto;
+	padding: 0px;
+	width: 500px;
+}
+#archives li {
+	display: inline;
+	padding-right: 2em;
+}
+#archives p {
+	margin: 0px;
+	line-height: 0pt;
+}
+.archiveDate {
+    font-style: italic;
+    float: right;
+}
+@media (max-width: 520px) {
+    #archives {
+        width: 300px;
+    }
+    section#content {
+        width: 320px;
+    }
+}

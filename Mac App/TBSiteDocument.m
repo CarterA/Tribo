@@ -84,18 +84,25 @@
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
-	//self.postsWatcher = [UKFSEventsWatcher new];
-	//self.postsWatcher.delegate = self;
-	//self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
-	//[self.postsWatcher addPath:self.site.postsDirectory.path];
 	if (!self.fileURL) {
 		self.siteSheetController = [TBNewSiteSheetController new];
-		[self.siteSheetController runModalForWindow:self.windowForSheet completionHandler:^(NSInteger returnCode, TBSite *site) {
-			if (returnCode == NSCancelButton) {
+		[self.siteSheetController runModalForWindow:self.windowForSheet completionHandler:^(NSString *name, NSString *author, NSURL *URL) {
+			
+			if (!URL) {
 				// Close the window after a small delay, so that the sheet has time to close.
 				[self performSelector:@selector(close) withObject:nil afterDelay:0.4];
 				return;
 			}
+			
+			NSURL *defaultSite = [[NSBundle mainBundle] URLForResource:@"Default" withExtension:@"tribo"];
+			[[NSFileManager defaultManager] copyItemAtURL:defaultSite toURL:URL error:nil];
+			[self readFromURL:URL ofType:@"tribo" error:nil];
+			self.fileURL = URL;
+			
+			self.postsWatcher = [UKFSEventsWatcher new];
+			self.postsWatcher.delegate = self;
+			self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
+			[self.postsWatcher addPath:self.site.postsDirectory.path];
 			
 		}];
 	}

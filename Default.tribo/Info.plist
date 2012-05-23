@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TBSiteAuthor</key>
+	<string>Author</string>
+	<key>TBSiteBaseURL</key>
+	<string></string>
+	<key>TBSiteName</key>
+	<string>Site Name</string>
+	<key>TBSiteNumberOfRecentPosts</key>
+	<integer>5</integer>
+	<key>TBSitePort</key>
+	<string></string>
+	<key>TBSiteProtocol</key>
+	<string>TBSiteProtocolSFTP</string>
+	<key>TBSiteRemotePathKey</key>
+	<string></string>
+	<key>TBSiteServer</key>
+	<string></string>
+	<key>TBSiteUserName</key>
+	<string></string>
+</dict>
+</plist>

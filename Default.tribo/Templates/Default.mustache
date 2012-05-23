@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		
+		<meta charset="utf-8">
+		<title>{{site/name}} - {{title}}</title>
+		<meta name="author" content="{{site/author}}">
+		
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="/stylesheets/main.css">
+		
+        {{#stylesheets}}
+		<link rel="stylesheet" href="/stylesheets/{{stylesheetName}}.css">
+		{{/stylesheets}}
+		
+		<script src="/scripts/main.js"></script>
+		
+		{{{livereload}}}
+		
+	</head>
+	<body>
+	    <div id="container">
+		<header>
+			<a href="/">
+				<h1>{{site/name}}</h1>
+			</a>
+			<h3>By {{site/author}}</h3>
+		</header>
+		<section id ="content">{{{content}}}</section>
+		<footer>
+			<p>Copyright 2012 {{site/author}}</p>
+		</footer>
+		</div>
+	</body>
+</html>
+
+<!--
+	This website was compiled by Tribo.
+-->

@@ -11,6 +11,8 @@
 
 @interface TBNewSiteSheetController ()
 @property (nonatomic, copy) TBNewSiteSheetCompletionHandler handler;
+@property (nonatomic, weak) IBOutlet NSTextField *nameField;
+@property (nonatomic, weak) IBOutlet NSTextField *authorField;
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 - (IBAction)next:(id)sender;
 - (IBAction)cancel:(id)sender;
@@ -18,6 +20,8 @@
 
 @implementation TBNewSiteSheetController
 @synthesize handler = _handler;
+@synthesize nameField = _nameField;
+@synthesize authorField = _authorField;
 
 - (id)init {
     self = [super initWithWindowNibName:@"TBNewSiteSheet"];
@@ -31,6 +35,18 @@
 
 - (IBAction)next:(id)sender {
 	
+	NSString *name = self.nameField.stringValue;
+	NSString *author = self.authorField.stringValue;
+	
+	NSSavePanel *savePanel = [NSSavePanel savePanel];
+	savePanel.extensionHidden = YES;
+	savePanel.nameFieldStringValue = [name stringByAppendingString:@".tribo"];
+	[savePanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+		if (result == NSFileHandlingPanelCancelButton) return;
+		if (self.handler) self.handler(name, author, savePanel.URL);
+		[NSApp endSheet:self.window returnCode:NSOKButton];
+	}];
+	
 }
 
 - (IBAction)cancel:(id)sender {
@@ -43,11 +59,8 @@
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
 	if (self.handler) {
-		if (returnCode == NSOKButton) {
-			
-		}
-		else if (returnCode == NSCancelButton) {
-			self.handler(NSCancelButton, nil);
+		if (returnCode == NSCancelButton) {
+			self.handler(nil, nil, nil);
 		}
 	}
 	[sheet orderOut:self];

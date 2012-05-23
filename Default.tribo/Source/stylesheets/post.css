@@ -1,0 +1,36 @@
+.post {
+	display: block;
+}
+.post-header { margin-bottom: -15px; }
+.date {
+	float:right;
+	font-size: 14px;
+}
+.date a {
+    color: black;
+}
+.post-content {
+	font-size: 12pt;
+	font-family: 'Georgia', Georgia, Times, serif;
+}
+.post-content img {
+    border: 5px solid #e5e5e5;
+    padding: 5px;
+    margin: 5px;
+}
+.right {
+    display: block;
+    float: right;
+}
+.center {
+    text-align: center;
+}
+.continue-reading {
+    float: right;
+	margin: 15px 0px 0px 0px;
+	font-size: 14px;
+	font-style: italic;
+	text-align: right;
+}
+.continue-reading a { text-decoration: none; }
+.continue-reading a:hover { text-decoration: underline }

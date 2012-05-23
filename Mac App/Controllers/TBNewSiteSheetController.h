@@ -11,7 +11,7 @@
 
 @class TBSite;
 
-typedef void(^TBNewSiteSheetCompletionHandler)(NSInteger returnCode, TBSite *site);
+typedef void(^TBNewSiteSheetCompletionHandler)(NSString *name, NSString *author, NSURL *URL);
 
 @interface TBNewSiteSheetController : NSWindowController
 - (void)runModalForWindow:(NSWindow *)window completionHandler:(TBNewSiteSheetCompletionHandler)handler;

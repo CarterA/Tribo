@@ -1,0 +1,50 @@
+<!-- Archives -->
+<!-- Stylesheets: archives -->
+<script type="text/javascript">
+/* getElementsByClass function by Dustin Diaz */
+function getElementsByClass(searchClass,node,tag) {
+  var classElements = new Array();
+  if ( node == null )
+    node = document;
+  if ( tag == null )
+    tag = '*';
+  var els = node.getElementsByTagName(tag);
+  var elsLen = els.length;
+  var pattern = new RegExp("(^|\\s)"+searchClass+"(\\s|$)");
+  for (i = 0, j = 0; i < elsLen; i++) {
+    if ( pattern.test(els[i].className) ) {
+      classElements[j] = els[i];
+      j++;
+    }
+  }
+  return classElements;
+}
+/* Plain-JS Truncation by Carter Allen */
+window.onload = function() {
+    var length = 40;
+    var elements = getElementsByClass("truncate");
+    if (elements) {
+    
+        for (var index = 0; index < elements.length; index ++) {
+            var text = elements[index].innerHTML;
+            if (text.length > length) {
+                text = text.substring(0, length);
+                text = text.replace(/\w+$/, "");
+                text = text.replace(/^\s\s*/, "").replace(/\s\s*$/, "");;
+                text += "&hellip;";
+                elements[index].innerHTML = text;
+            }
+        }
+    }
+}
+</script>
+<ul id="archives">
+	{{#site/posts}}
+	<li>
+		<p>
+			<a href="{{relativeURL}}" title="{{title}}" class="truncate">{{title}}</a>
+			<span class="archiveDate">{{dateString}}</span>
+		</p>
+	</li>
+	{{/site/posts}}
+</ul>
