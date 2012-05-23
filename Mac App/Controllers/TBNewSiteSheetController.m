@@ -12,6 +12,8 @@
 @interface TBNewSiteSheetController ()
 @property (nonatomic, copy) TBNewSiteSheetCompletionHandler handler;
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+- (IBAction)next:(id)sender;
+- (IBAction)cancel:(id)sender;
 @end
 
 @implementation TBNewSiteSheetController
@@ -27,11 +29,27 @@
 	[NSApp beginSheet:self.window modalForWindow:window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:nil];
 }
 
+- (IBAction)next:(id)sender {
+	
+}
+
+- (IBAction)cancel:(id)sender {
+	[NSApp endSheet:self.window returnCode:NSCancelButton];
+}
+
 - (void)windowDidLoad {
     [super windowDidLoad];
 }
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+	if (self.handler) {
+		if (returnCode == NSOKButton) {
+			
+		}
+		else if (returnCode == NSCancelButton) {
+			self.handler(NSCancelButton, nil);
+		}
+	}
 	[sheet orderOut:self];
 }
 

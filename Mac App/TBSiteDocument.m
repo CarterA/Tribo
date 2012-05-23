@@ -10,6 +10,7 @@
 #import "TBSiteDocument.h"
 #import "TBSiteWindowController.h"
 #import "TBAddPostSheetController.h"
+#import "TBNewSiteSheetController.h"
 #import "TBSite.h"
 #import "TBPost.h"
 #import "TBHTTPServer.h"
@@ -21,6 +22,7 @@
 @interface TBSiteDocument () <NSTableViewDelegate, TBSiteDelegate>
 @property (nonatomic, strong) UKFSEventsWatcher *sourceWatcher;
 @property (nonatomic, strong) UKFSEventsWatcher *postsWatcher;
+@property (nonatomic, strong) TBNewSiteSheetController *siteSheetController;
 - (void)reloadSite;
 @end
 
@@ -29,6 +31,7 @@
 @synthesize sourceWatcher=_sourceWatcher;
 @synthesize postsWatcher=_postsWatcher;
 @synthesize server=_server;
+@synthesize siteSheetController=_siteSheetController;
 
 - (void)makeWindowControllers {
 	TBSiteWindowController *windowController = [TBSiteWindowController new];
@@ -81,10 +84,21 @@
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
-	/*self.postsWatcher = [UKFSEventsWatcher new];
-	self.postsWatcher.delegate = self;
-	self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
-	[self.postsWatcher addPath:self.site.postsDirectory.path];*/
+	//self.postsWatcher = [UKFSEventsWatcher new];
+	//self.postsWatcher.delegate = self;
+	//self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
+	//[self.postsWatcher addPath:self.site.postsDirectory.path];
+	if (!self.fileURL) {
+		self.siteSheetController = [TBNewSiteSheetController new];
+		[self.siteSheetController runModalForWindow:self.windowForSheet completionHandler:^(NSInteger returnCode, TBSite *site) {
+			if (returnCode == NSCancelButton) {
+				// Close the window after a small delay, so that the sheet has time to close.
+				[self performSelector:@selector(close) withObject:nil afterDelay:0.4];
+				return;
+			}
+			
+		}];
+	}
 }
 
 - (void)watcher:(id<UKFileWatcher>)watcher receivedNotification:(NSString *)notification forPath:(NSString *)path {
