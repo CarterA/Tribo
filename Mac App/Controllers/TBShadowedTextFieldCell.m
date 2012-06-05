@@ -16,6 +16,8 @@
 	NSColor *shadowColor = self.aquaShadowColor;
 	if ([NSColor currentControlTint] == NSGraphiteControlTint)
 		shadowColor = self.graphiteShadowColor;
+	if (!controlView.window.isKeyWindow)
+		shadowColor = [shadowColor highlightWithLevel:0.3];
 	NSShadow *shadow = [NSShadow new];
 	shadow.shadowOffset = NSMakeSize(0.0, -1.0);
 	shadow.shadowBlurRadius = 0.0;

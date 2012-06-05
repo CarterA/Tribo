@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSColor *graphiteBorderColor;
 @property (nonatomic, strong) NSColor *graphiteHighlightColor;
 @property (nonatomic, assign) IBOutlet NSTextField *titleField;
+@property (nonatomic, strong) NSMutableArray *observers;
 @end
 
 @implementation TBStatusView
@@ -30,11 +31,17 @@
 @synthesize graphiteBorderColor = _graphiteBorderColor;
 @synthesize graphiteHighlightColor = _graphiteHighlightColor;
 @synthesize titleField = _titleField;
+@synthesize observers = _observers;
 
 - (void)awakeFromNib {
-	[[NSNotificationCenter defaultCenter] addObserverForName:NSControlTintDidChangeNotification object:NSApp queue:nil usingBlock:^(NSNotification *note) {
+	void (^needsDisplayBlock)(NSNotification *note) = ^(NSNotification *note) {
 		[self setNeedsDisplay:YES];
-	}];
+	};
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	self.observers = [NSMutableArray array];
+	[self.observers addObject:[center addObserverForName:NSControlTintDidChangeNotification object:NSApp queue:nil usingBlock:needsDisplayBlock]];
+	[self.observers addObject:[center addObserverForName:NSWindowDidResignKeyNotification object:self.window queue:nil usingBlock:needsDisplayBlock]];
+	[self.observers addObject:[center addObserverForName:NSWindowDidBecomeKeyNotification object:self.window queue:nil usingBlock:needsDisplayBlock]];
 	NSRect titleFrame = self.titleField.frame;
 	titleFrame.size.height += 2.0;
 	titleFrame.origin.y -= 2.0;
@@ -52,6 +59,13 @@
 		borderColor = self.graphiteBorderColor;
 		highlightColor = self.graphiteHighlightColor;
 	}
+	if (!self.window.isKeyWindow) {
+		CGFloat level = 0.3;
+		topColor = [topColor highlightWithLevel:level];
+		bottomColor = [bottomColor highlightWithLevel:level];
+		borderColor = [borderColor highlightWithLevel:level];
+		highlightColor = [highlightColor highlightWithLevel:level];
+	}
 	NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:topColor endingColor:bottomColor];
 	[gradient drawInRect:self.bounds angle:270.0];
 	[borderColor set];
@@ -60,6 +74,10 @@
 	[highlightColor set];
 	NSRect highlightRect = NSMakeRect(0.0, self.bounds.size.height - 2.0, self.bounds.size.width, 1.0);
 	NSRectFill(highlightRect);
+}
+
+- (void)dealloc {
+	for (id observer in _observers) [[NSNotificationCenter defaultCenter] removeObserver:observer];
 }
 
 @end
