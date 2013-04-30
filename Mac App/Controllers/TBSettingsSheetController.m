@@ -113,7 +113,7 @@
 		port = 22;
 		[self.passwordField.cell setPlaceholderString:@"Key-based authentication"];
 	}
-	[self.portField.cell setPlaceholderString:[NSString stringWithFormat:@"%d", port]];
+	[self.portField.cell setPlaceholderString:[NSString stringWithFormat:@"%ld", port]];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification {
