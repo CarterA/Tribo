@@ -35,20 +35,22 @@
 	
 	self.publisher = [TBPublisher publisherWithSite:site];
 	
+	__weak TBPublishSheetController *weakSelf = self;
+	
 	[self.publisher setProgressHandler:^(NSInteger progress, NSInteger total) {
-		self.indicator.indeterminate = NO;
-		self.indicator.doubleValue = ((double)progress/(double)total) * 100.0;
+		weakSelf.indicator.indeterminate = NO;
+		weakSelf.indicator.doubleValue = ((double)progress/(double)total) * 100.0;
 	}];
 	
 	[self.publisher setCompletionHandler:^() {
-		self.indicator.doubleValue = 100;
-		[NSApp endSheet:self.window];
-		[self.window orderOut:nil];
+		weakSelf.indicator.doubleValue = 100;
+		[NSApp endSheet:weakSelf.window];
+		[weakSelf.window orderOut:nil];
 	}];
 	
 	[self.publisher setErrorHandler:^(NSError *error) {
-		[NSApp endSheet:self.window];
-		[self.window orderOut:nil];
+		[NSApp endSheet:weakSelf.window];
+		[weakSelf.window orderOut:nil];
 	}];
 	
 	[NSApp beginSheet:self.window modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
