@@ -94,9 +94,12 @@
 				return;
 			}
 			
+			NSError *error = nil;
 			NSURL *defaultSite = [[NSBundle mainBundle] URLForResource:@"Default" withExtension:@"tribo"];
-			[[NSFileManager defaultManager] copyItemAtURL:defaultSite toURL:URL error:nil];
-			[self readFromURL:URL ofType:@"tribo" error:nil];
+			if (![[NSFileManager defaultManager] copyItemAtURL:defaultSite toURL:URL error:&error])
+				[NSApp presentError:error];
+			if (![self readFromURL:URL ofType:@"tribo" error:&error])
+				[NSApp presentError:error];
 			self.fileURL = URL;
 			
 			self.postsWatcher = [UKFSEventsWatcher new];
