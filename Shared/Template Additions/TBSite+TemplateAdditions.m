@@ -33,12 +33,12 @@
 	return mutableDateString;
 }
 - (NSString *)name {
-	return [self.metadata objectForKey:TBSiteNameMetadataKey];
+	return self.metadata[TBSiteNameMetadataKey];
 }
 - (NSString *)author {
-	return [self.metadata objectForKey:TBSiteAuthorMetadataKey];
+	return self.metadata[TBSiteAuthorMetadataKey];
 }
 - (NSString *)baseURL {
-	return [self.metadata objectForKey:TBSiteBaseURLMetadataKey];
+	return self.metadata[TBSiteBaseURLMetadataKey];
 }
 @end
