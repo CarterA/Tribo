@@ -110,6 +110,8 @@
 		4A9ED52A1506FAE8009C5754 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9ED5281506FADB009C5754 /* SystemConfiguration.framework */; };
 		4A9ED52D1507AF83009C5754 /* TBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED52C1507AF83009C5754 /* TBConstants.m */; };
 		4A9ED52E1507AF83009C5754 /* TBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED52C1507AF83009C5754 /* TBConstants.m */; };
+		4AA86A6B173EF28200046691 /* TBSite+TemplateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA86A6A173EF28200046691 /* TBSite+TemplateAdditions.m */; };
+		4AA86A6C173EF28200046691 /* TBSite+TemplateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA86A6A173EF28200046691 /* TBSite+TemplateAdditions.m */; };
 		4AAC8E461451EFA800AE978A /* TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E421451EF9200AE978A /* TBViewController.m */; };
 		4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */; };
 		4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5C1456609300AE978A /* TBPostsViewController.m */; };
@@ -306,6 +308,8 @@
 		4A9ED52B1507AF83009C5754 /* TBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBConstants.h; sourceTree = "<group>"; };
 		4A9ED52C1507AF83009C5754 /* TBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBConstants.m; sourceTree = "<group>"; };
 		4AA29D0114E42ED5005E341F /* Tribo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tribo.entitlements; sourceTree = "<group>"; };
+		4AA86A69173EF28200046691 /* TBSite+TemplateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBSite+TemplateAdditions.h"; sourceTree = "<group>"; };
+		4AA86A6A173EF28200046691 /* TBSite+TemplateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBSite+TemplateAdditions.m"; sourceTree = "<group>"; };
 		4AAC8E411451EF9200AE978A /* TBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AAC8E421451EF9200AE978A /* TBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4AAC8E4C145286E000AE978A /* TBSiteWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TBSiteWindowController.h; path = Controllers/TBSiteWindowController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -563,6 +567,7 @@
 				9B6B669B14F3546900759DC3 /* TBAsset.m */,
 				4A9ED52B1507AF83009C5754 /* TBConstants.h */,
 				4A9ED52C1507AF83009C5754 /* TBConstants.m */,
+				4AA86A68173EF26700046691 /* Template Additions */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -761,6 +766,15 @@
 			name = CurlHandle;
 			path = Dependencies/CurlHandle/CURLHandleSource;
 			sourceTree = SOURCE_ROOT;
+		};
+		4AA86A68173EF26700046691 /* Template Additions */ = {
+			isa = PBXGroup;
+			children = (
+				4AA86A69173EF28200046691 /* TBSite+TemplateAdditions.h */,
+				4AA86A6A173EF28200046691 /* TBSite+TemplateAdditions.m */,
+			);
+			path = "Template Additions";
+			sourceTree = "<group>";
 		};
 		4AE3B29E14E21AE100012A48 /* Scripting */ = {
 			isa = PBXGroup;
@@ -1039,6 +1053,7 @@
 				4A7558051436F6190040A10C /* DDTTYLogger.m in Sources */,
 				4A8696181437B60400204482 /* tribo.m in Sources */,
 				9B6B669D14F3546C00759DC3 /* TBAsset.m in Sources */,
+				4AA86A6B173EF28200046691 /* TBSite+TemplateAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1113,6 +1128,7 @@
 				4AB2796015152660009D7F93 /* TBShadowedTextFieldCell.m in Sources */,
 				4AB2796715154796009D7F93 /* TBShadowedButtonCell.m in Sources */,
 				4A43019F1518287C003EA175 /* TBNewSiteSheetController.m in Sources */,
+				4AA86A6C173EF28200046691 /* TBSite+TemplateAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

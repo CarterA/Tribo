@@ -16,13 +16,7 @@
 static NSDateFormatter *postPathFormatter;
 
 @interface TBSite ()
-@property (nonatomic, strong) TBPost *latestPost;
-@property (nonatomic, strong) NSArray *recentPosts;
-@property (nonatomic, readonly) NSString *XMLDate;
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
-@property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly) NSString *author;
-@property (nonatomic, readonly) NSString *baseURL;
 - (void)writePosts;
 - (NSError *)badDirectoryError;
 @end
@@ -35,8 +29,6 @@ static NSDateFormatter *postPathFormatter;
 @synthesize postsDirectory = _postsDirectory;
 @synthesize templatesDirectory = _templatesDirectory;
 @synthesize posts = _posts;
-@synthesize latestPost = _latestPost;
-@synthesize recentPosts = _recentPosts;
 @synthesize postTemplate = _postTemplate;
 @synthesize templateAssets = _templateAssets;
 @synthesize sourceAssets = _sourceAssets;
@@ -148,21 +140,6 @@ static NSDateFormatter *postPathFormatter;
 	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
 	self.posts = posts;
 	
-	// Prepare the convenience sets of posts used by templates.
-	if ([self.posts count] <= 0) {
-		self.recentPosts = [NSArray array];
-		self.latestPost = nil;
-	}
-	else {
-		NSUInteger recentPostCount = [[self.metadata objectForKey:TBSiteNumberOfRecentPostsMetadataKey] unsignedIntegerValue];
-		if (!recentPostCount) recentPostCount = 5;
-		if ([self.posts count] < recentPostCount) {
-			recentPostCount = [self.posts count];
-		}
-		self.recentPosts = [self.posts subarrayWithRange:NSMakeRange(0, recentPostCount)];
-		self.latestPost = [self.recentPosts objectAtIndex:0];
-	}
-	
     // Prepare the template object tree
     self.templateAssets = [TBAsset assetsFromDirectoryURL:[self templatesDirectory]];
     self.sourceAssets = [TBAsset assetsFromDirectoryURL:[self sourceDirectory]];
@@ -209,17 +186,6 @@ static NSDateFormatter *postPathFormatter;
     }
 	return destination;
 }
-- (NSString *)XMLDate {
-	NSDate *date = [NSDate date];
-	static NSDateFormatter *XMLDateFormatter;
-	if (XMLDateFormatter == nil) {
-		XMLDateFormatter = [NSDateFormatter new];
-		XMLDateFormatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
-	}
-	NSMutableString *mutableDateString = [[XMLDateFormatter stringFromDate:date] mutableCopy];
-	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
-	return mutableDateString;
-}
 - (NSError *)badDirectoryError{
     NSString *errorString = [NSString stringWithFormat:@"%@ does not exist!", [self.postsDirectory lastPathComponent]];
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:errorString,NSLocalizedDescriptionKey, self.postsDirectory, NSURLErrorKey, nil];
@@ -233,16 +199,6 @@ static NSDateFormatter *postPathFormatter;
 	[self.metadata writeToURL:metadataURL atomically:NO];
 	if (self.delegate && [self.delegate respondsToSelector:@selector(metadataDidChangeForSite:)])
 		[self.delegate metadataDidChangeForSite:self];
-}
-
-- (NSString *)name {
-	return [self.metadata objectForKey:TBSiteNameMetadataKey];
-}
-- (NSString *)author {
-	return [self.metadata objectForKey:TBSiteAuthorMetadataKey];
-}
-- (NSString *)baseURL {
-	return [self.metadata objectForKey:TBSiteBaseURLMetadataKey];
 }
 
 @end
