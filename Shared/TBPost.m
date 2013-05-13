@@ -12,16 +12,9 @@
 #import "html.h"
 #import "TBError.h"
 
-static NSDateFormatter *dateStringFormatter;
-static NSDateFormatter *relativeURLFormatter;
-
 @interface TBPost ()
 - (BOOL)parse:(NSError **)error;
 - (NSError *)badPostError;
-@property (readonly) NSString *dateString;
-@property (readonly) NSString *XMLDate;
-@property (readonly) NSString *summary;
-@property (readonly) NSString *relativeURL;
 @end
 
 @implementation TBPost
@@ -34,37 +27,6 @@ static NSDateFormatter *relativeURLFormatter;
 
 + (TBPost *)postWithURL:(NSURL *)URL error:(NSError **)error{
 	return (TBPost *)[super pageWithURL:URL inSite:nil error:error];
-}
-- (NSString *)dateString {
-	if (dateStringFormatter == nil) {
-		dateStringFormatter = [NSDateFormatter new];
-		dateStringFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dMMMyyyy" options:0 locale:[NSLocale currentLocale]];
-	}
-	return [dateStringFormatter stringFromDate:self.date];
-}
-- (NSString *)XMLDate {
-	static NSDateFormatter *XMLDateFormatter;
-	if (XMLDateFormatter == nil) {
-		XMLDateFormatter = [NSDateFormatter new];
-		XMLDateFormatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
-	}
-	NSMutableString *mutableDateString = [[XMLDateFormatter stringFromDate:self.date] mutableCopy];
-	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
-	return mutableDateString;
-}
-- (NSString *)summary {
-	NSUInteger paraStart = 0, paraEnd = 0, contentsEnd = 0;
-	[self.content getParagraphStart:&paraStart end:&paraEnd contentsEnd:&contentsEnd forRange:NSMakeRange(0, 0)];
-	NSRange paragraphRange = NSMakeRange(paraStart, contentsEnd - paraStart);
-	return [self.content substringWithRange:paragraphRange];
-}
-- (NSString *)relativeURL {
-	if (relativeURLFormatter == nil) {
-		relativeURLFormatter = [NSDateFormatter new];
-		relativeURLFormatter.dateFormat = @"/yyyy/MM/dd";
-	}
-	NSString *directoryStructure = [relativeURLFormatter stringFromDate:self.date];
-	return [directoryStructure stringByAppendingPathComponent:self.slug];
 }
 
 - (BOOL)parse:(NSError **)error {
