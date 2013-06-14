@@ -16,7 +16,7 @@
 
 + (NSSet *)assetsFromDirectoryURL:(NSURL*)folderURL {    
     NSMutableSet *subAssets = [NSMutableSet set];
-    NSArray *properties = [NSArray arrayWithObjects:NSURLTypeIdentifierKey, NSURLNameKey, NSURLIsDirectoryKey, nil];
+    NSArray *properties = @[NSURLTypeIdentifierKey, NSURLNameKey, NSURLIsDirectoryKey];
     NSDirectoryEnumerator *subAssetsEnumerator = [[NSFileManager defaultManager] enumeratorAtURL:folderURL includingPropertiesForKeys:properties options:NSDirectoryEnumerationSkipsHiddenFiles|NSDirectoryEnumerationSkipsSubdirectoryDescendants errorHandler:^BOOL(NSURL *url, NSError *error) {
         NSLog(@"Error!: %@", [error localizedDescription]);
         return NO;
@@ -50,7 +50,7 @@
 
 - (NSArray *)children {
     NSSortDescriptor *filenameSort = [NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES];
-    return [[self templateAssets] sortedArrayUsingDescriptors:[NSArray arrayWithObject:filenameSort]];
+    return [[self templateAssets] sortedArrayUsingDescriptors:@[filenameSort]];
 }
 
 - (BOOL)isLeaf {

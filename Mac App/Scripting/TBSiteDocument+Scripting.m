@@ -19,7 +19,7 @@
 	
 	[command suspendExecution];
 	
-	TBSiteWindowController *windowController = [self.windowControllers objectAtIndex:0];
+	TBSiteWindowController *windowController = (self.windowControllers)[0];
 	TBPostsViewController *postsViewController = nil;
 	for (TBViewController *viewController in windowController.viewControllers) {
 		if ([viewController class] == [TBPostsViewController class]) {
@@ -42,7 +42,7 @@
 	
 	if (!self.server.isRunning) return;
 	
-	TBSiteWindowController *windowController = [self.windowControllers objectAtIndex:0];
+	TBSiteWindowController *windowController = (self.windowControllers)[0];
 	TBPostsViewController *postsViewController = nil;
 	for (TBViewController *viewController in windowController.viewControllers) {
 		if ([viewController class] == [TBPostsViewController class]) {

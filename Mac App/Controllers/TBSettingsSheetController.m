@@ -78,25 +78,25 @@
 	
 	NSDictionary *metadata = self.site.metadata;
 	
-	self.siteNameField.stringValue = [metadata objectForKey:TBSiteNameMetadataKey] ?: @"";
-	self.authorField.stringValue = [metadata objectForKey:TBSiteAuthorMetadataKey] ?: @"";
-	self.baseURLField.stringValue = [metadata objectForKey:TBSiteBaseURLMetadataKey] ?: @"";
-	NSNumber *numberOfRecentPosts = [metadata objectForKey:TBSiteNumberOfRecentPostsMetadataKey] ?: [NSNumber numberWithInteger:5];
+	self.siteNameField.stringValue = metadata[TBSiteNameMetadataKey] ?: @"";
+	self.authorField.stringValue = metadata[TBSiteAuthorMetadataKey] ?: @"";
+	self.baseURLField.stringValue = metadata[TBSiteBaseURLMetadataKey] ?: @"";
+	NSNumber *numberOfRecentPosts = metadata[TBSiteNumberOfRecentPostsMetadataKey] ?: @5;
 	self.numberOfRecentPostsField.objectValue = numberOfRecentPosts;
 	self.recentPostsStepper.objectValue = numberOfRecentPosts;
 	
-	NSString *protocol = [metadata objectForKey:TBSiteProtocolKey];
+	NSString *protocol = metadata[TBSiteProtocolKey];
 	NSString *protocolTitle = @"SFTP";
 	if ([protocol isEqualToString:TBSiteProtocolFTP])
 		protocolTitle = @"FTP";
 	else if ([protocol isEqualToString:TBSiteProtocolSFTP])
 		protocolTitle = @"SFTP";
 	[self.uploadViaPopUp selectItemWithTitle:protocolTitle];
-	self.serverField.stringValue = [metadata objectForKey:TBSiteServerKey] ?: @"";
-	self.portField.objectValue = [metadata objectForKey:TBSitePortKey] ?: @"";
-	self.userNameField.stringValue = [metadata objectForKey:TBSiteUserNameKey] ?: @"";
+	self.serverField.stringValue = metadata[TBSiteServerKey] ?: @"";
+	self.portField.objectValue = metadata[TBSitePortKey] ?: @"";
+	self.userNameField.stringValue = metadata[TBSiteUserNameKey] ?: @"";
 	self.passwordField.stringValue = [self passwordFromKeychain] ?: @"";
-	self.remotePathField.stringValue = [metadata objectForKey:TBSiteRemotePathKey] ?: @"";
+	self.remotePathField.stringValue = metadata[TBSiteRemotePathKey] ?: @"";
 	
 	self.passwordField.stringValue = [self passwordFromKeychain] ?: @"";
 	
@@ -122,23 +122,21 @@
 
 - (NSDictionary *)dictionaryOfFormValues {
 	
-	NSNumber *numberOfRecentPosts = [NSNumber numberWithInteger:[self.numberOfRecentPostsField.stringValue integerValue]];
+	NSNumber *numberOfRecentPosts = @([self.numberOfRecentPostsField.stringValue integerValue]);
 	NSString *protocol = @"";
 	if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"FTP"])
 		protocol = TBSiteProtocolFTP;
 	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"SFTP"])
 		protocol = TBSiteProtocolSFTP;
-	NSDictionary *values = [NSDictionary dictionaryWithObjectsAndKeys:
-							self.siteNameField.stringValue, TBSiteNameMetadataKey,
-							self.authorField.stringValue, TBSiteAuthorMetadataKey,
-							self.baseURLField.stringValue, TBSiteBaseURLMetadataKey,
-							numberOfRecentPosts, TBSiteNumberOfRecentPostsMetadataKey,
-							protocol, TBSiteProtocolKey,
-							self.serverField.stringValue, TBSiteServerKey,
-							self.portField.stringValue, TBSitePortKey,
-							self.userNameField.stringValue, TBSiteUserNameKey,
-							self.remotePathField.stringValue, TBSiteRemotePathKey,
-							nil];
+	NSDictionary *values = @{TBSiteNameMetadataKey: self.siteNameField.stringValue,
+							TBSiteAuthorMetadataKey: self.authorField.stringValue,
+							TBSiteBaseURLMetadataKey: self.baseURLField.stringValue,
+							TBSiteNumberOfRecentPostsMetadataKey: numberOfRecentPosts,
+							TBSiteProtocolKey: protocol,
+							TBSiteServerKey: self.serverField.stringValue,
+							TBSitePortKey: self.portField.stringValue,
+							TBSiteUserNameKey: self.userNameField.stringValue,
+							TBSiteRemotePathKey: self.remotePathField.stringValue};
 	
 	return values;
 	

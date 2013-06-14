@@ -23,7 +23,7 @@
 @synthesize errorHandler = _errorHandler;
 
 + (TBPublisher *)publisherWithSite:(TBSite *)site {
-	NSString *protocol = [site.metadata objectForKey:TBSiteProtocolKey];
+	NSString *protocol = (site.metadata)[TBSiteProtocolKey];
 	if ([protocol isEqualToString:TBSiteProtocolFTP])
 		return [[TBFTPPublisher alloc] initWithSite:site];
 	else if ([protocol isEqualToString:TBSiteProtocolSFTP])

@@ -38,7 +38,7 @@ NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityB
 	
 	if (button == NSFileHandlingPanelCancelButton) return nil;
 	
-	identityURL = [[panel URLs] objectAtIndex:0];
+	identityURL = [panel URLs][0];
 	bookmarkData = [identityURL bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope|NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess includingResourceValuesForKeys:nil relativeToURL:nil error:nil];
 	[[NSUserDefaults standardUserDefaults] setObject:bookmarkData forKey:TBSFTPPublisherIdentityBookmarkKey];
 	
@@ -50,10 +50,10 @@ NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityB
 	
 	char *passwordBuffer = NULL;
 	UInt32 passwordLength = 0;
-	NSString *serverName = [self.site.metadata objectForKey:TBSiteServerKey];
-	NSString *accountName = [self.site.metadata objectForKey:TBSiteUserNameKey];
+	NSString *serverName = (self.site.metadata)[TBSiteServerKey];
+	NSString *accountName = (self.site.metadata)[TBSiteUserNameKey];
 	if (!serverName || !accountName) return nil;
-	UInt16 port = (UInt16)[[self.site.metadata objectForKey:TBSitePortKey] integerValue];
+	UInt16 port = (UInt16)[(self.site.metadata)[TBSitePortKey] integerValue];
 	SecProtocolType protocol = kSecProtocolTypeSSH;
 	OSStatus returnStatus = SecKeychainFindInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, "", port, protocol, kSecAuthenticationTypeDefault, &passwordLength, (void **)&passwordBuffer, NULL);
 	if (returnStatus != noErr)
@@ -88,9 +88,9 @@ NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityB
 	[arguments addObject:@"--info=progress2"];
 	[arguments addObject:[self.site.destination.path stringByAppendingString:@"/"]];
 	
-	NSString *userName = [self.site.metadata objectForKey:TBSiteUserNameKey];
-	NSString *server = [self.site.metadata objectForKey:TBSiteServerKey];
-	NSString *remotePath = [self.site.metadata objectForKey:TBSiteRemotePathKey];
+	NSString *userName = (self.site.metadata)[TBSiteUserNameKey];
+	NSString *server = (self.site.metadata)[TBSiteServerKey];
+	NSString *remotePath = (self.site.metadata)[TBSiteRemotePathKey];
 	NSString *destinationArgument = [NSString stringWithFormat:@"%@@%@:%@", userName, server, remotePath];
 	[arguments addObject:destinationArgument];
 	
@@ -99,11 +99,11 @@ NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityB
 	NSMutableDictionary *environment = [NSMutableDictionary dictionary];
 	
 	NSURL *authenticationToolURL = [[NSBundle mainBundle] URLForResource:@"Tribo Authentication Tool" withExtension:@""];
-	[environment setObject:authenticationToolURL.path forKey:@"SSH_ASKPASS"];
-	[environment setObject:@"NONE" forKey:@"DISPLAY"];
-	[environment setObject:@"" forKey:@"SSH_AUTH_SOCK"];
+	environment[@"SSH_ASKPASS"] = authenticationToolURL.path;
+	environment[@"DISPLAY"] = @"NONE";
+	environment[@"SSH_AUTH_SOCK"] = @"";
 	
-	NSString *appSupportDirectory = [[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"Tribo"];
+	NSString *appSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Tribo"];
 	[[NSFileManager defaultManager] createDirectoryAtPath:appSupportDirectory withIntermediateDirectories:YES attributes:nil error:nil];
 	NSString *knownHostsPath = [appSupportDirectory stringByAppendingPathComponent:@"known_hosts"];
 	NSString *knownHostsOption = [NSString stringWithFormat:@"'UserKnownHostsFile \"%@\"'", knownHostsPath];
@@ -115,11 +115,11 @@ NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityB
 			return;
 		}
 		[self.identityURL startAccessingSecurityScopedResource];
-		[environment setObject:[NSString stringWithFormat:@"/usr/bin/ssh -i %@ -F /dev/null -o %@", self.identityURL.path, knownHostsOption] forKey:@"RSYNC_RSH"];
-		[environment setObject:self.identityURL.path forKey:TBSiteIdentityFileEnvironmentKey];
+		environment[@"RSYNC_RSH"] = [NSString stringWithFormat:@"/usr/bin/ssh -i %@ -F /dev/null -o %@", self.identityURL.path, knownHostsOption];
+		environment[TBSiteIdentityFileEnvironmentKey] = self.identityURL.path;
 	}
 	else {
-		[environment setObject:[NSString stringWithFormat:@"/usr/bin/ssh -F /dev/null -o %@", knownHostsOption] forKey:@"RSYNC_RSH"];
+		environment[@"RSYNC_RSH"] = [NSString stringWithFormat:@"/usr/bin/ssh -F /dev/null -o %@", knownHostsOption];
 	}
 	
 	[environment addEntriesFromDictionary:self.site.metadata];

@@ -43,12 +43,12 @@
 
 - (IBAction)editPost:(id)sender {
 	TBSiteDocument *document = (TBSiteDocument *)self.document;
-	TBPost *clickedPost = [document.site.posts objectAtIndex:[self.postTableView clickedRow]];
+	TBPost *clickedPost = (document.site.posts)[[self.postTableView clickedRow]];
 	[[NSWorkspace sharedWorkspace] openURL:clickedPost.URL];
 }
 
 - (IBAction)previewPost:(id)sender {
-	TBPost *clickedPost = [self.document.site.posts objectAtIndex:[self.postTableView clickedRow]];
+	TBPost *clickedPost = (self.document.site.posts)[[self.postTableView clickedRow]];
 	NSDateFormatter *formatter = [NSDateFormatter new];
 	formatter.dateFormat = @"yyyy/MM/dd";
 	NSString *postURLPrefix = [[formatter stringFromDate:clickedPost.date] stringByAppendingPathComponent:clickedPost.slug];
@@ -58,7 +58,7 @@
 }
 
 - (IBAction)revealPost:(id)sender {
-	TBPost *clickedPost = [self.document.site.posts objectAtIndex:[self.postTableView clickedRow]];
+	TBPost *clickedPost = (self.document.site.posts)[[self.postTableView clickedRow]];
 	[[NSWorkspace sharedWorkspace] selectFile:clickedPost.URL.path inFileViewerRootedAtPath:nil];
 }
 
@@ -111,13 +111,13 @@
 - (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item {
 	NSUInteger index = 0;
 	for (index = 0; index < self.document.site.posts.count; index++) {
-		if ([((TBPost *)[self.document.site.posts objectAtIndex:index]).URL isEqual:item]) continue;
+		if ([((TBPost *)(self.document.site.posts)[index]).URL isEqual:item]) continue;
 	}
 	return [self.postTableView rectOfRow:index];
 }
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
-	TBPost *requestedPost = [self.document.site.posts objectAtIndex:index];
+	TBPost *requestedPost = (self.document.site.posts)[index];
 	return requestedPost.URL;
 }
 

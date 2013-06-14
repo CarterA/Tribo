@@ -63,12 +63,12 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 #pragma mark - View Controller Management
 
 - (TBViewController *)selectedViewController {
-	return [self.viewControllers objectAtIndex:self.selectedViewControllerIndex];
+	return (self.viewControllers)[self.selectedViewControllerIndex];
 }
 
 - (void)setSelectedViewControllerIndex:(NSUInteger)selectedViewControllerIndex {
 	_selectedViewControllerIndex = selectedViewControllerIndex;
-	NSView *newView = [[self.viewControllers objectAtIndex:_selectedViewControllerIndex] view];
+	NSView *newView = [(self.viewControllers)[_selectedViewControllerIndex] view];
 	if (self.currentView == newView)
 		return;
 	if (self.currentView)
@@ -213,7 +213,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
     TBSourceViewControllerViewController *sourcesController = [TBSourceViewControllerViewController new];
     sourcesController.document = self.document;
 	
-	self.viewControllers = [NSArray arrayWithObjects:postsViewController, templatesController, sourcesController, nil];
+	self.viewControllers = @[postsViewController, templatesController, sourcesController];
 	self.selectedViewControllerIndex = 0;
 	
 }

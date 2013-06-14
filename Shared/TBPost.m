@@ -86,14 +86,14 @@
 	sd_markdown_render(outputBuffer, smartyPantsOutputBuffer->data, smartyPantsOutputBuffer->size, markdown);
 	sd_markdown_free(markdown);
 	
-	self.content = [NSString stringWithCString:bufcstr(outputBuffer) encoding:NSUTF8StringEncoding];
+	self.content = @(bufcstr(outputBuffer));
 	
 	bufrelease(smartyPantsOutputBuffer);
 	bufrelease(outputBuffer);
     return YES;
 }
 - (NSError *)badPostError{
-    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Could not read any content from the post at %@", [[self URL] lastPathComponent]], NSLocalizedDescriptionKey, [self URL], NSURLErrorKey, nil];
+    NSDictionary *info = @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Could not read any content from the post at %@", [[self URL] lastPathComponent]], NSURLErrorKey: [self URL]};
     NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
     return contentError;
 }

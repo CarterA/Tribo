@@ -73,7 +73,7 @@
 	
 	// Draw a darker gradient over the selected tab.
 	NSGradient *selectionGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.89 alpha:1.0] endingColor:[NSColor colorWithDeviceWhite:0.85 alpha:1.0]];
-	[selectionGradient drawInRect:[[self.tabs objectAtIndex:self.selectedIndex] frame] angle:270.0];
+	[selectionGradient drawInRect:[(self.tabs)[self.selectedIndex] frame] angle:270.0];
 	
 	// Draw an inverted gradient over the clicked tab, if there is one.
 	if (_clickedTab) {

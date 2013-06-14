@@ -66,7 +66,7 @@
 		NSArray *stylesheetNames = [rawMatch componentsSeparatedByString:@", "];
 		NSMutableArray *stylesheetDictionaries = [NSMutableArray array];
 		for (NSString *stylesheetName in stylesheetNames) {
-			[stylesheetDictionaries addObject:[NSDictionary dictionaryWithObject:stylesheetName forKey:@"stylesheetName"]];
+			[stylesheetDictionaries addObject:@{@"stylesheetName": stylesheetName}];
 		}
 		self.stylesheets = stylesheetDictionaries;
 		[content deleteCharactersInRange:secondLineRange];
@@ -77,7 +77,7 @@
 }
 - (NSError *)badPageError{
     NSString *errorString = [NSString stringWithFormat:@"Could not read any content from %@", [[self URL] lastPathComponent]];
-    NSDictionary *info = [NSDictionary dictionaryWithObject:errorString forKey:NSLocalizedDescriptionKey];
+    NSDictionary *info = @{NSLocalizedDescriptionKey: errorString};
     return [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
 }
 @end

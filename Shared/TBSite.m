@@ -45,7 +45,7 @@ static NSDateFormatter *postPathFormatter;
 	NSData *metadataData = [NSData dataWithContentsOfURL:metadataURL];
 	site.metadata = [NSPropertyListSerialization propertyListFromData:metadataData mutabilityOption:NSPropertyListMutableContainersAndLeaves format:nil errorDescription:nil];
 	if (!site.metadata)
-		[[NSDictionary dictionary] writeToURL:metadataURL atomically:NO];
+		[@{} writeToURL:metadataURL atomically:NO];
 	return site;
 }
 
@@ -150,7 +150,7 @@ static NSDateFormatter *postPathFormatter;
 	
 	for (TBPost *post in self.posts) {
 		
-		post.stylesheets = [NSArray arrayWithObject:[NSDictionary dictionaryWithObject:@"post" forKey:@"stylesheetName"]];
+		post.stylesheets = @[@{@"stylesheetName": @"post"}];
 		
 		// Create the path to the folder where we are going to write the post file.
 		// The directory structure we create is /YYYY/MM/DD/slug/
@@ -188,7 +188,7 @@ static NSDateFormatter *postPathFormatter;
 }
 - (NSError *)badDirectoryError{
     NSString *errorString = [NSString stringWithFormat:@"%@ does not exist!", [self.postsDirectory lastPathComponent]];
-    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:errorString,NSLocalizedDescriptionKey, self.postsDirectory, NSURLErrorKey, nil];
+    NSDictionary *info = @{NSLocalizedDescriptionKey: errorString, NSURLErrorKey: self.postsDirectory};
     NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
     return contentError;
 }
