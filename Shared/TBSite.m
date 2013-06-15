@@ -56,7 +56,7 @@ static NSDateFormatter *postPathFormatter;
 	NSURL *postPartialURL = [self.templatesDirectory URLByAppendingPathComponent:@"Post.mustache" isDirectory:NO];
 	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:nil];
 	NSString *rawPostTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
-	self.postTemplate = [GRMustacheTemplate parseString:rawPostTemplate error:error];
+	self.postTemplate = [GRMustacheTemplate templateFromString:rawPostTemplate error:error];
     if (!self.postTemplate) {
         return NO;
     }
@@ -67,8 +67,8 @@ static NSDateFormatter *postPathFormatter;
 	
 	// Process the Feed.xml file.
 	NSURL *feedTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Feed.mustache"];
-	GRMustacheTemplate *feedTemplate = [GRMustacheTemplate parseContentsOfURL:feedTemplateURL error:nil];
-	NSString *feedContents = [feedTemplate renderObject:self];
+	GRMustacheTemplate *feedTemplate = [GRMustacheTemplate templateFromContentsOfURL:feedTemplateURL error:nil];
+	NSString *feedContents = [feedTemplate renderObject:self error:nil];
 	[feedContents writeToURL:[self.destination URLByAppendingPathComponent:@"feed.xml"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 	
 	// Recurse through the entire "Source" directory for pages and files.
@@ -104,8 +104,8 @@ static NSDateFormatter *postPathFormatter;
                 return NO;
             }
 			NSString *rawPageTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
-			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate parseString:rawPageTemplate error:nil];
-			NSString *renderedPage = [pageTemplate renderObject:page];
+			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:nil];
+			NSString *renderedPage = [pageTemplate renderObject:page error:nil];
 			[renderedPage writeToURL:[[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 		}
 		else {
@@ -163,7 +163,7 @@ static NSDateFormatter *postPathFormatter;
 		[[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:nil];
 		
 		// Set up the template loader with this post's content, and then render it all into the post template.
-		NSString *renderedContent = [self.postTemplate renderObject:post];
+		NSString *renderedContent = [self.postTemplate renderObject:post error:nil];
 		
 		// Write the post to the destination directory.
 		NSURL *destinationURL = [destinationDirectory URLByAppendingPathComponent:@"index.html" isDirectory:NO];
