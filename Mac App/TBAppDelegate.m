@@ -8,10 +8,9 @@
 //
 
 #import "TBAppDelegate.h"
-#import "TBDocumentController.h"
 
 @implementation TBAppDelegate
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
-	[TBDocumentController sharedDocumentController];
+	
 }
 @end

@@ -99,7 +99,6 @@
 		4A8829491438EB9F00EBBD7E /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A88294A1438EB9F00EBBD7E /* UKFSEventsWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */; };
-		4A88295E143A679C00EBBD7E /* TBDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A88295D143A679C00EBBD7E /* TBDocumentController.m */; };
 		4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A882968143A736E00EBBD7E /* TBSiteDocument.m */; };
 		4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A882969143A736F00EBBD7E /* TBSiteWindow.xib */; };
 		4A9ED51F15069CD6009C5754 /* CURLHandle+extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -292,8 +291,6 @@
 		4A8829471438EB9F00EBBD7E /* UKFSEventsWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFSEventsWatcher.h; sourceTree = "<group>"; };
 		4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFSEventsWatcher.m; sourceTree = "<group>"; };
 		4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
-		4A88295C143A679C00EBBD7E /* TBDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBDocumentController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4A88295D143A679C00EBBD7E /* TBDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBDocumentController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A882967143A736E00EBBD7E /* TBSiteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBSiteDocument.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A882968143A736E00EBBD7E /* TBSiteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBSiteDocument.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A882969143A736F00EBBD7E /* TBSiteWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBSiteWindow.xib; path = Controllers/TBSiteWindow.xib; sourceTree = "<group>"; };
@@ -455,8 +452,6 @@
 		4A43C23014EAB73D00D1CC7B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A88295C143A679C00EBBD7E /* TBDocumentController.h */,
-				4A88295D143A679C00EBBD7E /* TBDocumentController.m */,
 				4AAC8E411451EF9200AE978A /* TBViewController.h */,
 				4AAC8E421451EF9200AE978A /* TBViewController.m */,
 				4AEF0C5114A183CD00F0E021 /* TBSiteWindow */,
@@ -1102,7 +1097,6 @@
 				4A86964F1437BE3400204482 /* TBAppDelegate.m in Sources */,
 				4A8829491438EB9F00EBBD7E /* UKFileWatcher.m in Sources */,
 				4A88294A1438EB9F00EBBD7E /* UKFSEventsWatcher.m in Sources */,
-				4A88295E143A679C00EBBD7E /* TBDocumentController.m in Sources */,
 				4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */,
 				4ABD6A49143FE466007E2F5D /* TBAddPostSheetController.m in Sources */,
 				4ABD6A4F1441689B007E2F5D /* TBTableView.m in Sources */,
