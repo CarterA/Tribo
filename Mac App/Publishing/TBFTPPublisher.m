@@ -17,7 +17,6 @@
 @end
 
 @implementation TBFTPPublisher
-@synthesize data = _data;
 
 - (void)publish {
 	

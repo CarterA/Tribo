@@ -19,7 +19,6 @@ NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityB
 @end
 
 @implementation TBSFTPPublisher
-@synthesize identityURL = _identityURL;
 
 - (NSURL *)userSelectedIdentityURL {
 	

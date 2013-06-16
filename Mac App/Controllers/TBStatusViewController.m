@@ -14,8 +14,6 @@
 @end
 
 @implementation TBStatusViewController
-@synthesize link = _link;
-@synthesize stopHandler = _stopHandler;
 
 - (NSString *)defaultNibName {
 	return @"TBStatusView";

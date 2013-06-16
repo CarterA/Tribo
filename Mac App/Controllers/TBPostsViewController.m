@@ -21,8 +21,6 @@
 @end
 
 @implementation TBPostsViewController
-@synthesize document=_document;
-@synthesize postTableView=_postTableView;
 
 #pragma mark - View Controller Configuration
 

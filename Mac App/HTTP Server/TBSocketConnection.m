@@ -15,7 +15,6 @@
 @end
 
 @implementation TBSocketConnection
-@synthesize socket = _socket;
 
 - (WebSocket *)webSocketForURI:(NSString *)path {
 	if ([path isEqualToString:@"/livereload"]) {

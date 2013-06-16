@@ -19,9 +19,6 @@
 @end
 
 @implementation TBNewSiteSheetController
-@synthesize handler = _handler;
-@synthesize nameField = _nameField;
-@synthesize authorField = _authorField;
 
 - (id)init {
     self = [super initWithWindowNibName:@"TBNewSiteSheet"];

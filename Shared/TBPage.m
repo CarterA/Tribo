@@ -15,12 +15,6 @@
 @end
 
 @implementation TBPage
-@synthesize URL=_URL;
-@synthesize site=_site;
-@synthesize title=_title;
-@synthesize content=_content;
-@synthesize template=_template;
-@synthesize stylesheets=_stylesheets;
 
 + (TBPage *)pageWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError**)error{
 	TBPage *page = [super new];

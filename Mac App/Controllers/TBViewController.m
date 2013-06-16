@@ -10,7 +10,6 @@
 #import "TBViewController.h"
 
 @implementation TBViewController
-@synthesize document = _document;
 
 - (id)init {
 	NSString *nibName = [self defaultNibName];

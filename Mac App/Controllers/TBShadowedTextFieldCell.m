@@ -9,8 +9,6 @@
 #import "TBShadowedTextFieldCell.h"
 
 @implementation TBShadowedTextFieldCell
-@synthesize aquaShadowColor = _aquaShadowColor;
-@synthesize graphiteShadowColor = _graphiteShadowColor;
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
 	NSColor *shadowColor = self.aquaShadowColor;

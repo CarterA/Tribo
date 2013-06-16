@@ -22,16 +22,6 @@
 @end
 
 @implementation TBStatusView
-@synthesize aquaTopColor = _aquaTopColor;
-@synthesize aquaBottomColor = _aquaBottomColor;
-@synthesize aquaBorderColor = _aquaBorderColor;
-@synthesize aquaHighlightColor = _aquaHighlightColor;
-@synthesize graphiteTopColor = _graphiteTopColor;
-@synthesize graphiteBottomColor = _graphiteBottomColor;
-@synthesize graphiteBorderColor = _graphiteBorderColor;
-@synthesize graphiteHighlightColor = _graphiteHighlightColor;
-@synthesize titleField = _titleField;
-@synthesize observers = _observers;
 
 - (void)awakeFromNib {
 	void (^needsDisplayBlock)(NSNotification *note) = ^(NSNotification *note) {

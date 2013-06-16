@@ -16,9 +16,6 @@
 @end
 
 @implementation TBPublishSheetController
-@synthesize site = _site;
-@synthesize indicator = _indicator;
-@synthesize publisher = _publisher;
 
 - (id)init {
 	self = [super initWithWindowNibName:@"TBPublishSheet"];

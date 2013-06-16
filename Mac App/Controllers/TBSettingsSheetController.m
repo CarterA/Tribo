@@ -42,21 +42,6 @@
 
 @implementation TBSettingsSheetController
 
-@synthesize site = _site;
-
-@synthesize siteNameField = _siteNameField;
-@synthesize authorField = _authorField;
-@synthesize baseURLField = _baseURLField;
-@synthesize numberOfRecentPostsField = _numberOfRecentPostsField;
-@synthesize recentPostsStepper = _recentPostsStepper;
-
-@synthesize uploadViaPopUp = _uploadViaPopUp;
-@synthesize serverField = _serverField;
-@synthesize portField = _portField;
-@synthesize userNameField = _userNameField;
-@synthesize passwordField = _passwordField;
-@synthesize remotePathField = _remotePathField;
-
 - (id)init {
     self = [super initWithWindowNibName:@"TBSettingsSheet"];
     return self;

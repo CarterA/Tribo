@@ -20,10 +20,6 @@
 @end
 
 @implementation TBAddPostSheetController
-@synthesize titleField=_titleField;
-@synthesize slugField=_slugField;
-@synthesize addButton=_addButton;
-@synthesize completionHandler=_completionHandler;
 
 - (id)init {
 	self = [super initWithWindowNibName:@"TBAddPostSheet"];

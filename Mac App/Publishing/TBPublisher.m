@@ -17,10 +17,6 @@
 @end
 
 @implementation TBPublisher
-@synthesize site = _site;
-@synthesize progressHandler = _progressHandler;
-@synthesize completionHandler = _completionHandler;
-@synthesize errorHandler = _errorHandler;
 
 + (TBPublisher *)publisherWithSite:(TBSite *)site {
 	NSString *protocol = (site.metadata)[TBSiteProtocolKey];

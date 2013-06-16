@@ -9,10 +9,6 @@
 #import "TBAsset.h"
 
 @implementation TBAsset
-@synthesize filename = _filename;
-@synthesize fileType = _fileType;
-@synthesize fileURL = _fileURL;
-@synthesize templateAssets = _templateAssets;
 
 + (NSSet *)assetsFromDirectoryURL:(NSURL*)folderURL {    
     NSMutableSet *subAssets = [NSMutableSet set];

@@ -25,10 +25,6 @@
 @end
 
 @implementation TBTabView
-@synthesize titles=_titles;
-@synthesize selectedIndex=_selectedIndex;
-@synthesize delegate=_delegate;
-@synthesize tabs=_tabs;
 
 - (void)setTitles:(NSArray *)titles {
 	self.tabs = [NSMutableArray arrayWithCapacity:titles.count];

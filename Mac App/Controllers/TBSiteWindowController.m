@@ -42,18 +42,6 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 @end
 
 @implementation TBSiteWindowController
-@synthesize viewControllers=_viewControllers;
-@synthesize selectedViewControllerIndex=_selectedViewControllerIndex;
-@synthesize accessoryView=_accessoryView;
-@synthesize actionMenu=_actionMenu;
-@synthesize tabView=_tabView;
-@synthesize containerView=_containerView;
-@synthesize containerViewBottomConstraint=_containerViewBottomConstraint;
-@synthesize currentView=_currentView;
-@synthesize addPostSheetController=_addPostSheetController;
-@synthesize settingsSheetController=_settingsSheetController;
-@synthesize publishSheetController=_publishSheetController;
-@synthesize statusViewController=_statusViewController;
 
 - (id)init {
 	self = [super initWithWindowNibName:@"TBSiteWindow"];

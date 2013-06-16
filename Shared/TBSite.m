@@ -21,17 +21,6 @@
 @end
 
 @implementation TBSite
-@synthesize delegate = _delegate;
-@synthesize root = _root;
-@synthesize destination = _destination;
-@synthesize sourceDirectory = _sourceDirectory;
-@synthesize postsDirectory = _postsDirectory;
-@synthesize templatesDirectory = _templatesDirectory;
-@synthesize posts = _posts;
-@synthesize postTemplate = _postTemplate;
-@synthesize templateAssets = _templateAssets;
-@synthesize sourceAssets = _sourceAssets;
-@synthesize metadata = _metadata;
 
 + (TBSite *)siteWithRoot:(NSURL *)root {
 	TBSite *site = [TBSite new];

@@ -28,11 +28,6 @@
 @end
 
 @implementation TBSiteDocument
-@synthesize site=_site;
-@synthesize sourceWatcher=_sourceWatcher;
-@synthesize postsWatcher=_postsWatcher;
-@synthesize server=_server;
-@synthesize siteSheetController=_siteSheetController;
 
 - (void)makeWindowControllers {
 	TBSiteWindowController *windowController = [TBSiteWindowController new];
