@@ -39,12 +39,12 @@ window.onload = function() {
 }
 </script>
 <ul id="archives">
-	{{#site/posts}}
+	{{#site.posts}}
 	<li>
 		<p>
 			<a href="{{relativeURL}}" title="{{title}}" class="truncate">{{title}}</a>
 			<span class="archiveDate">{{dateString}}</span>
 		</p>
 	</li>
-	{{/site/posts}}
+	{{/site.posts}}
 </ul>

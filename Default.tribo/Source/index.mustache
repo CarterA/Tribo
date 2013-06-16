@@ -1,7 +1,7 @@
 <!-- Articles -->
 <!-- Stylesheets: post -->
 
-{{#site/recentPosts}}
+{{#site.recentPosts}}
 <article class="post">
     <header class="post-header">
         <h2><a href="{{relativeURL}}" title="{{title}}">{{title}}</a></h2>
@@ -15,11 +15,11 @@
     {{/summary}}
 </article>
 <p class="divider">~</p>
-{{/site/recentPosts}}
+{{/site.recentPosts}}
 
-{{^site/recentPosts}}
+{{^site.recentPosts}}
 <p>0 posts</p>
-{{/site/recentPosts}}
+{{/site.recentPosts}}
 
 <section id="bottomNav">
     <a href="/archives">Archives &raquo;</a>
