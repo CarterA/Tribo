@@ -11,7 +11,7 @@
 
 @implementation TBPost (TemplateAdditions)
 - (NSString *)dateString {
-	NSDateFormatter *dateStringFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"dMMMyyyy"];
+	NSDateFormatter *dateStringFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"d MMM yyyy"];
 	return [dateStringFormatter stringFromDate:self.date];
 }
 - (NSString *)XMLDate {
