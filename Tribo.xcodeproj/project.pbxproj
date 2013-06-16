@@ -18,6 +18,8 @@
 		4A36B99115124DCB00A3D79A /* TBStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A36B99015124DCB00A3D79A /* TBStatusView.m */; };
 		4A3DE5F9176CD1C800C20026 /* libGRMustache6-MacOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3DE5F8176CD1C800C20026 /* libGRMustache6-MacOS.a */; };
 		4A3DE5FA176CD1C800C20026 /* libGRMustache6-MacOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3DE5F8176CD1C800C20026 /* libGRMustache6-MacOS.a */; };
+		4A3DE5FE176CF16C00C20026 /* NSDateFormatter+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE5FD176CF16C00C20026 /* NSDateFormatter+TBAdditions.m */; };
+		4A3DE5FF176CF16C00C20026 /* NSDateFormatter+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE5FD176CF16C00C20026 /* NSDateFormatter+TBAdditions.m */; };
 		4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */; };
 		4A43019F1518287C003EA175 /* TBNewSiteSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A43019D1518287C003EA175 /* TBNewSiteSheetController.m */; };
 		4A4301A01518287C003EA175 /* TBNewSiteSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A43019E1518287C003EA175 /* TBNewSiteSheet.xib */; };
@@ -202,6 +204,8 @@
 		4A36B98F15124DCB00A3D79A /* TBStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBStatusView.h; sourceTree = "<group>"; };
 		4A36B99015124DCB00A3D79A /* TBStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBStatusView.m; sourceTree = "<group>"; };
 		4A3DE5F8176CD1C800C20026 /* libGRMustache6-MacOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache6-MacOS.a"; path = "Dependencies/GRMustache/lib/libGRMustache6-MacOS.a"; sourceTree = SOURCE_ROOT; };
+		4A3DE5FC176CF16C00C20026 /* NSDateFormatter+TBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+TBAdditions.h"; sourceTree = "<group>"; };
+		4A3DE5FD176CF16C00C20026 /* NSDateFormatter+TBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+TBAdditions.m"; sourceTree = "<group>"; };
 		4A3ED15D145C6FDC00AE9BF3 /* TBTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBTabView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A3ED15E145C6FDC00AE9BF3 /* TBTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBTabView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A43019C1518287C003EA175 /* TBNewSiteSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBNewSiteSheetController.h; sourceTree = "<group>"; };
@@ -439,6 +443,15 @@
 			path = Dependencies/Rsync;
 			sourceTree = SOURCE_ROOT;
 		};
+		4A3DE5FB176CF11A00C20026 /* System Additions */ = {
+			isa = PBXGroup;
+			children = (
+				4A3DE5FC176CF16C00C20026 /* NSDateFormatter+TBAdditions.h */,
+				4A3DE5FD176CF16C00C20026 /* NSDateFormatter+TBAdditions.m */,
+			);
+			path = "System Additions";
+			sourceTree = "<group>";
+		};
 		4A43019B15182854003EA175 /* TBNewSiteSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +580,7 @@
 				4A9ED52B1507AF83009C5754 /* TBConstants.h */,
 				4A9ED52C1507AF83009C5754 /* TBConstants.m */,
 				4AA86A68173EF26700046691 /* Template Additions */,
+				4A3DE5FB176CF11A00C20026 /* System Additions */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1048,6 +1062,7 @@
 				4A7557E91436F4D70040A10C /* WebSocket.m in Sources */,
 				4A7558001436F6190040A10C /* GCDAsyncSocket.m in Sources */,
 				4A7558011436F6190040A10C /* DDAbstractDatabaseLogger.m in Sources */,
+				4A3DE5FE176CF16C00C20026 /* NSDateFormatter+TBAdditions.m in Sources */,
 				4A7558021436F6190040A10C /* DDASLLogger.m in Sources */,
 				4A7558031436F6190040A10C /* DDFileLogger.m in Sources */,
 				4A7558041436F6190040A10C /* DDLog.m in Sources */,
@@ -1075,6 +1090,7 @@
 				4A88290B1437C52200EBBD7E /* DDData.m in Sources */,
 				4A88290C1437C52200EBBD7E /* DDNumber.m in Sources */,
 				4A88290D1437C52200EBBD7E /* DDRange.m in Sources */,
+				4A3DE5FF176CF16C00C20026 /* NSDateFormatter+TBAdditions.m in Sources */,
 				4A88290E1437C52200EBBD7E /* HTTPAuthenticationRequest.m in Sources */,
 				4A88290F1437C52200EBBD7E /* HTTPConnection.m in Sources */,
 				4A8829101437C52200EBBD7E /* HTTPMessage.m in Sources */,

@@ -11,6 +11,7 @@
 #import "markdown.h"
 #import "html.h"
 #import "TBError.h"
+#import "NSDateFormatter+TBAdditions.h"
 
 @interface TBPost ()
 - (BOOL)parse:(NSError **)error;
@@ -60,11 +61,7 @@
 	NSString *fileName = [self.URL.lastPathComponent stringByDeletingPathExtension];
 	NSTextCheckingResult *fileNameResult = [fileNameRegex firstMatchInString:fileName options:0 range:NSMakeRange(0, fileName.length)];
 	if (fileNameResult) {
-		static NSDateFormatter *fileNameDateFormatter;
-		if (fileNameDateFormatter == nil) {
-			fileNameDateFormatter = [NSDateFormatter new];
-			fileNameDateFormatter.dateFormat = @"yyyy-MM-dd";
-		}
+		NSDateFormatter *fileNameDateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
 		self.date = [fileNameDateFormatter dateFromString:[fileName substringWithRange:[fileNameResult rangeAtIndex:1]]];
 		self.slug = [fileName substringWithRange:[fileNameResult rangeAtIndex:2]];
 	}

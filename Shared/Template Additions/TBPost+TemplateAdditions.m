@@ -7,22 +7,15 @@
 //
 
 #import "TBPost+TemplateAdditions.h"
+#import "NSDateFormatter+TBAdditions.h"
 
 @implementation TBPost (TemplateAdditions)
 - (NSString *)dateString {
-	static NSDateFormatter *dateStringFormatter;
-	if (dateStringFormatter == nil) {
-		dateStringFormatter = [NSDateFormatter new];
-		dateStringFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dMMMyyyy" options:0 locale:[NSLocale currentLocale]];
-	}
+	NSDateFormatter *dateStringFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"dMMMyyyy"];
 	return [dateStringFormatter stringFromDate:self.date];
 }
 - (NSString *)XMLDate {
-	static NSDateFormatter *XMLDateFormatter;
-	if (XMLDateFormatter == nil) {
-		XMLDateFormatter = [NSDateFormatter new];
-		XMLDateFormatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
-	}
+	NSDateFormatter *XMLDateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ"];
 	NSMutableString *mutableDateString = [[XMLDateFormatter stringFromDate:self.date] mutableCopy];
 	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
 	return mutableDateString;
@@ -34,11 +27,7 @@
 	return [self.content substringWithRange:paragraphRange];
 }
 - (NSString *)relativeURL {
-	static NSDateFormatter *relativeURLFormatter;
-	if (relativeURLFormatter == nil) {
-		relativeURLFormatter = [NSDateFormatter new];
-		relativeURLFormatter.dateFormat = @"/yyyy/MM/dd";
-	}
+	NSDateFormatter *relativeURLFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"/yyyy/MM/dd"];
 	NSString *directoryStructure = [relativeURLFormatter stringFromDate:self.date];
 	return [directoryStructure stringByAppendingPathComponent:self.slug];
 }

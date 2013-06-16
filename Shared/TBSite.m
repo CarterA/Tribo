@@ -12,8 +12,7 @@
 #import "TBError.h"
 #import "GRMustache.h"
 #import "TBAsset.h"
-
-static NSDateFormatter *postPathFormatter;
+#import "NSDateFormatter+TBAdditions.h"
 
 @interface TBSite ()
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
@@ -67,8 +66,8 @@ static NSDateFormatter *postPathFormatter;
 	
 	// Process the Feed.xml file.
 	NSURL *feedTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Feed.mustache"];
-	GRMustacheTemplate *feedTemplate = [GRMustacheTemplate templateFromContentsOfURL:feedTemplateURL error:nil];
-	NSString *feedContents = [feedTemplate renderObject:self error:nil];
+	GRMustacheTemplate *feedTemplate = [GRMustacheTemplate templateFromContentsOfURL:feedTemplateURL error:error];
+	NSString *feedContents = [feedTemplate renderObject:self error:error];
 	[feedContents writeToURL:[self.destination URLByAppendingPathComponent:@"feed.xml"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 	
 	// Recurse through the entire "Source" directory for pages and files.
@@ -104,8 +103,8 @@ static NSDateFormatter *postPathFormatter;
                 return NO;
             }
 			NSString *rawPageTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
-			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:nil];
-			NSString *renderedPage = [pageTemplate renderObject:page error:nil];
+			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:error];
+			NSString *renderedPage = [pageTemplate renderObject:page error:error];
 			[renderedPage writeToURL:[[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 		}
 		else {
@@ -154,10 +153,7 @@ static NSDateFormatter *postPathFormatter;
 		
 		// Create the path to the folder where we are going to write the post file.
 		// The directory structure we create is /YYYY/MM/DD/slug/
-		if (postPathFormatter == nil) {
-			postPathFormatter = [NSDateFormatter new];
-			postPathFormatter.dateFormat = @"yyyy/MM/dd";
-		}
+		NSDateFormatter *postPathFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy/MM/dd"];
 		NSString *directoryStructure = [postPathFormatter stringFromDate:post.date];
 		NSURL *destinationDirectory = [[self.destination URLByAppendingPathComponent:directoryStructure isDirectory:YES] URLByAppendingPathComponent:post.slug isDirectory:YES];
 		[[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:nil];
@@ -174,8 +170,7 @@ static NSDateFormatter *postPathFormatter;
 }
 - (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error{
 	NSDate *currentDate = [NSDate date];
-	NSDateFormatter *dateFormatter = [NSDateFormatter new];
-	dateFormatter.dateFormat = @"yyyy-MM-dd";
+	NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
 	NSString *dateString = [dateFormatter stringFromDate:currentDate];
 	NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
 	NSURL *destination = [[self.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];

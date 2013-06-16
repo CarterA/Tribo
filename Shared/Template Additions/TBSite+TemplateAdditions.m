@@ -9,6 +9,7 @@
 
 
 #import "TBSite+TemplateAdditions.h"
+#import "NSDateFormatter+TBAdditions.h"
 
 @implementation TBSite (TemplateAdditions)
 - (TBPost *)latestPost {
@@ -23,11 +24,7 @@
 }
 - (NSString *)XMLDate {
 	NSDate *date = [NSDate date];
-	static NSDateFormatter *XMLDateFormatter;
-	if (XMLDateFormatter == nil) {
-		XMLDateFormatter = [NSDateFormatter new];
-		XMLDateFormatter.dateFormat = @"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
-	}
+	NSDateFormatter *XMLDateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy'-'MM'-'dd'T'HH':'mm':'ssZ"];
 	NSMutableString *mutableDateString = [[XMLDateFormatter stringFromDate:date] mutableCopy];
 	[mutableDateString insertString:@":" atIndex:mutableDateString.length - 2];
 	return mutableDateString;
