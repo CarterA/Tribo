@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UKFSEventsWatcher *postsWatcher;
 @property (nonatomic, strong) TBNewSiteSheetController *siteSheetController;
 - (void)reloadSite;
+- (void)startPostsWatcher;
 @end
 
 @implementation TBSiteDocument
@@ -83,6 +84,13 @@
 	[self.server stop];
 }
 
+- (void)startPostsWatcher {
+	self.postsWatcher = [UKFSEventsWatcher new];
+	self.postsWatcher.delegate = self;
+	self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
+	[self.postsWatcher addPath:self.site.postsDirectory.path];
+}
+
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
 	if (!self.fileURL) {
 		self.siteSheetController = [TBNewSiteSheetController new];
@@ -102,12 +110,12 @@
 				[NSApp presentError:error];
 			self.fileURL = URL;
 			
-			self.postsWatcher = [UKFSEventsWatcher new];
-			self.postsWatcher.delegate = self;
-			self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
-			[self.postsWatcher addPath:self.site.postsDirectory.path];
+			[self startPostsWatcher];
 			
 		}];
+	}
+	else {
+		[self startPostsWatcher];
 	}
 }
 
