@@ -16,6 +16,7 @@
 #import "TBSettingsSheetController.h"
 #import "TBPublishSheetController.h"
 #import "TBStatusViewController.h"
+#import "TBEditorController.h"
 #import "TBTabView.h"
 #import "TBSiteDocument.h"
 #import "TBSite.h"
@@ -32,12 +33,14 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 @property (nonatomic, assign) IBOutlet NSMenu *actionMenu;
 @property (nonatomic, assign) IBOutlet TBTabView *tabView;
 @property (nonatomic, assign) IBOutlet NSView *containerView;
+@property (nonatomic, assign) IBOutlet NSView *editorView;
 @property (nonatomic, assign) IBOutlet NSLayoutConstraint *containerViewBottomConstraint;
 @property (nonatomic, assign) NSView *currentView;
 @property (nonatomic, strong) TBAddPostSheetController *addPostSheetController;
 @property (nonatomic, strong) TBSettingsSheetController *settingsSheetController;
 @property (nonatomic, strong) TBPublishSheetController *publishSheetController;
 @property (nonatomic, strong) TBStatusViewController *statusViewController;
+@property (nonatomic, strong) TBEditorController *editorController;
 - (void)toggleStatusView;
 @end
 
@@ -176,11 +179,14 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 - (void)windowDidLoad {
 	[super windowDidLoad];
 	
+	// Initialize child view controllers
 	self.addPostSheetController = [TBAddPostSheetController new];
 	self.settingsSheetController = [TBSettingsSheetController new];
 	self.publishSheetController = [TBPublishSheetController new];
 	self.statusViewController = [TBStatusViewController new];
+	self.editorController = [TBEditorController new];
 	
+	// Add the utility button to the top right of the window
 	NSView *themeFrame = [self.window.contentView superview];
 	NSRect accessoryFrame = self.accessoryView.frame;
 	NSRect containerFrame = themeFrame.frame;
@@ -192,17 +198,20 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	[[(NSButton *)self.accessoryView cell] setHighlightsBy:NSContentsCellMask];
 	[themeFrame addSubview:self.accessoryView];
 	
+	// Configure the sidebar view controllers
 	TBPostsViewController *postsViewController = [TBPostsViewController new];
 	postsViewController.document = self.document;
-	
 	TBTemplatesViewController *templatesController = [TBTemplatesViewController new];
     templatesController.document = self.document;
-    
     TBSourceViewControllerViewController *sourcesController = [TBSourceViewControllerViewController new];
     sourcesController.document = self.document;
-	
 	self.viewControllers = @[postsViewController, templatesController, sourcesController];
 	self.selectedViewControllerIndex = 0;
+	
+	// Configure the editor view
+	self.editorController.view.frame = self.editorView.frame;
+	[self.editorView.superview replaceSubview:self.editorView with:self.editorController.view];
+	self.editorView = self.editorController.view;
 	
 }
 
