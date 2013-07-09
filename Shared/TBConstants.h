@@ -22,4 +22,8 @@ extern NSString * const TBSitePortKey; // Not a teleportation device
 extern NSString * const TBSiteUserNameKey;
 extern NSString * const TBSiteRemotePathKey;
 
+extern NSString * const TBSiteFilters;
+
 extern NSString * const TBSiteIdentityFileEnvironmentKey;
+extern NSString * const TBSiteEnvironmentKey;
+extern NSString * const TBSiteCurrentFileEnvironmentKey;
