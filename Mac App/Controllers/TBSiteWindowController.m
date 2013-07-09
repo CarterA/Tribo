@@ -217,6 +217,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 
 - (void)windowDidBecomeKey:(NSNotification *)notification {
 	//self.postCountLabel.textColor = [NSColor controlTextColor];
+	self.editorController.currentFile = [[self.document site].posts[0] URL];
 }
 
 - (void)windowDidResignKey:(NSNotification *)notification {

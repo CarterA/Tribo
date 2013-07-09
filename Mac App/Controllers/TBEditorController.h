@@ -10,5 +10,5 @@
 #import "TBViewController.h"
 
 @interface TBEditorController : TBViewController
-
+@property (nonatomic, strong) NSURL *currentFile;
 @end

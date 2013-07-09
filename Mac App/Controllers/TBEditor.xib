@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TBEditorController">
             <connections>
+                <outlet property="textView" destination="fCy-zC-TtS" id="bys-iH-qlX"/>
                 <outlet property="view" destination="MOj-o4-3Z2" id="hHf-cb-GHc"/>
             </connections>
         </customObject>
@@ -19,10 +20,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="389" height="347"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textView importsGraphics="NO" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="fCy-zC-TtS">
+                    <textView importsGraphics="NO" richText="NO" continuousSpellChecking="YES" allowsUndo="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="fCy-zC-TtS">
                         <rect key="frame" x="0.0" y="0.0" width="389" height="347"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.94153180803571423" alpha="1" colorSpace="calibratedWhite"/>
                         <size key="minSize" width="389" height="347"/>
                         <size key="maxSize" width="463" height="10000000"/>
                         <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -42,16 +43,4 @@
             </scroller>
         </scrollView>
     </objects>
-    <classes>
-        <class className="NSTextView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSTextView.h"/>
-            <relationships>
-                <relationship kind="action" name="orderFrontSharingServicePicker:"/>
-                <relationship kind="action" name="toggleQuickLookPreviewPanel:"/>
-            </relationships>
-        </class>
-        <class className="TBEditorController" superclassName="NSViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TBEditorController.h"/>
-        </class>
-    </classes>
 </document>
