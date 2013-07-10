@@ -22,4 +22,7 @@ NSString * const TBSitePortKey = @"TBSitePort";
 NSString * const TBSiteUserNameKey = @"TBSiteUserName";
 NSString * const TBSiteRemotePathKey = @"TBSiteRemotePathKey";
 
+NSString * const TBSiteFilters = @"TBSiteFilters";
+
 NSString * const TBSiteIdentityFileEnvironmentKey = @"TB_IDENTITY_FILE";
+NSString * const TBSiteCurrentFileEnvironmentKey = @"TBSiteCurrentFileEnvironmentKey";
