@@ -8,9 +8,15 @@
 //
 
 #import "TBEditorStorage.h"
+#import "TBStyleDictionary.h"
+
+// Turn a range inside a substring into a range inside the containing string.
+#define TBAbsoluteRange(relativeRange, containerRange) \
+	NSMakeRange(relativeRange.location + containerRange.location, relativeRange.length)
 
 @interface TBEditorStorage ()
 @property (nonatomic, strong) NSMutableAttributedString *backingStore;
+@property (nonatomic, strong) TBStyleDictionary *styleDictionary;
 @property (nonatomic, assign) BOOL syntaxHighlightingNeedsUpdate;
 @end
 
@@ -20,6 +26,7 @@
 	self = [super init];
 	if (self) {
 		self.backingStore = [[NSMutableAttributedString alloc] init];
+		self.styleDictionary = [TBStyleDictionary styleDictionaryFromURL:[[NSBundle mainBundle] URLForResource:@"Editor Styles" withExtension:@"json"]];
 	}
 	return self;
 }
@@ -60,29 +67,49 @@
 
 - (void)applySyntaxHighlightingToRange:(NSRange)range {
 	
-	NSString *markdown = [self.backingStore.string substringWithRange:range];
+	NSString *substring = [self.backingStore.string substringWithRange:range];
+	[self.backingStore setAttributes:self.styleDictionary[@"body"] range:range];
 	
 	// Headers
 	
 	// ATX-style headers (# Header 1 #, ## Header 2 ##, etc.)
 	NSRegularExpression *headerRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\#{1,6})[ \\t]*(.+?)[ \\t]*\\#*\\n+" options:0 error:nil];
-	[headerRegex enumerateMatchesInString:markdown options:0 range:NSMakeRange(0, markdown.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+	[headerRegex enumerateMatchesInString:substring options:0 range:NSMakeRange(0, substring.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
 		if (result.numberOfRanges != 3) return;
-		CGFloat headerSizeMultipliers[] = {
-			1.0, // Body text
-			1.6, // <h1>
-			1.5, // <h2>
-			1.4, // <h3>
-			1.3, // <h4>
-			1.2, // <h5>
-			1.1  // <h6>
-		};
-		NSString *hashmarks = [markdown substringWithRange:[result rangeAtIndex:1]];
+		NSString *hashmarks = [substring substringWithRange:[result rangeAtIndex:1]];
 		NSUInteger headerLevel = hashmarks.length;
-		NSRange headerRange = [self.backingStore.string rangeOfString:[markdown substringWithRange:[result rangeAtIndex:0]]];
-		[self.backingStore addAttributes:@{
-			NSFontAttributeName: [NSFont fontWithName:@"Avenir Next Demi Bold" size:14.0 * headerSizeMultipliers[headerLevel]],
-		} range:headerRange];
+		NSRange headerRange = TBAbsoluteRange([result rangeAtIndex:0], range);
+		NSDictionary *attributes = self.styleDictionary[[NSString stringWithFormat:@"h%ld", headerLevel]];
+		[self.backingStore addAttributes:attributes range:headerRange];
+	}];
+	
+	// Strength and Emphasis
+	
+	NSRegularExpression *emphasisRegex = [NSRegularExpression regularExpressionWithPattern:@"(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1" options:0 error:nil];
+	[emphasisRegex enumerateMatchesInString:substring options:0 range:NSMakeRange(0, substring.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+		NSRange emphasisRange = TBAbsoluteRange([result rangeAtIndex:0], range);
+		NSDictionary *attributes = self.styleDictionary[@"em"];
+		[self.backingStore addAttributes:attributes range:emphasisRange];
+	}];
+	NSRegularExpression *strongRegex = [NSRegularExpression regularExpressionWithPattern:@"(\\*\\*|__)(?=\\S)(.+?[*_]*)(?<=\\S)\\1" options:0 error:nil];
+	[strongRegex enumerateMatchesInString:substring options:0 range:NSMakeRange(0, substring.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+		NSRange strongRange = TBAbsoluteRange([result rangeAtIndex:0], range);
+		NSDictionary *attributes = self.styleDictionary[@"strong"];
+		[self.backingStore addAttributes:attributes range:strongRange];
+	}];
+	
+	// Links
+	
+	NSRegularExpression *inlineLinkRegex = [NSRegularExpression regularExpressionWithPattern:@"\\[(.*?)\\]\\(([\\S]*?)\\s?\\\"?(.*?)\\\"?\\)(.|\\s)" options:0 error:nil];
+	[inlineLinkRegex enumerateMatchesInString:substring options:0 range:NSMakeRange(0, substring.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+		NSRange linkTextRange = TBAbsoluteRange([result rangeAtIndex:1], range);
+		[self.backingStore addAttributes:self.styleDictionary[@"link-text"] range:linkTextRange];
+		NSRange linkHrefRange = TBAbsoluteRange([result rangeAtIndex:2], range);
+		[self.backingStore addAttributes:self.styleDictionary[@"link-href"] range:linkHrefRange];
+		if (result.numberOfRanges > 3) {
+			NSRange linkTitleRange = TBAbsoluteRange([result rangeAtIndex:3], range);
+			[self.backingStore addAttributes:self.styleDictionary[@"link-title"] range:linkTitleRange];
+		}
 	}];
 	
 }
