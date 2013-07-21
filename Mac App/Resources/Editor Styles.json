@@ -1,0 +1,30 @@
+{
+	"body": {
+		"font": "Avenir Next",
+		"size": 14,
+		"color": [0.0, 0.0, 0.0]
+	},
+	"h1;h2;h3;h4;h5;h6": {
+		"font": "Avenir Next Demi Bold"
+	},
+	"h5": { "size": 16 },
+	"h4": { "size": 18 },
+	"h3": { "size": 20 },
+	"h2": { "size": 22 },
+	"h1": { "size": 24 },
+	"em": {
+		"font": "Avenir Next Italic"
+	},
+	"strong": {
+		"font": "Avenir Next Demi Bold"
+	},
+	"link-text": {
+		"color": [0.158, 0.587, 0.893]
+	},
+	"link-href": {
+		"underline": "solid"
+	},
+	"link-title": {
+		"font": "Avenir Next Italic"
+	},
+}

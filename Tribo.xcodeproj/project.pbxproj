@@ -153,6 +153,8 @@
 		4AE91C6614FF044700499469 /* TBPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6514FF044700499469 /* TBPublisher.m */; };
 		4AE91C7114FF16ED00499469 /* TBPublishSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */; };
 		4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */; };
+		4AF9C9D417945FA300709238 /* Editor Styles.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D317945FA300709238 /* Editor Styles.json */; };
+		4AF9C9D71797155600709238 /* TBStyleDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D61797151800709238 /* TBStyleDictionary.m */; };
 		9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */; };
 		9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6B669614F3480800759DC3 /* TBTemplatesView.xib */; };
 		9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
@@ -372,6 +374,9 @@
 		4AE91C6E14FF16ED00499469 /* TBPublishSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPublishSheetController.h; sourceTree = "<group>"; };
 		4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPublishSheetController.m; sourceTree = "<group>"; };
 		4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBPublishSheet.xib; sourceTree = "<group>"; };
+		4AF9C9D317945FA300709238 /* Editor Styles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Editor Styles.json"; sourceTree = "<group>"; };
+		4AF9C9D51797151800709238 /* TBStyleDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStyleDictionary.h; sourceTree = "<group>"; };
+		4AF9C9D61797151800709238 /* TBStyleDictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBStyleDictionary.m; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
 		9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTemplatesViewController.h; sourceTree = "<group>"; };
 		9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTemplatesViewController.m; sourceTree = "<group>"; };
@@ -503,6 +508,7 @@
 				4AA29D0114E42ED5005E341F /* Tribo.entitlements */,
 				4A8696491437BE3400204482 /* Info.plist */,
 				4AE50F9714F95E0B00FCA39C /* LiveReload Snippet.html */,
+				4AF9C9D317945FA300709238 /* Editor Styles.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -808,6 +814,8 @@
 				4AD7CCF417820B4E009458FF /* TBEditorController.m */,
 				4AD7CCF81782151A009458FF /* TBEditorStorage.h */,
 				4AD7CCF91782151A009458FF /* TBEditorStorage.m */,
+				4AF9C9D51797151800709238 /* TBStyleDictionary.h */,
+				4AF9C9D61797151800709238 /* TBStyleDictionary.m */,
 			);
 			name = TBEditorController;
 			sourceTree = "<group>";
@@ -1045,6 +1053,7 @@
 				4AB27975151557D7009D7F93 /* Arrow@2x.png in Resources */,
 				4AB27976151557D7009D7F93 /* Stop.png in Resources */,
 				4AB27977151557D7009D7F93 /* Stop@2x.png in Resources */,
+				4AF9C9D417945FA300709238 /* Editor Styles.json in Resources */,
 				4A4301A01518287C003EA175 /* TBNewSiteSheet.xib in Resources */,
 				4A17D451156C769F00789C3D /* Default.tribo in Resources */,
 			);
@@ -1103,6 +1112,7 @@
 				4AD7CCFA1782151A009458FF /* TBEditorStorage.m in Sources */,
 				4AD7CCF617820B4E009458FF /* TBEditorController.m in Sources */,
 				4A8829021437C52200EBBD7E /* TBSite.m in Sources */,
+				4AF9C9D71797155600709238 /* TBStyleDictionary.m in Sources */,
 				4A8829031437C52200EBBD7E /* TBPost.m in Sources */,
 				4A8829041437C52200EBBD7E /* TBPage.m in Sources */,
 				4A8829051437C52200EBBD7E /* GCDAsyncSocket.m in Sources */,
