@@ -10,7 +10,7 @@
 #import "TBEditorController.h"
 #import "TBEditorStorage.h"
 
-@interface TBEditorController ()
+@interface TBEditorController () <NSTextViewDelegate>
 @property (nonatomic, assign) IBOutlet NSTextView *textView;
 @end
 
@@ -24,14 +24,28 @@
 	if (_currentFile == currentFile) return;
 	_currentFile = currentFile;
 	NSString *fileContents = [NSString stringWithContentsOfURL:currentFile encoding:NSUTF8StringEncoding error:nil];
-	//[self.textView.textStorage replaceCharactersInRange:NSMakeRange(0, self.textView.textStorage.length) withString:fileContents];
 	self.textView.string = fileContents;
 }
 
 - (void)viewDidLoad {
 	[self.textView.layoutManager replaceTextStorage:[TBEditorStorage new]];
 	self.textView.textContainerInset = NSMakeSize(25.0, 25.0);
-	self.textView.font = [NSFont fontWithName:@"Avenir Next" size:14.0];
+}
+
+- (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
+	NSRange selection = self.textView.selectedRange;
+	if (selection.location == NSNotFound || selection.length == 0) return YES;
+	NSDictionary *boundingCharacters = @{ @"*": @"*", @"_": @"_", @"[": @"]", @"(": @")", @"\"": @"\""};
+	if (!boundingCharacters[replacementString]) return YES;
+	[self.textView.undoManager beginUndoGrouping];
+	NSString *selectedString = [self.textView.string substringWithRange:selection];
+	NSString *boundedString = [NSString stringWithFormat:@"%@%@%@", replacementString, selectedString, boundingCharacters[replacementString]];
+	[self.textView replaceCharactersInRange:selection withString:boundedString];
+	NSRange replacedRange = NSMakeRange(selection.location, selection.length + 2);
+	self.textView.selectedRange = replacedRange;
+	[[self.textView.undoManager prepareWithInvocationTarget:self.textView] replaceCharactersInRange:replacedRange withString:selectedString];
+	[self.textView.undoManager endUndoGrouping];
+	return NO;
 }
 
 @end

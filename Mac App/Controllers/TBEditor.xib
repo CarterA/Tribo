@@ -29,6 +29,9 @@
                         <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <size key="minSize" width="389" height="347"/>
                         <size key="maxSize" width="463" height="10000000"/>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="9VL-Wm-xJp"/>
+                        </connections>
                     </textView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,4 +46,22 @@
             </scroller>
         </scrollView>
     </objects>
+    <classes>
+        <class className="NSTextView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSTextView.h"/>
+            <relationships>
+                <relationship kind="action" name="orderFrontSharingServicePicker:"/>
+                <relationship kind="action" name="toggleQuickLookPreviewPanel:"/>
+            </relationships>
+        </class>
+        <class className="TBEditorController" superclassName="TBViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TBEditorController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="textView" candidateClass="NSTextView"/>
+            </relationships>
+        </class>
+        <class className="TBViewController" superclassName="NSViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TBViewController.h"/>
+        </class>
+    </classes>
 </document>
