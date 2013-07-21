@@ -60,6 +60,11 @@
 	[[NSWorkspace sharedWorkspace] selectFile:clickedPost.URL.path inFileViewerRootedAtPath:nil];
 }
 
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+	TBPost *selectedPost = (self.document.site.posts)[[self.postTableView selectedRow]];
+	[self.delegate postsViewDidSelectPost:selectedPost];
+}
+
 - (void)tableView:(NSTableView *)tableView shouldDeleteRows:(NSIndexSet *)rowIndexes {
 	NSArray *selectedPosts = [self.document.site.posts objectsAtIndexes:rowIndexes];
 	NSArray *postURLs = [selectedPosts valueForKey:@"URL"];

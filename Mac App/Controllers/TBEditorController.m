@@ -24,7 +24,9 @@
 	if (_currentFile == currentFile) return;
 	_currentFile = currentFile;
 	NSString *fileContents = [NSString stringWithContentsOfURL:currentFile encoding:NSUTF8StringEncoding error:nil];
-	self.textView.string = fileContents;
+	TBEditorStorage *newStorage = [[TBEditorStorage alloc] init];
+	[newStorage replaceCharactersInRange:NSMakeRange(0, 0) withString:fileContents];
+	[self.textView.layoutManager replaceTextStorage:newStorage];
 }
 
 - (void)viewDidLoad {

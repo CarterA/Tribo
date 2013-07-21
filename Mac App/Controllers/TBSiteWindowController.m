@@ -20,6 +20,7 @@
 #import "TBTabView.h"
 #import "TBSiteDocument.h"
 #import "TBSite.h"
+#import "TBPost.h"
 #import "TBHTTPServer.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -28,7 +29,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	.right = 4.0
 };
 
-@interface TBSiteWindowController () <TBTabViewDelegate>
+@interface TBSiteWindowController () <TBTabViewDelegate, TBPostsViewControllerDelegate>
 @property (nonatomic, assign) IBOutlet NSView *accessoryView;
 @property (nonatomic, assign) IBOutlet NSMenu *actionMenu;
 @property (nonatomic, assign) IBOutlet TBTabView *tabView;
@@ -174,6 +175,12 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	self.selectedViewControllerIndex = index;
 }
 
+#pragma mark - Posts View Delegate Methods
+
+- (void)postsViewDidSelectPost:(TBPost *)post {
+	self.editorController.currentFile = post.URL;
+}
+
 #pragma mark - Window Delegate Methods
 
 - (void)windowDidLoad {
@@ -201,6 +208,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	// Configure the sidebar view controllers
 	TBPostsViewController *postsViewController = [TBPostsViewController new];
 	postsViewController.document = self.document;
+	postsViewController.delegate = self;
 	TBTemplatesViewController *templatesController = [TBTemplatesViewController new];
     templatesController.document = self.document;
     TBSourceViewControllerViewController *sourcesController = [TBSourceViewControllerViewController new];
@@ -217,7 +225,6 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 
 - (void)windowDidBecomeKey:(NSNotification *)notification {
 	//self.postCountLabel.textColor = [NSColor controlTextColor];
-	self.editorController.currentFile = [[self.document site].posts[0] URL];
 }
 
 - (void)windowDidResignKey:(NSNotification *)notification {
