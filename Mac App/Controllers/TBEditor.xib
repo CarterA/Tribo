@@ -46,22 +46,4 @@
             </scroller>
         </scrollView>
     </objects>
-    <classes>
-        <class className="NSTextView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSTextView.h"/>
-            <relationships>
-                <relationship kind="action" name="orderFrontSharingServicePicker:"/>
-                <relationship kind="action" name="toggleQuickLookPreviewPanel:"/>
-            </relationships>
-        </class>
-        <class className="TBEditorController" superclassName="TBViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TBEditorController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="textView" candidateClass="NSTextView"/>
-            </relationships>
-        </class>
-        <class className="TBViewController" superclassName="NSViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TBViewController.h"/>
-        </class>
-    </classes>
 </document>

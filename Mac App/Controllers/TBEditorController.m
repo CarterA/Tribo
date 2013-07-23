@@ -20,6 +20,11 @@
 	return @"TBEditor";
 }
 
+- (void)saveDocument:(id)sender {
+	if (!self.currentFile) return;
+	[self.textView.string writeToURL:self.currentFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
+}
+
 - (void)setCurrentFile:(NSURL *)currentFile {
 	if (_currentFile == currentFile) return;
 	_currentFile = currentFile;
@@ -34,6 +39,7 @@
 - (void)viewDidLoad {
 	[self.textView.layoutManager replaceTextStorage:[TBEditorStorage new]];
 	self.textView.textContainerInset = NSMakeSize(25.0, 25.0);
+	self.textView.nextResponder = self;
 }
 
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
