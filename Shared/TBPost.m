@@ -21,8 +21,8 @@
 
 @implementation TBPost
 
-+ (TBPost *)postWithURL:(NSURL *)URL error:(NSError **)error{
-	return (TBPost *)[super pageWithURL:URL inSite:nil error:error];
++ (TBPost *)postWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error{
+	return (TBPost *)[super pageWithURL:URL inSite:site error:error];
 }
 
 - (BOOL)parse:(NSError **)error {
@@ -82,40 +82,8 @@
 	
 	bufrelease(smartyPantsOutputBuffer);
 	bufrelease(outputBuffer);
-	
-	[self runFilters];
-	
+		
     return YES;
-}
-
-- (void)runFilters {
-	
-	NSArray *filterPaths = self.site.metadata[TBSiteFilters];
-	if (!filterPaths || ![filterPaths count]) return;
-	
-	NSMutableDictionary *environment = [self.site.metadata mutableCopy];
-	environment[TBSiteCurrentFileEnvironmentKey] = self.URL.path;
-	
-	for (NSString *filterPath in filterPaths) {
-		
-		NSTask *filter = [NSTask new];
-		filter.launchPath = filterPath;
-		filter.environment = environment;
-		NSPipe *input = [NSPipe pipe];
-		filter.standardInput = input;
-		NSPipe *output = [NSPipe pipe];
-		filter.standardOutput = output;
-		NSPipe *error = [NSFileHandle fileHandleWithStandardError];
-		filter.standardError = error;
-		
-		[filter launch];
-		[input.fileHandleForWriting writeData:[self.content dataUsingEncoding:NSUTF8StringEncoding]];
-		[filter waitUntilExit];
-		
-		self.content = [NSString stringWithUTF8String:[output.fileHandleForReading readDataToEndOfFile].bytes];
-		
-	}
-	
 }
 
 - (NSError *)badPostError{

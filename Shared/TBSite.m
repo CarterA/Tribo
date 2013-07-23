@@ -94,7 +94,9 @@
 			NSString *rawPageTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
 			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:error];
 			NSString *renderedPage = [pageTemplate renderObject:page error:error];
-			[renderedPage writeToURL:[[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+			destinationURL = [[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"];
+			[renderedPage writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
+			[self runFiltersOnFile:destinationURL];
 		}
 		else {
 			[[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:nil];
@@ -118,8 +120,7 @@
 	// Parse the contents of the Posts directory into individual TBPost objects.
 	NSMutableArray *posts = [NSMutableArray array];
 	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
-		TBPost *post = [TBPost postWithURL:postURL error:error];
-		post.site = self;
+		TBPost *post = [TBPost postWithURL:postURL inSite:self error:error];
 		if (!post) {
 			return NO;
 		}
@@ -154,9 +155,28 @@
 		NSURL *destinationURL = [destinationDirectory URLByAppendingPathComponent:@"index.html" isDirectory:NO];
 		[renderedContent writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
 		
+		[self runFiltersOnFile:destinationURL];
+		
 	}
 	
 }
+
+- (void)runFiltersOnFile:(NSURL *)file {
+	
+	NSArray *filterPaths = self.metadata[TBSiteFilters];
+	if (!filterPaths || ![filterPaths count]) return;
+	
+	NSURL *scriptsURL = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationScriptsDirectory inDomains:NSUserDomainMask][0];
+	NSArray *arguments = @[file.path];
+	
+	for (NSString *filterPath in filterPaths) {
+		NSURL *filterURL = [scriptsURL URLByAppendingPathComponent:filterPath];
+		NSUserUnixTask *filter = [[NSUserUnixTask alloc] initWithURL:filterURL error:nil];
+		[filter executeWithArguments:arguments completionHandler:nil];
+	}
+	
+}
+
 - (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error{
 	NSDate *currentDate = [NSDate date];
 	NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
@@ -170,6 +190,7 @@
     }
 	return destination;
 }
+
 - (NSError *)badDirectoryError{
     NSString *errorString = [NSString stringWithFormat:@"%@ does not exist!", [self.postsDirectory lastPathComponent]];
     NSDictionary *info = @{NSLocalizedDescriptionKey: errorString, NSURLErrorKey: self.postsDirectory};
