@@ -23,6 +23,8 @@
 - (void)setCurrentFile:(NSURL *)currentFile {
 	if (_currentFile == currentFile) return;
 	_currentFile = currentFile;
+	if (currentFile) self.textView.editable = YES;
+	else self.textView.editable = NO;
 	NSString *fileContents = [NSString stringWithContentsOfURL:currentFile encoding:NSUTF8StringEncoding error:nil];
 	TBEditorStorage *newStorage = [[TBEditorStorage alloc] init];
 	[newStorage replaceCharactersInRange:NSMakeRange(0, 0) withString:fileContents];
