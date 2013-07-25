@@ -9,6 +9,7 @@
 
 #import "TBEditorController.h"
 #import "TBEditorStorage.h"
+#import "TBSiteDocument.h"
 
 @interface TBEditorController () <NSTextViewDelegate>
 @property (nonatomic, assign) IBOutlet NSTextView *textView;
@@ -23,6 +24,7 @@
 - (void)saveDocument:(id)sender {
 	if (!self.currentFile) return;
 	[self.textView.string writeToURL:self.currentFile atomically:NO encoding:NSUTF8StringEncoding error:nil];
+	self.textView.window.documentEdited = NO;
 }
 
 - (void)setCurrentFile:(NSURL *)currentFile {
@@ -39,10 +41,12 @@
 - (void)viewDidLoad {
 	[self.textView.layoutManager replaceTextStorage:[TBEditorStorage new]];
 	self.textView.textContainerInset = NSMakeSize(25.0, 25.0);
+	self.nextResponder = self.textView.nextResponder;
 	self.textView.nextResponder = self;
 }
 
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString {
+	self.textView.window.documentEdited = YES;
 	NSRange selection = self.textView.selectedRange;
 	if (selection.location == NSNotFound || selection.length == 0) return YES;
 	NSDictionary *boundingCharacters = @{ @"*": @"*", @"_": @"_", @"[": @"]", @"(": @")", @"\"": @"\""};
@@ -56,6 +60,10 @@
 	[[self.textView.undoManager prepareWithInvocationTarget:self.textView] replaceCharactersInRange:replacedRange withString:selectedString];
 	[self.textView.undoManager endUndoGrouping];
 	return NO;
+}
+
+- (void)textDidEndEditing:(NSNotification *)notification {
+	[self saveDocument:self];
 }
 
 @end

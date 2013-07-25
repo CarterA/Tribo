@@ -179,6 +179,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 
 - (void)postsViewDidSelectPost:(TBPost *)post {
 	self.editorController.currentFile = post.URL;
+	[self synchronizeWindowTitleWithDocumentName];
 }
 
 #pragma mark - Window Delegate Methods
@@ -217,6 +218,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	self.selectedViewControllerIndex = 0;
 	
 	// Configure the editor view
+	self.editorController.document = self.document;
 	self.editorController.view.frame = self.editorView.frame;
 	[self.editorView.superview replaceSubview:self.editorView with:self.editorController.view];
 	self.editorView = self.editorController.view;
@@ -229,6 +231,20 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 
 - (void)windowDidResignKey:(NSNotification *)notification {
 	//self.postCountLabel.textColor = [NSColor disabledControlTextColor];
+}
+
+- (void)synchronizeWindowTitleWithDocumentName {
+	NSURL *currentFile = self.editorController.currentFile;
+	NSString *packageDisplayName = [[NSFileManager defaultManager] displayNameAtPath:[self.document fileURL].path];
+	if (currentFile) {
+		NSString *fileDisplayName = [[NSFileManager defaultManager] displayNameAtPath:currentFile.path];
+		self.window.representedURL = currentFile;
+		self.window.title = [NSString stringWithFormat:@"%@ — %@", fileDisplayName, packageDisplayName];
+	}
+	else {
+		self.window.representedURL = [self.document fileURL];
+		self.window.title = packageDisplayName;
+	}
 }
 
 @end
