@@ -37,40 +37,44 @@
 	return site;
 }
 
-- (BOOL)process:(NSError **)error {	
+- (void)processWithCompletionHandler:(TBSiteCompletionHandler)handler {
 	// Find and compile the post template.
+	NSError *error;
 	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
 	NSString *rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:nil];
 	NSURL *postPartialURL = [self.templatesDirectory URLByAppendingPathComponent:@"Post.mustache" isDirectory:NO];
 	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:nil];
 	NSString *rawPostTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
-	self.postTemplate = [GRMustacheTemplate templateFromString:rawPostTemplate error:error];
+	self.postTemplate = [GRMustacheTemplate templateFromString:rawPostTemplate error:&error];
     if (!self.postTemplate) {
-        return NO;
+		handler(error);
+		return;
     }
 	
 	// Take care of posts early so that pages can use them.
-	[self parsePosts:error];
+	if (![self parsePosts:&error]) {
+		handler(error);
+		return;
+	}
+	
 	[self writePosts];
 	
 	// Process the Feed.xml file.
 	NSURL *feedTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Feed.mustache"];
-	GRMustacheTemplate *feedTemplate = [GRMustacheTemplate templateFromContentsOfURL:feedTemplateURL error:error];
-	NSString *feedContents = [feedTemplate renderObject:self error:error];
+	GRMustacheTemplate *feedTemplate = [GRMustacheTemplate templateFromContentsOfURL:feedTemplateURL error:nil];
+	NSString *feedContents = [feedTemplate renderObject:self error:nil];
 	[feedContents writeToURL:[self.destination URLByAppendingPathComponent:@"feed.xml"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 	
 	// Recurse through the entire "Source" directory for pages and files.
 	BOOL sourceDirectoryIsDirectory = NO;
 	BOOL sourceDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.sourceDirectory.path isDirectory:&sourceDirectoryIsDirectory];
 	if (!sourceDirectoryIsDirectory || !sourceDirectoryExists){
-        if (error) {
-            *error = [self badDirectoryError];
-        }
-        return NO;
-    }
-    
+		handler([self badDirectoryError]);
+		return;
+	}
+	
 	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.sourceDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *enumeratorError) {
-        return YES;
+		return YES;
 	}];
 	for (NSURL *URL in enumerator) {
 		
@@ -87,13 +91,15 @@
 			[[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
 		
 		if ([extension isEqualToString:@"mustache"]) {
-			TBPage *page = [TBPage pageWithURL:URL inSite:self error:error];
-            if (!page) {
-                return NO;
-            }
+			NSError *pageError;
+			TBPage *page = [TBPage pageWithURL:URL inSite:self error:&pageError];
+			if (!page) {
+				handler(pageError);
+				return;
+			}
 			NSString *rawPageTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
-			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:error];
-			NSString *renderedPage = [pageTemplate renderObject:page error:error];
+			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:nil];
+			NSString *renderedPage = [pageTemplate renderObject:page error:nil];
 			destinationURL = [[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"];
 			[renderedPage writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
 			[self runFiltersOnFile:destinationURL];
@@ -101,6 +107,21 @@
 		else {
 			[[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:nil];
 		}
+	}
+	handler(nil);
+}
+
+- (BOOL)processSynchronously:(NSError **)error {
+	__block BOOL finished = NO;
+	__block NSError *blockError;
+	[self processWithCompletionHandler:^(NSError *asyncError) {
+		finished = YES;
+		blockError = asyncError;
+	}];
+	while (!finished) { /* Wait for completion... */ }
+	if (error) {
+		*error = blockError;
+		return NO;
 	}
 	return YES;
 }
@@ -172,7 +193,11 @@
 	for (NSString *filterPath in filterPaths) {
 		NSURL *filterURL = [scriptsURL URLByAppendingPathComponent:filterPath];
 		NSUserUnixTask *filter = [[NSUserUnixTask alloc] initWithURL:filterURL error:nil];
-		[filter executeWithArguments:arguments completionHandler:nil];
+		__block BOOL finished = NO;
+		[filter executeWithArguments:arguments completionHandler:^(NSError *error) {
+			finished = YES;
+		}];
+		while (!finished) { /* Wait for completion */ }
 	}
 	
 }

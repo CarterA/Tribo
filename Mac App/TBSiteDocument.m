@@ -40,35 +40,44 @@
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [[NSProcessInfo processInfo] disableSuddenTermination];
-		NSError *error = nil;
-		[self.site process:&error];
-		[[NSProcessInfo processInfo] enableSuddenTermination];
-        
-		if (!self.sourceWatcher) {
-			self.sourceWatcher = [UKFSEventsWatcher new];
-			self.sourceWatcher.delegate = self;
-			self.sourceWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
-		}
-		[self.sourceWatcher addPath:self.site.sourceDirectory.path];
-		[self.sourceWatcher addPath:self.site.postsDirectory.path];
-		[self.sourceWatcher addPath:self.site.templatesDirectory.path];
-		if (!self.server) {
-			self.server = [TBHTTPServer new];
-			self.server.connectionClass = [TBSocketConnection class];
-			self.server.documentRoot = self.site.destination.path;
-		}
-		[self.server start:nil];
-		[self.server refreshPages];
-		NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]];
-		[[NSWorkspace sharedWorkspace] openURL:localURL];
+		__weak TBSiteDocument *weakSelf = self;
+		[self.site processWithCompletionHandler:^(NSError *error) {
+			
+			if (error) {
+				callback(nil, error);
+				return;
+			}
+			
+			TBSiteDocument *strongSelf = weakSelf;
+			[[NSProcessInfo processInfo] enableSuddenTermination];
+			
+			if (!strongSelf.sourceWatcher) {
+				strongSelf.sourceWatcher = [UKFSEventsWatcher new];
+				strongSelf.sourceWatcher.delegate = strongSelf;
+				strongSelf.sourceWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
+			}
+			[strongSelf.sourceWatcher addPath:strongSelf.site.sourceDirectory.path];
+			[strongSelf.sourceWatcher addPath:strongSelf.site.postsDirectory.path];
+			[strongSelf.sourceWatcher addPath:strongSelf.site.templatesDirectory.path];
+			if (!strongSelf.server) {
+				strongSelf.server = [TBHTTPServer new];
+				strongSelf.server.connectionClass = [TBSocketConnection class];
+				strongSelf.server.documentRoot = self.site.destination.path;
+			}
+			[strongSelf.server start:nil];
+			[strongSelf.server refreshPages];
+			NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", strongSelf.server.listeningPort]];
+			[[NSWorkspace sharedWorkspace] openURL:localURL];
+			
+			if (!callback){
+				return;
+			}
+			
+			dispatch_async(dispatch_get_main_queue(), ^{
+				callback(localURL, error);
+			});
+		}];
 		
-		if (!callback){
-            return;
-        }
-		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			callback(localURL, error);
-		});
 		
 	});
 	
@@ -125,20 +134,22 @@
 
 - (void)reloadSite {
 	[[NSProcessInfo processInfo] disableSuddenTermination];
-    NSError *error = nil;
-    BOOL success = YES;
 	if (self.server.isRunning) {
-        success = [self.site process:&error];
-        if (success) {
-            [self.server refreshPages];
-        }
+		__weak TBSiteDocument *weakSelf = self;
+		[self.site processWithCompletionHandler:^(NSError *processingError) {
+			TBSiteDocument *strongSelf = weakSelf;
+			if (processingError) {
+				[strongSelf presentError:processingError];
+				return;
+			}
+			[strongSelf.server refreshPages];
+		}];
 	}
 	else {
-		success = [self.site parsePosts:&error];
+		NSError *parsingError;
+		if ([self.site parsePosts:&parsingError])
+			[self presentError:parsingError];
 	}
-    if (!success) {
-        [self presentError:error];
-    }
     [[NSProcessInfo processInfo] enableSuddenTermination];
 }
 

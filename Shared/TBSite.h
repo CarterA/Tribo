@@ -10,6 +10,7 @@
 #import "TBConstants.h"
 
 @class TBAsset;
+typedef void (^TBSiteCompletionHandler)(NSError *error);
 
 @protocol TBSiteDelegate;
 
@@ -27,13 +28,11 @@
 
 /*!
 	Process the entire site, writing the output into the destination directory.
-	@param error
-		If the return value is NO, then this argument will contain an NSError object
-		describing what went wrong.
- 	@return 
-		YES on successful processing, NO if an error was encountered.
+	@param handler
+		Called on completion, passing any encountered error to the handler, or nil
+		if no errors occurred during processing.
  */
-- (BOOL)process:(NSError **)error;
+- (void)processWithCompletionHandler:(TBSiteCompletionHandler)handler;
 
 /*!
 	Parse all post files into TBPost objects.
@@ -119,6 +118,8 @@
 @property (nonatomic, strong) NSSet *sourceAssets;
 @property (nonatomic, strong) NSDictionary *metadata;
 @property (nonatomic, weak) id <TBSiteDelegate> delegate;
+
+- (BOOL)processSynchronously:(NSError **)error;
 
 @end
 
