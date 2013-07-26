@@ -38,7 +38,7 @@
 }
 
 - (void)processWithCompletionHandler:(TBSiteCompletionHandler)handler {
-	// Find and compile the post template.
+	
 	NSError *error;
 	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
 	NSString *rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:nil];
@@ -48,7 +48,6 @@
 		return;
     }
 	
-	// Take care of posts early so that pages can use them.
 	if (![self parsePosts:&error]) {
 		handler(error);
 		return;
