@@ -62,11 +62,8 @@
 		return;
 	}
 	
-	// Recurse through the entire "Source" directory for pages and files.
-	BOOL sourceDirectoryIsDirectory = NO;
-	BOOL sourceDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.sourceDirectory.path isDirectory:&sourceDirectoryIsDirectory];
-	if (!sourceDirectoryIsDirectory || !sourceDirectoryExists){
-		handler([self badDirectoryError]);
+	if (![self verifySourceDirectory:&error]) {
+		handler(error);
 		return;
 	}
 	
@@ -231,6 +228,17 @@
 		while (!finished) { /* Wait for completion */ }
 	}
 	
+}
+
+- (BOOL)verifySourceDirectory:(NSError **)error {
+	BOOL sourceDirectoryIsDirectory = NO;
+	BOOL sourceDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.sourceDirectory.path isDirectory:&sourceDirectoryIsDirectory];
+	if (!sourceDirectoryIsDirectory || !sourceDirectoryExists){
+		if (error)
+			*error = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadSourceDirectory userInfo:nil];
+		return NO;
+	}
+	return YES;
 }
 
 - (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error{
