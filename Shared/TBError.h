@@ -16,5 +16,6 @@
 #define TBErrorBadContent 42
 #define TBErrorMissingPostPartial 43
 #define TBErrorBadSourceDirectory 44
+#define TBErrorFilterStandardError 45
 
 #endif

@@ -68,42 +68,13 @@
 		return;
 	}
 	
-	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.sourceDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *enumeratorError) {
-		return YES;
-	}];
-	for (NSURL *URL in enumerator) {
-		
-		BOOL URLIsDirectory = NO;
-		[[NSFileManager defaultManager] fileExistsAtPath:URL.path isDirectory:&URLIsDirectory];
-		if (URLIsDirectory) continue;
-		
-		NSString *extension = [URL pathExtension];
-		NSString *relativePath = [URL.path stringByReplacingOccurrencesOfString:self.sourceDirectory.path withString:@""];
-		NSURL *destinationURL = [[self.destination URLByAppendingPathComponent:relativePath] URLByStandardizingPath];
-		NSURL *destinationDirectory = [destinationURL URLByDeletingLastPathComponent];
-		[[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:nil];
-		if ([[NSFileManager defaultManager] fileExistsAtPath:destinationURL.path])
-			[[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
-		
-		if ([extension isEqualToString:@"mustache"]) {
-			NSError *pageError;
-			TBPage *page = [TBPage pageWithURL:URL inSite:self error:&pageError];
-			if (!page) {
-				handler(pageError);
-				return;
-			}
-			NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
-			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:nil];
-			NSString *renderedPage = [pageTemplate renderObject:page error:nil];
-			destinationURL = [[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"];
-			[renderedPage writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
-			[self runFiltersOnFile:destinationURL];
-		}
-		else {
-			[[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:nil];
-		}
+	if (![self processSourceDirectory:&error]) {
+		handler(error);
+		return;
 	}
+	
 	handler(nil);
+	
 }
 
 - (BOOL)processSynchronously:(NSError **)error {
@@ -190,7 +161,8 @@
 		if (![renderedContent writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:error])
 			return NO;
 		
-		[self runFiltersOnFile:destinationURL];
+		if (![self runFiltersOnFile:destinationURL error:error])
+			return NO;
 		
 	}
 	
@@ -211,26 +183,6 @@
 	return YES;
 }
 
-- (void)runFiltersOnFile:(NSURL *)file {
-	
-	NSArray *filterPaths = self.metadata[TBSiteFilters];
-	if (!filterPaths || ![filterPaths count]) return;
-	
-	NSURL *scriptsURL = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationScriptsDirectory inDomains:NSUserDomainMask][0];
-	NSArray *arguments = @[file.path];
-	
-	for (NSString *filterPath in filterPaths) {
-		NSURL *filterURL = [scriptsURL URLByAppendingPathComponent:filterPath];
-		NSUserUnixTask *filter = [[NSUserUnixTask alloc] initWithURL:filterURL error:nil];
-		__block BOOL finished = NO;
-		[filter executeWithArguments:arguments completionHandler:^(NSError *error) {
-			finished = YES;
-		}];
-		while (!finished) { /* Wait for completion */ }
-	}
-	
-}
-
 - (BOOL)verifySourceDirectory:(NSError **)error {
 	BOOL sourceDirectoryIsDirectory = NO;
 	BOOL sourceDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.sourceDirectory.path isDirectory:&sourceDirectoryIsDirectory];
@@ -240,6 +192,99 @@
 		return NO;
 	}
 	return YES;
+}
+
+- (BOOL)processSourceDirectory:(NSError **)error {
+	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.sourceDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *enumeratorError) {
+		return YES;
+	}];
+	for (NSURL *URL in enumerator) {
+		
+		BOOL URLIsDirectory = NO;
+		[[NSFileManager defaultManager] fileExistsAtPath:URL.path isDirectory:&URLIsDirectory];
+		if (URLIsDirectory) continue;
+		
+		if (![self processSourceFile:URL error:error])
+			return NO;
+		
+	}
+	return YES;
+}
+
+- (BOOL)processSourceFile:(NSURL *)URL error:(NSError **)error {
+	NSString *extension = [URL pathExtension];
+	NSString *relativePath = [URL.path stringByReplacingOccurrencesOfString:self.sourceDirectory.path withString:@""];
+	NSURL *destinationURL = [[self.destination URLByAppendingPathComponent:relativePath] URLByStandardizingPath];
+	NSURL *destinationDirectory = [destinationURL URLByDeletingLastPathComponent];
+	if (![[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:error])
+		return NO;
+	if ([[NSFileManager defaultManager] fileExistsAtPath:destinationURL.path])
+		if (![[NSFileManager defaultManager] removeItemAtURL:destinationURL error:error])
+			return NO;
+	
+	if ([extension isEqualToString:@"mustache"]) {
+		TBPage *page = [TBPage pageWithURL:URL inSite:self error:error];
+		if (!page) return NO;
+		NSURL *pageDestination = [[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"];
+		if (![self writePage:page toDestination:pageDestination error:error])
+			return NO;
+	}
+	else {
+		if (![[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:error])
+			return NO;
+	}
+	return YES;
+}
+
+- (BOOL)writePage:(TBPage *)page toDestination:(NSURL *)destination error:(NSError **)error {
+	if (!page) return NO;
+	NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
+	GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:error];
+	if (!pageTemplate) return NO;
+	NSString *renderedPage = [pageTemplate renderObject:page error:error];
+	if (!renderedPage) return NO;
+	if (![renderedPage writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error])
+		return NO;
+	if (![self runFiltersOnFile:destination error:error])
+		return NO;
+	return YES;
+}
+
+- (BOOL)runFiltersOnFile:(NSURL *)file error:(NSError **)error {
+	
+	NSArray *filterPaths = self.metadata[TBSiteFilters];
+	if (!filterPaths || ![filterPaths count]) return YES;
+	
+	NSURL *scriptsURL = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationScriptsDirectory inDomains:NSUserDomainMask][0];
+	NSArray *arguments = @[file.path];
+	
+	for (NSString *filterPath in filterPaths) {
+		NSURL *filterURL = [scriptsURL URLByAppendingPathComponent:filterPath];
+		NSUserUnixTask *filter = [[NSUserUnixTask alloc] initWithURL:filterURL error:nil];
+		NSPipe *standardError = [NSPipe pipe];
+		filter.standardError = standardError.fileHandleForWriting;
+		__block BOOL finished = NO;
+		__block NSError *blockError;
+		[filter executeWithArguments:arguments completionHandler:^(NSError *filterError) {
+			blockError = filterError;
+			finished = YES;
+		}];
+		while (!finished) { /* Wait for completion */ }
+		if (blockError) {
+			if (error) *error = blockError;
+			return NO;
+		}
+		NSString *standardErrorContents = [NSString stringWithUTF8String:[standardError.fileHandleForReading readDataToEndOfFile].bytes];
+		if (standardErrorContents.length > 0) {
+			NSError *filterError = [NSError errorWithDomain:TBErrorDomain code:TBErrorFilterStandardError userInfo:
+									@{NSLocalizedDescriptionKey: standardErrorContents}];
+			if (error) *error = filterError;
+			return NO;
+		}
+	}
+	
+	return YES;
+	
 }
 
 - (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error{
