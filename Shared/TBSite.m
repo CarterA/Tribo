@@ -42,11 +42,8 @@
 	NSError *error;
 	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
 	NSString *rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:nil];
-	NSURL *postPartialURL = [self.templatesDirectory URLByAppendingPathComponent:@"Post.mustache" isDirectory:NO];
-	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:nil];
-	NSString *rawPostTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
-	self.postTemplate = [GRMustacheTemplate templateFromString:rawPostTemplate error:&error];
-    if (!self.postTemplate) {
+	
+    if (![self loadPostTemplateWithRawDefaultTemplate:rawDefaultTemplate error:&error]) {
 		handler(error);
 		return;
     }
@@ -125,6 +122,21 @@
 	return YES;
 }
 
+- (BOOL)loadPostTemplateWithRawDefaultTemplate:(NSString *)rawDefaultTemplate error:(NSError **)error {
+	NSURL *postPartialURL = [self.templatesDirectory URLByAppendingPathComponent:@"Post.mustache" isDirectory:NO];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:postPartialURL.path]) {
+		if (error)
+			*error = [NSError errorWithDomain:TBErrorDomain code:TBErrorMissingPostPartial userInfo:nil];
+		return NO;
+	}
+	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:error];
+	if (!rawPostPartial) return NO;
+	NSString *rawPostTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
+	self.postTemplate = [GRMustacheTemplate templateFromString:rawPostTemplate error:error];
+	if (!self.postTemplate) return NO;
+	return YES;
+}
+
 - (BOOL)parsePosts:(NSError **)error {
 	
 	// Verify that the Posts directory exists and is a directory.
@@ -155,6 +167,7 @@
     return YES;
 	
 }
+
 - (void)writePosts {
 	
 	for (TBPost *post in self.posts) {
