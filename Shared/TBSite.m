@@ -59,11 +59,10 @@
 	
 	[self writePosts];
 	
-	// Process the Feed.xml file.
-	NSURL *feedTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Feed.mustache"];
-	GRMustacheTemplate *feedTemplate = [GRMustacheTemplate templateFromContentsOfURL:feedTemplateURL error:nil];
-	NSString *feedContents = [feedTemplate renderObject:self error:nil];
-	[feedContents writeToURL:[self.destination URLByAppendingPathComponent:@"feed.xml"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+	if (![self writeFeed:&error]) {
+		handler(error);
+		return;
+	}
 	
 	// Recurse through the entire "Source" directory for pages and files.
 	BOOL sourceDirectoryIsDirectory = NO;
@@ -180,6 +179,19 @@
 		
 	}
 	
+}
+
+- (BOOL)writeFeed:(NSError **)error {
+	NSURL *templateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Feed.mustache"];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:templateURL.path]) return YES;
+	GRMustacheTemplate *template = [GRMustacheTemplate templateFromContentsOfURL:templateURL error:error];
+	if (!template) return NO;
+	NSString *contents = [template renderObject:self error:error];
+	if (!contents) return NO;
+	NSURL *destination = [self.destination URLByAppendingPathComponent:@"feed.xml"];
+	if (![contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error])
+		return NO;
+	return YES;
 }
 
 - (void)runFiltersOnFile:(NSURL *)file {
