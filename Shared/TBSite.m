@@ -16,6 +16,7 @@
 
 @interface TBSite ()
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
+@property (nonatomic, strong) NSString *rawDefaultTemplate;
 - (NSError *)badDirectoryError;
 @end
 
@@ -40,9 +41,9 @@
 	
 	NSError *error;
 	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
-	NSString *rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:nil];
+	self.rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:nil];
 	
-    if (![self loadPostTemplateWithRawDefaultTemplate:rawDefaultTemplate error:&error]) {
+    if (![self loadPostTemplate:&error]) {
 		handler(error);
 		return;
     }
@@ -91,7 +92,7 @@
 				handler(pageError);
 				return;
 			}
-			NSString *rawPageTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
+			NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
 			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:nil];
 			NSString *renderedPage = [pageTemplate renderObject:page error:nil];
 			destinationURL = [[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"];
@@ -120,7 +121,7 @@
 	return YES;
 }
 
-- (BOOL)loadPostTemplateWithRawDefaultTemplate:(NSString *)rawDefaultTemplate error:(NSError **)error {
+- (BOOL)loadPostTemplate:(NSError **)error {
 	NSURL *postPartialURL = [self.templatesDirectory URLByAppendingPathComponent:@"Post.mustache" isDirectory:NO];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:postPartialURL.path]) {
 		if (error)
@@ -129,7 +130,7 @@
 	}
 	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:error];
 	if (!rawPostPartial) return NO;
-	NSString *rawPostTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
+	NSString *rawPostTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
 	self.postTemplate = [GRMustacheTemplate templateFromString:rawPostTemplate error:error];
 	if (!self.postTemplate) return NO;
 	return YES;
