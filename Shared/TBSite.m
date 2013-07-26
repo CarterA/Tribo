@@ -16,7 +16,6 @@
 
 @interface TBSite ()
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
-- (void)writePosts;
 - (NSError *)badDirectoryError;
 @end
 
@@ -53,7 +52,10 @@
 		return;
 	}
 	
-	[self writePosts];
+	if (![self writePosts:&error]) {
+		handler(error);
+		return;
+	}
 	
 	if (![self writeFeed:&error]) {
 		handler(error);
@@ -167,7 +169,7 @@
 	
 }
 
-- (void)writePosts {
+- (BOOL)writePosts:(NSError **)error {
 	
 	for (TBPost *post in self.posts) {
 		
@@ -178,18 +180,23 @@
 		NSDateFormatter *postPathFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy/MM/dd"];
 		NSString *directoryStructure = [postPathFormatter stringFromDate:post.date];
 		NSURL *destinationDirectory = [[self.destination URLByAppendingPathComponent:directoryStructure isDirectory:YES] URLByAppendingPathComponent:post.slug isDirectory:YES];
-		[[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+		if (![[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:error])
+			return NO;
 		
 		// Set up the template loader with this post's content, and then render it all into the post template.
-		NSString *renderedContent = [self.postTemplate renderObject:post error:nil];
+		NSString *renderedContent = [self.postTemplate renderObject:post error:error];
+		if (!renderedContent) return NO;
 		
 		// Write the post to the destination directory.
 		NSURL *destinationURL = [destinationDirectory URLByAppendingPathComponent:@"index.html" isDirectory:NO];
-		[renderedContent writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
+		if (![renderedContent writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:error])
+			return NO;
 		
 		[self runFiltersOnFile:destinationURL];
 		
 	}
+	
+	return YES;
 	
 }
 
