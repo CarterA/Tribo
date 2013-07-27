@@ -66,7 +66,7 @@ NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityB
 
 - (void)publish {
 	
-	[self.site processSynchronously:nil];
+	[self.site process:nil];
 	
 	NSTask *rsync = [[NSTask alloc] init];
 	NSURL *bundledRsyncURL = [[NSBundle mainBundle] URLForResource:@"rsync" withExtension:@""];

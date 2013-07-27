@@ -28,11 +28,13 @@ typedef void (^TBSiteCompletionHandler)(NSError *error);
 
 /*!
 	Process the entire site, writing the output into the destination directory.
-	@param handler
-		Called on completion, passing any encountered error to the handler, or nil
-		if no errors occurred during processing.
+	@param error
+		If the return value is NO, then this argument will contain an NSError object
+		describing what went wrong.
+	@return
+		YES on successful processing, NO if an error was encountered.
  */
-- (void)processWithCompletionHandler:(TBSiteCompletionHandler)handler;
+- (BOOL)process:(NSError **)error;
 
 /*!
 	Parse all post files into TBPost objects.
@@ -118,8 +120,6 @@ typedef void (^TBSiteCompletionHandler)(NSError *error);
 @property (nonatomic, strong) NSSet *sourceAssets;
 @property (nonatomic, strong) NSDictionary *metadata;
 @property (nonatomic, weak) id <TBSiteDelegate> delegate;
-
-- (BOOL)processSynchronously:(NSError **)error;
 
 @end
 

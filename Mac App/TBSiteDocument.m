@@ -38,45 +38,43 @@
 
 - (void)startPreview:(TBSiteDocumentPreviewCallback)callback {
 	
+	__weak TBSiteDocument *weakSelf = self;
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [[NSProcessInfo processInfo] disableSuddenTermination];
-		__weak TBSiteDocument *weakSelf = self;
-		[self.site processWithCompletionHandler:^(NSError *error) {
-			
-			if (error) {
-				callback(nil, error);
-				return;
-			}
-			
-			TBSiteDocument *strongSelf = weakSelf;
-			[[NSProcessInfo processInfo] enableSuddenTermination];
-			
-			if (!strongSelf.sourceWatcher) {
-				strongSelf.sourceWatcher = [UKFSEventsWatcher new];
-				strongSelf.sourceWatcher.delegate = strongSelf;
-				strongSelf.sourceWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
-			}
-			[strongSelf.sourceWatcher addPath:strongSelf.site.sourceDirectory.path];
-			[strongSelf.sourceWatcher addPath:strongSelf.site.postsDirectory.path];
-			[strongSelf.sourceWatcher addPath:strongSelf.site.templatesDirectory.path];
-			if (!strongSelf.server) {
-				strongSelf.server = [TBHTTPServer new];
-				strongSelf.server.connectionClass = [TBSocketConnection class];
-				strongSelf.server.documentRoot = self.site.destination.path;
-			}
-			[strongSelf.server start:nil];
-			[strongSelf.server refreshPages];
-			NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", strongSelf.server.listeningPort]];
-			[[NSWorkspace sharedWorkspace] openURL:localURL];
-			
-			if (!callback){
-				return;
-			}
-			
-			dispatch_async(dispatch_get_main_queue(), ^{
-				callback(localURL, error);
-			});
-		}];
+		TBSiteDocument *strongSelf = weakSelf;
+		NSError *error;
+		
+		[[NSProcessInfo processInfo] disableSuddenTermination];
+		if (![strongSelf.site process:&error]) {
+			callback(nil, error);
+			return;
+		}
+		[[NSProcessInfo processInfo] enableSuddenTermination];
+		
+		if (!strongSelf.sourceWatcher) {
+			strongSelf.sourceWatcher = [UKFSEventsWatcher new];
+			strongSelf.sourceWatcher.delegate = strongSelf;
+			strongSelf.sourceWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
+		}
+		[strongSelf.sourceWatcher addPath:strongSelf.site.sourceDirectory.path];
+		[strongSelf.sourceWatcher addPath:strongSelf.site.postsDirectory.path];
+		[strongSelf.sourceWatcher addPath:strongSelf.site.templatesDirectory.path];
+		if (!strongSelf.server) {
+			strongSelf.server = [TBHTTPServer new];
+			strongSelf.server.connectionClass = [TBSocketConnection class];
+			strongSelf.server.documentRoot = self.site.destination.path;
+		}
+		[strongSelf.server start:nil];
+		[strongSelf.server refreshPages];
+		NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", strongSelf.server.listeningPort]];
+		[[NSWorkspace sharedWorkspace] openURL:localURL];
+		
+		if (!callback){
+			return;
+		}
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			callback(localURL, error);
+		});
 		
 		
 	});
@@ -136,14 +134,20 @@
 	[[NSProcessInfo processInfo] disableSuddenTermination];
 	if (self.server.isRunning) {
 		__weak TBSiteDocument *weakSelf = self;
-		[self.site processWithCompletionHandler:^(NSError *processingError) {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 			TBSiteDocument *strongSelf = weakSelf;
-			if (processingError) {
-				[strongSelf presentError:processingError];
+			NSError *error;
+			
+			if (![strongSelf.site process:&error]) {
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[strongSelf presentError:error];
+				});
 				return;
 			}
+			
 			[strongSelf.server refreshPages];
-		}];
+			
+		});
 	}
 	else {
 		NSError *parsingError;

@@ -36,62 +36,31 @@
 	return site;
 }
 
-- (void)processWithCompletionHandler:(TBSiteCompletionHandler)handler {
-	
-	NSError *error;
-	
-	if (![self loadRawDefaultTemplate:&error]) {
-		handler(error);
-		return;
-	}
-	
-    if (![self loadPostTemplate:&error]) {
-		handler(error);
-		return;
-    }
-	
-	if (![self parsePosts:&error]) {
-		handler(error);
-		return;
-	}
-	
-	if (![self writePosts:&error]) {
-		handler(error);
-		return;
-	}
-	
-	if (![self writeFeed:&error]) {
-		handler(error);
-		return;
-	}
-	
-	if (![self verifySourceDirectory:&error]) {
-		handler(error);
-		return;
-	}
-	
-	if (![self processSourceDirectory:&error]) {
-		handler(error);
-		return;
-	}
-	
-	handler(nil);
-	
-}
-
-- (BOOL)processSynchronously:(NSError **)error {
-	__block BOOL finished = NO;
-	__block NSError *blockError;
-	[self processWithCompletionHandler:^(NSError *asyncError) {
-		finished = YES;
-		blockError = asyncError;
-	}];
-	while (!finished) { /* Wait for completion... */ }
-	if (error) {
-		*error = blockError;
+- (BOOL)process:(NSError **)error {
+		
+	if (![self loadRawDefaultTemplate:error])
 		return NO;
-	}
+	
+    if (![self loadPostTemplate:error])
+		return NO;
+	
+	if (![self parsePosts:error])
+		return NO;
+	
+	if (![self writePosts:error])
+		return NO;
+	
+	if (![self writeFeed:error])
+		return NO;
+	
+	if (![self verifySourceDirectory:error])
+		return NO;
+	
+	if (![self processSourceDirectory:error])
+		return NO;
+	
 	return YES;
+	
 }
 
 - (BOOL)loadRawDefaultTemplate:(NSError **)error {
