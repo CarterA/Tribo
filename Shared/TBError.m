@@ -10,7 +10,7 @@
 #import "TBError.h"
 
 NSString * const TBErrorDomain = @"com.opt-6.Tribo.ErrorDomain";
-NSString * const TBErrorStringsTable = @"TBError.strings";
+NSString * const TBErrorStringsTable = @"TBError";
 
 enum {
 	TBErrorMissingPostsDirectory = 42,
