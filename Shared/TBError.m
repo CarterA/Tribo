@@ -13,12 +13,12 @@ NSString * const TBErrorDomain = @"com.opt-6.Tribo.ErrorDomain";
 NSString * const TBErrorStringsTable = @"TBError.strings";
 
 enum {
-	TBErrorMissingPostsDirectory	= 42,
-	TBErrorMissingPostPartial		= 43,
-	TBErrorMissingSourceDirectory	= 44,
-	TBErrorFilterStandardError		= 45,
-	TBErrorEmptyPostFile			= 46,
-	TBErrorEmptyPageFile			= 47
+	TBErrorMissingPostsDirectory = 42,
+	TBErrorMissingPostPartial,
+	TBErrorMissingSourceDirectory,
+	TBErrorFilterStandardError,
+	TBErrorEmptyPostFile,
+	TBErrorEmptyPageFile
 };
 
 static NSError *missingPostsDirectory(NSURL *postsDirectory) {
