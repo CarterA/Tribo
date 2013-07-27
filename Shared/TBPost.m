@@ -21,38 +21,22 @@
 }
 
 - (BOOL)parse:(NSError **)error {
-	NSMutableString *markdownContent = [NSMutableString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
-    if (![markdownContent length]) {
-        if (error) *error = TBError.emptyPostFile(self.URL);
-        return NO;
-    }
 	
-	// Titles are optional.
-	// A single # header on the first line of the document is regarded as the title.
-	static NSRegularExpression *headerRegex;
-	if (headerRegex == nil)
-		headerRegex = [NSRegularExpression regularExpressionWithPattern:@"#[ \\t](.*)[ \\t]#" options:0 error:nil];
-	NSRange firstLineRange = NSMakeRange(0, [markdownContent rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location);
-	NSString *firstLine = [markdownContent substringWithRange:firstLineRange];
-	NSTextCheckingResult *titleResult = [headerRegex firstMatchInString:firstLine options:0 range:NSMakeRange(0, firstLine.length)];
-	if (titleResult) {
-		self.title = [firstLine substringWithRange:[titleResult rangeAtIndex:1]];
-		[markdownContent deleteCharactersInRange:NSMakeRange(firstLineRange.location, firstLineRange.length + 1)];
-	}
-	[markdownContent deleteCharactersInRange:[markdownContent rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]]];
-	self.markdownContent = markdownContent;
+	if (![self loadMarkdownContent:error])
+		return NO;
 	
-	if (![self parseDateAndSlug:error]) return NO;
+	if (![self parseDateAndSlug:error])
+		return NO;
+	
+	[self parseTitle];
 	
 	// Create and fill a buffer for with the raw markdown data.
-	if ([markdownContent length] == 0) return YES;
+	if ([self.markdownContent length] == 0) return YES;
 	struct sd_callbacks callbacks;
 	struct html_renderopt options;
-	const char *rawMarkdown = [markdownContent cStringUsingEncoding:NSUTF8StringEncoding];
+	const char *rawMarkdown = [self.markdownContent cStringUsingEncoding:NSUTF8StringEncoding];
 	struct buf *smartyPantsOutputBuffer = bufnew(1);
 	sdhtml_smartypants(smartyPantsOutputBuffer, (const unsigned char *)rawMarkdown, strlen(rawMarkdown));
-	//struct buf *inputBuffer = bufnew(strlen(rawMarkdown));
-	//bufputs(inputBuffer, rawMarkdown);
 	
 	// Parse the markdown into a new buffer using Sundown.
 	struct buf *outputBuffer = bufnew(64);
@@ -67,6 +51,33 @@
 	bufrelease(outputBuffer);
 		
     return YES;
+}
+
+- (BOOL)loadMarkdownContent:(NSError **)error {
+	NSString *markdownContent = [NSString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:error];
+	if (!markdownContent) return NO;
+    if (![markdownContent length]) {
+        if (error) *error = TBError.emptyPostFile(self.URL);
+        return NO;
+    }
+	return YES;
+}
+
+- (void)parseTitle {
+	// Titles are optional. A single # header on the first line of the document is regarded as the title.
+	NSMutableString *markdownContent = [self.markdownContent mutableCopy];
+	static NSRegularExpression *headerRegex;
+	if (headerRegex == nil)
+		headerRegex = [NSRegularExpression regularExpressionWithPattern:@"#[ \\t](.*)[ \\t]#" options:0 error:nil];
+	NSRange firstLineRange = NSMakeRange(0, [markdownContent rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location);
+	NSString *firstLine = [markdownContent substringWithRange:firstLineRange];
+	NSTextCheckingResult *titleResult = [headerRegex firstMatchInString:firstLine options:0 range:NSMakeRange(0, firstLine.length)];
+	if (titleResult) {
+		self.title = [firstLine substringWithRange:[titleResult rangeAtIndex:1]];
+		[markdownContent deleteCharactersInRange:NSMakeRange(firstLineRange.location, firstLineRange.length + 1)];
+	}
+	[markdownContent deleteCharactersInRange:[markdownContent rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]]];
+	self.markdownContent = markdownContent;
 }
 
 - (BOOL)parseDateAndSlug:(NSError **)error {
