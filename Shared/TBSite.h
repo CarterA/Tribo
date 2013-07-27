@@ -9,7 +9,6 @@
 
 #import "TBConstants.h"
 
-@class TBAsset;
 typedef void (^TBSiteCompletionHandler)(NSError *error);
 
 @protocol TBSiteDelegate;
