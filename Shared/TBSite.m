@@ -196,9 +196,7 @@
 	NSURL *destinationDirectory = [destinationURL URLByDeletingLastPathComponent];
 	if (![[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:error])
 		return NO;
-	if ([[NSFileManager defaultManager] fileExistsAtPath:destinationURL.path])
-		if (![[NSFileManager defaultManager] removeItemAtURL:destinationURL error:error])
-			return NO;
+	[[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
 	
 	if ([extension isEqualToString:@"mustache"]) {
 		TBPage *page = [TBPage pageWithURL:URL inSite:self error:error];
