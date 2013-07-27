@@ -39,8 +39,11 @@
 - (void)processWithCompletionHandler:(TBSiteCompletionHandler)handler {
 	
 	NSError *error;
-	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
-	self.rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:nil];
+	
+	if (![self loadRawDefaultTemplate:&error]) {
+		handler(error);
+		return;
+	}
 	
     if (![self loadPostTemplate:&error]) {
 		handler(error);
@@ -88,6 +91,13 @@
 		*error = blockError;
 		return NO;
 	}
+	return YES;
+}
+
+- (BOOL)loadRawDefaultTemplate:(NSError **)error {
+	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
+	self.rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:error];
+	if (!self.rawDefaultTemplate) return NO;
 	return YES;
 }
 
