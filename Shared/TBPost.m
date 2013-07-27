@@ -9,9 +9,9 @@
 
 #import "TBSite.h"
 #import "TBPost.h"
+#import "TBError.h"
 #import "markdown.h"
 #import "html.h"
-#import "TBError.h"
 #import "NSDateFormatter+TBAdditions.h"
 
 @implementation TBPost
