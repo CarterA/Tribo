@@ -42,7 +42,7 @@
 	[markdownContent deleteCharactersInRange:[markdownContent rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]]];
 	self.markdownContent = markdownContent;
 	
-	if (![self parseDate:error]) return NO;
+	if (![self parseDateAndSlug:error]) return NO;
 	
 	// Create and fill a buffer for with the raw markdown data.
 	if ([markdownContent length] == 0) return YES;
@@ -69,8 +69,8 @@
     return YES;
 }
 
-- (BOOL)parseDate:(NSError **)error {
-	// Dates are parsed from a pattern in the post file name.
+- (BOOL)parseDateAndSlug:(NSError **)error {
+	// Dates and slugs are parsed from a pattern in the post file name.
 	static NSRegularExpression *fileNameRegex;
 	if (fileNameRegex == nil)
 		fileNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d+-\\d+-\\d+)-(.*)" options:0 error:nil];
@@ -82,7 +82,7 @@
 		self.slug = [fileName substringWithRange:[fileNameResult rangeAtIndex:2]];
 	}
 	else {
-		if (error) *error = TBError.missingPostDate(self.URL);
+		if (error) *error = TBError.badPostFileName(self.URL);
 		return NO;
 	}
 	return YES;

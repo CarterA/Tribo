@@ -10,7 +10,7 @@
 extern const struct TBError {
 	NSError *(*missingPostsDirectory)(NSURL *postsDirectory);
 	NSError *(*missingPostPartial)(NSURL *postPartial);
-	NSError *(*missingPostDate)(NSURL *postURL);
+	NSError *(*badPostFileName)(NSURL *postURL);
 	NSError *(*missingSourceDirectory)(NSURL *sourceDirectory);
 	NSError *(*filterStandardError)(NSURL *filterURL, NSString *standardError);
 	NSError *(*emptyPostFile)(NSURL *postURL);
