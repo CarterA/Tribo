@@ -17,7 +17,6 @@
 @interface TBSite ()
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
 @property (nonatomic, strong) NSString *rawDefaultTemplate;
-- (NSError *)badDirectoryError;
 @end
 
 @implementation TBSite
@@ -114,7 +113,7 @@
 	BOOL postsDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.postsDirectory.path isDirectory:&postsDirectoryIsDirectory];
 	if (!postsDirectoryIsDirectory || !postsDirectoryExists){
         if (error) {
-            *error = [self badDirectoryError];
+            *error = [NSError errorWithDomain:TBErrorDomain code:TBErrorMissingPostDirectory userInfo:nil];
         }
         return NO;
     }
@@ -299,13 +298,6 @@
         return nil;
     }
 	return destination;
-}
-
-- (NSError *)badDirectoryError{
-    NSString *errorString = [NSString stringWithFormat:@"%@ does not exist!", [self.postsDirectory lastPathComponent]];
-    NSDictionary *info = @{NSLocalizedDescriptionKey: errorString, NSURLErrorKey: self.postsDirectory};
-    NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
-    return contentError;
 }
 
 - (void)setMetadata:(NSDictionary *)metadata {

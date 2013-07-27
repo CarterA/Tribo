@@ -13,9 +13,11 @@
 #define TBErrorDomain @"com.opt-6.Tribo.ErrorDomain"
 
 // Error codes
-#define TBErrorBadContent 42
+#define TBErrorMissingPostDirectory 42
 #define TBErrorMissingPostPartial 43
 #define TBErrorBadSourceDirectory 44
 #define TBErrorFilterStandardError 45
+#define TBErrorEmptyPostFile 46
+#define TBErrorEmptyPageFile 47
 
 #endif

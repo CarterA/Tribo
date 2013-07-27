@@ -88,7 +88,7 @@
 
 - (NSError *)badPostError{
     NSDictionary *info = @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Could not read any content from the post at %@", [[self URL] lastPathComponent]], NSURLErrorKey: [self URL]};
-    NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
+    NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorEmptyPostFile userInfo:info];
     return contentError;
 }
 

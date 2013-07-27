@@ -72,6 +72,6 @@
 - (NSError *)badPageError{
     NSString *errorString = [NSString stringWithFormat:@"Could not read any content from %@", [[self URL] lastPathComponent]];
     NSDictionary *info = @{NSLocalizedDescriptionKey: errorString};
-    return [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
+    return [NSError errorWithDomain:TBErrorDomain code:TBErrorEmptyPageFile userInfo:info];
 }
 @end
