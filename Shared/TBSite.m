@@ -9,9 +9,9 @@
 
 #import "TBSite.h"
 #import "TBPost.h"
+#import "TBAsset.h"
 #import "TBError.h"
 #import "GRMustache.h"
-#import "TBAsset.h"
 #import "NSDateFormatter+TBAdditions.h"
 
 @interface TBSite ()
@@ -21,20 +21,24 @@
 
 @implementation TBSite
 
+#pragma mark - Initialization
+
 + (TBSite *)siteWithRoot:(NSURL *)root {
 	TBSite *site = [TBSite new];
 	site.root = root;
-	site.destination = [site.root URLByAppendingPathComponent:@"Output" isDirectory:YES];
-	site.sourceDirectory = [site.root URLByAppendingPathComponent:@"Source" isDirectory:YES];
-	site.postsDirectory = [site.root URLByAppendingPathComponent:@"Posts" isDirectory:YES];
-	site.templatesDirectory = [site.root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
-	NSURL *metadataURL = [site.root URLByAppendingPathComponent:@"Info.plist" isDirectory:NO];
+	site.destination = [root URLByAppendingPathComponent:@"Output" isDirectory:YES];
+	site.sourceDirectory = [root URLByAppendingPathComponent:@"Source" isDirectory:YES];
+	site.postsDirectory = [root URLByAppendingPathComponent:@"Posts" isDirectory:YES];
+	site.templatesDirectory = [root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
+	NSURL *metadataURL = [root URLByAppendingPathComponent:@"Info.plist" isDirectory:NO];
 	NSData *metadataData = [NSData dataWithContentsOfURL:metadataURL];
 	site.metadata = [NSPropertyListSerialization propertyListFromData:metadataData mutabilityOption:NSPropertyListMutableContainersAndLeaves format:nil errorDescription:nil];
 	if (!site.metadata)
 		[@{} writeToURL:metadataURL atomically:NO];
 	return site;
 }
+
+#pragma mark - Site Processing
 
 - (BOOL)process:(NSError **)error {
 		
@@ -63,6 +67,8 @@
 	
 }
 
+#pragma mark - Template Loading
+
 - (BOOL)loadRawDefaultTemplate:(NSError **)error {
 	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
 	self.rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:error];
@@ -85,6 +91,8 @@
 	return YES;
 }
 
+#pragma mark - Post Processing
+
 - (BOOL)parsePosts:(NSError **)error {
 	
 	// Verify that the Posts directory exists and is a directory.
@@ -99,7 +107,9 @@
 		
 	// Parse the contents of the Posts directory into individual TBPost objects.
 	NSMutableArray *posts = [NSMutableArray array];
-	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
+	NSArray *postsDirectoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:error];
+	if (!postsDirectoryContents) return NO;
+	for (NSURL *postURL in postsDirectoryContents) {
 		TBPost *post = [TBPost postWithURL:postURL inSite:self error:error];
 		if (!post) {
 			return NO;
@@ -148,6 +158,8 @@
 	
 }
 
+#pragma mark - Feed Processing
+
 - (BOOL)writeFeed:(NSError **)error {
 	NSURL *templateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Feed.mustache"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:templateURL.path]) return YES;
@@ -160,6 +172,8 @@
 		return NO;
 	return YES;
 }
+
+#pragma mark - Source Directory Processing
 
 - (BOOL)verifySourceDirectory:(NSError **)error {
 	BOOL sourceDirectoryIsDirectory = NO;
@@ -226,6 +240,8 @@
 	return YES;
 }
 
+#pragma mark - Filters
+
 - (BOOL)runFiltersOnFile:(NSURL *)file error:(NSError **)error {
 	
 	NSArray *filterPaths = self.metadata[TBSiteFilters];
@@ -236,7 +252,8 @@
 	
 	for (NSString *filterPath in filterPaths) {
 		NSURL *filterURL = [scriptsURL URLByAppendingPathComponent:filterPath];
-		NSUserUnixTask *filter = [[NSUserUnixTask alloc] initWithURL:filterURL error:nil];
+		NSUserUnixTask *filter = [[NSUserUnixTask alloc] initWithURL:filterURL error:error];
+		if (!filter) return NO;
 		NSPipe *standardError = [NSPipe pipe];
 		filter.standardError = standardError.fileHandleForWriting;
 		__block BOOL finished = NO;
@@ -263,17 +280,19 @@
 	
 }
 
-- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error{
+#pragma mark - Site Modification
+
+- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error {
 	NSDate *currentDate = [NSDate date];
 	NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
 	NSString *dateString = [dateFormatter stringFromDate:currentDate];
 	NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
 	NSURL *destination = [[self.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
 	NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
-	[contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
-	if (![self parsePosts:error]) {
+	if (![contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error])
+		return nil;
+	if (![self parsePosts:error])
         return nil;
-    }
 	return destination;
 }
 
