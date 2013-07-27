@@ -15,6 +15,7 @@ NSString * const TBErrorStringsTable = @"TBError";
 enum {
 	TBErrorMissingPostsDirectory = 42,
 	TBErrorMissingPostPartial,
+	TBErrorMissingPostDate,
 	TBErrorMissingSourceDirectory,
 	TBErrorFilterStandardError,
 	TBErrorEmptyPostFile,
@@ -29,6 +30,11 @@ static NSError *missingPostsDirectory(NSURL *postsDirectory) {
 static NSError *missingPostPartial(NSURL *partialURL) {
 	NSString *description = [NSString stringWithFormat:NSLocalizedStringFromTable(@"MISSING_POST_PARTIAL", TBErrorStringsTable, nil), partialURL.path];
 	return [NSError errorWithDomain:TBErrorDomain code:TBErrorMissingPostPartial userInfo:@{NSLocalizedDescriptionKey: description}];
+}
+
+static NSError *missingPostDate(NSURL *postURL) {
+	NSString *description = [NSString stringWithFormat:NSLocalizedStringFromTable(@"MISSING_POST_DATE", TBErrorStringsTable, nil), postURL.path];
+	return [NSError errorWithDomain:TBErrorDomain code:TBErrorMissingPostDate userInfo:@{NSLocalizedDescriptionKey: description}];
 }
 
 static NSError *missingSourceDirectory(NSURL *sourceDirectory) {
@@ -54,6 +60,7 @@ static NSError *emptyPageFile(NSURL *pageURL) {
 const struct TBError TBError = {
 	.missingPostsDirectory = missingPostsDirectory,
 	.missingPostPartial = missingPostPartial,
+	.missingPostDate = missingPostDate,
 	.missingSourceDirectory = missingSourceDirectory,
 	.filterStandardError = filterStandardError,
 	.emptyPostFile = emptyPostFile,
