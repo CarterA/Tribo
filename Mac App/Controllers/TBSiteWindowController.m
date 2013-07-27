@@ -111,8 +111,11 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 		self.statusViewController.title = @"Starting local preview...";
 		[document startPreview:^(NSURL *localURL, NSError *error) {
 			
-			if (error)
-				[self presentError:error];
+			if (error) {
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[self presentError:error];
+				});
+			}
 			previewMenuItem.title = @"Stop Preview";
 			
 			self.statusViewController.title = @"Local preview running";
