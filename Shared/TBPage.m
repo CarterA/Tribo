@@ -10,10 +10,6 @@
 #import "TBPage.h"
 #import "TBError.h"
 
-@interface TBPage()
-- (NSError *)badPageError;
-@end
-
 @implementation TBPage
 
 + (TBPage *)pageWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError**)error{
@@ -32,9 +28,7 @@
 - (BOOL)parse:(NSError **)error{
 	NSMutableString *content = [NSMutableString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
     if (![content length]) {
-        if (error) {
-            *error = [self badPageError];
-        }
+        if (error) *error = TBError.emptyPageFile(self.URL);
         return NO;
     }
 	
@@ -69,9 +63,5 @@
 	self.content = content;
 	return YES;
 }
-- (NSError *)badPageError{
-    NSString *errorString = [NSString stringWithFormat:@"Could not read any content from %@", [[self URL] lastPathComponent]];
-    NSDictionary *info = @{NSLocalizedDescriptionKey: errorString};
-    return [NSError errorWithDomain:TBErrorDomain code:TBErrorEmptyPageFile userInfo:info];
-}
+
 @end

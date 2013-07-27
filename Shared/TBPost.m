@@ -14,11 +14,6 @@
 #import "TBError.h"
 #import "NSDateFormatter+TBAdditions.h"
 
-@interface TBPost ()
-- (BOOL)parse:(NSError **)error;
-- (NSError *)badPostError;
-@end
-
 @implementation TBPost
 
 + (TBPost *)postWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error{
@@ -28,9 +23,7 @@
 - (BOOL)parse:(NSError **)error {
 	NSMutableString *markdownContent = [NSMutableString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
     if (![markdownContent length]) {
-        if (error) {
-            *error = [self badPostError];
-        }
+        if (error) *error = TBError.emptyPostFile(self.URL);
         return NO;
     }
 	
@@ -84,12 +77,6 @@
 	bufrelease(outputBuffer);
 		
     return YES;
-}
-
-- (NSError *)badPostError{
-    NSDictionary *info = @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Could not read any content from the post at %@", [[self URL] lastPathComponent]], NSURLErrorKey: [self URL]};
-    NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorEmptyPostFile userInfo:info];
-    return contentError;
 }
 
 @end

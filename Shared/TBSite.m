@@ -80,7 +80,7 @@
 	NSURL *postPartialURL = [self.templatesDirectory URLByAppendingPathComponent:@"Post.mustache" isDirectory:NO];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:postPartialURL.path]) {
 		if (error)
-			*error = [NSError errorWithDomain:TBErrorDomain code:TBErrorMissingPostPartial userInfo:nil];
+			*error = TBError.missingPostPartial(postPartialURL);
 		return NO;
 	}
 	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:error];
@@ -100,7 +100,7 @@
 	BOOL postsDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.postsDirectory.path isDirectory:&postsDirectoryIsDirectory];
 	if (!postsDirectoryIsDirectory || !postsDirectoryExists){
         if (error) {
-            *error = [NSError errorWithDomain:TBErrorDomain code:TBErrorMissingPostDirectory userInfo:nil];
+            *error = TBError.missingPostsDirectory(self.postsDirectory);
         }
         return NO;
     }
@@ -179,8 +179,7 @@
 	BOOL sourceDirectoryIsDirectory = NO;
 	BOOL sourceDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.sourceDirectory.path isDirectory:&sourceDirectoryIsDirectory];
 	if (!sourceDirectoryIsDirectory || !sourceDirectoryExists){
-		if (error)
-			*error = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadSourceDirectory userInfo:nil];
+		if (error) *error = TBError.missingSourceDirectory(self.sourceDirectory);
 		return NO;
 	}
 	return YES;
@@ -269,9 +268,7 @@
 		}
 		NSString *standardErrorContents = [NSString stringWithUTF8String:[standardError.fileHandleForReading readDataToEndOfFile].bytes];
 		if (standardErrorContents.length > 0) {
-			NSError *filterError = [NSError errorWithDomain:TBErrorDomain code:TBErrorFilterStandardError userInfo:
-									@{NSLocalizedDescriptionKey: standardErrorContents}];
-			if (error) *error = filterError;
+			if (error) *error = TBError.filterStandardError(filterURL, standardErrorContents);
 			return NO;
 		}
 	}
