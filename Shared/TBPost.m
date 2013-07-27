@@ -30,27 +30,10 @@
 	
 	[self parseTitle];
 	
-	// Create and fill a buffer for with the raw markdown data.
-	if ([self.markdownContent length] == 0) return YES;
-	struct sd_callbacks callbacks;
-	struct html_renderopt options;
-	const char *rawMarkdown = [self.markdownContent cStringUsingEncoding:NSUTF8StringEncoding];
-	struct buf *smartyPantsOutputBuffer = bufnew(1);
-	sdhtml_smartypants(smartyPantsOutputBuffer, (const unsigned char *)rawMarkdown, strlen(rawMarkdown));
+	[self parseMarkdownContent];
 	
-	// Parse the markdown into a new buffer using Sundown.
-	struct buf *outputBuffer = bufnew(64);
-	sdhtml_renderer(&callbacks, &options, 0);
-	struct sd_markdown *markdown = sd_markdown_new(0, 16, &callbacks, &options);
-	sd_markdown_render(outputBuffer, smartyPantsOutputBuffer->data, smartyPantsOutputBuffer->size, markdown);
-	sd_markdown_free(markdown);
-	
-	self.content = @(bufcstr(outputBuffer));
-	
-	bufrelease(smartyPantsOutputBuffer);
-	bufrelease(outputBuffer);
-		
     return YES;
+	
 }
 
 - (BOOL)loadMarkdownContent:(NSError **)error {
@@ -97,6 +80,28 @@
 		return NO;
 	}
 	return YES;
+}
+
+- (void)parseMarkdownContent {
+	// Create and fill a buffer for with the raw markdown data.
+	if ([self.markdownContent length] == 0) return;
+	struct sd_callbacks callbacks;
+	struct html_renderopt options;
+	const char *rawMarkdown = [self.markdownContent cStringUsingEncoding:NSUTF8StringEncoding];
+	struct buf *smartyPantsOutputBuffer = bufnew(1);
+	sdhtml_smartypants(smartyPantsOutputBuffer, (const unsigned char *)rawMarkdown, strlen(rawMarkdown));
+	
+	// Parse the markdown into a new buffer using Sundown.
+	struct buf *outputBuffer = bufnew(64);
+	sdhtml_renderer(&callbacks, &options, 0);
+	struct sd_markdown *markdown = sd_markdown_new(0, 16, &callbacks, &options);
+	sd_markdown_render(outputBuffer, smartyPantsOutputBuffer->data, smartyPantsOutputBuffer->size, markdown);
+	sd_markdown_free(markdown);
+	
+	self.content = @(bufcstr(outputBuffer));
+	
+	bufrelease(smartyPantsOutputBuffer);
+	bufrelease(outputBuffer);
 }
 
 @end
