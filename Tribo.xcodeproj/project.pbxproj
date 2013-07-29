@@ -155,6 +155,9 @@
 		4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */; };
 		4AF9C9D417945FA300709238 /* Editor Styles.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D317945FA300709238 /* Editor Styles.json */; };
 		4AF9C9D71797155600709238 /* TBStyleDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D61797151800709238 /* TBStyleDictionary.m */; };
+		4AF9C9D917A4587700709238 /* TBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D817A4587700709238 /* TBError.m */; };
+		4AF9C9DA17A4587700709238 /* TBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D817A4587700709238 /* TBError.m */; };
+		4AF9C9DD17A4831700709238 /* TBError.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9C9DF17A4831700709238 /* TBError.strings */; };
 		9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */; };
 		9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6B669614F3480800759DC3 /* TBTemplatesView.xib */; };
 		9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
@@ -377,6 +380,8 @@
 		4AF9C9D317945FA300709238 /* Editor Styles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Editor Styles.json"; sourceTree = "<group>"; };
 		4AF9C9D51797151800709238 /* TBStyleDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStyleDictionary.h; sourceTree = "<group>"; };
 		4AF9C9D61797151800709238 /* TBStyleDictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBStyleDictionary.m; sourceTree = "<group>"; };
+		4AF9C9D817A4587700709238 /* TBError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBError.m; sourceTree = "<group>"; };
+		4AF9C9DE17A4831700709238 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/TBError.strings; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
 		9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTemplatesViewController.h; sourceTree = "<group>"; };
 		9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTemplatesViewController.m; sourceTree = "<group>"; };
