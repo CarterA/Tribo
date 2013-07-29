@@ -43,6 +43,7 @@
         if (error) *error = TBError.emptyPostFile(self.URL);
         return NO;
     }
+	self.markdownContent = markdownContent;
 	return YES;
 }
 
