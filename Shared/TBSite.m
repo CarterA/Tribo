@@ -247,7 +247,7 @@
 	if (!filterPaths || ![filterPaths count]) return YES;
 	
 	NSURL *scriptsURL = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationScriptsDirectory inDomains:NSUserDomainMask][0];
-	NSArray *arguments = @[file.path];
+	NSArray *arguments = @[self.root.path, file.path];
 	
 	for (NSString *filterPath in filterPaths) {
 		NSURL *filterURL = [scriptsURL URLByAppendingPathComponent:filterPath];
