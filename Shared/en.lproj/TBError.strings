@@ -1,0 +1,22 @@
+/* 
+	TBError.strings (English)
+	Tribo
+
+	Created by Carter Allen on 7/27/13.
+	Copyright (c) 2013 The Tribo Authors.
+	See the included License.md file.
+*/
+
+"MISSING_POSTS_DIRECTORY" = "Tribo requires a posts directory for every site. It couldn't be either found or read at the following path: %@";
+
+"MISSING_POSTS_PARTIAL" = "Tribo requires a post template file for every site. It couldn't be either found or read at the following path: %@";
+
+"BAD_POST_FILE_NAME" = "Tribo uses the file name of a post to derive its publishing date and slug. The post at path %@ does not have a file name beginning with a date in the format \"YYYY-MM-DD\", followed by a dash ('-'), then a slug.";
+
+"MISSING_SOURCE_DIRECTORY" = "Tribo requires a source directory for every site. It couldn't be either found or read at the following path: %@";
+
+"FILTER_STANDARD_ERROR" = "The custom filter at path %@ logged the following information into its stderr pipe: %@";
+
+"EMPTY_POST_FILE" = "Tribo does not support empty post files. The following post file is empty: %@";
+
+"EMPTY_PAGE_FILE" = "Tribo does not support empty page files. The following page file is empty: %@";

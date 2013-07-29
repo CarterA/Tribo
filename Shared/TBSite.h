@@ -9,7 +9,7 @@
 
 #import "TBConstants.h"
 
-@class TBAsset;
+typedef void (^TBSiteCompletionHandler)(NSError *error);
 
 @protocol TBSiteDelegate;
 
@@ -30,7 +30,7 @@
 	@param error
 		If the return value is NO, then this argument will contain an NSError object
 		describing what went wrong.
- 	@return 
+	@return
 		YES on successful processing, NO if an error was encountered.
  */
 - (BOOL)process:(NSError **)error;

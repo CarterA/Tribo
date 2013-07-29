@@ -590,6 +590,8 @@
 				4A72F14014368E1200A164E9 /* TBPage.h */,
 				4A72F14114368E1200A164E9 /* TBPage.m */,
 				9B507E7A14D7B2B100E85357 /* TBError.h */,
+				4AF9C9D817A4587700709238 /* TBError.m */,
+				4AF9C9DF17A4831700709238 /* TBError.strings */,
 				9B6B669A14F3546900759DC3 /* TBAsset.h */,
 				9B6B669B14F3546900759DC3 /* TBAsset.m */,
 				4A9ED52B1507AF83009C5754 /* TBConstants.h */,
@@ -1052,6 +1054,7 @@
 				4AB27974151557D7009D7F93 /* Arrow.png in Resources */,
 				4AB27975151557D7009D7F93 /* Arrow@2x.png in Resources */,
 				4AB27976151557D7009D7F93 /* Stop.png in Resources */,
+				4AF9C9DD17A4831700709238 /* TBError.strings in Resources */,
 				4AB27977151557D7009D7F93 /* Stop@2x.png in Resources */,
 				4AF9C9D417945FA300709238 /* Editor Styles.json in Resources */,
 				4A4301A01518287C003EA175 /* TBNewSiteSheet.xib in Resources */,
@@ -1066,6 +1069,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AF9C9D917A4587700709238 /* TBError.m in Sources */,
 				4A00337B1430216500F6702F /* TBSite.m in Sources */,
 				4A00337E143028CA00F6702F /* TBPost.m in Sources */,
 				4A03890015085F87006C7A0D /* TBConstants.m in Sources */,
@@ -1136,6 +1140,7 @@
 				4A8829161437C52200EBBD7E /* HTTPRedirectResponse.m in Sources */,
 				4A8829171437C52200EBBD7E /* WebSocket.m in Sources */,
 				4A8829181437C52200EBBD7E /* houdini_href_e.c in Sources */,
+				4AF9C9DA17A4587700709238 /* TBError.m in Sources */,
 				4A8829191437C52200EBBD7E /* houdini_html_e.c in Sources */,
 				4A88291A1437C52200EBBD7E /* html.c in Sources */,
 				4A88291B1437C52200EBBD7E /* html_smartypants.c in Sources */,
@@ -1210,6 +1215,14 @@
 				4A43C23414EAB89600D1CC7B /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		4AF9C9DF17A4831700709238 /* TBError.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AF9C9DE17A4831700709238 /* en */,
+			);
+			name = TBError.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

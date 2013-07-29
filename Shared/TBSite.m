@@ -9,27 +9,28 @@
 
 #import "TBSite.h"
 #import "TBPost.h"
+#import "TBAsset.h"
 #import "TBError.h"
 #import "GRMustache.h"
-#import "TBAsset.h"
 #import "NSDateFormatter+TBAdditions.h"
 
 @interface TBSite ()
 @property (nonatomic, strong) GRMustacheTemplate *postTemplate;
-- (void)writePosts;
-- (NSError *)badDirectoryError;
+@property (nonatomic, strong) NSString *rawDefaultTemplate;
 @end
 
 @implementation TBSite
 
+#pragma mark - Initialization
+
 + (TBSite *)siteWithRoot:(NSURL *)root {
 	TBSite *site = [TBSite new];
 	site.root = root;
-	site.destination = [site.root URLByAppendingPathComponent:@"Output" isDirectory:YES];
-	site.sourceDirectory = [site.root URLByAppendingPathComponent:@"Source" isDirectory:YES];
-	site.postsDirectory = [site.root URLByAppendingPathComponent:@"Posts" isDirectory:YES];
-	site.templatesDirectory = [site.root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
-	NSURL *metadataURL = [site.root URLByAppendingPathComponent:@"Info.plist" isDirectory:NO];
+	site.destination = [root URLByAppendingPathComponent:@"Output" isDirectory:YES];
+	site.sourceDirectory = [root URLByAppendingPathComponent:@"Source" isDirectory:YES];
+	site.postsDirectory = [root URLByAppendingPathComponent:@"Posts" isDirectory:YES];
+	site.templatesDirectory = [root URLByAppendingPathComponent:@"Templates" isDirectory:YES];
+	NSURL *metadataURL = [root URLByAppendingPathComponent:@"Info.plist" isDirectory:NO];
 	NSData *metadataData = [NSData dataWithContentsOfURL:metadataURL];
 	site.metadata = [NSPropertyListSerialization propertyListFromData:metadataData mutabilityOption:NSPropertyListMutableContainersAndLeaves format:nil errorDescription:nil];
 	if (!site.metadata)
@@ -37,73 +38,60 @@
 	return site;
 }
 
-- (BOOL)process:(NSError **)error {	
-	// Find and compile the post template.
+#pragma mark - Site Processing
+
+- (BOOL)process:(NSError **)error {
+		
+	if (![self loadRawDefaultTemplate:error])
+		return NO;
+	
+    if (![self loadPostTemplate:error])
+		return NO;
+	
+	if (![self parsePosts:error])
+		return NO;
+	
+	if (![self writePosts:error])
+		return NO;
+	
+	if (![self writeFeed:error])
+		return NO;
+	
+	if (![self verifySourceDirectory:error])
+		return NO;
+	
+	if (![self processSourceDirectory:error])
+		return NO;
+	
+	return YES;
+	
+}
+
+#pragma mark - Template Loading
+
+- (BOOL)loadRawDefaultTemplate:(NSError **)error {
 	NSURL *defaultTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Default.mustache" isDirectory:NO];
-	NSString *rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:nil];
-	NSURL *postPartialURL = [self.templatesDirectory URLByAppendingPathComponent:@"Post.mustache" isDirectory:NO];
-	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:nil];
-	NSString *rawPostTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
-	self.postTemplate = [GRMustacheTemplate templateFromString:rawPostTemplate error:error];
-    if (!self.postTemplate) {
-        return NO;
-    }
-	
-	// Take care of posts early so that pages can use them.
-	[self parsePosts:error];
-	[self writePosts];
-	
-	// Process the Feed.xml file.
-	NSURL *feedTemplateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Feed.mustache"];
-	GRMustacheTemplate *feedTemplate = [GRMustacheTemplate templateFromContentsOfURL:feedTemplateURL error:error];
-	NSString *feedContents = [feedTemplate renderObject:self error:error];
-	[feedContents writeToURL:[self.destination URLByAppendingPathComponent:@"feed.xml"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
-	
-	// Recurse through the entire "Source" directory for pages and files.
-	BOOL sourceDirectoryIsDirectory = NO;
-	BOOL sourceDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.sourceDirectory.path isDirectory:&sourceDirectoryIsDirectory];
-	if (!sourceDirectoryIsDirectory || !sourceDirectoryExists){
-        if (error) {
-            *error = [self badDirectoryError];
-        }
-        return NO;
-    }
-    
-	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.sourceDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *enumeratorError) {
-        return YES;
-	}];
-	for (NSURL *URL in enumerator) {
-		
-		BOOL URLIsDirectory = NO;
-		[[NSFileManager defaultManager] fileExistsAtPath:URL.path isDirectory:&URLIsDirectory];
-		if (URLIsDirectory) continue;
-		
-		NSString *extension = [URL pathExtension];
-		NSString *relativePath = [URL.path stringByReplacingOccurrencesOfString:self.sourceDirectory.path withString:@""];
-		NSURL *destinationURL = [[self.destination URLByAppendingPathComponent:relativePath] URLByStandardizingPath];
-		NSURL *destinationDirectory = [destinationURL URLByDeletingLastPathComponent];
-		[[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:nil];
-		if ([[NSFileManager defaultManager] fileExistsAtPath:destinationURL.path])
-			[[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
-		
-		if ([extension isEqualToString:@"mustache"]) {
-			TBPage *page = [TBPage pageWithURL:URL inSite:self error:error];
-            if (!page) {
-                return NO;
-            }
-			NSString *rawPageTemplate = [rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
-			GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:error];
-			NSString *renderedPage = [pageTemplate renderObject:page error:error];
-			destinationURL = [[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"];
-			[renderedPage writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
-			[self runFiltersOnFile:destinationURL];
-		}
-		else {
-			[[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:nil];
-		}
-	}
+	self.rawDefaultTemplate = [NSString stringWithContentsOfURL:defaultTemplateURL encoding:NSUTF8StringEncoding error:error];
+	if (!self.rawDefaultTemplate) return NO;
 	return YES;
 }
+
+- (BOOL)loadPostTemplate:(NSError **)error {
+	NSURL *postPartialURL = [self.templatesDirectory URLByAppendingPathComponent:@"Post.mustache" isDirectory:NO];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:postPartialURL.path]) {
+		if (error)
+			*error = TBError.missingPostPartial(postPartialURL);
+		return NO;
+	}
+	NSString *rawPostPartial = [NSString stringWithContentsOfURL:postPartialURL encoding:NSUTF8StringEncoding error:error];
+	if (!rawPostPartial) return NO;
+	NSString *rawPostTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:rawPostPartial];
+	self.postTemplate = [GRMustacheTemplate templateFromString:rawPostTemplate error:error];
+	if (!self.postTemplate) return NO;
+	return YES;
+}
+
+#pragma mark - Post Processing
 
 - (BOOL)parsePosts:(NSError **)error {
 	
@@ -112,14 +100,16 @@
 	BOOL postsDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.postsDirectory.path isDirectory:&postsDirectoryIsDirectory];
 	if (!postsDirectoryIsDirectory || !postsDirectoryExists){
         if (error) {
-            *error = [self badDirectoryError];
+            *error = TBError.missingPostsDirectory(self.postsDirectory);
         }
         return NO;
     }
 		
 	// Parse the contents of the Posts directory into individual TBPost objects.
 	NSMutableArray *posts = [NSMutableArray array];
-	for (NSURL *postURL in [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:nil]) {
+	NSArray *postsDirectoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:self.postsDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:error];
+	if (!postsDirectoryContents) return NO;
+	for (NSURL *postURL in postsDirectoryContents) {
 		TBPost *post = [TBPost postWithURL:postURL inSite:self error:error];
 		if (!post) {
 			return NO;
@@ -135,7 +125,8 @@
     return YES;
 	
 }
-- (void)writePosts {
+
+- (BOOL)writePosts:(NSError **)error {
 	
 	for (TBPost *post in self.posts) {
 		
@@ -146,56 +137,160 @@
 		NSDateFormatter *postPathFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy/MM/dd"];
 		NSString *directoryStructure = [postPathFormatter stringFromDate:post.date];
 		NSURL *destinationDirectory = [[self.destination URLByAppendingPathComponent:directoryStructure isDirectory:YES] URLByAppendingPathComponent:post.slug isDirectory:YES];
-		[[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+		if (![[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:error])
+			return NO;
 		
 		// Set up the template loader with this post's content, and then render it all into the post template.
-		NSString *renderedContent = [self.postTemplate renderObject:post error:nil];
+		NSString *renderedContent = [self.postTemplate renderObject:post error:error];
+		if (!renderedContent) return NO;
 		
 		// Write the post to the destination directory.
 		NSURL *destinationURL = [destinationDirectory URLByAppendingPathComponent:@"index.html" isDirectory:NO];
-		[renderedContent writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
+		if (![renderedContent writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:error])
+			return NO;
 		
-		[self runFiltersOnFile:destinationURL];
+		if (![self runFiltersOnFile:destinationURL error:error])
+			return NO;
 		
 	}
 	
+	return YES;
+	
 }
 
-- (void)runFiltersOnFile:(NSURL *)file {
+#pragma mark - Feed Processing
+
+- (BOOL)writeFeed:(NSError **)error {
+	NSURL *templateURL = [self.templatesDirectory URLByAppendingPathComponent:@"Feed.mustache"];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:templateURL.path]) return YES;
+	GRMustacheTemplate *template = [GRMustacheTemplate templateFromContentsOfURL:templateURL error:error];
+	if (!template) return NO;
+	NSString *contents = [template renderObject:self error:error];
+	if (!contents) return NO;
+	NSURL *destination = [self.destination URLByAppendingPathComponent:@"feed.xml"];
+	if (![contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error])
+		return NO;
+	return YES;
+}
+
+#pragma mark - Source Directory Processing
+
+- (BOOL)verifySourceDirectory:(NSError **)error {
+	BOOL sourceDirectoryIsDirectory = NO;
+	BOOL sourceDirectoryExists = [[NSFileManager defaultManager] fileExistsAtPath:self.sourceDirectory.path isDirectory:&sourceDirectoryIsDirectory];
+	if (!sourceDirectoryIsDirectory || !sourceDirectoryExists){
+		if (error) *error = TBError.missingSourceDirectory(self.sourceDirectory);
+		return NO;
+	}
+	return YES;
+}
+
+- (BOOL)processSourceDirectory:(NSError **)error {
+	NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.sourceDirectory includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *enumeratorError) {
+		return YES;
+	}];
+	for (NSURL *URL in enumerator) {
+		
+		BOOL URLIsDirectory = NO;
+		[[NSFileManager defaultManager] fileExistsAtPath:URL.path isDirectory:&URLIsDirectory];
+		if (URLIsDirectory) continue;
+		
+		if (![self processSourceFile:URL error:error])
+			return NO;
+		
+	}
+	return YES;
+}
+
+- (BOOL)processSourceFile:(NSURL *)URL error:(NSError **)error {
+	NSString *extension = [URL pathExtension];
+	NSString *relativePath = [URL.path stringByReplacingOccurrencesOfString:self.sourceDirectory.path withString:@""];
+	NSURL *destinationURL = [[self.destination URLByAppendingPathComponent:relativePath] URLByStandardizingPath];
+	NSURL *destinationDirectory = [destinationURL URLByDeletingLastPathComponent];
+	if (![[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:error])
+		return NO;
+	[[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
+	
+	if ([extension isEqualToString:@"mustache"]) {
+		TBPage *page = [TBPage pageWithURL:URL inSite:self error:error];
+		if (!page) return NO;
+		NSURL *pageDestination = [[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"];
+		if (![self writePage:page toDestination:pageDestination error:error])
+			return NO;
+	}
+	else {
+		if (![[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:error])
+			return NO;
+	}
+	return YES;
+}
+
+- (BOOL)writePage:(TBPage *)page toDestination:(NSURL *)destination error:(NSError **)error {
+	if (!page) return NO;
+	NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
+	GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:error];
+	if (!pageTemplate) return NO;
+	NSString *renderedPage = [pageTemplate renderObject:page error:error];
+	if (!renderedPage) return NO;
+	if (![renderedPage writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error])
+		return NO;
+	if (![self runFiltersOnFile:destination error:error])
+		return NO;
+	return YES;
+}
+
+#pragma mark - Filters
+
+- (BOOL)runFiltersOnFile:(NSURL *)file error:(NSError **)error {
 	
 	NSArray *filterPaths = self.metadata[TBSiteFilters];
-	if (!filterPaths || ![filterPaths count]) return;
+	if (!filterPaths || ![filterPaths count]) return YES;
 	
 	NSURL *scriptsURL = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationScriptsDirectory inDomains:NSUserDomainMask][0];
-	NSArray *arguments = @[file.path];
+	NSArray *arguments = @[self.root.path, file.path];
 	
 	for (NSString *filterPath in filterPaths) {
 		NSURL *filterURL = [scriptsURL URLByAppendingPathComponent:filterPath];
-		NSUserUnixTask *filter = [[NSUserUnixTask alloc] initWithURL:filterURL error:nil];
-		[filter executeWithArguments:arguments completionHandler:nil];
+		NSUserUnixTask *filter = [[NSUserUnixTask alloc] initWithURL:filterURL error:error];
+		if (!filter) return NO;
+		NSPipe *standardError = [NSPipe pipe];
+		filter.standardError = standardError.fileHandleForWriting;
+		__block BOOL finished = NO;
+		__block NSError *blockError;
+		[filter executeWithArguments:arguments completionHandler:^(NSError *filterError) {
+			blockError = filterError;
+			finished = YES;
+		}];
+		while (!finished) { /* Wait for completion */ }
+		if (blockError) {
+			if (error) *error = blockError;
+			return NO;
+		}
+		NSString *standardErrorContents = [NSString stringWithUTF8String:[standardError.fileHandleForReading readDataToEndOfFile].bytes];
+		if (standardErrorContents.length > 0) {
+			if (error) *error = TBError.filterStandardError(filterURL, standardErrorContents);
+			return NO;
+		}
 	}
+	
+	return YES;
 	
 }
 
-- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error{
+#pragma mark - Site Modification
+
+- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error {
 	NSDate *currentDate = [NSDate date];
 	NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
 	NSString *dateString = [dateFormatter stringFromDate:currentDate];
 	NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
 	NSURL *destination = [[self.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
 	NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
-	[contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
-	if (![self parsePosts:error]) {
+	if (![contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error])
+		return nil;
+	if (![self parsePosts:error])
         return nil;
-    }
 	return destination;
-}
-
-- (NSError *)badDirectoryError{
-    NSString *errorString = [NSString stringWithFormat:@"%@ does not exist!", [self.postsDirectory lastPathComponent]];
-    NSDictionary *info = @{NSLocalizedDescriptionKey: errorString, NSURLErrorKey: self.postsDirectory};
-    NSError *contentError = [NSError errorWithDomain:TBErrorDomain code:TBErrorBadContent userInfo:info];
-    return contentError;
 }
 
 - (void)setMetadata:(NSDictionary *)metadata {
