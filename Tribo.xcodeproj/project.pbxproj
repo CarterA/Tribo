@@ -59,6 +59,7 @@
 		4A75580F1436F6A20040A10C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A75580D1436F6820040A10C /* Security.framework */; };
 		4A7558121436F8390040A10C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558101436F82D0040A10C /* CoreServices.framework */; };
 		4A7558151436FBAD0040A10C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558131436FBA10040A10C /* ApplicationServices.framework */; };
+		4A78DAAB17A628C000C40AFF /* TBError.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9C9DF17A4831700709238 /* TBError.strings */; };
 		4A8696181437B60400204482 /* tribo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696171437B60400204482 /* tribo.m */; };
 		4A8696241437BE0B00204482 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8696231437BE0B00204482 /* Cocoa.framework */; };
 		4A86964E1437BE3400204482 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696461437BE3400204482 /* Core.m */; };
@@ -157,7 +158,6 @@
 		4AF9C9D71797155600709238 /* TBStyleDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D61797151800709238 /* TBStyleDictionary.m */; };
 		4AF9C9D917A4587700709238 /* TBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D817A4587700709238 /* TBError.m */; };
 		4AF9C9DA17A4587700709238 /* TBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D817A4587700709238 /* TBError.m */; };
-		4AF9C9DD17A4831700709238 /* TBError.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9C9DF17A4831700709238 /* TBError.strings */; };
 		9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */; };
 		9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6B669614F3480800759DC3 /* TBTemplatesView.xib */; };
 		9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
@@ -381,7 +381,7 @@
 		4AF9C9D51797151800709238 /* TBStyleDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStyleDictionary.h; sourceTree = "<group>"; };
 		4AF9C9D61797151800709238 /* TBStyleDictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBStyleDictionary.m; sourceTree = "<group>"; };
 		4AF9C9D817A4587700709238 /* TBError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBError.m; sourceTree = "<group>"; };
-		4AF9C9DE17A4831700709238 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/TBError.strings; sourceTree = "<group>"; };
+		4AF9C9DE17A4831700709238 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TBError.strings; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
 		9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTemplatesViewController.h; sourceTree = "<group>"; };
 		9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTemplatesViewController.m; sourceTree = "<group>"; };
@@ -1039,6 +1039,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A78DAAB17A628C000C40AFF /* TBError.strings in Resources */,
 				4AE91C5E14FEE15700499469 /* Tribo Authentication Tool in Resources */,
 				4AE50F9814F95E0B00FCA39C /* LiveReload Snippet.html in Resources */,
 				4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */,
@@ -1059,7 +1060,6 @@
 				4AB27974151557D7009D7F93 /* Arrow.png in Resources */,
 				4AB27975151557D7009D7F93 /* Arrow@2x.png in Resources */,
 				4AB27976151557D7009D7F93 /* Stop.png in Resources */,
-				4AF9C9DD17A4831700709238 /* TBError.strings in Resources */,
 				4AB27977151557D7009D7F93 /* Stop@2x.png in Resources */,
 				4AF9C9D417945FA300709238 /* Editor Styles.json in Resources */,
 				4A4301A01518287C003EA175 /* TBNewSiteSheet.xib in Resources */,
