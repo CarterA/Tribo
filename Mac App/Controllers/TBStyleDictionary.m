@@ -13,6 +13,7 @@ NSString * const TBStyleDictionaryFontKey		= @"font";
 NSString * const TBStyleDictionarySizeKey		= @"size";
 NSString * const TBStyleDictionaryColorKey		= @"color";
 NSString * const TBStyleDictionaryUnderlineKey	= @"underline";
+NSString * const TBStyleDictionaryIndentKey		= @"indent";
 
 @interface TBStyleDictionary ()
 @property (nonatomic, strong) NSDictionary *styleDictionary;
@@ -105,6 +106,13 @@ NSString * const TBStyleDictionaryUnderlineKey	= @"underline";
 		NSString *rawUnderline = rawAttributes[TBStyleDictionaryUnderlineKey];
 		if ([rawUnderline isEqualToString:@"solid"])
 			attributes[NSUnderlineStyleAttributeName] = @(NSUnderlineStyleSingle);
+		
+		// Indents
+		CGFloat indent = [rawAttributes[TBStyleDictionaryIndentKey] floatValue];
+		NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+		paragraphStyle.firstLineHeadIndent = indent;
+		paragraphStyle.headIndent = indent;
+		attributes[NSParagraphStyleAttributeName] = paragraphStyle;
 		
 	}];
 	

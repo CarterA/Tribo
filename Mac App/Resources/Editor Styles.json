@@ -2,7 +2,8 @@
 	"body": {
 		"font": "Avenir Next",
 		"size": 14,
-		"color": [0.0, 0.0, 0.0]
+		"color": [0.0, 0.0, 0.0],
+		"indent": 0.0
 	},
 	"h1;h2;h3;h4;h5;h6": {
 		"font": "Avenir Next Demi Bold"
@@ -27,4 +28,7 @@
 	"link-title": {
 		"font": "Avenir Next Italic"
 	},
+	"list": {
+		"indent": 25.0
+	}
 }

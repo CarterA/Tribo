@@ -112,6 +112,14 @@
 		}
 	}];
 	
+	// Lists
+	
+	NSError *error;
+	NSRegularExpression *listRegex = [NSRegularExpression regularExpressionWithPattern:@"(([ \\t]{0,3}(?:[*+-]|\\d+[.])[ \\t]+)(?s:.+?)(\\z|\\n{2,}(?=\\S)(?![ \\t]*(?:[*+-]|\\d+[.])[ \\t]+)))" options:NSRegularExpressionAnchorsMatchLines error:&error];
+	[listRegex enumerateMatchesInString:self.backingStore.string options:NSMatchingWithTransparentBounds range:range usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+		[self.backingStore addAttributes:self.styleDictionary[@"list"] range:[result rangeAtIndex:1]];
+	}];
+	
 }
 
 @end
