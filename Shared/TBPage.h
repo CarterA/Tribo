@@ -17,6 +17,5 @@
 @property (nonatomic, weak) TBSite *site;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *content;
-@property (nonatomic, strong) GRMustacheTemplate *template;
 @property (nonatomic, strong) NSArray *stylesheets;
 @end
