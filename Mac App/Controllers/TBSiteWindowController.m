@@ -237,6 +237,10 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 }
 
 - (void)synchronizeWindowTitleWithDocumentName {
+	if (!self.document) {
+		[super synchronizeWindowTitleWithDocumentName];
+		return;
+	}
 	NSURL *currentFile = self.editorController.currentFile;
 	NSString *packageDisplayName = [[NSFileManager defaultManager] displayNameAtPath:[self.document fileURL].path];
 	if (currentFile) {
