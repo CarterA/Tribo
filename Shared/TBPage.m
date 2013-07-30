@@ -25,15 +25,33 @@
 	}
 	return page;
 }
+
 - (BOOL)parse:(NSError **)error{
-	NSMutableString *content = [NSMutableString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
-    if (![content length]) {
-        if (error) *error = TBError.emptyPageFile(self.URL);
-        return NO;
-    }
 	
+	if (![self loadContent:error])
+		return NO;
+	
+	[self parseTitle];
+	
+	[self parseStylesheets];
+	
+	return YES;
+}
+
+- (BOOL)loadContent:(NSError **)error {
+	NSString *content = [NSString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:error];
+	if (!content.length) {
+		if (error) *error = TBError.emptyPageFile(self.URL);
+		return NO;
+	}
+	self.content = content;
+	return YES;
+}
+
+- (void)parseTitle {
 	// Titles are optional. They take the following form:
 	// <!-- Title -->
+	NSMutableString *content = [self.content mutableCopy];
 	NSRegularExpression *headerRegex = [NSRegularExpression regularExpressionWithPattern:@"<!--[ \\t](.*)[ \\t]-->" options:0 error:nil];
 	NSRange firstLineRange = NSMakeRange(0, [content rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location);
 	NSString *firstLine = [content substringWithRange:firstLineRange];
@@ -42,9 +60,13 @@
 		self.title = [firstLine substringWithRange:[titleResult rangeAtIndex:1]];
 		[content deleteCharactersInRange:NSMakeRange(firstLineRange.location, firstLineRange.length + 1)];
 	}
-	
+	self.content = content;
+}
+
+- (void)parseStylesheets {
 	// Stylsheets are also optional. They are on the second line (or first if there is no title), and look like this:
 	// <!-- Stylsheets: name, name -->
+	NSMutableString *content = [self.content mutableCopy];
 	NSRegularExpression *stylesheetsRegex = [NSRegularExpression regularExpressionWithPattern:@"<!-- Stylesheets:[ \\t](.*)[ \\t]-->" options:0 error:nil];
 	NSRange secondLineRange = NSMakeRange(0, [content rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location);
 	NSString *secondLine = [content substringWithRange:secondLineRange];
@@ -59,9 +81,7 @@
 		self.stylesheets = stylesheetDictionaries;
 		[content deleteCharactersInRange:secondLineRange];
 	}
-	
 	self.content = content;
-	return YES;
 }
 
 @end
