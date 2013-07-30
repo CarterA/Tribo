@@ -368,7 +368,7 @@
 		4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPublishSheetController.m; sourceTree = "<group>"; };
 		4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBPublishSheet.xib; sourceTree = "<group>"; };
 		4AF9C9D817A4587700709238 /* TBError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBError.m; sourceTree = "<group>"; };
-		4AF9C9DE17A4831700709238 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/TBError.strings; sourceTree = "<group>"; };
+		4AF9C9DE17A4831700709238 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TBError.strings; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
 		9B6B669414F3480800759DC3 /* TBTemplatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTemplatesViewController.h; sourceTree = "<group>"; };
 		9B6B669514F3480800759DC3 /* TBTemplatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTemplatesViewController.m; sourceTree = "<group>"; };
@@ -579,11 +579,11 @@
 				4A00337D143028CA00F6702F /* TBPost.m */,
 				4A72F14014368E1200A164E9 /* TBPage.h */,
 				4A72F14114368E1200A164E9 /* TBPage.m */,
+				9B6B669A14F3546900759DC3 /* TBAsset.h */,
+				9B6B669B14F3546900759DC3 /* TBAsset.m */,
 				9B507E7A14D7B2B100E85357 /* TBError.h */,
 				4AF9C9D817A4587700709238 /* TBError.m */,
 				4AF9C9DF17A4831700709238 /* TBError.strings */,
-				9B6B669A14F3546900759DC3 /* TBAsset.h */,
-				9B6B669B14F3546900759DC3 /* TBAsset.m */,
 				4A9ED52B1507AF83009C5754 /* TBConstants.h */,
 				4A9ED52C1507AF83009C5754 /* TBConstants.m */,
 				4AA86A68173EF26700046691 /* Template Additions */,

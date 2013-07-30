@@ -119,9 +119,12 @@
 	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
 	self.posts = posts;
 	
-    // Prepare the template object tree
-    self.templateAssets = [TBAsset assetsFromDirectoryURL:[self templatesDirectory]];
-    self.sourceAssets = [TBAsset assetsFromDirectoryURL:[self sourceDirectory]];
+    // Prepare the asset object tree
+    self.templateAssets = [TBAsset assetsFromDirectory:self.templatesDirectory error:error];
+	if (!self.templateAssets) return NO;
+    self.sourceAssets = [TBAsset assetsFromDirectory:self.sourceDirectory error:error];
+	if (!self.sourceAssets) return NO;
+	
     return YES;
 	
 }

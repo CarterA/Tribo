@@ -135,8 +135,8 @@
  */
 @property (nonatomic, strong) NSMutableArray *posts;
 
-@property (nonatomic, strong) NSSet *templateAssets;
-@property (nonatomic, strong) NSSet *sourceAssets;
+@property (nonatomic, strong) NSArray *templateAssets;
+@property (nonatomic, strong) NSArray *sourceAssets;
 @property (nonatomic, strong) NSDictionary *metadata;
 @property (nonatomic, weak) id <TBSiteDelegate> delegate;
 
