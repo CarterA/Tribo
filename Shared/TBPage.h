@@ -7,7 +7,6 @@
 //  See the included License.md file.
 //
 
-@class GRMustacheTemplate;
 @class TBSite;
 
 @interface TBPage : NSObject
