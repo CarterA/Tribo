@@ -27,13 +27,13 @@
 }
 
 - (NSArray *)templates {
-    NSArray *nameSort = @[[NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES]];
+    NSArray *nameSort = @[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES]];
     return [self.document.site.templateAssets sortedArrayUsingDescriptors:nameSort];
 }
 
 - (void)doubleClickRow:(NSOutlineView *)outlineView {
     NSArray *assets = [self.assets selectedObjects];
-    NSArray *assetURLS = [assets valueForKey:@"fileURL"];
+    NSArray *assetURLS = [assets valueForKey:@"URL"];
     [assetURLS enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSArray *singleFileArray = @[obj];
         BOOL fileOpened = [[NSWorkspace sharedWorkspace] openURLs:singleFileArray withAppBundleIdentifier:nil options:NSWorkspaceLaunchAsync additionalEventParamDescriptor:nil launchIdentifiers:NULL];

@@ -1,56 +1,48 @@
 //
-//  TBTemplateAsset.m
+//  TBAsset.m
 //  Tribo
 //
 //  Created by Samuel Goodwin on 2/20/12.
-//  Copyright (c) 2012 Opt-6 Products, LLC. All rights reserved.
+//  Copyright (c) 2013 The Tribo Authors.
+//  See the included License.md file.
 //
 
 #import "TBAsset.h"
 
 @implementation TBAsset
 
-+ (NSSet *)assetsFromDirectoryURL:(NSURL*)folderURL {    
-    NSMutableSet *subAssets = [NSMutableSet set];
-    NSArray *properties = @[NSURLTypeIdentifierKey, NSURLNameKey, NSURLIsDirectoryKey];
-    NSDirectoryEnumerator *subAssetsEnumerator = [[NSFileManager defaultManager] enumeratorAtURL:folderURL includingPropertiesForKeys:properties options:NSDirectoryEnumerationSkipsHiddenFiles|NSDirectoryEnumerationSkipsSubdirectoryDescendants errorHandler:^BOOL(NSURL *url, NSError *error) {
-        NSLog(@"Error!: %@", [error localizedDescription]);
-        return NO;
-    }];
-    for (NSURL *assetURL in subAssetsEnumerator) {
-        NSNumber *isADirectory;
-        [assetURL getResourceValue:&isADirectory forKey:NSURLIsDirectoryKey error:NULL];
++ (NSArray *)assetsFromDirectory:(NSURL*)URL error:(NSError **)error {
+	
+    NSMutableArray *assets = [NSMutableArray array];
+    NSArray *properties = @[NSURLTypeIdentifierKey, NSURLLocalizedNameKey, NSURLIsDirectoryKey];
+    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:URL includingPropertiesForKeys:properties options:NSDirectoryEnumerationSkipsHiddenFiles|NSDirectoryEnumerationSkipsSubdirectoryDescendants errorHandler:nil];
+    for (NSURL *assetURL in enumerator) {
+		
+		NSDictionary *resourceValues = [assetURL resourceValuesForKeys:properties error:error];
+		if (!resourceValues) return nil;
         
-        NSString *fileName;
-        [assetURL getResourceValue:&fileName forKey:NSURLNameKey error:NULL];
+        TBAsset *asset = [[self class] new];
+		asset.URL = assetURL;
+		asset.displayName = resourceValues[NSURLLocalizedNameKey];
+		asset.type = resourceValues[NSURLTypeIdentifierKey];
+		
+        if ([resourceValues[NSURLIsDirectoryKey] boolValue]) {
+			asset.children = [[self class] assetsFromDirectory:assetURL error:error];
+			if (!asset.children) return nil;
+		}
         
-        NSString *fileType;
-        [assetURL getResourceValue:&fileType forKey:NSURLTypeIdentifierKey error:NULL];
-        
-        TBAsset *asset = [[self alloc] init];
-        [asset setFilename:[assetURL lastPathComponent]];
-        [asset setFileURL:assetURL];
-        [asset setFileType:fileType];
-        if([isADirectory boolValue]) {
-            [asset setTemplateAssets:[self assetsFromDirectoryURL:assetURL]];
-        }
-        
-        [subAssets addObject:asset];
+        [assets addObject:asset];
+		
     }
-    return subAssets;
-}
-
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %@ children: %@>", [self class], [self filename], [self templateAssets]];
-}
-
-- (NSArray *)children {
-    NSSortDescriptor *filenameSort = [NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES];
-    return [[self templateAssets] sortedArrayUsingDescriptors:@[filenameSort]];
+	
+	[assets sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES]]];
+	
+    return assets;
+	
 }
 
 - (BOOL)isLeaf {
-    return ![[self fileType] isEqualToString:@"public.folder"];
+    return ([self.children count] == 0);
 }
 
 @end
