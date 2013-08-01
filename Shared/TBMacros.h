@@ -54,8 +54,9 @@
 #define MAWeakVar(var)            __weak_ ## var
 
 #define MAWeakDeclare(var)        __weak id MAWeakVar(var) = var
-#define MAWeakImport(var)         __typeof__(var) var = MAWeakVar(var)
+#define MAWeakImport(var)         _Pragma("clang diagnostic push") _Pragma("clang diagnostic ignored \"-Wshadow\"") __typeof__(var) var = MAWeakVar(var) _Pragma("clang diagnostic pop")
 #define MAWeakImportReturn(var)   MAWeakImport(var); do { if(var == nil) return; } while(NO)
+
 
 #define MAWeakSelfDeclare()       MAWeakDeclare(self)
 #define MAWeakSelfImport()        MAWeakImport(self)
