@@ -8,7 +8,6 @@
 //
 
 #import "TBSiteWindowController.h"
-#import "TBViewController.h"
 #import "TBPostsViewController.h"
 #import "TBTemplatesViewController.h"
 #import "TBSourceViewControllerViewController.h"
@@ -20,7 +19,6 @@
 #import "TBSiteDocument.h"
 #import "TBSite.h"
 #import "TBHTTPServer.h"
-#import <QuartzCore/QuartzCore.h>
 
 const NSEdgeInsets TBAccessoryViewInsets = {
 	.top = 0.0,
@@ -207,14 +205,6 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	self.viewControllers = @[postsViewController, templatesController, sourcesController];
 	self.selectedViewControllerIndex = 0;
 	
-}
-
-- (void)windowDidBecomeKey:(NSNotification *)notification {
-	//self.postCountLabel.textColor = [NSColor controlTextColor];
-}
-
-- (void)windowDidResignKey:(NSNotification *)notification {
-	//self.postCountLabel.textColor = [NSColor disabledControlTextColor];
 }
 
 @end
