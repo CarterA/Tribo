@@ -18,7 +18,7 @@
 
 @implementation TBPublisher
 
-+ (TBPublisher *)publisherWithSite:(TBSite *)site {
++ (instancetype)publisherWithSite:(TBSite *)site {
 	NSString *protocol = (site.metadata)[TBSiteProtocolKey];
 	if ([protocol isEqualToString:TBSiteProtocolFTP])
 		return [[TBFTPPublisher alloc] initWithSite:site];
@@ -28,7 +28,7 @@
 	return nil;
 }
 
-- (id)initWithSite:(TBSite *)site {
+- (instancetype)initWithSite:(TBSite *)site {
 	self = [super init];
 	if (self) {
 		self.site = site;

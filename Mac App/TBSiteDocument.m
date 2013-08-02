@@ -13,6 +13,7 @@
 #import "TBNewSiteSheetController.h"
 #import "TBSite.h"
 #import "TBPost.h"
+#import "TBMacros.h"
 #import "TBHTTPServer.h"
 #import "TBPublisher.h"
 #import "TBSocketConnection.h"
@@ -38,34 +39,34 @@
 
 - (void)startPreview:(TBSiteDocumentPreviewCallback)callback {
 	
-	__weak TBSiteDocument *weakSelf = self;
+	MAWeakSelfDeclare();
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-		TBSiteDocument *strongSelf = weakSelf;
 		NSError *error;
-		
+		MAWeakSelfImport();
+
 		[[NSProcessInfo processInfo] disableSuddenTermination];
-		if (![strongSelf.site process:&error]) {
+		if (![self.site process:&error]) {
 			callback(nil, error);
 			return;
 		}
 		[[NSProcessInfo processInfo] enableSuddenTermination];
 		
-		if (!strongSelf.sourceWatcher) {
-			strongSelf.sourceWatcher = [UKFSEventsWatcher new];
-			strongSelf.sourceWatcher.delegate = strongSelf;
-			strongSelf.sourceWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
+		if (!self.sourceWatcher) {
+			self.sourceWatcher = [UKFSEventsWatcher new];
+			self.sourceWatcher.delegate = self;
+			self.sourceWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
 		}
-		[strongSelf.sourceWatcher addPath:strongSelf.site.sourceDirectory.path];
-		[strongSelf.sourceWatcher addPath:strongSelf.site.postsDirectory.path];
-		[strongSelf.sourceWatcher addPath:strongSelf.site.templatesDirectory.path];
-		if (!strongSelf.server) {
-			strongSelf.server = [TBHTTPServer new];
-			strongSelf.server.connectionClass = [TBSocketConnection class];
-			strongSelf.server.documentRoot = self.site.destination.path;
+		[self.sourceWatcher addPath:self.site.sourceDirectory.path];
+		[self.sourceWatcher addPath:self.site.postsDirectory.path];
+		[self.sourceWatcher addPath:self.site.templatesDirectory.path];
+		if (!self.server) {
+			self.server = [TBHTTPServer new];
+			self.server.connectionClass = [TBSocketConnection class];
+			self.server.documentRoot = self.site.destination.path;
 		}
-		[strongSelf.server start:nil];
-		[strongSelf.server refreshPages];
-		NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", strongSelf.server.listeningPort]];
+		[self.server start:nil];
+		[self.server refreshPages];
+		NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]];
 		[[NSWorkspace sharedWorkspace] openURL:localURL];
 		
 		if (!callback){
@@ -133,19 +134,19 @@
 - (void)reloadSite {
 	[[NSProcessInfo processInfo] disableSuddenTermination];
 	if (self.server.isRunning) {
-		__weak TBSiteDocument *weakSelf = self;
+		MAWeakSelfDeclare();
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-			TBSiteDocument *strongSelf = weakSelf;
+			MAWeakSelfImport();
 			NSError *error;
 			
-			if (![strongSelf.site process:&error]) {
+			if (![self.site process:&error]) {
 				dispatch_async(dispatch_get_main_queue(), ^{
-					[strongSelf presentError:error];
+					[self presentError:error];
 				});
 				return;
 			}
 			
-			[strongSelf.server refreshPages];
+			[self.server refreshPages];
 			
 		});
 	}

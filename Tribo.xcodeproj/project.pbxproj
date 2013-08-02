@@ -289,6 +289,7 @@
 		4A75580D1436F6820040A10C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4A7558101436F82D0040A10C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		4A7558131436FBA10040A10C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		4A78DAAC17AA146E00C40AFF /* TBMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBMacros.h; path = Shared/TBMacros.h; sourceTree = SOURCE_ROOT; };
 		4A8696161437B60400204482 /* CLI-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLI-Prefix.pch"; sourceTree = "<group>"; };
 		4A8696171437B60400204482 /* tribo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = tribo.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A8696211437BE0B00204482 /* Tribo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tribo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -601,6 +602,7 @@
 				4AF9C9DF17A4831700709238 /* TBError.strings */,
 				4A9ED52B1507AF83009C5754 /* TBConstants.h */,
 				4A9ED52C1507AF83009C5754 /* TBConstants.m */,
+				4A78DAAC17AA146E00C40AFF /* TBMacros.h */,
 				4AA86A68173EF26700046691 /* Template Additions */,
 				4A3DE5FB176CF11A00C20026 /* System Additions */,
 			);

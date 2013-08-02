@@ -36,9 +36,9 @@
 	 @return
 		YES on successful processing, NO if an error was encountered.
  */
-+ (TBPage *)pageWithURL:(NSURL *)URL
-				 inSite:(TBSite *)site
-				  error:(NSError**)error;
++ (instancetype)pageWithURL:(NSURL *)URL
+					 inSite:(TBSite *)site
+					  error:(NSError**)error;
 
 /*!
 	@property URL

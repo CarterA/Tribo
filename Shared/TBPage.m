@@ -12,7 +12,7 @@
 
 @implementation TBPage
 
-+ (TBPage *)pageWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError**)error{
++ (instancetype)pageWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError**)error{
 	TBPage *page = [super new];
 	if (page) {
 		page.URL = URL;
