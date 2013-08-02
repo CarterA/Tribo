@@ -23,7 +23,7 @@
 
 #pragma mark - Initialization
 
-+ (TBSite *)siteWithRoot:(NSURL *)root {
++ (instancetype)siteWithRoot:(NSURL *)root {
 	TBSite *site = [TBSite new];
 	site.root = root;
 	site.destination = [root URLByAppendingPathComponent:@"Output" isDirectory:YES];

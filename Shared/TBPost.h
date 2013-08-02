@@ -39,7 +39,9 @@
 	@return
 		YES on successful processing, NO if an error was encountered.
  */
-+ (TBPost *)postWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error;
++ (instancetype)postWithURL:(NSURL *)URL
+					 inSite:(TBSite *)site
+					  error:(NSError **)error;
 
 /*!
 	@property author

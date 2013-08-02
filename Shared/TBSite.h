@@ -34,7 +34,7 @@
 		A TBSite instance, initialized to represent the site folder at the given 
 		root directory.
  */
-+ (TBSite *)siteWithRoot:(NSURL *)root;
++ (instancetype)siteWithRoot:(NSURL *)root;
 
 /*!
 	Process the entire site, writing the output into the destination directory.
