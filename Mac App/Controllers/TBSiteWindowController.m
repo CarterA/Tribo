@@ -8,7 +8,6 @@
 //
 
 #import "TBSiteWindowController.h"
-#import "TBViewController.h"
 #import "TBSidebarViewController.h"
 #import "TBAddPostSheetController.h"
 #import "TBSettingsSheetController.h"
