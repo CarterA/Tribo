@@ -10,6 +10,8 @@
 @class TBSiteDocument;
 @interface TBViewController : NSViewController
 @property (nonatomic, weak) TBSiteDocument *document;
+@property (nonatomic, readonly, getter = isViewLoaded) BOOL viewLoaded;
 - (NSString *)defaultNibName;
+- (void)viewWillLoad;
 - (void)viewDidLoad;
 @end

@@ -60,6 +60,8 @@
 		4A7558121436F8390040A10C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558101436F82D0040A10C /* CoreServices.framework */; };
 		4A7558151436FBAD0040A10C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7558131436FBA10040A10C /* ApplicationServices.framework */; };
 		4A78DAAB17A628C000C40AFF /* TBError.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9C9DF17A4831700709238 /* TBError.strings */; };
+		4A78DABC17AB642100C40AFF /* TBSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A78DABA17AB642100C40AFF /* TBSidebarViewController.m */; };
+		4A78DABD17AB642100C40AFF /* TBSidebarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A78DABB17AB642100C40AFF /* TBSidebarView.xib */; };
 		4A8696181437B60400204482 /* tribo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696171437B60400204482 /* tribo.m */; };
 		4A8696241437BE0B00204482 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8696231437BE0B00204482 /* Cocoa.framework */; };
 		4A86964E1437BE3400204482 /* Core.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8696461437BE3400204482 /* Core.m */; };
@@ -162,8 +164,8 @@
 		9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6B669614F3480800759DC3 /* TBTemplatesView.xib */; };
 		9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
 		9B6B669D14F3546C00759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
-		9BEF1C7A14F5CFCF0072B295 /* TBSourceViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */; };
-		9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */; };
+		9BEF1C7A14F5CFCF0072B295 /* TBSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7814F5CFCF0072B295 /* TBSourceViewController.m */; };
+		9BEF1C7B14F5CFCF0072B295 /* TBSourceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7914F5CFCF0072B295 /* TBSourceView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -290,6 +292,9 @@
 		4A7558101436F82D0040A10C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		4A7558131436FBA10040A10C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		4A78DAAC17AA146E00C40AFF /* TBMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBMacros.h; path = Shared/TBMacros.h; sourceTree = SOURCE_ROOT; };
+		4A78DAB917AB642100C40AFF /* TBSidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBSidebarViewController.h; path = Controllers/TBSidebarViewController.h; sourceTree = "<group>"; };
+		4A78DABA17AB642100C40AFF /* TBSidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBSidebarViewController.m; path = Controllers/TBSidebarViewController.m; sourceTree = "<group>"; };
+		4A78DABB17AB642100C40AFF /* TBSidebarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBSidebarView.xib; path = Controllers/TBSidebarView.xib; sourceTree = "<group>"; };
 		4A8696161437B60400204482 /* CLI-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLI-Prefix.pch"; sourceTree = "<group>"; };
 		4A8696171437B60400204482 /* tribo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = tribo.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A8696211437BE0B00204482 /* Tribo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tribo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -389,9 +394,9 @@
 		9B6B669614F3480800759DC3 /* TBTemplatesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBTemplatesView.xib; sourceTree = "<group>"; };
 		9B6B669A14F3546900759DC3 /* TBAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAsset.h; sourceTree = "<group>"; };
 		9B6B669B14F3546900759DC3 /* TBAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAsset.m; sourceTree = "<group>"; };
-		9BEF1C7714F5CFCF0072B295 /* TBSourceViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSourceViewControllerViewController.h; sourceTree = "<group>"; };
-		9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSourceViewControllerViewController.m; sourceTree = "<group>"; };
-		9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSourceViewControllerView.xib; sourceTree = "<group>"; };
+		9BEF1C7714F5CFCF0072B295 /* TBSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSourceViewController.h; sourceTree = "<group>"; };
+		9BEF1C7814F5CFCF0072B295 /* TBSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSourceViewController.m; sourceTree = "<group>"; };
+		9BEF1C7914F5CFCF0072B295 /* TBSourceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSourceView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -917,6 +922,9 @@
 				4A882969143A736F00EBBD7E /* TBSiteWindow.xib */,
 				4AAC8E4C145286E000AE978A /* TBSiteWindowController.h */,
 				4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */,
+				4A78DABB17AB642100C40AFF /* TBSidebarView.xib */,
+				4A78DAB917AB642100C40AFF /* TBSidebarViewController.h */,
+				4A78DABA17AB642100C40AFF /* TBSidebarViewController.m */,
 			);
 			name = TBSiteWindow;
 			path = ..;
@@ -946,9 +954,9 @@
 		9BEF1C7C14F5CFD60072B295 /* TBSourceVIewController */ = {
 			isa = PBXGroup;
 			children = (
-				9BEF1C7714F5CFCF0072B295 /* TBSourceViewControllerViewController.h */,
-				9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */,
-				9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */,
+				9BEF1C7714F5CFCF0072B295 /* TBSourceViewController.h */,
+				9BEF1C7814F5CFCF0072B295 /* TBSourceViewController.m */,
+				9BEF1C7914F5CFCF0072B295 /* TBSourceView.xib */,
 			);
 			name = TBSourceVIewController;
 			sourceTree = "<group>";
@@ -1052,7 +1060,7 @@
 				4ADE327C14E21B3A0059D03C /* Tribo.sdef in Resources */,
 				4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */,
 				9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */,
-				9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */,
+				9BEF1C7B14F5CFCF0072B295 /* TBSourceView.xib in Resources */,
 				4AD7CCF717820B4E009458FF /* TBEditor.xib in Resources */,
 				4AE50F9214F8BB3900FCA39C /* livereload.js in Resources */,
 				4AE50FE114FBD4E100FCA39C /* TBSettingsSheet.xib in Resources */,
@@ -1066,6 +1074,7 @@
 				4AF9C9D417945FA300709238 /* Editor Styles.json in Resources */,
 				4A4301A01518287C003EA175 /* TBNewSiteSheet.xib in Resources */,
 				4A17D451156C769F00789C3D /* Default.tribo in Resources */,
+				4A78DABD17AB642100C40AFF /* TBSidebarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1147,6 +1156,7 @@
 				4A8829161437C52200EBBD7E /* HTTPRedirectResponse.m in Sources */,
 				4A8829171437C52200EBBD7E /* WebSocket.m in Sources */,
 				4A8829181437C52200EBBD7E /* houdini_href_e.c in Sources */,
+				4A78DABC17AB642100C40AFF /* TBSidebarViewController.m in Sources */,
 				4AF9C9DA17A4587700709238 /* TBError.m in Sources */,
 				4A8829191437C52200EBBD7E /* houdini_html_e.c in Sources */,
 				4A88291A1437C52200EBBD7E /* html.c in Sources */,
@@ -1171,7 +1181,7 @@
 				4ADE328514E21C450059D03C /* TBSiteDocument+Scripting.m in Sources */,
 				9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */,
 				9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */,
-				9BEF1C7A14F5CFCF0072B295 /* TBSourceViewControllerViewController.m in Sources */,
+				9BEF1C7A14F5CFCF0072B295 /* TBSourceViewController.m in Sources */,
 				4AE50F8114F882A300FCA39C /* TBSocketConnection.m in Sources */,
 				4AE50F8514F88A6C00FCA39C /* TBWebSocket.m in Sources */,
 				4AE50F8814F8906400FCA39C /* TBHTTPServer.m in Sources */,

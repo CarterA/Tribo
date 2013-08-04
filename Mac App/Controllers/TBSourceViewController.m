@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Opt-6 Products, LLC. All rights reserved.
 //
 
-#import "TBSourceViewControllerViewController.h"
+#import "TBSourceViewController.h"
 #import "TBAsset.h"
 
-@implementation TBSourceViewControllerViewController
+@implementation TBSourceViewController
 
 - (NSString *)defaultNibName {
-	return @"TBSourceViewControllerView";
+	return @"TBSourceView";
 }
 
 - (NSString *)title {

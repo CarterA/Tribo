@@ -9,34 +9,27 @@
 
 #import "TBSiteWindowController.h"
 #import "TBViewController.h"
-#import "TBPostsViewController.h"
-#import "TBTemplatesViewController.h"
-#import "TBSourceViewControllerViewController.h"
+#import "TBSidebarViewController.h"
 #import "TBAddPostSheetController.h"
 #import "TBSettingsSheetController.h"
 #import "TBPublishSheetController.h"
 #import "TBStatusViewController.h"
 #import "TBEditorController.h"
-#import "TBTabView.h"
 #import "TBSiteDocument.h"
 #import "TBSite.h"
-#import "TBPost.h"
 #import "TBHTTPServer.h"
-#import <QuartzCore/QuartzCore.h>
 
 const NSEdgeInsets TBAccessoryViewInsets = {
 	.top = 0.0,
 	.right = 4.0
 };
 
-@interface TBSiteWindowController () <TBTabViewDelegate, TBPostsViewControllerDelegate>
+@interface TBSiteWindowController () <TBSidebarViewControllerDelegate>
 @property (nonatomic, assign) IBOutlet NSView *accessoryView;
 @property (nonatomic, assign) IBOutlet NSMenu *actionMenu;
-@property (nonatomic, assign) IBOutlet TBTabView *tabView;
-@property (nonatomic, assign) IBOutlet NSView *containerView;
+@property (nonatomic, assign) IBOutlet NSView *sidebarView;
 @property (nonatomic, assign) IBOutlet NSView *editorView;
-@property (nonatomic, assign) IBOutlet NSLayoutConstraint *containerViewBottomConstraint;
-@property (nonatomic, assign) NSView *currentView;
+@property (nonatomic, strong) TBSidebarViewController *sidebarViewController;
 @property (nonatomic, strong) TBAddPostSheetController *addPostSheetController;
 @property (nonatomic, strong) TBSettingsSheetController *settingsSheetController;
 @property (nonatomic, strong) TBPublishSheetController *publishSheetController;
@@ -53,41 +46,6 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 }
 
 #pragma mark - View Controller Management
-
-- (TBViewController *)selectedViewController {
-	return (self.viewControllers)[self.selectedViewControllerIndex];
-}
-
-- (void)setSelectedViewControllerIndex:(NSUInteger)selectedViewControllerIndex {
-	_selectedViewControllerIndex = selectedViewControllerIndex;
-	NSView *newView = [(self.viewControllers)[_selectedViewControllerIndex] view];
-	if (self.currentView == newView)
-		return;
-	if (self.currentView)
-		[self.currentView removeFromSuperview];
-	newView.frame = self.containerView.bounds;
-	newView.autoresizingMask = NSViewWidthSizable|NSViewHeightSizable;
-	[self.containerView addSubview:newView];
-	self.currentView = newView;
-}
-
-- (void)setViewControllers:(NSArray *)viewControllers {
-	_viewControllers = viewControllers;
-	self.tabView.titles = [self.viewControllers valueForKey:@"title"];
-	self.tabView.selectedIndex = self.selectedViewControllerIndex;
-}
-
-- (IBAction)switchToPosts:(id)sender {
-    self.tabView.selectedIndex = 0;
-}
-
-- (IBAction)switchToTemplates:(id)sender {
-    self.tabView.selectedIndex = 1;
-}
-
-- (IBAction)switchToSources:(id)sender {
-    self.tabView.selectedIndex = 2;
-}
 
 - (IBAction)showAddPostSheet:(id)sender {
 	TBSiteDocument *document = (TBSiteDocument *)self.document;
@@ -152,36 +110,34 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	[NSAnimationContext beginGrouping];
 	[[NSAnimationContext currentContext] setDuration:animationDuration];
 	NSView *statusView = self.statusViewController.view;
-	NSRect hiddenStatusViewFrame = NSMakeRect(0.0, -statusView.frame.size.height, self.containerView.frame.size.width, statusView.frame.size.height);
+	NSRect hiddenStatusViewFrame = NSMakeRect(0.0, -statusView.frame.size.height, self.sidebarView.frame.size.width, statusView.frame.size.height);
 	NSRect displayedStatusViewFrame = hiddenStatusViewFrame;
+	NSRect hiddenStatusViewSidebarFrame = self.sidebarView.frame;
+	hiddenStatusViewSidebarFrame.size.height = self.editorView.frame.size.height;
+	hiddenStatusViewSidebarFrame.origin.y = 0.0;
+	NSRect displayedStatusViewSidebarFrame = hiddenStatusViewSidebarFrame;
 	displayedStatusViewFrame.origin.y = 0.0;
+	displayedStatusViewSidebarFrame.size.height -= displayedStatusViewFrame.size.height;
+	displayedStatusViewSidebarFrame.origin.y += displayedStatusViewFrame.size.height;
 	if (statusView.superview) {
 		[[NSAnimationContext currentContext] setCompletionHandler:^{
 			[statusView removeFromSuperview];
 		}];
 		[[statusView animator] setFrame:hiddenStatusViewFrame];
-		[[self.containerViewBottomConstraint animator] setConstant:0];
+		[[self.sidebarView animator] setFrame:hiddenStatusViewSidebarFrame];
 	}
 	else {
 		statusView.autoresizingMask = NSViewWidthSizable;
 		statusView.frame = hiddenStatusViewFrame;
-		[self.containerView.superview addSubview:statusView];
+		[self.sidebarView.superview addSubview:statusView];
 		[[statusView animator] setFrame:displayedStatusViewFrame];
-		[[self.containerViewBottomConstraint animator] setConstant:(-1 * statusView.frame.size.height)];
+		[[self.sidebarView animator] setFrame:displayedStatusViewSidebarFrame];
 	}
 	[NSAnimationContext endGrouping];
 }
 
-#pragma mark - Tab View Delegate Methods
-
-- (void)tabView:(TBTabView *)tabView didSelectIndex:(NSUInteger)index {
-	self.selectedViewControllerIndex = index;
-}
-
-#pragma mark - Posts View Delegate Methods
-
-- (void)postsViewDidSelectPost:(TBPost *)post {
-	self.editorController.currentFile = post.URL;
+- (void)sidebarViewDidSelectFile:(NSURL *)selectedFile {
+	self.editorController.currentFile = selectedFile;
 	[self synchronizeWindowTitleWithDocumentName];
 }
 
@@ -191,11 +147,12 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	[super windowDidLoad];
 	
 	// Initialize child view controllers
+	self.sidebarViewController = [TBSidebarViewController new];
+	self.editorController = [TBEditorController new];
 	self.addPostSheetController = [TBAddPostSheetController new];
 	self.settingsSheetController = [TBSettingsSheetController new];
 	self.publishSheetController = [TBPublishSheetController new];
 	self.statusViewController = [TBStatusViewController new];
-	self.editorController = [TBEditorController new];
 	
 	// Add the utility button to the top right of the window
 	NSView *themeFrame = [self.window.contentView superview];
@@ -209,16 +166,12 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	[[(NSButton *)self.accessoryView cell] setHighlightsBy:NSContentsCellMask];
 	[themeFrame addSubview:self.accessoryView];
 	
-	// Configure the sidebar view controllers
-	TBPostsViewController *postsViewController = [TBPostsViewController new];
-	postsViewController.document = self.document;
-	postsViewController.delegate = self;
-	TBTemplatesViewController *templatesController = [TBTemplatesViewController new];
-    templatesController.document = self.document;
-    TBSourceViewControllerViewController *sourcesController = [TBSourceViewControllerViewController new];
-    sourcesController.document = self.document;
-	self.viewControllers = @[postsViewController, templatesController, sourcesController];
-	self.selectedViewControllerIndex = 0;
+	// Configure the sidebar view
+	self.sidebarViewController.document = self.document;
+	self.sidebarViewController.delegate = self;
+	self.sidebarViewController.view.frame = self.sidebarView.frame;
+	[self.sidebarView.superview replaceSubview:self.sidebarView with:self.sidebarViewController.view];
+	self.sidebarView = self.sidebarViewController.view;
 	
 	// Configure the editor view
 	self.editorController.document = self.document;
@@ -226,14 +179,6 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	[self.editorView.superview replaceSubview:self.editorView with:self.editorController.view];
 	self.editorView = self.editorController.view;
 	
-}
-
-- (void)windowDidBecomeKey:(NSNotification *)notification {
-	//self.postCountLabel.textColor = [NSColor controlTextColor];
-}
-
-- (void)windowDidResignKey:(NSNotification *)notification {
-	//self.postCountLabel.textColor = [NSColor disabledControlTextColor];
 }
 
 - (void)synchronizeWindowTitleWithDocumentName {

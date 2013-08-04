@@ -10,13 +10,6 @@
 @class TBViewController, TBAddPostSheetController;
 
 @interface TBSiteWindowController : NSWindowController <NSWindowDelegate>
-@property (nonatomic, strong) NSArray *viewControllers;
-@property (readonly) TBViewController *selectedViewController;
-@property (nonatomic, assign) NSUInteger selectedViewControllerIndex;
-
-- (IBAction)switchToPosts:(id)sender;
-- (IBAction)switchToTemplates:(id)sender;
-- (IBAction)switchToSources:(id)sender;
 
 - (IBAction)showAddPostSheet:(id)sender;
 

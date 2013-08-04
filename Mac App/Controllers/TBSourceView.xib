@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">12E55</string>
-		<string key="IBDocument.InterfaceBuilderVersion">4457.9</string>
+		<string key="IBDocument.InterfaceBuilderVersion">4488.1</string>
 		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">4457.9</string>
+			<string key="NS.object.0">4488.1</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSCustomObject</string>
@@ -46,7 +46,7 @@
 				<string key="NSTreeContentLeafKey">isLeaf</string>
 			</object>
 			<object class="NSScrollView" id="490884874">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSClipView" id="664582501">
@@ -58,7 +58,6 @@
 								<int key="NSvFlags">256</int>
 								<string key="NSFrameSize">{240, 135}</string>
 								<reference key="NSSuperview" ref="664582501"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="890964451"/>
 								<string key="NSReuseIdentifierKey">_NS:13</string>
 								<bool key="NSEnabled">YES</bool>
@@ -162,7 +161,6 @@
 						</array>
 						<string key="NSFrameSize">{240, 135}</string>
 						<reference key="NSSuperview" ref="490884874"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="496895413"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<reference key="NSDocView" ref="496895413"/>
@@ -174,8 +172,6 @@
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{224, 17}, {15, 102}}</string>
 						<reference key="NSSuperview" ref="490884874"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:58</string>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						<reference key="NSTarget" ref="490884874"/>
@@ -184,10 +180,9 @@
 					</object>
 					<object class="NSScroller" id="890964451">
 						<reference key="NSNextResponder" ref="490884874"/>
-						<int key="NSvFlags">-2147483392</int>
-						<string key="NSFrame">{{1, 118}, {238, 16}}</string>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrame">{{0, 119}, {240, 16}}</string>
 						<reference key="NSSuperview" ref="490884874"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="964600664"/>
 						<string key="NSReuseIdentifierKey">_NS:60</string>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -198,8 +193,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{240, 135}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="664582501"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<int key="NSsFlags">133680</int>
@@ -397,42 +390,10 @@
 			<nil key="sourceID"/>
 			<int key="maxID">37</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">TBSourceViewControllerViewController</string>
-					<string key="superclassName">TBViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="assetTree">NSTreeController</string>
-						<string key="outlineView">NSOutlineView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="assetTree">
-							<string key="name">assetTree</string>
-							<string key="candidateClassName">NSTreeController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="outlineView">
-							<string key="name">outlineView</string>
-							<string key="candidateClassName">NSOutlineView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TBSourceViewControllerViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">TBViewController</string>
-					<string key="superclassName">NSViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TBViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">YES</bool>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<integer value="1070" key="NS.object.0"/>

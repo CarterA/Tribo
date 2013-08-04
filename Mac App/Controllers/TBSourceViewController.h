@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TBViewController.h"
 
-@interface TBSourceViewControllerViewController : TBViewController
+@interface TBSourceViewController : TBViewController
 @property (nonatomic, weak) IBOutlet NSOutlineView *outlineView;
 @property (nonatomic, weak) IBOutlet NSTreeController *assetTree;
 @end

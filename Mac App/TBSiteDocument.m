@@ -152,7 +152,7 @@
 	}
 	else {
 		NSError *parsingError;
-		if ([self.site parsePosts:&parsingError])
+		if (![self.site parsePosts:&parsingError])
 			[self presentError:parsingError];
 	}
     [[NSProcessInfo processInfo] enableSuddenTermination];

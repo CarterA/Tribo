@@ -21,10 +21,14 @@
 	return [self className];
 }
 
+- (void)viewWillLoad {}
+
 - (void)viewDidLoad {}
 
 - (void)loadView {
+	[self viewWillLoad];
 	[super loadView];
+	_viewLoaded = YES;
 	[self viewDidLoad];
 }
 
