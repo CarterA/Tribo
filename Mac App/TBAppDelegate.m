@@ -10,7 +10,4 @@
 #import "TBAppDelegate.h"
 
 @implementation TBAppDelegate
-- (void)applicationDidFinishLaunching:(NSNotification *)notification {
-	
-}
 @end
