@@ -18,7 +18,6 @@
 #import "TBPublisher.h"
 #import "TBSocketConnection.h"
 #import "UKFSEventsWatcher.h"
-#import <Quartz/Quartz.h>
 
 @interface TBSiteDocument () <NSTableViewDelegate, TBSiteDelegate>
 @property (nonatomic, strong) UKFSEventsWatcher *sourceWatcher;
@@ -128,7 +127,6 @@
 
 - (void)metadataDidChangeForSite:(TBSite *)site {
 	[self reloadSite];
-	
 }
 
 - (void)reloadSite {

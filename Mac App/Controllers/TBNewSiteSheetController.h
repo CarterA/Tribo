@@ -9,8 +9,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class TBSite;
-
 typedef void(^TBNewSiteSheetCompletionHandler)(NSString *name, NSString *author, NSURL *URL);
 
 @interface TBNewSiteSheetController : NSWindowController

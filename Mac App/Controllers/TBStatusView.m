@@ -3,7 +3,8 @@
 //  Tribo
 //
 //  Created by Carter Allen on 3/15/12.
-//  Copyright (c) 2012 Opt-6 Products, LLC. All rights reserved.
+//  Copyright (c) 2012 The Tribo Authors.
+//  See the included License.md file.
 //
 
 #import "TBStatusView.h"
@@ -18,7 +19,7 @@
 @property (nonatomic, strong) NSColor *graphiteBorderColor;
 @property (nonatomic, strong) NSColor *graphiteHighlightColor;
 @property (nonatomic, assign) IBOutlet NSTextField *titleField;
-@property (nonatomic, strong) NSMutableArray *observers;
+@property (nonatomic, strong) NSArray *observers;
 @end
 
 @implementation TBStatusView
@@ -28,10 +29,11 @@
 		[self setNeedsDisplay:YES];
 	};
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	self.observers = [NSMutableArray array];
-	[self.observers addObject:[center addObserverForName:NSControlTintDidChangeNotification object:NSApp queue:nil usingBlock:needsDisplayBlock]];
-	[self.observers addObject:[center addObserverForName:NSWindowDidResignKeyNotification object:self.window queue:nil usingBlock:needsDisplayBlock]];
-	[self.observers addObject:[center addObserverForName:NSWindowDidBecomeKeyNotification object:self.window queue:nil usingBlock:needsDisplayBlock]];
+	self.observers = @[
+		[center addObserverForName:NSControlTintDidChangeNotification object:NSApp queue:nil usingBlock:needsDisplayBlock],
+		[center addObserverForName:NSWindowDidResignKeyNotification object:self.window queue:nil usingBlock:needsDisplayBlock],
+		[center addObserverForName:NSWindowDidBecomeKeyNotification object:self.window queue:nil usingBlock:needsDisplayBlock]
+	];
 	NSRect titleFrame = self.titleField.frame;
 	titleFrame.size.height += 2.0;
 	titleFrame.origin.y -= 2.0;

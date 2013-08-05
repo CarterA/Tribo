@@ -10,8 +10,6 @@
 #import "TBViewController.h"
 #import <Quartz/Quartz.h>
 
-@class TBSiteDocument;
-
 @interface TBPostsViewController : TBViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource>
 @property (nonatomic, assign) IBOutlet NSTableView *postTableView;
 - (IBAction)editPost:(id)sender;
