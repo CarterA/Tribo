@@ -35,8 +35,10 @@
 	| Attribute |  Type  |                   Notes                   |
 	+-----------+--------+-------------------------------------------+
 	|   font    | string | Full name of a specific, installed, font. |
+	|   size    | float  | Font size, in typographic points.         |
 	|   color   | array  | Array of numbers, [red, green, blue].     |
 	| underline | string | One possible value: "solid".              |
+	|  indent   | float  | Left-indentation, in CoreGraphics points. |
 	+-----------+--------+-------------------------------------------+
 	
 	Note that TBStyleDictionary instances support keyed subscripting, so the 
