@@ -63,13 +63,28 @@
 
 - (void)drawRect:(NSRect)rect {
 	
+	// Pre-calculate rectangles for each tab, because the frames are unreliably rounded
+	NSUInteger numberOfTabs = [self.tabs count];
+	CGFloat tabWidth = floor(self.frame.size.width / numberOfTabs);
+	CGFloat remainder = self.frame.size.width - (tabWidth * numberOfTabs);
+	CGRect tabFrames[numberOfTabs];
+	for (NSUInteger index = 0; index < numberOfTabs; index++) {
+		CGRect tabFrame = {
+			.origin = { .x = (index * tabWidth), .y = 0.0 },
+			.size = { .width = tabWidth, .height = 20.0 }
+		};
+		if (index == (numberOfTabs - 1))
+			tabFrame.size.width += remainder;
+		tabFrames[index] = tabFrame;
+	}
+	
 	// Fill everything with the base white gradient.
 	NSGradient *backgroundGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.98 alpha:1.000] endingColor:[NSColor colorWithDeviceWhite:0.940 alpha:1.000]];
 	[backgroundGradient drawInRect:self.bounds angle:270.0];
 	
 	// Draw a darker gradient over the selected tab.
 	NSGradient *selectionGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.89 alpha:1.0] endingColor:[NSColor colorWithDeviceWhite:0.85 alpha:1.0]];
-	[selectionGradient drawInRect:[(self.tabs)[self.selectedIndex] frame] angle:270.0];
+	[selectionGradient drawInRect:tabFrames[self.selectedIndex] angle:270.0];
 	
 	// Draw an inverted gradient over the clicked tab, if there is one.
 	if (_clickedTab) {
@@ -78,7 +93,7 @@
 			clickedGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.85 alpha:1.0] endingColor:[NSColor colorWithDeviceWhite:0.89 alpha:1.0]];
 		else
 			clickedGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceWhite:0.94 alpha:1.0] endingColor:[NSColor colorWithDeviceWhite:0.98 alpha:1.0]];
-		[clickedGradient drawInRect:_clickedTab.frame angle:270.0];
+		[clickedGradient drawInRect:tabFrames[[self.tabs indexOfObject:_clickedTab]] angle:270.0];
 	}
 	
 	// Draw the bottom border and inset line.
@@ -88,12 +103,12 @@
 	NSRectFill(topBorderRect);
 	
 	// Draw border lines and titles for each tab.
-	[self.tabs enumerateObjectsUsingBlock:^(TBTab *tab, NSUInteger index, BOOL *stop) {
+	for (NSUInteger index = 0; index < [self.tabs count]; index++) {
 		if (index != (self.tabs.count) && index != 0) {
-			NSRect lineRect = NSMakeRect(tab.frame.size.width * index, 0.0, 1.0, tab.frame.size.height);
+			NSRect lineRect = NSMakeRect(tabFrames[index].origin.x, 0.0, 1.0, self.frame.size.height);
 			NSRectFill(lineRect);
 		}
-	}];
+	}
 	
 }
 
