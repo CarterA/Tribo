@@ -183,7 +183,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" title="SFTP" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="3178" id="3176">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="3177">
                                 <items>
                                     <menuItem title="SFTP" state="on" image="NSLockLockedTemplate" id="3178"/>
@@ -387,25 +387,14 @@ Gw
                         </scroller>
                     </scrollView>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="uGP-Ud-h38">
-                        <rect key="frame" x="17" y="221" width="177" height="26"/>
+                        <rect key="frame" x="104" y="222" width="274" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Filters are scripts that modify page content during site processing." id="ulZ-JH-25s">
+                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Filters are scripts that modify page and post content during site processing." id="ulZ-JH-25s">
                             <font key="font" size="10" name="LucidaGrande"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="a9N-92-6b6">
-                        <rect key="frame" x="193" y="217" width="188" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Reveal filters folder..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NNR-0v-x8a">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="revealFiltersFolder:" target="-2" id="L3h-dS-FWg"/>
-                        </connections>
-                    </button>
                 </subviews>
             </view>
             <connections>

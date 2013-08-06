@@ -32,7 +32,6 @@
 @property (nonatomic, strong) NSMutableArray *enabledFilters;
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-- (IBAction)revealFiltersFolder:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)uploadViaPopUpDidChange:(id)sender;
@@ -61,11 +60,6 @@
 	[self updatePlaceholders];
 	[self.filtersTable reloadData];
 	[NSApp beginSheet:self.window modalForWindow:window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:nil];
-}
-
-- (IBAction)revealFiltersFolder:(id)sender {
-	NSURL *scriptsDirectory = [[NSFileManager defaultManager] URLForDirectory:NSApplicationScriptsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-	[[NSWorkspace sharedWorkspace] selectFile:scriptsDirectory.path inFileViewerRootedAtPath:nil];
 }
 
 - (IBAction)uploadViaPopUpDidChange:(id)sender {
