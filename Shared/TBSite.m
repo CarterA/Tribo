@@ -269,8 +269,9 @@
 			if (error) *error = blockError;
 			return NO;
 		}
-		NSString *standardErrorContents = [NSString stringWithUTF8String:[standardError.fileHandleForReading readDataToEndOfFile].bytes];
-		if (standardErrorContents.length > 0) {
+		NSData *standardErrorData = [standardError.fileHandleForReading readDataToEndOfFile];
+		if (standardErrorData.length > 0) {
+			NSString *standardErrorContents = [NSString stringWithUTF8String:standardErrorData.bytes];
 			if (error) *error = TBError.filterStandardError(filterURL, standardErrorContents);
 			return NO;
 		}
