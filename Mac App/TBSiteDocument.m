@@ -57,6 +57,7 @@
 		[self.server start:nil];
 		[self.server refreshPages];
 		[self.sourceWatcher startWatching];
+		[self.postsWatcher stopWatching];
 		NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]];
 		[[NSWorkspace sharedWorkspace] openURL:localURL];
 		
@@ -75,6 +76,7 @@
 
 - (void)stopPreview {
 	[self.sourceWatcher stopWatching];
+	[self.postsWatcher startWatching];
 	[self.server stop];
 }
 
