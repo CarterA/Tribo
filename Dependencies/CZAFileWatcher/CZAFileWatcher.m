@@ -47,14 +47,18 @@ static void eventCallback(ConstFSEventStreamRef eventStreamRef, void *callbackIn
 #pragma mark - Event Stream Interaction
 
 - (void)startWatching {
-	if (!_eventStreamIsRunning)
+	if (!_eventStreamIsRunning) {
+		FSEventStreamSetDispatchQueue(self.eventStream, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
 		FSEventStreamStart(self.eventStream);
+	}
 	_eventStreamIsRunning = YES;
 }
 
 - (void)stopWatching {
-	if (_eventStreamIsRunning)
+	if (_eventStreamIsRunning) {
 		FSEventStreamStop(self.eventStream);
+		FSEventStreamInvalidate(self.eventStream);
+	}
 	_eventStreamIsRunning = NO;
 }
 
@@ -68,7 +72,6 @@ static void eventCallback(ConstFSEventStreamRef eventStreamRef, void *callbackIn
 	};
 	CFArrayRef paths = (__bridge CFArrayRef)[[self cza_directoryURLs] valueForKey:@"path"];
 	FSEventStreamRef eventStream = FSEventStreamCreate(kCFAllocatorDefault, &eventCallback, &context, paths, kFSEventStreamEventIdSinceNow, 1.0, kFSEventStreamCreateFlagUseCFTypes);
-	FSEventStreamSetDispatchQueue(eventStream, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
 	self.eventStream = eventStream;
 }
 
