@@ -26,6 +26,7 @@
 		4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A43C23314EAB89600D1CC7B /* MainMenu.xib */; };
 		4A57A566150F8BAA00DACDBC /* TBStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A57A564150F8BAA00DACDBC /* TBStatusViewController.m */; };
 		4A57A567150F8BAA00DACDBC /* TBStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A57A565150F8BAA00DACDBC /* TBStatusView.xib */; };
+		4A6A0D2717B41B2800E5F06D /* TBPage+LiveReload.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F9A14F95ED500FCA39C /* TBPage+LiveReload.m */; };
 		4A6DC8EC1430203B00CB5025 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6DC8EB1430203B00CB5025 /* Foundation.framework */; };
 		4A72F131143686AE00A164E9 /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F128143686AE00A164E9 /* autolink.c */; };
 		4A72F132143686AE00A164E9 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A72F12A143686AE00A164E9 /* buffer.c */; };
@@ -102,6 +103,10 @@
 		4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A882968143A736E00EBBD7E /* TBSiteDocument.m */; };
 		4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A882969143A736F00EBBD7E /* TBSiteWindow.xib */; };
 		4A99C42917B4091D0023C9A9 /* CZAFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A99C42117B4091D0023C9A9 /* CZAFileWatcher.m */; };
+		4A99C43017B40F760023C9A9 /* TBHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8714F8906400FCA39C /* TBHTTPServer.m */; };
+		4A99C43117B40F790023C9A9 /* TBSocketConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8014F882A300FCA39C /* TBSocketConnection.m */; };
+		4A99C43217B40F7B0023C9A9 /* TBWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8414F88A6C00FCA39C /* TBWebSocket.m */; };
+		4A99C43417B40F9B0023C9A9 /* CZAFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A99C42117B4091D0023C9A9 /* CZAFileWatcher.m */; };
 		4A9ED51F15069CD6009C5754 /* CURLHandle+extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A9ED52015069CD6009C5754 /* CURLHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED51E15069CD6009C5754 /* CURLHandle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A9ED52115069CE3009C5754 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9ED51815069CB6009C5754 /* libcurl.dylib */; };
@@ -136,8 +141,6 @@
 		4AE50F8114F882A300FCA39C /* TBSocketConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8014F882A300FCA39C /* TBSocketConnection.m */; };
 		4AE50F8514F88A6C00FCA39C /* TBWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8414F88A6C00FCA39C /* TBWebSocket.m */; };
 		4AE50F8814F8906400FCA39C /* TBHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F8714F8906400FCA39C /* TBHTTPServer.m */; };
-		4AE50F9214F8BB3900FCA39C /* livereload.js in Resources */ = {isa = PBXBuildFile; fileRef = 4AE50F8F14F8BB2200FCA39C /* livereload.js */; };
-		4AE50F9814F95E0B00FCA39C /* LiveReload Snippet.html in Resources */ = {isa = PBXBuildFile; fileRef = 4AE50F9714F95E0B00FCA39C /* LiveReload Snippet.html */; };
 		4AE50F9B14F95ED500FCA39C /* TBPage+LiveReload.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50F9A14F95ED500FCA39C /* TBPage+LiveReload.m */; };
 		4AE50FE014FBD4E100FCA39C /* TBSettingsSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE50FDE14FBD4E100FCA39C /* TBSettingsSheetController.m */; };
 		4AE50FE114FBD4E100FCA39C /* TBSettingsSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE50FDF14FBD4E100FCA39C /* TBSettingsSheet.xib */; };
@@ -351,8 +354,6 @@
 		4AE50F8414F88A6C00FCA39C /* TBWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBWebSocket.m; sourceTree = "<group>"; };
 		4AE50F8614F8906400FCA39C /* TBHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBHTTPServer.h; sourceTree = "<group>"; };
 		4AE50F8714F8906400FCA39C /* TBHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHTTPServer.m; sourceTree = "<group>"; };
-		4AE50F8F14F8BB2200FCA39C /* livereload.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = livereload.js; sourceTree = "<group>"; };
-		4AE50F9714F95E0B00FCA39C /* LiveReload Snippet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "LiveReload Snippet.html"; sourceTree = "<group>"; };
 		4AE50F9914F95ED500FCA39C /* TBPage+LiveReload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBPage+LiveReload.h"; sourceTree = "<group>"; };
 		4AE50F9A14F95ED500FCA39C /* TBPage+LiveReload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBPage+LiveReload.m"; sourceTree = "<group>"; };
 		4AE50FDD14FBD4E100FCA39C /* TBSettingsSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSettingsSheetController.h; sourceTree = "<group>"; };
@@ -491,12 +492,10 @@
 				4AB27971151557D7009D7F93 /* Arrow@2x.png */,
 				4AB27972151557D7009D7F93 /* Stop.png */,
 				4AB27973151557D7009D7F93 /* Stop@2x.png */,
-				4AE50F8F14F8BB2200FCA39C /* livereload.js */,
 				4A43C23314EAB89600D1CC7B /* MainMenu.xib */,
 				4A30E879144B86F4001DDBAE /* Credits.rtf */,
 				4AA29D0114E42ED5005E341F /* Tribo.entitlements */,
 				4A8696491437BE3400204482 /* Info.plist */,
-				4AE50F9714F95E0B00FCA39C /* LiveReload Snippet.html */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1008,7 +1007,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AE91C5E14FEE15700499469 /* Tribo Authentication Tool in Resources */,
-				4AE50F9814F95E0B00FCA39C /* LiveReload Snippet.html in Resources */,
 				4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */,
 				4ABD6A4C143FE495007E2F5D /* TBAddPostSheet.xib in Resources */,
 				4ABD6A5114417DBE007E2F5D /* TBQLPreviewView.xib in Resources */,
@@ -1018,7 +1016,6 @@
 				4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */,
 				9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */,
 				9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */,
-				4AE50F9214F8BB3900FCA39C /* livereload.js in Resources */,
 				4AE50FE114FBD4E100FCA39C /* TBSettingsSheet.xib in Resources */,
 				4A2E84CD14FDD969008FE2C4 /* rsync in Resources */,
 				4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */,
@@ -1043,6 +1040,7 @@
 				4AF9C9D917A4587700709238 /* TBError.m in Sources */,
 				4A00337B1430216500F6702F /* TBSite.m in Sources */,
 				4A00337E143028CA00F6702F /* TBPost.m in Sources */,
+				4A99C43417B40F9B0023C9A9 /* CZAFileWatcher.m in Sources */,
 				4A03890015085F87006C7A0D /* TBConstants.m in Sources */,
 				4A72F131143686AE00A164E9 /* autolink.c in Sources */,
 				4A72F132143686AE00A164E9 /* buffer.c in Sources */,
@@ -1050,6 +1048,7 @@
 				4A72F134143686AE00A164E9 /* stack.c in Sources */,
 				4A72F13C143688D900A164E9 /* houdini_href_e.c in Sources */,
 				4A72F13D143688D900A164E9 /* houdini_html_e.c in Sources */,
+				4A6A0D2717B41B2800E5F06D /* TBPage+LiveReload.m in Sources */,
 				4A72F13E143688D900A164E9 /* html.c in Sources */,
 				4A72F13F143688D900A164E9 /* html_smartypants.c in Sources */,
 				4A72F14214368E1200A164E9 /* TBPage.m in Sources */,
@@ -1059,14 +1058,17 @@
 				4A7557E01436F4D70040A10C /* HTTPAuthenticationRequest.m in Sources */,
 				4A7557E11436F4D70040A10C /* HTTPConnection.m in Sources */,
 				4A7557E21436F4D70040A10C /* HTTPMessage.m in Sources */,
+				4A99C43117B40F790023C9A9 /* TBSocketConnection.m in Sources */,
 				4A7557E31436F4D70040A10C /* HTTPServer.m in Sources */,
 				4A7557E41436F4D70040A10C /* HTTPAsyncFileResponse.m in Sources */,
 				4A7557E51436F4D70040A10C /* HTTPDataResponse.m in Sources */,
 				4A7557E61436F4D70040A10C /* HTTPDynamicFileResponse.m in Sources */,
 				4A7557E71436F4D70040A10C /* HTTPFileResponse.m in Sources */,
+				4A99C43017B40F760023C9A9 /* TBHTTPServer.m in Sources */,
 				4A7557E81436F4D70040A10C /* HTTPRedirectResponse.m in Sources */,
 				4A7557E91436F4D70040A10C /* WebSocket.m in Sources */,
 				4A7558001436F6190040A10C /* GCDAsyncSocket.m in Sources */,
+				4A99C43217B40F7B0023C9A9 /* TBWebSocket.m in Sources */,
 				4A7558011436F6190040A10C /* DDAbstractDatabaseLogger.m in Sources */,
 				4A3DE5FE176CF16C00C20026 /* NSDateFormatter+TBAdditions.m in Sources */,
 				4A7558021436F6190040A10C /* DDASLLogger.m in Sources */,
@@ -1279,6 +1281,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
 				);
+				OTHER_LDFLAGS = (
+					"-Wl",
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"$SRCROOT/Mac\\ App/Resources/Info.plist",
+				);
 				PRODUCT_NAME = tribo;
 			};
 			name = Debug;
@@ -1291,6 +1300,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies/GRMustache/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl",
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"$SRCROOT/Mac\\ App/Resources/Info.plist",
 				);
 				PRODUCT_NAME = tribo;
 			};
