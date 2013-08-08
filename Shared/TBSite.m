@@ -221,10 +221,8 @@
 		if (![self writePage:page toDestination:pageDestination error:error])
 			return NO;
 	}
-	else {
-		if (![[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:error])
-			return NO;
-	}
+	else
+		[[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:error];
 	return YES;
 }
 
