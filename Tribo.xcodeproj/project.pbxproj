@@ -98,11 +98,10 @@
 		4A8829231437C53000EBBD7E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A75580A1436F6590040A10C /* CoreFoundation.framework */; };
 		4A8829241437C53000EBBD7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6DC8EB1430203B00CB5025 /* Foundation.framework */; };
 		4A8829251437C53000EBBD7E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A75580D1436F6820040A10C /* Security.framework */; };
-		4A8829491438EB9F00EBBD7E /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A88294A1438EB9F00EBBD7E /* UKFSEventsWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A8829561438F56B00EBBD7E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */; };
 		4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A882968143A736E00EBBD7E /* TBSiteDocument.m */; };
 		4A88296B143A737000EBBD7E /* TBSiteWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A882969143A736F00EBBD7E /* TBSiteWindow.xib */; };
+		4A99C42917B4091D0023C9A9 /* CZAFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A99C42117B4091D0023C9A9 /* CZAFileWatcher.m */; };
 		4A9ED51F15069CD6009C5754 /* CURLHandle+extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A9ED52015069CD6009C5754 /* CURLHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED51E15069CD6009C5754 /* CURLHandle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4A9ED52115069CE3009C5754 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A9ED51815069CB6009C5754 /* libcurl.dylib */; };
@@ -294,14 +293,12 @@
 		4A8696481437BE3400204482 /* TBAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A8696491437BE3400204482 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A86964A1437BE3400204482 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
-		4A8829451438EB9F00EBBD7E /* UKFileWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFileWatcher.h; sourceTree = "<group>"; };
-		4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
-		4A8829471438EB9F00EBBD7E /* UKFSEventsWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFSEventsWatcher.h; sourceTree = "<group>"; };
-		4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFSEventsWatcher.m; sourceTree = "<group>"; };
 		4A8829541438F55F00EBBD7E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		4A882967143A736E00EBBD7E /* TBSiteDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBSiteDocument.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A882968143A736E00EBBD7E /* TBSiteDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBSiteDocument.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A882969143A736F00EBBD7E /* TBSiteWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBSiteWindow.xib; path = Controllers/TBSiteWindow.xib; sourceTree = "<group>"; };
+		4A99C42017B4091D0023C9A9 /* CZAFileWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZAFileWatcher.h; sourceTree = "<group>"; };
+		4A99C42117B4091D0023C9A9 /* CZAFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZAFileWatcher.m; sourceTree = "<group>"; };
 		4A9ED51815069CB6009C5754 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
 		4A9ED51B15069CD6009C5754 /* CURLHandle+extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CURLHandle+extras.h"; sourceTree = "<group>"; };
 		4A9ED51C15069CD6009C5754 /* CURLHandle+extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CURLHandle+extras.m"; sourceTree = "<group>"; };
@@ -431,10 +428,10 @@
 			children = (
 				4A7557BE1436F4D70040A10C /* CocoaHTTPServer */,
 				4A9ED51A15069CD6009C5754 /* CurlHandle */,
+				4A99C41E17B4091D0023C9A9 /* CZAFileWatcher */,
 				4A72F1271436868B00A164E9 /* Sundown */,
 				4A2E84CB14FDD969008FE2C4 /* Rsync */,
 				4A72F125143155AE00A164E9 /* GRMustache */,
-				4A8829441438EB9F00EBBD7E /* UKFileWatcher */,
 			);
 			name = Dependencies;
 			path = Tribo;
@@ -760,16 +757,14 @@
 			path = "Mac App";
 			sourceTree = "<group>";
 		};
-		4A8829441438EB9F00EBBD7E /* UKFileWatcher */ = {
+		4A99C41E17B4091D0023C9A9 /* CZAFileWatcher */ = {
 			isa = PBXGroup;
 			children = (
-				4A8829451438EB9F00EBBD7E /* UKFileWatcher.h */,
-				4A8829461438EB9F00EBBD7E /* UKFileWatcher.m */,
-				4A8829471438EB9F00EBBD7E /* UKFSEventsWatcher.h */,
-				4A8829481438EB9F00EBBD7E /* UKFSEventsWatcher.m */,
+				4A99C42017B4091D0023C9A9 /* CZAFileWatcher.h */,
+				4A99C42117B4091D0023C9A9 /* CZAFileWatcher.m */,
 			);
-			name = UKFileWatcher;
-			path = Dependencies/UKFileWatcher;
+			name = CZAFileWatcher;
+			path = Dependencies/CZAFileWatcher;
 			sourceTree = SOURCE_ROOT;
 		};
 		4A9ED51A15069CD6009C5754 /* CurlHandle */ = {
@@ -1123,8 +1118,6 @@
 				4A88291F1437C52200EBBD7E /* stack.c in Sources */,
 				4A86964E1437BE3400204482 /* Core.m in Sources */,
 				4A86964F1437BE3400204482 /* TBAppDelegate.m in Sources */,
-				4A8829491438EB9F00EBBD7E /* UKFileWatcher.m in Sources */,
-				4A88294A1438EB9F00EBBD7E /* UKFSEventsWatcher.m in Sources */,
 				4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */,
 				4ABD6A49143FE466007E2F5D /* TBAddPostSheetController.m in Sources */,
 				4ABD6A4F1441689B007E2F5D /* TBTableView.m in Sources */,
@@ -1157,6 +1150,7 @@
 				4AB2796015152660009D7F93 /* TBShadowedTextFieldCell.m in Sources */,
 				4AB2796715154796009D7F93 /* TBShadowedButtonCell.m in Sources */,
 				4A43019F1518287C003EA175 /* TBNewSiteSheetController.m in Sources */,
+				4A99C42917B4091D0023C9A9 /* CZAFileWatcher.m in Sources */,
 				4AA86A6C173EF28200046691 /* TBSite+TemplateAdditions.m in Sources */,
 				4AA86A70174124C300046691 /* TBPost+TemplateAdditions.m in Sources */,
 			);
