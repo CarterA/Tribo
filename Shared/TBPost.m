@@ -22,8 +22,7 @@
 
 - (BOOL)parse:(NSError **)error {
 	
-	if (![self loadMarkdownContent:error])
-		return NO;
+	[self loadMarkdownContent];
 	
 	if (![self parseDateAndSlug:error])
 		return NO;
@@ -36,19 +35,14 @@
 	
 }
 
-- (BOOL)loadMarkdownContent:(NSError **)error {
-	NSString *markdownContent = [NSString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:error];
-	if (!markdownContent) return NO;
-    if (![markdownContent length]) {
-        if (error) *error = TBError.emptyPostFile(self.URL);
-        return NO;
-    }
+- (void)loadMarkdownContent; {
+	NSString *markdownContent = [NSString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
 	self.markdownContent = markdownContent;
-	return YES;
 }
 
 - (void)parseTitle {
 	// Titles are optional. A single # header on the first line of the document is regarded as the title.
+	if (!self.markdownContent || ![self.markdownContent length]) return;
 	NSMutableString *markdownContent = [self.markdownContent mutableCopy];
 	static NSRegularExpression *headerRegex;
 	if (headerRegex == nil)
@@ -84,6 +78,7 @@
 }
 
 - (void)parseMarkdownContent {
+	if (!self.markdownContent || ![self.markdownContent length]) return;
 	// Create and fill a buffer for with the raw markdown data.
 	if ([self.markdownContent length] == 0) return;
 	struct sd_callbacks callbacks;

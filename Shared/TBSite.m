@@ -111,10 +111,7 @@
 	if (!postsDirectoryContents) return NO;
 	for (NSURL *postURL in postsDirectoryContents) {
 		TBPost *post = [TBPost postWithURL:postURL inSite:self error:error];
-		if (!post) {
-			return NO;
-		}
-		[posts addObject:post];
+		if (post) [posts addObject:post];
 	}
 	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
 	self.posts = posts;

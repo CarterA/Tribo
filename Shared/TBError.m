@@ -18,7 +18,6 @@ enum {
 	TBErrorBadPostFileName,
 	TBErrorMissingSourceDirectory,
 	TBErrorFilterStandardError,
-	TBErrorEmptyPostFile,
 	TBErrorEmptyPageFile
 };
 
@@ -47,11 +46,6 @@ static NSError *filterStandardError(NSURL *filterURL, NSString *standardError) {
 	return [NSError errorWithDomain:TBErrorDomain code:TBErrorFilterStandardError userInfo:@{NSLocalizedDescriptionKey: description}];
 }
 
-static NSError *emptyPostFile(NSURL *postURL) {
-	NSString *description = [NSString stringWithFormat:NSLocalizedStringFromTable(@"EMPTY_POST_FILE", TBErrorStringsTable, nil), postURL.path];
-	return [NSError errorWithDomain:TBErrorDomain code:TBErrorEmptyPostFile userInfo:@{NSLocalizedDescriptionKey: description}];
-}
-
 static NSError *emptyPageFile(NSURL *pageURL) {
 	NSString *description = [NSString stringWithFormat:NSLocalizedStringFromTable(@"EMPTY_PAGE_FILE", TBErrorStringsTable, nil), pageURL.path];
 	return [NSError errorWithDomain:TBErrorDomain code:TBErrorEmptyPageFile userInfo:@{NSLocalizedDescriptionKey: description}];
@@ -63,6 +57,5 @@ const struct TBError TBError = {
 	.badPostFileName = badPostFileName,
 	.missingSourceDirectory = missingSourceDirectory,
 	.filterStandardError = filterStandardError,
-	.emptyPostFile = emptyPostFile,
 	.emptyPageFile = emptyPageFile
 };
