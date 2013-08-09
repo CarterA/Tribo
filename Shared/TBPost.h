@@ -34,10 +34,10 @@
 	@param site
 		The TBSite object which contains the post.
 	@param error
-		If the return value is NO, then this argument will contain an NSError 
+		If the return value is nil, then this argument will contain an NSError
 		object describing what went wrong.
 	@return
-		YES on successful processing, NO if an error was encountered.
+		A TBPost object, or nil if an error was encountered.
  */
 + (instancetype)postWithURL:(NSURL *)URL
 					 inSite:(TBSite *)site

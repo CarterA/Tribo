@@ -16,7 +16,7 @@
 
 @implementation TBPost
 
-+ (instancetype)postWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error{
++ (instancetype)postWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error {
 	return (TBPost *)[super pageWithURL:URL inSite:site error:error];
 }
 
