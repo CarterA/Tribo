@@ -13,5 +13,4 @@ extern const struct TBError {
 	NSError *(*badPostFileName)(NSURL *postURL);
 	NSError *(*missingSourceDirectory)(NSURL *sourceDirectory);
 	NSError *(*filterStandardError)(NSURL *filterURL, NSString *standardError);
-	NSError *(*emptyPageFile)(NSURL *pageURL);
 } TBError;

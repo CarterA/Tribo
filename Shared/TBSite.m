@@ -212,8 +212,7 @@
 	[[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
 	
 	if ([extension isEqualToString:@"mustache"]) {
-		TBPage *page = [TBPage pageWithURL:URL inSite:self error:error];
-		if (!page) return NO;
+		TBPage *page = [TBPage pageWithURL:URL inSite:self error:nil];
 		NSURL *pageDestination = [[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"];
 		if (![self writePage:page toDestination:pageDestination error:error])
 			return NO;
@@ -225,7 +224,8 @@
 
 - (BOOL)writePage:(TBPage *)page toDestination:(NSURL *)destination error:(NSError **)error {
 	if (!page) return NO;
-	NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
+	NSString *pageContent = page.content ?: @"";
+	NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:pageContent];
 	GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:error];
 	if (!pageTemplate) return NO;
 	NSString *renderedPage = [pageTemplate renderObject:page error:error];
