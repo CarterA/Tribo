@@ -125,7 +125,6 @@
 		4AAC8E461451EFA800AE978A /* TBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E421451EF9200AE978A /* TBViewController.m */; };
 		4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */; };
 		4AAC8E5D1456609400AE978A /* TBPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5C1456609300AE978A /* TBPostsViewController.m */; };
-		4AAC8E5F1456617000AE978A /* TBPostsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AAC8E5E1456616F00AE978A /* TBPostsView.xib */; };
 		4AB2796015152660009D7F93 /* TBShadowedTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2795F15152660009D7F93 /* TBShadowedTextFieldCell.m */; };
 		4AB2796715154796009D7F93 /* TBShadowedButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB2796615154796009D7F93 /* TBShadowedButtonCell.m */; };
 		4AB27974151557D7009D7F93 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AB27970151557D7009D7F93 /* Arrow.png */; };
@@ -158,6 +157,7 @@
 		4AE91C6614FF044700499469 /* TBPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6514FF044700499469 /* TBPublisher.m */; };
 		4AE91C7114FF16ED00499469 /* TBPublishSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */; };
 		4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */; };
+		4AEA97EE17B5D1CB00164C7B /* TBPostsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AEA97ED17B5D1CB00164C7B /* TBPostsView.xib */; };
 		4AF9C9D417945FA300709238 /* Editor Styles.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D317945FA300709238 /* Editor Styles.json */; };
 		4AF9C9D71797155600709238 /* TBStyleDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D61797151800709238 /* TBStyleDictionary.m */; };
 		4AF9C9D917A4587700709238 /* TBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D817A4587700709238 /* TBError.m */; };
@@ -335,7 +335,6 @@
 		4AAC8E4D145286E000AE978A /* TBSiteWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TBSiteWindowController.m; path = Controllers/TBSiteWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4AAC8E5B1456609300AE978A /* TBPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TBPostsViewController.h; path = Controllers/TBPostsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AAC8E5C1456609300AE978A /* TBPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TBPostsViewController.m; path = Controllers/TBPostsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4AAC8E5E1456616F00AE978A /* TBPostsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBPostsView.xib; path = Controllers/TBPostsView.xib; sourceTree = "<group>"; };
 		4AB2795E15152660009D7F93 /* TBShadowedTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBShadowedTextFieldCell.h; sourceTree = "<group>"; };
 		4AB2795F15152660009D7F93 /* TBShadowedTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBShadowedTextFieldCell.m; sourceTree = "<group>"; };
 		4AB2796515154796009D7F93 /* TBShadowedButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBShadowedButtonCell.h; sourceTree = "<group>"; };
@@ -381,6 +380,7 @@
 		4AE91C6E14FF16ED00499469 /* TBPublishSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPublishSheetController.h; sourceTree = "<group>"; };
 		4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPublishSheetController.m; sourceTree = "<group>"; };
 		4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBPublishSheet.xib; sourceTree = "<group>"; };
+		4AEA97ED17B5D1CB00164C7B /* TBPostsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TBPostsView.xib; path = Controllers/TBPostsView.xib; sourceTree = "<group>"; };
 		4AF9C9D317945FA300709238 /* Editor Styles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Editor Styles.json"; sourceTree = "<group>"; };
 		4AF9C9D51797151800709238 /* TBStyleDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBStyleDictionary.h; sourceTree = "<group>"; };
 		4AF9C9D61797151800709238 /* TBStyleDictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBStyleDictionary.m; sourceTree = "<group>"; };
@@ -515,7 +515,6 @@
 				4A30E879144B86F4001DDBAE /* Credits.rtf */,
 				4AA29D0114E42ED5005E341F /* Tribo.entitlements */,
 				4A8696491437BE3400204482 /* Info.plist */,
-				4AE50F9714F95E0B00FCA39C /* LiveReload Snippet.html */,
 				4AF9C9D317945FA300709238 /* Editor Styles.json */,
 			);
 			path = Resources;
@@ -902,7 +901,7 @@
 		4AEF0C5014A183C200F0E021 /* TBPostsView */ = {
 			isa = PBXGroup;
 			children = (
-				4AAC8E5E1456616F00AE978A /* TBPostsView.xib */,
+				4AEA97ED17B5D1CB00164C7B /* TBPostsView.xib */,
 				4AAC8E5B1456609300AE978A /* TBPostsViewController.h */,
 				4AAC8E5C1456609300AE978A /* TBPostsViewController.m */,
 				4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */,
@@ -1050,13 +1049,11 @@
 				4ABD6A4C143FE495007E2F5D /* TBAddPostSheet.xib in Resources */,
 				4ABD6A5114417DBE007E2F5D /* TBQLPreviewView.xib in Resources */,
 				4A30E87B144B8763001DDBAE /* Credits.rtf in Resources */,
-				4AAC8E5F1456617000AE978A /* TBPostsView.xib in Resources */,
 				4ADE327C14E21B3A0059D03C /* Tribo.sdef in Resources */,
 				4A43C23514EAB89600D1CC7B /* MainMenu.xib in Resources */,
 				9B6B669814F3480800759DC3 /* TBTemplatesView.xib in Resources */,
 				9BEF1C7B14F5CFCF0072B295 /* TBSourceView.xib in Resources */,
 				4AD7CCF717820B4E009458FF /* TBEditor.xib in Resources */,
-				4AE50F9214F8BB3900FCA39C /* livereload.js in Resources */,
 				4AE50FE114FBD4E100FCA39C /* TBSettingsSheet.xib in Resources */,
 				4A2E84CD14FDD969008FE2C4 /* rsync in Resources */,
 				4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */,
@@ -1064,6 +1061,7 @@
 				4AB27974151557D7009D7F93 /* Arrow.png in Resources */,
 				4AB27975151557D7009D7F93 /* Arrow@2x.png in Resources */,
 				4AB27976151557D7009D7F93 /* Stop.png in Resources */,
+				4AEA97EE17B5D1CB00164C7B /* TBPostsView.xib in Resources */,
 				4AB27977151557D7009D7F93 /* Stop@2x.png in Resources */,
 				4AF9C9D417945FA300709238 /* Editor Styles.json in Resources */,
 				4A4301A01518287C003EA175 /* TBNewSiteSheet.xib in Resources */,
