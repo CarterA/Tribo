@@ -46,6 +46,7 @@
 	if (headerRegex == nil)
 		headerRegex = [NSRegularExpression regularExpressionWithPattern:@"#[ \\t](.*)[ \\t]#" options:0 error:nil];
 	NSRange firstLineRange = NSMakeRange(0, [markdownContent rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location);
+	if (firstLineRange.length == NSNotFound) return;
 	NSString *firstLine = [markdownContent substringWithRange:firstLineRange];
 	NSTextCheckingResult *titleResult = [headerRegex firstMatchInString:firstLine options:0 range:NSMakeRange(0, firstLine.length)];
 	if (titleResult) {
