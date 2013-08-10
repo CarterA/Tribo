@@ -20,7 +20,9 @@
 
 - (void)publish {
 	
+	self.site.published = YES;
 	[self.site process:nil];
+	self.site.published = NO;
 	
 	NSString *hostname = (self.site.metadata)[TBSiteServerKey];
 	NSString *remotePath = (self.site.metadata)[TBSiteRemotePathKey];

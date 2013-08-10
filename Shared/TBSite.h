@@ -140,6 +140,8 @@
 @property (nonatomic, strong) NSDictionary *metadata;
 @property (nonatomic, weak) id <TBSiteDelegate> delegate;
 
+@property (nonatomic, assign, getter=isPublished) BOOL published;
+
 @end
 
 @protocol TBSiteDelegate <NSObject>
