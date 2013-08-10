@@ -44,6 +44,12 @@
 					  error:(NSError **)error;
 
 /*!
+	Parse the contents of the markdownContent property, saving the HTML output
+	to the content property.
+ */
+- (void)parseMarkdownContent;
+
+/*!
 	@property author
 		The name of the person who wrote the post. This property is not
 		currently implemented.

@@ -111,6 +111,7 @@
 	if (!postsDirectoryContents) return NO;
 	for (NSURL *postURL in postsDirectoryContents) {
 		TBPost *post = [TBPost postWithURL:postURL inSite:self error:error];
+		[post parseMarkdownContent];
 		if (post) [posts addObject:post];
 	}
 	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
@@ -140,16 +141,21 @@
 		if (![[NSFileManager defaultManager] createDirectoryAtURL:destinationDirectory withIntermediateDirectories:YES attributes:nil error:error])
 			return NO;
 		
+		// Filter the markdownContent of the post.
+		NSString *filteredMarkdownContent = [self filteredContent:(post.markdownContent ?: @"") fromFile:post.URL error:error];
+		if (!filteredMarkdownContent)
+			return NO;
+		post.markdownContent = filteredMarkdownContent;
+		[post parseMarkdownContent];
+		
 		// Set up the template loader with this post's content, and then render it all into the post template.
 		NSString *renderedContent = [self.postTemplate renderObject:post error:error];
-		if (!renderedContent) return NO;
+		if (!renderedContent)
+			return NO;
 		
 		// Write the post to the destination directory.
 		NSURL *destinationURL = [destinationDirectory URLByAppendingPathComponent:@"index.html" isDirectory:NO];
 		if (![renderedContent writeToURL:destinationURL atomically:YES encoding:NSUTF8StringEncoding error:error])
-			return NO;
-		
-		if (![self runFiltersOnFile:destinationURL error:error])
 			return NO;
 		
 	}
@@ -224,37 +230,44 @@
 
 - (BOOL)writePage:(TBPage *)page toDestination:(NSURL *)destination error:(NSError **)error {
 	if (!page) return NO;
-	NSString *pageContent = page.content ?: @"";
-	NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:pageContent];
+	NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
 	GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:error];
 	if (!pageTemplate) return NO;
 	NSString *renderedPage = [pageTemplate renderObject:page error:error];
 	if (!renderedPage) return NO;
 	if (![renderedPage writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error])
 		return NO;
-	if (![self runFiltersOnFile:destination error:error])
-		return NO;
 	return YES;
 }
 
 #pragma mark - Filters
 
-- (BOOL)runFiltersOnFile:(NSURL *)file error:(NSError **)error {
+- (NSString *)filteredContent:(NSString *)content fromFile:(NSURL *)file error:(NSError **)error {
 	
 	NSArray *filterPaths = self.metadata[TBSiteFilters];
-	if (!filterPaths || ![filterPaths count]) return YES;
+	if (!filterPaths || ![filterPaths count])
+		return content;
 	
 	NSURL *scriptsURL = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationScriptsDirectory inDomains:NSUserDomainMask][0];
 	NSArray *arguments = @[self.root.path, file.path];
 	
 	for (NSString *filterPath in filterPaths) {
+		
 		NSURL *filterURL = [scriptsURL URLByAppendingPathComponent:filterPath];
 		NSUserUnixTask *filter = [[NSUserUnixTask alloc] initWithURL:filterURL error:error];
-		if (!filter) return NO;
+		if (!filter) return content;
+		
 		NSPipe *standardError = [NSPipe pipe];
 		filter.standardError = standardError.fileHandleForWriting;
+		NSPipe *standardInput = [NSPipe pipe];
+		filter.standardInput = standardInput.fileHandleForReading;
+		NSPipe *standardOutput = [NSPipe pipe];
+		filter.standardOutput = standardOutput.fileHandleForWriting;
+		[standardInput.fileHandleForWriting writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+		[standardInput.fileHandleForWriting closeFile];
+		
 		__block BOOL finished = NO;
-		__block NSError *blockError;
+		__block NSError *blockError = nil;
 		[filter executeWithArguments:arguments completionHandler:^(NSError *filterError) {
 			blockError = filterError;
 			finished = YES;
@@ -262,17 +275,22 @@
 		while (!finished) { /* Wait for completion */ }
 		if (blockError) {
 			if (error) *error = blockError;
-			return NO;
+			return nil;
 		}
+		
 		NSData *standardErrorData = [standardError.fileHandleForReading readDataToEndOfFile];
 		if (standardErrorData.length > 0) {
 			NSString *standardErrorContents = [NSString stringWithUTF8String:standardErrorData.bytes];
 			if (error) *error = TBError.filterStandardError(filterURL, standardErrorContents);
-			return NO;
+			return nil;
 		}
+		NSData *standardOutputData = [standardOutput.fileHandleForReading readDataToEndOfFile];
+		if (standardOutputData.length > 0)
+			content = [[NSString alloc] initWithBytes:standardOutputData.bytes length:standardOutputData.length encoding:NSUTF8StringEncoding];
+		
 	}
 	
-	return YES;
+	return content;
 	
 }
 

@@ -29,8 +29,6 @@
 	
 	[self parseTitle];
 	
-	[self parseMarkdownContent];
-	
     return YES;
 	
 }
