@@ -17,14 +17,13 @@
 #import "TBHTTPServer.h"
 #import "TBPublisher.h"
 #import "TBSocketConnection.h"
-#import "UKFSEventsWatcher.h"
+#import "CZAFileWatcher.h"
 
 @interface TBSiteDocument () <NSTableViewDelegate, TBSiteDelegate>
-@property (nonatomic, strong) UKFSEventsWatcher *sourceWatcher;
-@property (nonatomic, strong) UKFSEventsWatcher *postsWatcher;
+@property (nonatomic, strong) CZAFileWatcher *sourceWatcher;
+@property (nonatomic, strong) CZAFileWatcher *postsWatcher;
 @property (nonatomic, strong) TBNewSiteSheetController *siteSheetController;
 - (void)reloadSite;
-- (void)startPostsWatcher;
 @end
 
 @implementation TBSiteDocument
@@ -50,14 +49,6 @@
 		}
 		[[NSProcessInfo processInfo] enableSuddenTermination];
 		
-		if (!self.sourceWatcher) {
-			self.sourceWatcher = [UKFSEventsWatcher new];
-			self.sourceWatcher.delegate = self;
-			self.sourceWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
-		}
-		[self.sourceWatcher addPath:self.site.sourceDirectory.path];
-		[self.sourceWatcher addPath:self.site.postsDirectory.path];
-		[self.sourceWatcher addPath:self.site.templatesDirectory.path];
 		if (!self.server) {
 			self.server = [TBHTTPServer new];
 			self.server.connectionClass = [TBSocketConnection class];
@@ -65,6 +56,8 @@
 		}
 		[self.server start:nil];
 		[self.server refreshPages];
+		[self.sourceWatcher startWatching];
+		[self.postsWatcher stopWatching];
 		NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]];
 		[[NSWorkspace sharedWorkspace] openURL:localURL];
 		
@@ -82,15 +75,29 @@
 }
 
 - (void)stopPreview {
-	[self.sourceWatcher removeAllPaths];
+	[self.sourceWatcher stopWatching];
+	[self.postsWatcher startWatching];
 	[self.server stop];
 }
 
-- (void)startPostsWatcher {
-	self.postsWatcher = [UKFSEventsWatcher new];
-	self.postsWatcher.delegate = self;
-	self.postsWatcher.FSEventStreamCreateFlags = kFSEventStreamCreateFlagUseCFTypes;
-	[self.postsWatcher addPath:self.site.postsDirectory.path];
+- (CZAFileWatcher *)sourceWatcher {
+	if (_sourceWatcher) return _sourceWatcher;
+	MAWeakSelfDeclare();
+	_sourceWatcher = [CZAFileWatcher fileWatcherForURLs:@[self.site.sourceDirectory, self.site.postsDirectory, self.site.templatesDirectory] changesHandler:^(NSArray *changedURLs) {
+		MAWeakSelfImport();
+		[self reloadSite];
+	}];
+	return _sourceWatcher;
+}
+
+- (CZAFileWatcher *)postsWatcher {
+	if (_postsWatcher) return _postsWatcher;
+	MAWeakSelfDeclare();
+	_postsWatcher = [CZAFileWatcher fileWatcherForURLs:@[self.site.postsDirectory] changesHandler:^(NSArray *changedURLs) {
+		MAWeakSelfImport();
+		[self reloadSite];
+	}];
+	return _postsWatcher;
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
@@ -112,17 +119,13 @@
 				[NSApp presentError:error];
 			self.fileURL = URL;
 			
-			[self startPostsWatcher];
+			[self.postsWatcher startWatching];
 			
 		}];
 	}
 	else {
-		[self startPostsWatcher];
+		[self.postsWatcher startWatching];
 	}
-}
-
-- (void)watcher:(id<UKFileWatcher>)watcher receivedNotification:(NSString *)notification forPath:(NSString *)path {
-    [self reloadSite];
 }
 
 - (void)metadataDidChangeForSite:(TBSite *)site {

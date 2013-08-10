@@ -111,10 +111,7 @@
 	if (!postsDirectoryContents) return NO;
 	for (NSURL *postURL in postsDirectoryContents) {
 		TBPost *post = [TBPost postWithURL:postURL inSite:self error:error];
-		if (!post) {
-			return NO;
-		}
-		[posts addObject:post];
+		if (post) [posts addObject:post];
 	}
 	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
 	self.posts = posts;
@@ -215,22 +212,20 @@
 	[[NSFileManager defaultManager] removeItemAtURL:destinationURL error:nil];
 	
 	if ([extension isEqualToString:@"mustache"]) {
-		TBPage *page = [TBPage pageWithURL:URL inSite:self error:error];
-		if (!page) return NO;
+		TBPage *page = [TBPage pageWithURL:URL inSite:self error:nil];
 		NSURL *pageDestination = [[destinationURL URLByDeletingPathExtension] URLByAppendingPathExtension:@"html"];
 		if (![self writePage:page toDestination:pageDestination error:error])
 			return NO;
 	}
-	else {
-		if (![[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:error])
-			return NO;
-	}
+	else
+		[[NSFileManager defaultManager] copyItemAtURL:URL toURL:destinationURL error:error];
 	return YES;
 }
 
 - (BOOL)writePage:(TBPage *)page toDestination:(NSURL *)destination error:(NSError **)error {
 	if (!page) return NO;
-	NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:page.content];
+	NSString *pageContent = page.content ?: @"";
+	NSString *rawPageTemplate = [self.rawDefaultTemplate stringByReplacingOccurrencesOfString:@"{{{content}}}" withString:pageContent];
 	GRMustacheTemplate *pageTemplate = [GRMustacheTemplate templateFromString:rawPageTemplate error:error];
 	if (!pageTemplate) return NO;
 	NSString *renderedPage = [pageTemplate renderObject:page error:error];
@@ -269,8 +264,9 @@
 			if (error) *error = blockError;
 			return NO;
 		}
-		NSString *standardErrorContents = [NSString stringWithUTF8String:[standardError.fileHandleForReading readDataToEndOfFile].bytes];
-		if (standardErrorContents.length > 0) {
+		NSData *standardErrorData = [standardError.fileHandleForReading readDataToEndOfFile];
+		if (standardErrorData.length > 0) {
+			NSString *standardErrorContents = [NSString stringWithUTF8String:standardErrorData.bytes];
 			if (error) *error = TBError.filterStandardError(filterURL, standardErrorContents);
 			return NO;
 		}

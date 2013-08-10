@@ -31,14 +31,14 @@
 	 @param site
 		The TBSite object which contains the page.
 	 @param error
-		If the return value is NO, then this argument will contain an NSError
+		If the return value is nil, then this argument will contain an NSError
 		object describing what went wrong.
 	 @return
-		YES on successful processing, NO if an error was encountered.
+		An instance of TBPage, or nil if an error was encountered.
  */
 + (instancetype)pageWithURL:(NSURL *)URL
 					 inSite:(TBSite *)site
-					  error:(NSError**)error;
+					  error:(NSError **)error;
 
 /*!
 	@property URL

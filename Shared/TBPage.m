@@ -8,47 +8,33 @@
 //
 
 #import "TBPage.h"
-#import "TBError.h"
 
 @implementation TBPage
 
-+ (instancetype)pageWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError**)error{
++ (instancetype)pageWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error {
 	TBPage *page = [super new];
 	if (page) {
 		page.URL = URL;
 		page.site = site;
-        
-		BOOL parsedPage = [page parse:error];
-        if (!parsedPage) {
-            return nil;
-        }
+		[page parse:error];
 	}
 	return page;
 }
 
-- (BOOL)parse:(NSError **)error{
-	
-	if (![self loadContent:error])
-		return NO;
-	
+- (BOOL)parse:(NSError **)error {
+	[self loadContent];
 	[self parseTitle];
-	
 	[self parseStylesheets];
-	
 	return YES;
 }
 
-- (BOOL)loadContent:(NSError **)error {
-	NSString *content = [NSString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:error];
-	if (!content.length) {
-		if (error) *error = TBError.emptyPageFile(self.URL);
-		return NO;
-	}
+- (void)loadContent {
+	NSString *content = [NSString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
 	self.content = content;
-	return YES;
 }
 
 - (void)parseTitle {
+	if (!self.content || ![self.content length]) return;
 	// Titles are optional. They take the following form:
 	// <!-- Title -->
 	NSMutableString *content = [self.content mutableCopy];
@@ -64,6 +50,7 @@
 }
 
 - (void)parseStylesheets {
+	if (!self.content || ![self.content length]) return;
 	// Stylsheets are also optional. They are on the second line (or first if there is no title), and look like this:
 	// <!-- Stylsheets: name, name -->
 	NSMutableString *content = [self.content mutableCopy];

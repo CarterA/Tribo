@@ -17,6 +17,4 @@
 
 "FILTER_STANDARD_ERROR" = "The custom filter at path %@ logged the following information into its stderr pipe: %@";
 
-"EMPTY_POST_FILE" = "Tribo does not support empty post files. The following post file is empty: %@";
-
 "EMPTY_PAGE_FILE" = "Tribo does not support empty page files. The following page file is empty: %@";

@@ -11,7 +11,7 @@
 @implementation TBPage (LiveReload)
 
 - (NSString *)livereload {
-	return [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"LiveReload Snippet" withExtension:@"html"] encoding:NSUTF8StringEncoding error:nil];
+	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"TBLiveReloadSnippet"];
 }
 
 @end
