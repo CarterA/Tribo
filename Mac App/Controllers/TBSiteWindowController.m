@@ -18,6 +18,7 @@
 #import "TBTabView.h"
 #import "TBSiteDocument.h"
 #import "TBSite.h"
+#import "TBMacros.h"
 #import "TBHTTPServer.h"
 #import "NSResponder+TBAdditions.h"
 
@@ -107,18 +108,23 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 		
 		[self toggleStatusView];
 		self.statusViewController.title = @"Starting local preview...";
+		
 		[document startPreview:^(NSURL *localURL, NSError *error) {
 			
 			if (error) {
 				[self tb_presentErrorOnMainQueue:error];
+				[self toggleStatusView];
+				return;
 			}
 			previewMenuItem.title = @"Stop Preview";
 			
 			self.statusViewController.title = @"Local preview running";
 			self.statusViewController.link = localURL;
-			__unsafe_unretained id weakSelf = self;
+			
+			MAWeakSelfDeclare();
 			[self.statusViewController setStopHandler:^() {
-				if (weakSelf) [weakSelf preview:sender];
+				MAWeakSelfImport();
+				[self preview:sender];
 			}];
 			
 		}];
