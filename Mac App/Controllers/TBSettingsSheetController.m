@@ -247,8 +247,4 @@
 		[self.enabledFilters removeObject:filterName];
 }
 
-//- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row {
-//	return NO;
-//}
-
 @end
