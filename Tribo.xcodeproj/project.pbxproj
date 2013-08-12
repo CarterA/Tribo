@@ -152,6 +152,9 @@
 		4AE91C6614FF044700499469 /* TBPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6514FF044700499469 /* TBPublisher.m */; };
 		4AE91C7114FF16ED00499469 /* TBPublishSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */; };
 		4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */; };
+		4AF2BFED17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */; };
+		4AF2BFEE17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */; };
+		4AF2BFEF17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */; };
 		4AF9C9D917A4587700709238 /* TBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D817A4587700709238 /* TBError.m */; };
 		4AF9C9DA17A4587700709238 /* TBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D817A4587700709238 /* TBError.m */; };
 		4AF9C9DD17A4831700709238 /* TBError.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9C9DF17A4831700709238 /* TBError.strings */; };
@@ -366,6 +369,8 @@
 		4AE91C6E14FF16ED00499469 /* TBPublishSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPublishSheetController.h; sourceTree = "<group>"; };
 		4AE91C6F14FF16ED00499469 /* TBPublishSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPublishSheetController.m; sourceTree = "<group>"; };
 		4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBPublishSheet.xib; sourceTree = "<group>"; };
+		4AF2BFEB17B88AB6008D67AB /* NSResponder+TBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSResponder+TBAdditions.h"; sourceTree = "<group>"; };
+		4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSResponder+TBAdditions.m"; sourceTree = "<group>"; };
 		4AF9C9D817A4587700709238 /* TBError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBError.m; sourceTree = "<group>"; };
 		4AF9C9DE17A4831700709238 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TBError.strings; sourceTree = "<group>"; };
 		9B507E7A14D7B2B100E85357 /* TBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBError.h; sourceTree = "<group>"; };
@@ -452,6 +457,8 @@
 			children = (
 				4A3DE5FC176CF16C00C20026 /* NSDateFormatter+TBAdditions.h */,
 				4A3DE5FD176CF16C00C20026 /* NSDateFormatter+TBAdditions.m */,
+				4AF2BFEB17B88AB6008D67AB /* NSResponder+TBAdditions.h */,
+				4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */,
 			);
 			path = "System Additions";
 			sourceTree = "<group>";
@@ -1067,6 +1074,7 @@
 				4A99C43017B40F760023C9A9 /* TBHTTPServer.m in Sources */,
 				4A7557E81436F4D70040A10C /* HTTPRedirectResponse.m in Sources */,
 				4A7557E91436F4D70040A10C /* WebSocket.m in Sources */,
+				4AF2BFED17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */,
 				4A7558001436F6190040A10C /* GCDAsyncSocket.m in Sources */,
 				4A99C43217B40F7B0023C9A9 /* TBWebSocket.m in Sources */,
 				4A7558011436F6190040A10C /* DDAbstractDatabaseLogger.m in Sources */,
@@ -1149,6 +1157,7 @@
 				4A9ED52D1507AF83009C5754 /* TBConstants.m in Sources */,
 				4A57A566150F8BAA00DACDBC /* TBStatusViewController.m in Sources */,
 				4A36B99115124DCB00A3D79A /* TBStatusView.m in Sources */,
+				4AF2BFEE17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */,
 				4AB2796015152660009D7F93 /* TBShadowedTextFieldCell.m in Sources */,
 				4AB2796715154796009D7F93 /* TBShadowedButtonCell.m in Sources */,
 				4A43019F1518287C003EA175 /* TBNewSiteSheetController.m in Sources */,
@@ -1164,6 +1173,7 @@
 			files = (
 				4AE91C5D14FEE0F500499469 /* Authentication Tool.m in Sources */,
 				4A9ED52E1507AF83009C5754 /* TBConstants.m in Sources */,
+				4AF2BFEF17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

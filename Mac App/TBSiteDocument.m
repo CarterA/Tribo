@@ -17,6 +17,7 @@
 #import "TBHTTPServer.h"
 #import "TBPublisher.h"
 #import "TBSocketConnection.h"
+#import "NSResponder+TBAdditions.h"
 #import "CZAFileWatcher.h"
 
 @interface TBSiteDocument () <NSTableViewDelegate, TBSiteDelegate>
@@ -114,9 +115,9 @@
 			NSError *error = nil;
 			NSURL *defaultSite = [[NSBundle mainBundle] URLForResource:@"Default" withExtension:@"tribo"];
 			if (![[NSFileManager defaultManager] copyItemAtURL:defaultSite toURL:URL error:&error])
-				[NSApp presentError:error];
+				[NSApp tb_presentErrorOnMainQueue:error];
 			if (![self readFromURL:URL ofType:@"tribo" error:&error])
-				[NSApp presentError:error];
+				[NSApp tb_presentErrorOnMainQueue:error];
 			self.fileURL = URL;
 			
 			[self.postsWatcher startWatching];
@@ -141,9 +142,7 @@
 			NSError *error;
 			
 			if (![self.site process:&error]) {
-				dispatch_async(dispatch_get_main_queue(), ^{
-					[self presentError:error];
-				});
+				[NSApp tb_presentErrorOnMainQueue:error];
 				return;
 			}
 			
@@ -154,7 +153,7 @@
 	else {
 		NSError *parsingError;
 		if (![self.site parsePosts:&parsingError])
-			[self presentError:parsingError];
+			[NSApp tb_presentErrorOnMainQueue:parsingError];
 	}
     [[NSProcessInfo processInfo] enableSuddenTermination];
 }
@@ -167,7 +166,7 @@
     
     BOOL success = [self.site parsePosts:outError];
     if (!success) {
-        [NSApp presentError:*outError];
+        [NSApp tb_presentErrorOnMainQueue:*outError];
         *outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil];
         return NO;
     }

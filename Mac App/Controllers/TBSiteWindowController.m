@@ -19,6 +19,7 @@
 #import "TBSiteDocument.h"
 #import "TBSite.h"
 #import "TBHTTPServer.h"
+#import "NSResponder+TBAdditions.h"
 
 const NSEdgeInsets TBAccessoryViewInsets = {
 	.top = 0.0,
@@ -88,9 +89,8 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	[self.addPostSheetController runModalForWindow:[document windowForSheet] completionBlock:^(NSString *title, NSString *slug) {
         NSError *error = nil;
         NSURL *siteURL = [document.site addPostWithTitle:title slug:slug error:&error];
-        if (!siteURL) {
-            [self presentError:error];
-        }
+        if (!siteURL)
+            [self tb_presentErrorOnMainQueue:error];
 	}];
 }
 
@@ -110,9 +110,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 		[document startPreview:^(NSURL *localURL, NSError *error) {
 			
 			if (error) {
-				dispatch_async(dispatch_get_main_queue(), ^{
-					[self presentError:error];
-				});
+				[self tb_presentErrorOnMainQueue:error];
 			}
 			previewMenuItem.title = @"Stop Preview";
 			

@@ -14,6 +14,7 @@
 #import "TBPost.h"
 #import "TBTableView.h"
 #import "TBHTTPServer.h"
+#import "NSResponder+TBAdditions.h"
 
 @interface TBPostsViewController () <TBTableViewDelegate>
 - (void)moveURLsToTrash:(NSArray *)URLs;
@@ -69,14 +70,14 @@
 - (void)moveURLsToTrash:(NSArray *)URLs {
 	[[NSWorkspace sharedWorkspace] recycleURLs:URLs completionHandler:^(NSDictionary *newURLs, NSError *error) {
 		
-		if (error) [self presentError:error];
+		if (error) [self tb_presentErrorOnMainQueue:error];
 		
 		[self.document.undoManager registerUndoWithTarget:self selector:@selector(undoMoveToTrashForURLs:) object:newURLs];
 		[self.document.undoManager setActionName:@"Move to Trash"];
 		
 		NSError *postParsingError = nil;
 		BOOL success = [self.document.site parsePosts:&postParsingError];
-		if (!success) [self presentError:postParsingError];
+		if (!success) [self tb_presentErrorOnMainQueue:postParsingError];
 		
 	}];
 }
@@ -87,10 +88,10 @@
 		NSURL *trashURL = object;
 		NSError *error = nil;
 		BOOL success = [[NSFileManager defaultManager] moveItemAtURL:trashURL toURL:originalURL error:&error];
-		if (!success) [self presentError:error];
+		if (!success) [self tb_presentErrorOnMainQueue:error];
 		NSError *postParsingError = nil;
 		success = [self.document.site parsePosts:&postParsingError];
-		if (!success) [self presentError:postParsingError];
+		if (!success) [self tb_presentErrorOnMainQueue:postParsingError];
 	}];
 	[self.document.undoManager registerUndoWithTarget:self selector:@selector(moveURLsToTrash:) object:URLs.allKeys];
 	[self.document.undoManager setActionName:@"Move to Trash"];
