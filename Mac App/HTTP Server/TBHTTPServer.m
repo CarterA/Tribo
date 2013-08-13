@@ -7,9 +7,17 @@
 //
 
 #import "TBHTTPServer.h"
+#import "TBSocketConnection.h"
 #import "TBWebSocket.h"
 
 @implementation TBHTTPServer
+- (id)init {
+	self = [super init];
+	if (self) {
+		self.connectionClass = [TBSocketConnection class];
+	}
+	return self;
+}
 - (void)refreshPages {
 	for (TBWebSocket *webSocket in webSockets) {
 		[webSocket sendMessage:@"{ \"command\": \"reload\", \"path\": \"/\", \"liveCSS\": true }"];

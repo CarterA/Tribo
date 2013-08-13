@@ -30,7 +30,6 @@ int main (int argumentCount, const char *arguments[]) {
         }
         
 		TBHTTPServer *server = [TBHTTPServer new];
-		server.connectionClass = [TBSocketConnection class];
 		server.documentRoot = site.destination.path;
 		server.port = 4000;
 		[server start:nil];

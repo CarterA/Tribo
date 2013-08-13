@@ -15,12 +15,10 @@
 #import "TBPost.h"
 #import "TBMacros.h"
 #import "TBHTTPServer.h"
-#import "TBPublisher.h"
-#import "TBSocketConnection.h"
 #import "NSResponder+TBAdditions.h"
 #import "CZAFileWatcher.h"
 
-@interface TBSiteDocument () <NSTableViewDelegate, TBSiteDelegate>
+@interface TBSiteDocument () <TBSiteDelegate>
 @property (nonatomic, strong) CZAFileWatcher *sourceWatcher;
 @property (nonatomic, strong) CZAFileWatcher *postsWatcher;
 @property (nonatomic, strong) TBNewSiteSheetController *siteSheetController;
@@ -52,7 +50,6 @@
 		
 		if (!self.server) {
 			self.server = [TBHTTPServer new];
-			self.server.connectionClass = [TBSocketConnection class];
 			self.server.documentRoot = self.site.destination.path;
 		}
 		[self.server start:nil];
