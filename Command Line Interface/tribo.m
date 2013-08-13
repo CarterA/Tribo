@@ -9,7 +9,6 @@
 
 #import "TBSite.h"
 #import "TBHTTPServer.h"
-#import "TBSocketConnection.h"
 #import "CZAFileWatcher.h"
 #import <ApplicationServices/ApplicationServices.h>
 
