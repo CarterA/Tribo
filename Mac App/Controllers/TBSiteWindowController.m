@@ -19,7 +19,6 @@
 #import "TBSiteDocument.h"
 #import "TBSite.h"
 #import "TBMacros.h"
-#import "TBHTTPServer.h"
 #import "NSResponder+TBAdditions.h"
 
 const NSEdgeInsets TBAccessoryViewInsets = {
@@ -104,7 +103,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 - (IBAction)preview:(id)sender {
 	TBSiteDocument *document = (TBSiteDocument *)self.document;
 	NSMenuItem *previewMenuItem = (NSMenuItem *)sender;
-	if (!document.server.isRunning) {
+	if (!document.previewIsRunning) {
 		
 		[self toggleStatusView];
 		self.statusViewController.title = @"Starting local preview...";

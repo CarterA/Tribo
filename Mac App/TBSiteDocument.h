@@ -14,6 +14,7 @@ typedef void(^TBSiteDocumentPreviewCallback)(NSURL *localURL, NSError *error);
 @interface TBSiteDocument : NSDocument
 @property (nonatomic, strong) TBSite *site;
 @property (nonatomic, strong) TBHTTPServer *server;
+@property (readonly) BOOL previewIsRunning;
 - (void)startPreview:(TBSiteDocumentPreviewCallback)callback;
 - (void)stopPreview;
 @end

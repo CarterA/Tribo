@@ -62,6 +62,8 @@
 		NSURL *localURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d", self.server.listeningPort]];
 		[[NSWorkspace sharedWorkspace] openURL:localURL];
 		
+		self->_previewIsRunning = YES;
+		
 		if (!callback){
 			return;
 		}
@@ -79,6 +81,7 @@
 	[self.sourceWatcher stopWatching];
 	[self.postsWatcher startWatching];
 	[self.server stop];
+	_previewIsRunning = NO;
 }
 
 - (CZAFileWatcher *)sourceWatcher {
