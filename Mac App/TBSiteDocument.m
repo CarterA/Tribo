@@ -9,7 +9,6 @@
 
 #import "TBSiteDocument.h"
 #import "TBSiteWindowController.h"
-#import "TBAddPostSheetController.h"
 #import "TBNewSiteSheetController.h"
 #import "TBSite.h"
 #import "TBPost.h"
@@ -22,17 +21,9 @@
 @property (nonatomic, strong) CZAFileWatcher *sourceWatcher;
 @property (nonatomic, strong) CZAFileWatcher *postsWatcher;
 @property (nonatomic, strong) TBNewSiteSheetController *siteSheetController;
-- (void)reloadSite;
 @end
 
 @implementation TBSiteDocument
-
-- (void)makeWindowControllers {
-	TBSiteWindowController *windowController = [TBSiteWindowController new];
-	[self windowControllerWillLoadNib:windowController];
-	[self addWindowController:windowController];
-	[self windowControllerDidLoadNib:windowController];
-}
 
 - (void)startPreview:(TBSiteDocumentPreviewCallback)callback {
 	
@@ -69,7 +60,6 @@
 			callback(localURL, error);
 		});
 		
-		
 	});
 	
 }
@@ -101,6 +91,42 @@
 	return _postsWatcher;
 }
 
+- (void)reloadSite {
+	[[NSProcessInfo processInfo] disableSuddenTermination];
+	if (self.server.isRunning) {
+		MAWeakSelfDeclare();
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+			MAWeakSelfImport();
+			NSError *error;
+			
+			if (![self.site process:&error]) {
+				[NSApp tb_presentErrorOnMainQueue:error];
+				return;
+			}
+			
+			[self.server refreshPages];
+			
+		});
+	}
+	else {
+		NSError *parsingError;
+		if (![self.site parsePosts:&parsingError])
+			[NSApp tb_presentErrorOnMainQueue:parsingError];
+	}
+    [[NSProcessInfo processInfo] enableSuddenTermination];
+}
+
+#pragma mark - NSDocument
+
++ (BOOL)canConcurrentlyReadDocumentsOfType:(NSString *)typeName { return YES; }
+
+- (void)makeWindowControllers {
+	TBSiteWindowController *windowController = [TBSiteWindowController new];
+	[self windowControllerWillLoadNib:windowController];
+	[self addWindowController:windowController];
+	[self windowControllerDidLoadNib:windowController];
+}
+
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
 	if (!self.fileURL) {
 		self.siteSheetController = [TBNewSiteSheetController new];
@@ -129,37 +155,6 @@
 	}
 }
 
-- (void)metadataDidChangeForSite:(TBSite *)site {
-	[self reloadSite];
-}
-
-- (void)reloadSite {
-	[[NSProcessInfo processInfo] disableSuddenTermination];
-	if (self.server.isRunning) {
-		MAWeakSelfDeclare();
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-			MAWeakSelfImport();
-			NSError *error;
-			
-			if (![self.site process:&error]) {
-				[NSApp tb_presentErrorOnMainQueue:error];
-				return;
-			}
-			
-			[self.server refreshPages];
-			
-		});
-	}
-	else {
-		NSError *parsingError;
-		if (![self.site parsePosts:&parsingError])
-			[NSApp tb_presentErrorOnMainQueue:parsingError];
-	}
-    [[NSProcessInfo processInfo] enableSuddenTermination];
-}
-
-+ (BOOL)canConcurrentlyReadDocumentsOfType:(NSString *)typeName { return YES; }
-
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
 	self.site = [TBSite siteWithRoot:URL];
 	self.site.delegate = self;
@@ -179,6 +174,12 @@
 
 - (void)updateChangeCountWithToken:(id)changeCountToken forSaveOperation:(NSSaveOperationType)saveOperation {
 	// Again, do nothing. See -updateChangeCount:.
+}
+
+#pragma mark - TBSiteDelegate
+
+- (void)metadataDidChangeForSite:(TBSite *)site {
+	[self reloadSite];
 }
 
 @end
