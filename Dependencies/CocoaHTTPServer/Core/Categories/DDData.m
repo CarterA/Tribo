@@ -32,29 +32,29 @@
         [stringBuffer appendFormat:@"%02lx", (unsigned long)dataBuffer[i]];
 	}
     
-    return [[stringBuffer copy] autorelease];
+    return [stringBuffer copy];
 }
 
 - (NSString *)base64Encoded
 {
-	CFDataRef data = (CFDataRef)self;
+	CFDataRef data = (__bridge CFDataRef)self;
 	SecTransformRef encoder = SecEncodeTransformCreate(kSecBase64Encoding, NULL);
 	SecTransformSetAttribute(encoder, kSecTransformInputAttributeName, data, NULL);
 	CFDataRef encodedData = SecTransformExecute(encoder, NULL);
 	CFStringRef encodedString = CFStringCreateFromExternalRepresentation(NULL, encodedData, kCFStringEncodingUTF8);
 	CFRelease(encoder);
 	CFRelease(encodedData);
-	return [(NSString *)encodedString autorelease];
+	return (__bridge_transfer NSString *)encodedString;
 }
 
 - (NSData *)base64Decoded
 {
-	CFDataRef data = (CFDataRef)self;
+	CFDataRef data = (__bridge CFDataRef)self;
 	SecTransformRef decoder = SecDecodeTransformCreate(kSecBase64Encoding, NULL);
 	SecTransformSetAttribute(decoder, kSecTransformInputAttributeName, data, NULL);
 	CFDataRef decodedData = SecTransformExecute(decoder, NULL);
 	CFRelease(decoder);
-	return [(NSData *)decodedData autorelease];
+	return (__bridge_transfer NSData *)decodedData;
 }
 
 @end
