@@ -431,7 +431,7 @@ static NSMutableArray *recentNonces;
 		
 		NSString *url = [[request url] relativeString];
 		
-		if (![url isEqualToString:[auth uri]])
+		if (![url isEqualToString:auth.URI])
 		{
 			// Requested URL and Authorization URI do not match
 			// This could be a replay attack
@@ -464,7 +464,7 @@ static NSMutableArray *recentNonces;
 			}
 		}
 		
-		long authNC = strtol([[auth nc] UTF8String], NULL, 16);
+		long authNC = strtol([auth.nonceCount UTF8String], NULL, 16);
 		
 		if (authNC <= lastNC)
 		{
@@ -474,19 +474,19 @@ static NSMutableArray *recentNonces;
 		}
 		lastNC = authNC;
 		
-		NSString *HA1str = [NSString stringWithFormat:@"%@:%@:%@", [auth username], [auth realm], password];
-		NSString *HA2str = [NSString stringWithFormat:@"%@:%@", [request method], [auth uri]];
+		NSString *HA1str = [NSString stringWithFormat:@"%@:%@:%@", [auth username], auth.realm, password];
+		NSString *HA2str = [NSString stringWithFormat:@"%@:%@", [request method], auth.URI];
 		
 		NSString *HA1 = [[[HA1str dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];
 		
 		NSString *HA2 = [[[HA2str dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];
 		
 		NSString *responseStr = [NSString stringWithFormat:@"%@:%@:%@:%@:%@:%@",
-								 HA1, [auth nonce], [auth nc], [auth cnonce], [auth qop], HA2];
+								 HA1, auth.nonce, auth.nonceCount, auth.cnonce, auth.qualityOfProtection, HA2];
 		
 		NSString *response = [[[responseStr dataUsingEncoding:NSUTF8StringEncoding] md5Digest] hexStringValue];
 		
-		return [response isEqualToString:[auth response]];
+		return [response isEqualToString:auth.response];
 	}
 	else
 	{
