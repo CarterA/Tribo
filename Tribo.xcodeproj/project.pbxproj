@@ -73,9 +73,9 @@
 		4A8829081437C52200EBBD7E /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557FB1436F6190040A10C /* DDFileLogger.m */; };
 		4A8829091437C52200EBBD7E /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557FD1436F6190040A10C /* DDLog.m */; };
 		4A88290A1437C52200EBBD7E /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557FF1436F6190040A10C /* DDTTYLogger.m */; };
-		4A88290B1437C52200EBBD7E /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C11436F4D70040A10C /* DDData.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A88290C1437C52200EBBD7E /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C31436F4D70040A10C /* DDNumber.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4A88290D1437C52200EBBD7E /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C51436F4D70040A10C /* DDRange.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4A88290B1437C52200EBBD7E /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C11436F4D70040A10C /* DDData.m */; };
+		4A88290C1437C52200EBBD7E /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C31436F4D70040A10C /* DDNumber.m */; };
+		4A88290D1437C52200EBBD7E /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C51436F4D70040A10C /* DDRange.m */; };
 		4A88290E1437C52200EBBD7E /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C71436F4D70040A10C /* HTTPAuthenticationRequest.m */; };
 		4A88290F1437C52200EBBD7E /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557C91436F4D70040A10C /* HTTPConnection.m */; };
 		4A8829101437C52200EBBD7E /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7557CC1436F4D70040A10C /* HTTPMessage.m */; };
