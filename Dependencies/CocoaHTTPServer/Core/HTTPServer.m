@@ -143,7 +143,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = documentRoot;
+		result = self->documentRoot;
 	});
 	
 	return result;
@@ -166,7 +166,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		documentRoot = valueCopy;
+		self->documentRoot = valueCopy;
 	});
 	
 }
@@ -182,7 +182,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block Class result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = connectionClass;
+		result = self->connectionClass;
 	});
 	
 	return result;
@@ -193,7 +193,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	HTTPLogTrace();
 	
 	dispatch_async(serverQueue, ^{
-		connectionClass = value;
+		self->connectionClass = value;
 	});
 }
 
@@ -205,7 +205,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = interface;
+		result = self->interface;
 	});
 	
 	return result;
@@ -216,7 +216,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		interface = valueCopy;
+		self->interface = valueCopy;
 	});
 	
 }
@@ -231,7 +231,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block UInt16 result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = port;
+		result = self->port;
 	});
 	
     return result;
@@ -242,8 +242,8 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block UInt16 result;
 	
 	dispatch_sync(serverQueue, ^{
-		if (isRunning)
-			result = [asyncSocket localPort];
+		if (self->isRunning)
+			result = [self->asyncSocket localPort];
 		else
 			result = 0;
 	});
@@ -256,7 +256,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	HTTPLogTrace();
 	
 	dispatch_async(serverQueue, ^{
-		port = value;
+		self->port = value;
 	});
 }
 
@@ -269,7 +269,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = domain;
+		result = self->domain;
 	});
 	
     return result;
@@ -282,7 +282,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		domain = valueCopy;
+		self->domain = valueCopy;
 	});
 	
 }
@@ -297,7 +297,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = name;
+		result = self->name;
 	});
 	
 	return result;
@@ -309,7 +309,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	
 	dispatch_sync(serverQueue, ^{
 		
-		if (netService == nil)
+		if (self->netService == nil)
 		{
 			result = nil;
 		}
@@ -317,7 +317,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 		{
 			
 			dispatch_block_t bonjourBlock = ^{
-				result = [[netService name] copy];
+				result = [[self->netService name] copy];
 			};
 			
 			[[self class] performBonjourBlock:bonjourBlock];
@@ -332,7 +332,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		name = valueCopy;
+		self->name = valueCopy;
 	});
 	
 }
@@ -346,7 +346,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = type;
+		result = self->type;
 	});
 	
 	return result;
@@ -357,7 +357,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		type = valueCopy;
+		self->type = valueCopy;
 	});
 	
 }
@@ -370,7 +370,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block NSDictionary *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = txtRecordDictionary;
+		result = self->txtRecordDictionary;
 	});
 	
 	return result;
@@ -384,15 +384,15 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	
 	dispatch_async(serverQueue, ^{
 	
-		txtRecordDictionary = valueCopy;
+		self->txtRecordDictionary = valueCopy;
 		
 		// Update the txtRecord of the netService if it has already been published
-		if (netService)
+		if (self->netService)
 		{
-			NSNetService *theNetService = netService;
+			NSNetService *theNetService = self->netService;
 			NSData *txtRecordData = nil;
-			if (txtRecordDictionary)
-				txtRecordData = [NSNetService dataFromTXTRecordDictionary:txtRecordDictionary];
+			if (self->txtRecordDictionary)
+				txtRecordData = [NSNetService dataFromTXTRecordDictionary:self->txtRecordDictionary];
 			
 			dispatch_block_t bonjourBlock = ^{
 				[theNetService setTXTRecordData:txtRecordData];
@@ -417,12 +417,12 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	
 	dispatch_sync(serverQueue, ^{ @autoreleasepool {
 		
-		success = [asyncSocket acceptOnInterface:interface port:port error:&err];
+		success = [self->asyncSocket acceptOnInterface:self->interface port:self->port error:&err];
 		if (success)
 		{
-			HTTPLogInfo(@"%@: Started HTTP server on port %hu", THIS_FILE, [asyncSocket localPort]);
+			HTTPLogInfo(@"%@: Started HTTP server on port %hu", THIS_FILE, [self->asyncSocket localPort]);
 			
-			isRunning = YES;
+			self->isRunning = YES;
 			[self publishBonjour];
 		}
 		else
@@ -452,28 +452,28 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 		[self unpublishBonjour];
 		
 		// Stop listening / accepting incoming connections
-		[asyncSocket disconnect];
-		isRunning = NO;
+		[self->asyncSocket disconnect];
+		self->isRunning = NO;
 		
 		if (!keepExistingConnections)
 		{
 			// Stop all HTTP connections the server owns
-			[connectionsLock lock];
-			for (HTTPConnection *connection in connections)
+			[self->connectionsLock lock];
+			for (HTTPConnection *connection in self->connections)
 			{
 				[connection stop];
 			}
-			[connections removeAllObjects];
-			[connectionsLock unlock];
+			[self->connections removeAllObjects];
+			[self->connectionsLock unlock];
 			
 			// Stop all WebSocket connections the server owns
-			[webSocketsLock lock];
-			for (WebSocket *webSocket in webSockets)
+			[self->webSocketsLock lock];
+			for (WebSocket *webSocket in self->webSockets)
 			{
 				[webSocket stop];
 			}
-			[webSockets removeAllObjects];
-			[webSocketsLock unlock];
+			[self->webSockets removeAllObjects];
+			[self->webSocketsLock unlock];
 		}
 	}});
 }
@@ -483,7 +483,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 	__block BOOL result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = isRunning;
+		result = self->isRunning;
 	});
 	
 	return result;

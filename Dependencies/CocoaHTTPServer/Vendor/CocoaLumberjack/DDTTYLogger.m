@@ -882,8 +882,8 @@ static DDTTYLogger *sharedInstance;
 	__block BOOL result;
 	
 	dispatch_sync(globalLoggingQueue, ^{
-		dispatch_sync(loggerQueue, ^{
-			result = colorsEnabled;
+		dispatch_sync(self->loggerQueue, ^{
+			result = self->colorsEnabled;
 		});
 	});
 	
@@ -894,9 +894,9 @@ static DDTTYLogger *sharedInstance;
 {
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		colorsEnabled = newColorsEnabled;
+		self->colorsEnabled = newColorsEnabled;
 		
-		if ([colorProfilesArray count] == 0) {
+		if ([self->colorProfilesArray count] == 0) {
 			[self loadDefaultColorProfiles];
 		}
 	}};
@@ -917,7 +917,7 @@ static DDTTYLogger *sharedInstance;
 	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
 	
 	dispatch_async(globalLoggingQueue, ^{
-		dispatch_async(loggerQueue, block);
+		dispatch_async(self->loggerQueue, block);
 	});
 }
 
@@ -939,7 +939,7 @@ static DDTTYLogger *sharedInstance;
 		NSLogInfo(@"DDTTYLogger: newColorProfile: %@", newColorProfile);
 		
 		NSUInteger i = 0;
-		for (DDTTYLoggerColorProfile *colorProfile in colorProfilesArray)
+		for (DDTTYLoggerColorProfile *colorProfile in self->colorProfilesArray)
 		{
 			if ((colorProfile->mask == mask) && (colorProfile->context == ctxt))
 			{
@@ -949,10 +949,10 @@ static DDTTYLogger *sharedInstance;
 			i++;
 		}
 		
-		if (i < [colorProfilesArray count])
-			[colorProfilesArray replaceObjectAtIndex:i withObject:newColorProfile];
+		if (i < [self->colorProfilesArray count])
+			[self->colorProfilesArray replaceObjectAtIndex:i withObject:newColorProfile];
 		else
-			[colorProfilesArray addObject:newColorProfile];
+			[self->colorProfilesArray addObject:newColorProfile];
 	}};
 	
 	// The design of the setter logic below is taken from the DDAbstractLogger implementation.
@@ -968,7 +968,7 @@ static DDTTYLogger *sharedInstance;
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
-			dispatch_async(loggerQueue, block);
+			dispatch_async(self->loggerQueue, block);
 		});
 	}
 }
@@ -987,7 +987,7 @@ static DDTTYLogger *sharedInstance;
 		
 		NSLogInfo(@"DDTTYLogger: newColorProfile: %@", newColorProfile);
 		
-		[colorProfilesDict setObject:newColorProfile forKey:tag];
+		[self->colorProfilesDict setObject:newColorProfile forKey:tag];
 	}};
 	
 	// The design of the setter logic below is taken from the DDAbstractLogger implementation.
@@ -1003,7 +1003,7 @@ static DDTTYLogger *sharedInstance;
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
-			dispatch_async(loggerQueue, block);
+			dispatch_async(self->loggerQueue, block);
 		});
 	}
 }
@@ -1018,7 +1018,7 @@ static DDTTYLogger *sharedInstance;
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
 		NSUInteger i = 0;
-		for (DDTTYLoggerColorProfile *colorProfile in colorProfilesArray)
+		for (DDTTYLoggerColorProfile *colorProfile in self->colorProfilesArray)
 		{
 			if ((colorProfile->mask == mask) && (colorProfile->context == context))
 			{
@@ -1028,9 +1028,9 @@ static DDTTYLogger *sharedInstance;
 			i++;
 		}
 		
-		if (i < [colorProfilesArray count])
+		if (i < [self->colorProfilesArray count])
 		{
-			[colorProfilesArray removeObjectAtIndex:i];
+			[self->colorProfilesArray removeObjectAtIndex:i];
 		}
 	}};
 	
@@ -1047,7 +1047,7 @@ static DDTTYLogger *sharedInstance;
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
-			dispatch_async(loggerQueue, block);
+			dispatch_async(self->loggerQueue, block);
 		});
 	}
 }
@@ -1058,7 +1058,7 @@ static DDTTYLogger *sharedInstance;
 	
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		[colorProfilesDict removeObjectForKey:tag];
+		[self->colorProfilesDict removeObjectForKey:tag];
 	}};
 	
 	// The design of the setter logic below is taken from the DDAbstractLogger implementation.
@@ -1074,7 +1074,7 @@ static DDTTYLogger *sharedInstance;
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
-			dispatch_async(loggerQueue, block);
+			dispatch_async(self->loggerQueue, block);
 		});
 	}
 }
@@ -1083,7 +1083,7 @@ static DDTTYLogger *sharedInstance;
 {
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		[colorProfilesArray removeAllObjects];
+		[self->colorProfilesArray removeAllObjects];
 	}};
 	
 	// The design of the setter logic below is taken from the DDAbstractLogger implementation.
@@ -1099,7 +1099,7 @@ static DDTTYLogger *sharedInstance;
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
-			dispatch_async(loggerQueue, block);
+			dispatch_async(self->loggerQueue, block);
 		});
 	}
 }
@@ -1108,7 +1108,7 @@ static DDTTYLogger *sharedInstance;
 {
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		[colorProfilesDict removeAllObjects];
+		[self->colorProfilesDict removeAllObjects];
 	}};
 	
 	// The design of the setter logic below is taken from the DDAbstractLogger implementation.
@@ -1124,7 +1124,7 @@ static DDTTYLogger *sharedInstance;
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
-			dispatch_async(loggerQueue, block);
+			dispatch_async(self->loggerQueue, block);
 		});
 	}
 }
@@ -1133,8 +1133,8 @@ static DDTTYLogger *sharedInstance;
 {
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		[colorProfilesArray removeAllObjects];
-		[colorProfilesDict removeAllObjects];
+		[self->colorProfilesArray removeAllObjects];
+		[self->colorProfilesDict removeAllObjects];
 	}};
 	
 	// The design of the setter logic below is taken from the DDAbstractLogger implementation.
@@ -1150,7 +1150,7 @@ static DDTTYLogger *sharedInstance;
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
-			dispatch_async(loggerQueue, block);
+			dispatch_async(self->loggerQueue, block);
 		});
 	}
 }

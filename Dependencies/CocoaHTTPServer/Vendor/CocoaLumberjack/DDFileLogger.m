@@ -500,7 +500,7 @@
 	__block unsigned long long result;
 	
 	dispatch_block_t block = ^{
-		result = maximumFileSize;
+		result = self->maximumFileSize;
 	};
 	
 	// The design of this method is taken from the DDAbstractLogger implementation.
@@ -519,7 +519,7 @@
 	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
 	
 	dispatch_sync(globalLoggingQueue, ^{
-		dispatch_sync(loggerQueue, block);
+		dispatch_sync(self->loggerQueue, block);
 	});
 	
 	return result;
@@ -529,7 +529,7 @@
 {
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		maximumFileSize = newMaximumFileSize;
+		self->maximumFileSize = newMaximumFileSize;
 		[self maybeRollLogFileDueToSize];
 		
 	}};
@@ -550,7 +550,7 @@
 	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
 	
 	dispatch_async(globalLoggingQueue, ^{
-		dispatch_async(loggerQueue, block);
+		dispatch_async(self->loggerQueue, block);
 	});
 }
 
@@ -559,7 +559,7 @@
 	__block NSTimeInterval result;
 	
 	dispatch_block_t block = ^{
-		result = rollingFrequency;
+		result = self->rollingFrequency;
 	};
 	
 	// The design of this method is taken from the DDAbstractLogger implementation.
@@ -578,7 +578,7 @@
 	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
 	
 	dispatch_sync(globalLoggingQueue, ^{
-		dispatch_sync(loggerQueue, block);
+		dispatch_sync(self->loggerQueue, block);
 	});
 	
 	return result;
@@ -588,7 +588,7 @@
 {
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		rollingFrequency = newRollingFrequency;
+		self->rollingFrequency = newRollingFrequency;
 		[self maybeRollLogFileDueToAge];
 	}};
 	
@@ -608,7 +608,7 @@
 	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
 	
 	dispatch_async(globalLoggingQueue, ^{
-		dispatch_async(loggerQueue, block);
+		dispatch_async(self->loggerQueue, block);
 	});
 }
 
@@ -686,7 +686,7 @@
 		NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 		
 		dispatch_async(globalLoggingQueue, ^{
-			dispatch_async(loggerQueue, block);
+			dispatch_async(self->loggerQueue, block);
 		});
 	}
 }

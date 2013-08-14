@@ -1021,8 +1021,8 @@ static char *dd_str_copy(const char *str)
 	__block id <DDLogFormatter> result;
 	
 	dispatch_sync(globalLoggingQueue, ^{
-		dispatch_sync(loggerQueue, ^{
-			result = formatter;
+		dispatch_sync(self->loggerQueue, ^{
+			result = self->formatter;
 		});
 	});
 	
@@ -1038,16 +1038,16 @@ static char *dd_str_copy(const char *str)
 	
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		if (formatter != logFormatter)
+		if (self->formatter != logFormatter)
 		{
-			if ([formatter respondsToSelector:@selector(willRemoveFromLogger:)]) {
-				[formatter willRemoveFromLogger:self];
+			if ([self->formatter respondsToSelector:@selector(willRemoveFromLogger:)]) {
+				[self->formatter willRemoveFromLogger:self];
 			}
 			
-			formatter = logFormatter;
+			self->formatter = logFormatter;
 			
-			if ([formatter respondsToSelector:@selector(didAddToLogger:)]) {
-				[formatter didAddToLogger:self];
+			if ([self->formatter respondsToSelector:@selector(didAddToLogger:)]) {
+				[self->formatter didAddToLogger:self];
 			}
 		}
 	}};
@@ -1055,7 +1055,7 @@ static char *dd_str_copy(const char *str)
 	dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
 	
 	dispatch_async(globalLoggingQueue, ^{
-		dispatch_async(loggerQueue, block);
+		dispatch_async(self->loggerQueue, block);
 	});
 }
 
