@@ -34,9 +34,8 @@
 			// Tests show that Firefox performs this way, but Safari does not
 			// Thus we'll attempt to retrieve the value as nonquoted, but we'll verify it doesn't start with a quote
 			_qualityOfProtection = [self nonquotedSubHeaderFieldValue:@"qop" fromHeaderFieldValue:authInfo];
-			if (_qualityOfProtection && ([_qualityOfProtection characterAtIndex:0] == '"')) {
+			if (_qualityOfProtection && ([_qualityOfProtection characterAtIndex:0] == '"'))
 				_qualityOfProtection = [self quotedSubHeaderFieldValue:@"qop" fromHeaderFieldValue:authInfo];
-			}
 			
 			_nonceCount = [self nonquotedSubHeaderFieldValue:@"nc" fromHeaderFieldValue:authInfo];
 			_cnonce		= [self quotedSubHeaderFieldValue:@"cnonce" fromHeaderFieldValue:authInfo];
@@ -46,80 +45,67 @@
 	return self;
 }
 
-/**
- * Retrieves a "Sub Header Field Value" from a given header field value.
- * The sub header field is expected to be quoted.
- * 
- * In the following header field:
- * Authorization: Digest username="Mufasa", qop=auth, response="6629fae4939"
- * The sub header field titled 'username' is quoted, and this method would return the value @"Mufasa".
-**/
-- (NSString *)quotedSubHeaderFieldValue:(NSString *)param fromHeaderFieldValue:(NSString *)header
-{
+/*!
+ Retrieves a "Sub Header Field Value" from a given header field value.
+ The sub header field is expected to be quoted.
+ 
+ In the following header field:
+ Authorization: Digest username="Mufasa", qop=auth, response="6629fae4939"
+ The sub header field titled 'username' is quoted, and this method would return the value @"Mufasa".
+ */
+- (NSString *)quotedSubHeaderFieldValue:(NSString *)param fromHeaderFieldValue:(NSString *)header {
+	
 	NSRange startRange = [header rangeOfString:[NSString stringWithFormat:@"%@=\"", param]];
-	if(startRange.location == NSNotFound)
-	{
-		// The param was not found anywhere in the header
+	if (startRange.location == NSNotFound)
 		return nil;
-	}
 	
 	NSUInteger postStartRangeLocation = startRange.location + startRange.length;
 	NSUInteger postStartRangeLength = [header length] - postStartRangeLocation;
 	NSRange postStartRange = NSMakeRange(postStartRangeLocation, postStartRangeLength);
 	
 	NSRange endRange = [header rangeOfString:@"\"" options:0 range:postStartRange];
-	if(endRange.location == NSNotFound)
-	{
-		// The ending double-quote was not found anywhere in the header
+	if (endRange.location == NSNotFound)
 		return nil;
-	}
 	
 	NSRange subHeaderRange = NSMakeRange(postStartRangeLocation, endRange.location - postStartRangeLocation);
 	return [header substringWithRange:subHeaderRange];
+	
 }
 
-/**
- * Retrieves a "Sub Header Field Value" from a given header field value.
- * The sub header field is expected to not be quoted.
- * 
- * In the following header field:
- * Authorization: Digest username="Mufasa", qop=auth, response="6629fae4939"
- * The sub header field titled 'qop' is nonquoted, and this method would return the value @"auth".
-**/
-- (NSString *)nonquotedSubHeaderFieldValue:(NSString *)param fromHeaderFieldValue:(NSString *)header
-{
+/*!
+ Retrieves a "Sub Header Field Value" from a given header field value.
+ The sub header field is expected to not be quoted.
+
+ In the following header field:
+ Authorization: Digest username="Mufasa", qop=auth, response="6629fae4939"
+ The sub header field titled 'qop' is nonquoted, and this method would return the value @"auth".
+ */
+- (NSString *)nonquotedSubHeaderFieldValue:(NSString *)param fromHeaderFieldValue:(NSString *)header {
+	
 	NSRange startRange = [header rangeOfString:[NSString stringWithFormat:@"%@=", param]];
 	if(startRange.location == NSNotFound)
-	{
-		// The param was not found anywhere in the header
 		return nil;
-	}
 	
 	NSUInteger postStartRangeLocation = startRange.location + startRange.length;
 	NSUInteger postStartRangeLength = [header length] - postStartRangeLocation;
 	NSRange postStartRange = NSMakeRange(postStartRangeLocation, postStartRangeLength);
 	
 	NSRange endRange = [header rangeOfString:@"," options:0 range:postStartRange];
-	if(endRange.location == NSNotFound)
-	{
+	if (endRange.location == NSNotFound) {
 		// The ending comma was not found anywhere in the header
 		// However, if the nonquoted param is at the end of the string, there would be no comma
 		// This is only possible if there are no spaces anywhere
 		NSRange endRange2 = [header rangeOfString:@" " options:0 range:postStartRange];
 		if(endRange2.location != NSNotFound)
-		{
 			return nil;
-		}
 		else
-		{
 			return [header substringWithRange:postStartRange];
-		}
 	}
-	else
-	{
+	else {
 		NSRange subHeaderRange = NSMakeRange(postStartRangeLocation, endRange.location - postStartRangeLocation);
 		return [header substringWithRange:subHeaderRange];
 	}
+	
 }
 
 @end
