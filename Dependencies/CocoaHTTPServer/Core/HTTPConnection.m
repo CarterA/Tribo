@@ -429,7 +429,7 @@ static NSMutableArray *recentNonces;
 			return NO;
 		}
 		
-		NSString *url = [[request url] relativeString];
+		NSString *url = [request.URL relativeString];
 		
 		if (![url isEqualToString:auth.URI])
 		{
@@ -540,7 +540,7 @@ static NSMutableArray *recentNonces;
 	NSString *authFormat = @"Digest realm=\"%@\", qop=\"auth\", nonce=\"%@\"";
 	NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm], [[self class] generateNonce]];
 	
-	[response setHeaderField:@"WWW-Authenticate" value:authInfo];
+	[response setValue:authInfo forHeaderField:@"WWW-Authenticate"];
 }
 
 /**
@@ -553,7 +553,7 @@ static NSMutableArray *recentNonces;
 	NSString *authFormat = @"Basic realm=\"%@\"";
 	NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm]];
 	
-	[response setHeaderField:@"WWW-Authenticate" value:authInfo];
+	[response setValue:authInfo forHeaderField:@"WWW-Authenticate"];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -714,7 +714,7 @@ static NSMutableArray *recentNonces;
 	
 	NSDictionary *result = nil;
 	
-	NSURL *url = [request url];
+	NSURL *url = request.URL;
 	if(url)
 	{
 		NSString *query = [url query];
@@ -882,7 +882,7 @@ static NSMutableArray *recentNonces;
 {
 	if(request == nil) return nil;
 	
-	return [[request url] relativeString];
+	return [request.URL relativeString];
 }
 
 /**
@@ -1015,11 +1015,11 @@ static NSMutableArray *recentNonces;
 	DDRange range = [[ranges objectAtIndex:0] ddrangeValue];
 	
 	NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", range.length];
-	[response setHeaderField:@"Content-Length" value:contentLengthStr];
+	[response setValue:contentLengthStr forHeaderField:@"Content-Length"];
 	
 	NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, DDMaxRange(range) - 1];
 	NSString *contentRangeStr = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];
-	[response setHeaderField:@"Content-Range" value:contentRangeStr];
+	[response setValue:contentRangeStr forHeaderField:@"Content-Range"];
 	
 	return response;
 }
@@ -1089,10 +1089,10 @@ static NSMutableArray *recentNonces;
 	actualContentLength += [endingBoundryData length];
 	
 	NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", actualContentLength];
-	[response setHeaderField:@"Content-Length" value:contentLengthStr];
+	[response setValue:contentLengthStr forHeaderField:@"Content-Length"];
 	
 	NSString *contentTypeStr = [NSString stringWithFormat:@"multipart/byteranges; boundary=%@", ranges_boundry];
-	[response setHeaderField:@"Content-Type" value:contentTypeStr];
+	[response setValue:contentTypeStr forHeaderField:@"Content-Type"];
 	
 	return response;
 }
@@ -1148,7 +1148,7 @@ static NSMutableArray *recentNonces;
 	}
 	
 	// Check for specific range request
-	NSString *rangeHeader = [request headerField:@"Range"];
+	NSString *rangeHeader = [request valueForHeaderField:@"Range"];
 	
 	BOOL isRangeRequest = NO;
 	
@@ -1180,12 +1180,12 @@ static NSMutableArray *recentNonces;
 		
 		if (isChunked)
 		{
-			[response setHeaderField:@"Transfer-Encoding" value:@"chunked"];
+			[response setValue:@"chunked" forHeaderField:@"Transfer-Encoding"];
 		}
 		else
 		{
 			NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", contentLength];
-			[response setHeaderField:@"Content-Length" value:contentLengthStr];
+			[response setValue:contentLengthStr forHeaderField:@"Content-Length"];
 		}
 	}
 	else
@@ -1758,7 +1758,7 @@ static NSMutableArray *recentNonces;
 	HTTPLogWarn(@"HTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
 	
 	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
+	[response setValue:@"0" forHeaderField:@"Content-Length"];
     
 	NSData *responseData = [self preprocessErrorResponse:response];
 	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];
@@ -1778,7 +1778,7 @@ static NSMutableArray *recentNonces;
 		
 	// Status Code 401 - Unauthorized
 	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:401 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
+	[response setValue:@"0" forHeaderField:@"Content-Length"];
 	
 	if ([self useDigestAccessAuthentication])
 	{
@@ -1809,8 +1809,8 @@ static NSMutableArray *recentNonces;
 	
 	// Status Code 400 - Bad Request
 	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
-	[response setHeaderField:@"Connection" value:@"close"];
+	[response setValue:@"0" forHeaderField:@"Content-Length"];
+	[response setValue:@"close" forHeaderField:@"Connection"];
 	
 	NSData *responseData = [self preprocessErrorResponse:response];
 	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_FINAL_RESPONSE];
@@ -1837,8 +1837,8 @@ static NSMutableArray *recentNonces;
 	
 	// Status code 405 - Method Not Allowed
 	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
-	[response setHeaderField:@"Connection" value:@"close"];
+	[response setValue:@"0" forHeaderField:@"Content-Length"];
+	[response setValue:@"close" forHeaderField:@"Connection"];
 	
 	NSData *responseData = [self preprocessErrorResponse:response];
 	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_FINAL_RESPONSE];
@@ -1862,7 +1862,7 @@ static NSMutableArray *recentNonces;
 	
 	// Status Code 404 - Not Found
 	HTTPMessage *response = [[HTTPMessage alloc] initResponseWithStatusCode:404 description:nil version:HTTPVersion1_1];
-	[response setHeaderField:@"Content-Length" value:@"0"];
+	[response setValue:@"0" forHeaderField:@"Content-Length"];
 	
 	NSData *responseData = [self preprocessErrorResponse:response];
 	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:HTTP_RESPONSE];
@@ -1924,10 +1924,10 @@ static NSMutableArray *recentNonces;
 	
 	// Add standard headers
 	NSString *now = [self dateAsString:[NSDate date]];
-	[response setHeaderField:@"Date" value:now];
+	[response setValue:now forHeaderField:@"Date"];
 	
 	// Add server capability headers
-	[response setHeaderField:@"Accept-Ranges" value:@"bytes"];
+	[response setValue:@"bytes" forHeaderField:@"Accept-Ranges"];
 	
 	// Add optional response headers
 	if ([httpResponse respondsToSelector:@selector(httpHeaders)])
@@ -1941,7 +1941,7 @@ static NSMutableArray *recentNonces;
 		{
 			NSString *value = [responseHeaders objectForKey:key];
 			
-			[response setHeaderField:key value:value];
+			[response setValue:value forHeaderField:key];
 		}
 	}
 	
@@ -1972,15 +1972,15 @@ static NSMutableArray *recentNonces;
 	//     [response setBody:msgData];
 	//     
 	//     NSString *contentLengthStr = [NSString stringWithFormat:@"%lu", (unsigned long)[msgData length]];
-	//     [response setHeaderField:@"Content-Length" value:contentLengthStr];
+	//     [response setValue:contentLengthStr forHeaderField:@"Content-Length"];
 	// }
 	
 	// Add standard headers
 	NSString *now = [self dateAsString:[NSDate date]];
-	[response setHeaderField:@"Date" value:now];
+	[response setValue:now forHeaderField:@"Date"];
 	
 	// Add server capability headers
-	[response setHeaderField:@"Accept-Ranges" value:@"bytes"];
+	[response setValue:@"bytes" forHeaderField:@"Accept-Ranges"];
 	
 	// Add optional response headers
 	if ([httpResponse respondsToSelector:@selector(httpHeaders)])
@@ -1994,7 +1994,7 @@ static NSMutableArray *recentNonces;
 		{
 			NSString *value = [responseHeaders objectForKey:key];
 			
-			[response setHeaderField:key value:value];
+			[response setValue:value forHeaderField:key];
 		}
 	}
 	
@@ -2053,10 +2053,10 @@ static NSMutableArray *recentNonces;
 			NSString *uri = [self requestURI];
 			
 			// Check for a Transfer-Encoding field
-			NSString *transferEncoding = [request headerField:@"Transfer-Encoding"];
+			NSString *transferEncoding = [request valueForHeaderField:@"Transfer-Encoding"];
       
 			// Check for a Content-Length field
-			NSString *contentLength = [request headerField:@"Content-Length"];
+			NSString *contentLength = [request valueForHeaderField:@"Content-Length"];
 			
 			// Content-Length MUST be present for upload methods (such as POST or PUT)
 			// and MUST NOT be present for other methods.
@@ -2607,7 +2607,7 @@ static NSMutableArray *recentNonces;
 		// HTTP version 1.1
 		// Connection should only be closed if request included "Connection: close" header
 		
-		NSString *connection = [request headerField:@"Connection"];
+		NSString *connection = [request valueForHeaderField:@"Connection"];
 		
 		shouldDie = (connection && ([connection caseInsensitiveCompare:@"close"] == NSOrderedSame));
 	}
@@ -2616,7 +2616,7 @@ static NSMutableArray *recentNonces;
 		// HTTP version 1.0
 		// Connection should be closed unless request included "Connection: Keep-Alive" header
 		
-		NSString *connection = [request headerField:@"Connection"];
+		NSString *connection = [request valueForHeaderField:@"Connection"];
 		
 		if (connection == nil)
 			shouldDie = YES;

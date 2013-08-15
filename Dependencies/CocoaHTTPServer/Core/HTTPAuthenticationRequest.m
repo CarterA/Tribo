@@ -11,7 +11,7 @@
 	self = [super init];
 	if (self) {
 		
-		NSString *authInfo = [request headerField:@"Authorization"];
+		NSString *authInfo = [request valueForHeaderField:@"Authorization"];
 		
 		_basic = NO;
 		if ([authInfo length] >= 6)

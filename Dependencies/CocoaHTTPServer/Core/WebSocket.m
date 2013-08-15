@@ -100,8 +100,8 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 	// If we find them, and they have the proper value,
 	// we can safely assume this is a websocket request.
 	
-	NSString *upgradeHeaderValue = [request headerField:@"Upgrade"];
-	NSString *connectionHeaderValue = [request headerField:@"Connection"];
+	NSString *upgradeHeaderValue = [request valueForHeaderField:@"Upgrade"];
+	NSString *connectionHeaderValue = [request valueForHeaderField:@"Connection"];
 	
 	BOOL isWebSocket = YES;
 	
@@ -122,8 +122,8 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 
 + (BOOL)isVersion76Request:(HTTPMessage *)request
 {
-	NSString *key1 = [request headerField:@"Sec-WebSocket-Key1"];
-	NSString *key2 = [request headerField:@"Sec-WebSocket-Key2"];
+	NSString *key1 = [request valueForHeaderField:@"Sec-WebSocket-Key1"];
+	NSString *key2 = [request valueForHeaderField:@"Sec-WebSocket-Key2"];
 	
 	BOOL isVersion76;
 	
@@ -141,7 +141,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 
 + (BOOL)isRFC6455Request:(HTTPMessage *)request
 {
-	NSString *key = [request headerField:@"Sec-WebSocket-Key"];
+	NSString *key = [request valueForHeaderField:@"Sec-WebSocket-Key"];
 	BOOL isRFC6455 = (key != nil);
 
 	HTTPLogTrace2(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, (isRFC6455 ? @"YES" : @"NO"));
@@ -280,7 +280,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 {
 	HTTPLogTrace();
 	
-	NSString *origin = [request headerField:@"Origin"];
+	NSString *origin = [request valueForHeaderField:@"Origin"];
 	
 	if (origin == nil)
 	{
@@ -301,9 +301,9 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 	NSString *location;
 	
 	NSString *scheme = [asyncSocket isSecure] ? @"wss" : @"ws";
-	NSString *host = [request headerField:@"Host"];
+	NSString *host = [request valueForHeaderField:@"Host"];
 	
-	NSString *requestUri = [[request url] relativeString];
+	NSString *requestUri = [request.URL relativeString];
 	
 	if (host == nil)
 	{
@@ -320,7 +320,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 }
 
 - (NSString *)secWebSocketKeyResponseHeaderValue {
-	NSString *key = [request headerField: @"Sec-WebSocket-Key"];
+	NSString *key = [request valueForHeaderField: @"Sec-WebSocket-Key"];
 	NSString *guid = @"258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
 	return [[key stringByAppendingString: guid] dataUsingEncoding: NSUTF8StringEncoding].sha1Digest.base64Encoded;
 }
@@ -379,8 +379,8 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 	                                                              description:@"Web Socket Protocol Handshake"
 	                                                                  version:HTTPVersion1_1];
 	
-	[wsResponse setHeaderField:@"Upgrade" value:@"WebSocket"];
-	[wsResponse setHeaderField:@"Connection" value:@"Upgrade"];
+	[wsResponse setValue:@"WebSocket" forHeaderField:@"Upgrade"];
+	[wsResponse setValue:@"Upgrade" forHeaderField:@"Connection"];
 	
 	// Note: It appears that WebSocket-Origin and WebSocket-Location
 	// are required for Google's Chrome implementation to work properly.
@@ -397,12 +397,12 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 	NSString *originField = isVersion76 ? @"Sec-WebSocket-Origin" : @"WebSocket-Origin";
 	NSString *locationField = isVersion76 ? @"Sec-WebSocket-Location" : @"WebSocket-Location";
 	
-	[wsResponse setHeaderField:originField value:originValue];
-	[wsResponse setHeaderField:locationField value:locationValue];
+	[wsResponse setValue:originValue forHeaderField:originField];
+	[wsResponse setValue:locationValue forHeaderField:locationField];
 	
 	NSString *acceptValue = [self secWebSocketKeyResponseHeaderValue];
 	if (acceptValue) {
-		[wsResponse setHeaderField: @"Sec-WebSocket-Accept" value: acceptValue];
+		[wsResponse setValue: acceptValue forHeaderField: @"Sec-WebSocket-Accept"];
 	}
 	
 	NSData *responseHeaders = [wsResponse messageData];
@@ -471,8 +471,8 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame)
 	NSAssert(isVersion76, @"WebSocket version 75 doesn't contain a response body");
 	NSAssert([d3 length] == 8, @"Invalid requestBody length");
 	
-	NSString *key1 = [request headerField:@"Sec-WebSocket-Key1"];
-	NSString *key2 = [request headerField:@"Sec-WebSocket-Key2"];
+	NSString *key1 = [request valueForHeaderField:@"Sec-WebSocket-Key1"];
+	NSString *key2 = [request valueForHeaderField:@"Sec-WebSocket-Key2"];
 	
 	NSData *d1 = [self processKey:key1];
 	NSData *d2 = [self processKey:key2];

@@ -5,8 +5,7 @@
 #import <Foundation/Foundation.h>
 
 #if TARGET_OS_IPHONE
-  // Note: You may need to add the CFNetwork Framework to your project
-  #import <CFNetwork/CFNetwork.h>
+#import <CFNetwork/CFNetwork.h>
 #endif
 
 #define HTTPVersion1_0  ((NSString *)kCFHTTPVersion1_0)
@@ -14,35 +13,23 @@
 
 
 @interface HTTPMessage : NSObject
-{
-	CFHTTPMessageRef message;
-}
 
 - (id)initEmptyRequest;
-
-- (id)initRequestWithMethod:(NSString *)method URL:(NSURL *)url version:(NSString *)version;
-
+- (id)initRequestWithMethod:(NSString *)method URL:(NSURL *)URL version:(NSString *)version;
 - (id)initResponseWithStatusCode:(NSInteger)code description:(NSString *)description version:(NSString *)version;
 
 - (BOOL)appendData:(NSData *)data;
 
-- (BOOL)isHeaderComplete;
+@property (readonly, getter = isHeaderComplete) BOOL headerComplete;
+@property (readonly) NSString *version;
+@property (readonly) NSString *method;
+@property (readonly) NSURL *URL;
+@property (readonly) NSInteger statusCode;
+@property (readonly) NSDictionary *allHeaderFields;
+@property (readonly) NSData *messageData;
+@property (nonatomic, strong) NSData *body;
 
-- (NSString *)version;
-
-- (NSString *)method;
-- (NSURL *)url;
-
-- (NSInteger)statusCode;
-
-- (NSDictionary *)allHeaderFields;
-- (NSString *)headerField:(NSString *)headerField;
-
-- (void)setHeaderField:(NSString *)headerField value:(NSString *)headerFieldValue;
-
-- (NSData *)messageData;
-
-- (NSData *)body;
-- (void)setBody:(NSData *)body;
+- (NSString *)valueForHeaderField:(NSString *)headerField;
+- (void)setValue:(NSString *)value forHeaderField:(NSString *)headerField;
 
 @end
