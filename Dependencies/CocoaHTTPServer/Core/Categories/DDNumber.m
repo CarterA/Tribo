@@ -1,88 +1,71 @@
 #import "DDNumber.h"
 
-
 @implementation NSNumber (DDNumber)
 
-+ (BOOL)parseString:(NSString *)str intoSInt64:(SInt64 *)pNum
-{
-	if(str == nil)
-	{
-		*pNum = 0;
++ (BOOL)parseString:(NSString *)string intoSInt64:(SInt64 *)integer {
+	
+	if (string == nil) {
+		*integer = 0;
 		return NO;
 	}
 	
 	errno = 0;
-	
 	// On both 32-bit and 64-bit machines, long long = 64 bit
+	*integer = strtoll([string UTF8String], NULL, 10);
 	
-	*pNum = strtoll([str UTF8String], NULL, 10);
+	if (errno != 0) return NO;
+	return YES;
 	
-	if(errno != 0)
-		return NO;
-	else
-		return YES;
 }
 
-+ (BOOL)parseString:(NSString *)str intoUInt64:(UInt64 *)pNum
-{
-	if(str == nil)
-	{
-		*pNum = 0;
++ (BOOL)parseString:(NSString *)string intoUInt64:(UInt64 *)integer {
+	
+	if (string == nil) {
+		*integer = 0;
 		return NO;
 	}
-	
+
 	errno = 0;
-	
 	// On both 32-bit and 64-bit machines, unsigned long long = 64 bit
-	
-	*pNum = strtoull([str UTF8String], NULL, 10);
-	
-	if(errno != 0)
-		return NO;
-	else
-		return YES;
+	*integer = strtoll([string UTF8String], NULL, 10);
+
+	if(errno != 0) return NO;
+	return YES;
+
 }
 
-+ (BOOL)parseString:(NSString *)str intoNSInteger:(NSInteger *)pNum
-{
-	if(str == nil)
-	{
-		*pNum = 0;
++ (BOOL)parseString:(NSString *)string intoNSInteger:(NSInteger *)integer {
+	
+	if (string == nil) {
+		*integer = 0;
 		return NO;
 	}
 	
 	errno = 0;
-	
 	// On LP64, NSInteger = long = 64 bit
 	// Otherwise, NSInteger = int = long = 32 bit
+	*integer = strtol([string UTF8String], NULL, 10);
 	
-	*pNum = strtol([str UTF8String], NULL, 10);
+	if(errno != 0) return NO;
+	return YES;
 	
-	if(errno != 0)
-		return NO;
-	else
-		return YES;
 }
 
-+ (BOOL)parseString:(NSString *)str intoNSUInteger:(NSUInteger *)pNum
++ (BOOL)parseString:(NSString *)string intoNSUInteger:(NSUInteger *)integer
 {
-	if(str == nil)
-	{
-		*pNum = 0;
+	if (string == nil) {
+		*integer = 0;
 		return NO;
 	}
 	
 	errno = 0;
-	
 	// On LP64, NSUInteger = unsigned long = 64 bit
 	// Otherwise, NSUInteger = unsigned int = unsigned long = 32 bit
+	*integer = strtoul([string UTF8String], NULL, 10);
 	
-	*pNum = strtoul([str UTF8String], NULL, 10);
+	if(errno != 0) return NO;
+	return YES;
 	
-	if(errno != 0)
-		return NO;
-	else
-		return YES;
 }
 
 @end

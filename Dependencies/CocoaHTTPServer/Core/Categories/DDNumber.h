@@ -1,12 +1,11 @@
 #import <Foundation/Foundation.h>
 
-
 @interface NSNumber (DDNumber)
 
-+ (BOOL)parseString:(NSString *)str intoSInt64:(SInt64 *)pNum;
-+ (BOOL)parseString:(NSString *)str intoUInt64:(UInt64 *)pNum;
++ (BOOL)parseString:(NSString *)string intoSInt64:(SInt64 *)integer;
++ (BOOL)parseString:(NSString *)string intoUInt64:(UInt64 *)integer;
 
-+ (BOOL)parseString:(NSString *)str intoNSInteger:(NSInteger *)pNum;
-+ (BOOL)parseString:(NSString *)str intoNSUInteger:(NSUInteger *)pNum;
++ (BOOL)parseString:(NSString *)string intoNSInteger:(NSInteger *)integer;
++ (BOOL)parseString:(NSString *)string intoNSUInteger:(NSUInteger *)integer;
 
 @end
