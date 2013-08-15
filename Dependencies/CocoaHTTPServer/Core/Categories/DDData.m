@@ -1,42 +1,30 @@
 #import "DDData.h"
 #import <CommonCrypto/CommonDigest.h>
 
-
 @implementation NSData (DDData)
 
-- (NSData *)md5Digest
-{
+- (NSData *)md5Digest {
 	unsigned char result[CC_MD5_DIGEST_LENGTH];
-    
-    CC_MD5([self bytes], (CC_LONG)[self length], result);
-    return [NSData dataWithBytes:result length:CC_MD5_DIGEST_LENGTH];
+	CC_MD5(self.bytes, (CC_LONG)[self length], result);
+	return [NSData dataWithBytes:result length:CC_MD5_DIGEST_LENGTH];
 }
 
-- (NSData *)sha1Digest
-{
+- (NSData *)sha1Digest {
 	unsigned char result[CC_SHA1_DIGEST_LENGTH];
-    
-	CC_SHA1([self bytes], (CC_LONG)[self length], result);
-    return [NSData dataWithBytes:result length:CC_SHA1_DIGEST_LENGTH];
+	CC_SHA1(self.bytes, (CC_LONG)[self length], result);
+	return [NSData dataWithBytes:result length:CC_SHA1_DIGEST_LENGTH];
 }
 
-- (NSString *)hexStringValue
-{
+- (NSString *)hexStringValue {
 	NSMutableString *stringBuffer = [NSMutableString stringWithCapacity:([self length] * 2)];
-	
-    const unsigned char *dataBuffer = [self bytes];
-    NSUInteger i;
-    
-    for (i = 0; i < [self length]; ++i)
-	{
-        [stringBuffer appendFormat:@"%02lx", (unsigned long)dataBuffer[i]];
+	const unsigned char *dataBuffer = [self bytes];
+	for (NSUInteger i = 0; i < [self length]; ++i) {
+		[stringBuffer appendFormat:@"%02lx", (unsigned long)dataBuffer[i]];
 	}
-    
-    return [stringBuffer copy];
+	return stringBuffer;
 }
 
-- (NSString *)base64Encoded
-{
+- (NSString *)base64Encoded {
 	CFDataRef data = (__bridge CFDataRef)self;
 	SecTransformRef encoder = SecEncodeTransformCreate(kSecBase64Encoding, NULL);
 	SecTransformSetAttribute(encoder, kSecTransformInputAttributeName, data, NULL);
@@ -47,8 +35,7 @@
 	return (__bridge_transfer NSString *)encodedString;
 }
 
-- (NSData *)base64Decoded
-{
+- (NSData *)base64Decoded {
 	CFDataRef data = (__bridge CFDataRef)self;
 	SecTransformRef decoder = SecDecodeTransformCreate(kSecBase64Encoding, NULL);
 	SecTransformSetAttribute(decoder, kSecTransformInputAttributeName, data, NULL);

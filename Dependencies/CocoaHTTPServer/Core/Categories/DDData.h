@@ -9,6 +9,7 @@
 - (NSString *)hexStringValue;
 
 - (NSString *)base64Encoded;
+
 - (NSData *)base64Decoded;
 
 @end
