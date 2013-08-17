@@ -142,11 +142,13 @@
 			return NO;
 		
 		// Filter the markdownContent of the post.
-		NSString *filteredMarkdownContent = [self filteredContent:(post.markdownContent ?: @"") fromFile:post.URL error:error];
+		NSString *originalContent = post.markdownContent;
+		NSString *filteredMarkdownContent = [self filteredContent:(originalContent ?: @"") fromFile:post.URL error:error];
 		if (!filteredMarkdownContent)
 			return NO;
 		post.markdownContent = filteredMarkdownContent;
 		[post parseMarkdownContent];
+		post.markdownContent = originalContent;
 		
 		// Set up the template loader with this post's content, and then render it all into the post template.
 		NSString *renderedContent = [self.postTemplate renderObject:post error:error];
