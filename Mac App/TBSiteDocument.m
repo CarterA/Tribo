@@ -11,7 +11,6 @@
 #import "TBSiteWindowController.h"
 #import "TBNewSiteSheetController.h"
 #import "TBSite.h"
-#import "TBPost.h"
 #import "TBMacros.h"
 #import "TBHTTPServer.h"
 #import "NSResponder+TBAdditions.h"
@@ -52,10 +51,7 @@
 		
 		self->_previewIsRunning = YES;
 		
-		if (!callback){
-			return;
-		}
-		
+		if (!callback) return;
 		dispatch_async(dispatch_get_main_queue(), ^{
 			callback(localURL, error);
 		});
@@ -92,17 +88,18 @@
 }
 
 - (void)reloadSite {
-	[[NSProcessInfo processInfo] disableSuddenTermination];
 	if (self.server.isRunning) {
 		MAWeakSelfDeclare();
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 			MAWeakSelfImport();
 			NSError *error;
 			
+			[[NSProcessInfo processInfo] disableSuddenTermination];
 			if (![self.site process:&error]) {
 				[NSApp tb_presentErrorOnMainQueue:error];
 				return;
 			}
+			[[NSProcessInfo processInfo] enableSuddenTermination];
 			
 			[self.server refreshPages];
 			
@@ -113,7 +110,6 @@
 		if (![self.site parsePosts:&parsingError])
 			[NSApp tb_presentErrorOnMainQueue:parsingError];
 	}
-    [[NSProcessInfo processInfo] enableSuddenTermination];
 }
 
 #pragma mark - NSDocument
