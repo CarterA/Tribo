@@ -268,13 +268,16 @@
 		[standardInput.fileHandleForWriting writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
 		[standardInput.fileHandleForWriting closeFile];
 		
-		__block BOOL finished = NO;
 		__block NSError *blockError = nil;
-		[filter executeWithArguments:arguments completionHandler:^(NSError *filterError) {
-			blockError = filterError;
-			finished = YES;
-		}];
-		while (!finished) { /* Wait for completion */ }
+		dispatch_group_t group = dispatch_group_create();
+		dispatch_async(dispatch_get_current_queue(), ^{
+			dispatch_group_enter(group);
+			[filter executeWithArguments:arguments completionHandler:^(NSError *filterError) {
+				blockError = filterError;
+				dispatch_group_leave(group);
+			}];
+		});
+		dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
 		if (blockError) {
 			if (error) *error = blockError;
 			return nil;
