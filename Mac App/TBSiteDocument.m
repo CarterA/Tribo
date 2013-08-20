@@ -112,6 +112,29 @@
 	}
 }
 
+- (void)runNewSiteSheet {
+	self.siteSheetController = [TBNewSiteSheetController new];
+	[self.siteSheetController runModalForWindow:self.windowForSheet completionHandler:^(NSString *name, NSString *author, NSURL *URL) {
+		
+		if (!URL) {
+			// Close the window after a small delay, so that the sheet has time to close.
+			[self performSelector:@selector(close) withObject:nil afterDelay:0.4];
+			return;
+		}
+		
+		NSError *error = nil;
+		NSURL *defaultSite = [[NSBundle mainBundle] URLForResource:@"Default" withExtension:@"tribo"];
+		if (![[NSFileManager defaultManager] copyItemAtURL:defaultSite toURL:URL error:&error])
+			[NSApp tb_presentErrorOnMainQueue:error];
+		if (![self readFromURL:URL ofType:@"tribo" error:&error])
+			[NSApp tb_presentErrorOnMainQueue:error];
+		self.fileURL = URL;
+		
+		[self.postsWatcher startWatching];
+		
+	}];
+}
+
 #pragma mark - NSDocument
 
 + (BOOL)canConcurrentlyReadDocumentsOfType:(NSString *)typeName { return YES; }
@@ -125,26 +148,7 @@
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
 	if (!self.fileURL) {
-		self.siteSheetController = [TBNewSiteSheetController new];
-		[self.siteSheetController runModalForWindow:self.windowForSheet completionHandler:^(NSString *name, NSString *author, NSURL *URL) {
-			
-			if (!URL) {
-				// Close the window after a small delay, so that the sheet has time to close.
-				[self performSelector:@selector(close) withObject:nil afterDelay:0.4];
-				return;
-			}
-			
-			NSError *error = nil;
-			NSURL *defaultSite = [[NSBundle mainBundle] URLForResource:@"Default" withExtension:@"tribo"];
-			if (![[NSFileManager defaultManager] copyItemAtURL:defaultSite toURL:URL error:&error])
-				[NSApp tb_presentErrorOnMainQueue:error];
-			if (![self readFromURL:URL ofType:@"tribo" error:&error])
-				[NSApp tb_presentErrorOnMainQueue:error];
-			self.fileURL = URL;
-			
-			[self.postsWatcher startWatching];
-			
-		}];
+		[self runNewSiteSheet];
 	}
 	else {
 		[self.postsWatcher startWatching];
