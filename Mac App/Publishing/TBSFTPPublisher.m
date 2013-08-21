@@ -9,6 +9,7 @@
 
 #import "TBSFTPPublisher.h"
 #import "TBSite.h"
+#import "TBMacros.h"
 
 NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityBookmark";
 
@@ -132,8 +133,10 @@ NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityB
 	__block NSInteger lastPercentage = 0;
 	NSCharacterSet *newlineCharacterSet = [NSCharacterSet newlineCharacterSet];
 	NSCharacterSet *whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];
+	MAWeakSelfDeclare();
 	[outputFileHandle setReadabilityHandler:^(NSFileHandle *fileHandle) {
 		
+		MAWeakSelfImport();
 		NSString *availableOutput = [[NSString alloc] initWithData:fileHandle.availableData encoding:NSASCIIStringEncoding];
 		NSString *lastLine = [[availableOutput componentsSeparatedByCharactersInSet:newlineCharacterSet] lastObject];
 		if (![lastLine isEqualToString:lastNewLine]) {
@@ -158,6 +161,7 @@ NSString * const TBSFTPPublisherIdentityBookmarkKey = @"TBSFTPPublisherIdentityB
 	}];
 	
 	[rsync setTerminationHandler:^(NSTask *task) {
+		MAWeakSelfImport();
 		if (self.identityURL) [self.identityURL stopAccessingSecurityScopedResource];
 		if (self.completionHandler) self.completionHandler();
 	}];

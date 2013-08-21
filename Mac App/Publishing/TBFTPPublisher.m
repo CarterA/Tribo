@@ -9,6 +9,7 @@
 
 #import "TBFTPPublisher.h"
 #import "TBSite.h"
+#import "TBMacros.h"
 #import "CURLFTPSession.h"
 
 @interface TBFTPPublisher ()
@@ -65,7 +66,9 @@
 		
 	}
 	
+	MAWeakSelfDeclare();
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+		MAWeakSelfImport();
 		NSInteger totalOperations = [directories count] + [files count];
 		__block NSInteger completedOperations = 0;
 		
@@ -79,6 +82,7 @@
 			}
 		}];
 		[files enumerateKeysAndObjectsUsingBlock:^(NSString *remoteFilePath, NSURL *localFileURL, BOOL *stop) {
+			MAWeakSelfImport();
 			NSData *fileContents = [NSData dataWithContentsOfURL:localFileURL];
 			[FTPSession createFileAtPath:remoteFilePath contents:fileContents permissions:permissions withIntermediateDirectories:NO error:nil];
 			completedOperations++;
@@ -91,6 +95,7 @@
 		
 		if (self.completionHandler) {
 			dispatch_async(dispatch_get_main_queue(), ^{
+				MAWeakSelfImport();
 				self.completionHandler();
 			});
 		}
