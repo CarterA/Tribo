@@ -154,7 +154,6 @@
 		4AE91C7214FF16ED00499469 /* TBPublishSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE91C7014FF16ED00499469 /* TBPublishSheet.xib */; };
 		4AF2BFED17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */; };
 		4AF2BFEE17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */; };
-		4AF2BFEF17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */; };
 		4AF9C9D917A4587700709238 /* TBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D817A4587700709238 /* TBError.m */; };
 		4AF9C9DA17A4587700709238 /* TBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF9C9D817A4587700709238 /* TBError.m */; };
 		4AF9C9DD17A4831700709238 /* TBError.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AF9C9DF17A4831700709238 /* TBError.strings */; };
@@ -1173,7 +1172,6 @@
 			files = (
 				4AE91C5D14FEE0F500499469 /* Authentication Tool.m in Sources */,
 				4A9ED52E1507AF83009C5754 /* TBConstants.m in Sources */,
-				4AF2BFEF17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
