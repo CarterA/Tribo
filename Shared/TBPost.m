@@ -17,6 +17,12 @@
 @implementation TBPost
 
 - (instancetype)initWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error {
+    self.postDirectory = URL;
+    
+    self.slug = [URL lastPathComponent];
+    
+    URL = [URL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.md", self.slug]];
+    
 	return [super initWithURL:URL inSite:site error:error];
 }
 

@@ -30,9 +30,9 @@
 @interface TBPost : TBPage
 
 /*!
-	Create a TBPost object from a file on-disk.
+	Create a TBPost object from a directory.
 	@param URL
-		A filesystem URL pointing to the post file.
+		A filesystem URL pointing to the post directory.
 	@param site
 		The TBSite object which contains the post.
 	@param error
