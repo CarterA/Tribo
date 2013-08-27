@@ -39,9 +39,7 @@
 	@return
 		A TBPost object, or nil if an error was encountered.
  */
-+ (instancetype)postWithURL:(NSURL *)URL
-					 inSite:(TBSite *)site
-					  error:(NSError **)error;
+- (instancetype)initWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error;
 
 /*!
 	Parse the contents of the markdownContent property, saving the HTML output
