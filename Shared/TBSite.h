@@ -8,6 +8,7 @@
 //
 
 #import "TBConstants.h"
+#import "TBPost.h"
 
 @protocol TBSiteDelegate;
 
@@ -56,26 +57,7 @@
  */
 - (BOOL)parsePosts:(NSError **)error;
 
-/*!
-	Add an empty post to the receiving site object.
-	@param title
-		The title of the post. Must not be nil.
-	@param slug
-		The slug of the post, i.e. the post title that will be used in URLs.
-		Must be URL-encoded and not nil.
-	@param error
-		If the return value is nil, then this argument will contain an NSError 
-		object describing what went wrong.
-	@return
-		A filesystem URL pointing to the newly-created post file.
-	@discussion
-		The new post file has no content, but is pre-filled with a Markdown 
-		title on the first line. The date of the post is automatically set to 
-		today's date.
- */
-- (NSURL *)addPostWithTitle:(NSString *)title
-					   slug:(NSString *)slug
-					  error:(NSError **)error;
+- (void)addPost:(TBPost *)post;
 
 /*!
 	@property root

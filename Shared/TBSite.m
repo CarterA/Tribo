@@ -429,28 +429,8 @@
 
 #pragma mark - Site Modification
 
-- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error {
-	NSDate *currentDate = [NSDate date];
-    
-	NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
-    
-	NSString *dateString = [dateFormatter stringFromDate:currentDate];
-    
-	NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
-    
-	NSURL *destination = [[self.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
-    
-	NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
-    
-	if (![contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error]) {
-		return nil;
-    }
-    
-	if (![self parsePosts:error]) {
-        return nil;
-    }
-    
-	return destination;
+- (void)addPost:(TBPost *)post {
+    [self.posts addObject:post];
 }
 
 - (void)setMetadata:(NSDictionary *)metadata {

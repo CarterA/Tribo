@@ -41,6 +41,8 @@
  */
 - (instancetype)initWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error;
 
+- (instancetype)initWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error;
+
 /*!
 	Parse the contents of the markdownContent property, saving the HTML output
 	to the content property.

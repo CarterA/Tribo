@@ -20,6 +20,34 @@
 	return [super initWithURL:URL inSite:site error:error];
 }
 
+- (instancetype)initWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error {
+    if (self = [super init]) {
+        self.site = site;
+        
+        // Create the directory
+        NSDate *currentDate = [NSDate date];
+        NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
+        
+        NSString *dateString = [dateFormatter stringFromDate:currentDate];
+        
+        NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
+        
+        NSURL *destination = [[site.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
+        
+        NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
+        
+        if (![contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error]) {
+            return nil;
+        }
+        
+        self.URL = destination;
+        
+        [self parse:error];
+    }
+    
+    return self;
+}
+
 - (BOOL)parse:(NSError **)error {	
 	if (![self parseDateAndSlug:error]) {
 		return NO;
