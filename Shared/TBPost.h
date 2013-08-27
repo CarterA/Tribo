@@ -76,6 +76,8 @@
 
 @property (nonatomic, strong) TSPostMetadata *metadata;
 
+@property (nonatomic, strong) NSURL *postDirectory;
+
 /*!
 	@property markdownContent
 		The original content of the post, before being converted to HTML by the 

@@ -32,20 +32,20 @@
         
         NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
         
-        NSURL *directory = [site.postsDirectory URLByAppendingPathComponent:slug isDirectory:YES];
+        self.postDirectory = [site.postsDirectory URLByAppendingPathComponent:slug isDirectory:YES];
         
-        if (![[NSFileManager defaultManager] createDirectoryAtURL:directory withIntermediateDirectories:YES attributes:nil error:error]) {
+        if (![[NSFileManager defaultManager] createDirectoryAtURL:self.postDirectory withIntermediateDirectories:YES attributes:nil error:error]) {
             // Unable to create directory structure
             return nil;
         }
         
         // Metadata File
-        self.metadata = [[TSPostMetadata alloc] initWithPostDirectory:directory];
+        self.metadata = [[TSPostMetadata alloc] initWithPostDirectory:self.postDirectory];
         
         [self.metadata writeWithError:error];
         
         // Post File
-        NSURL *contentDestination = [[directory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
+        NSURL *contentDestination = [[self.postDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
         
         NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
         
