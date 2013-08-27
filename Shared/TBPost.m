@@ -32,15 +32,28 @@
         
         NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
         
-        NSURL *destination = [[site.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
+        NSURL *directory = [site.postsDirectory URLByAppendingPathComponent:slug isDirectory:YES];
         
-        NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
-        
-        if (![contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error]) {
+        if (![[NSFileManager defaultManager] createDirectoryAtURL:directory withIntermediateDirectories:YES attributes:nil error:error]) {
+            // Unable to create directory structure
             return nil;
         }
         
-        self.URL = destination;
+        // Metadata File
+        self.metadata = [[TSPostMetadata alloc] initWithPostDirectory:directory];
+        
+        [self.metadata writeWithError:error];
+        
+        // Post File
+        NSURL *contentDestination = [[directory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
+        
+        NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
+        
+        if (![contents writeToURL:contentDestination atomically:YES encoding:NSUTF8StringEncoding error:error]) {
+            return nil;
+        }
+        
+        self.URL = contentDestination;
         
         [self parse:error];
     }

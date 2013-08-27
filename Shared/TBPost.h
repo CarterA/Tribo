@@ -9,6 +9,8 @@
 
 #import "TBPage.h"
 
+#import "TSPostMetadata.h"
+
 /*!
 	@class TBPost
 	@discussion A post represents a piece of writing, loaded from disk, with its
@@ -71,6 +73,8 @@
 		where the slug must immediately follow the date, separated by a dash.
  */
 @property (nonatomic, strong) NSString *slug;
+
+@property (nonatomic, strong) TSPostMetadata *metadata;
 
 /*!
 	@property markdownContent

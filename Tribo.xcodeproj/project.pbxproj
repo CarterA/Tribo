@@ -163,6 +163,7 @@
 		9B6B669D14F3546C00759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
 		9BEF1C7A14F5CFCF0072B295 /* TBSourceViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */; };
 		9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */; };
+		C3ACCD1817CD1EF00002CE67 /* TSPostMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ACCD1717CD1EEF0002CE67 /* TSPostMetadata.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -381,6 +382,8 @@
 		9BEF1C7714F5CFCF0072B295 /* TBSourceViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSourceViewControllerViewController.h; sourceTree = "<group>"; };
 		9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSourceViewControllerViewController.m; sourceTree = "<group>"; };
 		9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSourceViewControllerView.xib; sourceTree = "<group>"; };
+		C3ACCD1617CD1EEF0002CE67 /* TSPostMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPostMetadata.h; sourceTree = "<group>"; };
+		C3ACCD1717CD1EEF0002CE67 /* TSPostMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPostMetadata.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -580,6 +583,8 @@
 				4A00337A1430216500F6702F /* TBSite.m */,
 				4A00337C143028CA00F6702F /* TBPost.h */,
 				4A00337D143028CA00F6702F /* TBPost.m */,
+				C3ACCD1617CD1EEF0002CE67 /* TSPostMetadata.h */,
+				C3ACCD1717CD1EEF0002CE67 /* TSPostMetadata.m */,
 				4A72F14014368E1200A164E9 /* TBPage.h */,
 				4A72F14114368E1200A164E9 /* TBPage.m */,
 				9B6B669A14F3546900759DC3 /* TBAsset.h */,
@@ -1163,6 +1168,7 @@
 				4A99C42917B4091D0023C9A9 /* CZAFileWatcher.m in Sources */,
 				4AA86A6C173EF28200046691 /* TBSite+TemplateAdditions.m in Sources */,
 				4AA86A70174124C300046691 /* TBPost+TemplateAdditions.m in Sources */,
+				C3ACCD1817CD1EF00002CE67 /* TSPostMetadata.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
