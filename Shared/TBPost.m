@@ -41,7 +41,7 @@
         }
         
         // Metadata File
-        self.metadata = [[TSPostMetadata alloc] initWithPostDirectory:self.postDirectory];
+        self.metadata = [[TSPostMetadata alloc] initWithPostDirectory:self.postDirectory withError:error];
         
         [self.metadata writeWithError:error];
         

@@ -20,8 +20,11 @@
 @property (retain, strong) NSDate *publishedDate;
 
 - (instancetype)init;
-- (instancetype)initWithPostDirectory:(NSURL *)postDirectory;
+- (instancetype)initWithPostDirectory:(NSURL *)directory withError:(NSError **)error;
 
+- (void)extractDataFromDictionary:(NSDictionary *)dictionary;
+
+- (BOOL)readWithError:(NSError **)error;
 - (BOOL)writeWithError:(NSError **)error;
 
 @end
