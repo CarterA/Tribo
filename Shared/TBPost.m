@@ -25,12 +25,7 @@
         self.site = site;
         
         // Create the directory
-        NSDate *currentDate = [NSDate date];
-        NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
-        
-        NSString *dateString = [dateFormatter stringFromDate:currentDate];
-        
-        NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
+        NSString *filename = [NSString stringWithString:slug];
         
         self.postDirectory = [site.postsDirectory URLByAppendingPathComponent:slug isDirectory:YES];
         
