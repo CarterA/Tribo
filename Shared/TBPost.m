@@ -57,7 +57,7 @@
 }
 
 - (BOOL)parse:(NSError **)error {	
-	if (![self parseDateAndSlug:error]) {
+	if (![self parseSlug:error]) {
 		return NO;
     }
     
@@ -116,34 +116,16 @@
 	self.markdownContent = markdownContent;
 }
 
-- (BOOL)parseDateAndSlug:(NSError **)error {
-	// Dates and slugs are parsed from a pattern in the post file name
-	static NSRegularExpression *fileNameRegex;
+- (BOOL)parseSlug:(NSError **)error {
+	NSString *filename = [[self.URL lastPathComponent] stringByDeletingPathExtension];
     
-	if (fileNameRegex == nil) {
-		fileNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d+-\\d+-\\d+)-(.*)" options:0 error:nil];
+    if (filename && [filename length] > 0) {
+        self.slug = filename;
+        
+        return YES;
     }
     
-	NSString *fileName = [self.URL.lastPathComponent stringByDeletingPathExtension];
-    
-	NSTextCheckingResult *fileNameResult = [fileNameRegex firstMatchInString:fileName options:0 range:NSMakeRange(0, fileName.length)];
-    
-	if (fileNameResult) {
-		NSDateFormatter *fileNameDateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
-        
-		self.date = [fileNameDateFormatter dateFromString:[fileName substringWithRange:[fileNameResult rangeAtIndex:1]]];
-		self.slug = [fileName substringWithRange:[fileNameResult rangeAtIndex:2]];
-	} else {
-        // No date found
-        
-		if (error) {
-            *error = TBError.badPostFileName(self.URL);
-        }
-        
-		return NO;
-	}
-    
-	return YES;
+    return NO;
 }
 
 - (void)parseMarkdownContent {
