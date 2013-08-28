@@ -21,9 +21,15 @@
     
     self.slug = [URL lastPathComponent];
     
-    URL = [URL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.md", self.slug]];
+    self.metadata = [[TSPostMetadata alloc] initWithPostDirectory:URL withError:error];
     
-	return [super initWithURL:URL inSite:site error:error];
+    if (self.metadata) {
+        URL = [URL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.md", self.slug]];
+                
+        return [super initWithURL:URL inSite:site error:error];
+    } else {
+        return nil;
+    }
 }
 
 - (instancetype)initWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error {
@@ -163,6 +169,14 @@
 	
 	bufrelease(smartyPantsOutputBuffer);
 	bufrelease(outputBuffer);
+}
+
+- (BOOL)draft {
+    return [self.metadata draft];
+}
+
+- (void)setDraft:(BOOL)draft {
+    [self.metadata setDraft:draft];
 }
 
 @end

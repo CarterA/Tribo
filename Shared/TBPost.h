@@ -76,6 +76,8 @@
 
 @property (nonatomic, strong) TSPostMetadata *metadata;
 
+@property (nonatomic, assign) BOOL draft;
+
 @property (nonatomic, strong) NSURL *postDirectory;
 
 /*!
