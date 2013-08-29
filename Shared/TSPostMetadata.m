@@ -51,7 +51,7 @@
 }
 
 - (BOOL)readWithError:(NSError **)error {
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[_path absoluteString]] == NO) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[_path path]] == NO) {
         return NO;
     }
     
