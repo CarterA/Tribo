@@ -177,6 +177,14 @@
 
 - (void)setDraft:(BOOL)draft {
     [self.metadata setDraft:draft];
+    
+    NSError *error = nil;
+    
+    [self.metadata writeWithError:&error];
+    
+    if (error) {
+        [self.metadata setDraft:!draft];
+    }
 }
 
 @end
