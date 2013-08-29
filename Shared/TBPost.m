@@ -178,12 +178,17 @@
 - (void)setDraft:(BOOL)draft {
     [self.metadata setDraft:draft];
     
+    if (draft == NO) {
+        [self.metadata setPublishedDate:[NSDate date]];
+    }
+    
     NSError *error = nil;
     
     [self.metadata writeWithError:&error];
     
     if (error) {
         [self.metadata setDraft:!draft];
+        [self.metadata setPublishedDate:nil];
     }
 }
 
