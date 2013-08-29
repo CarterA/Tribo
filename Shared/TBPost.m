@@ -180,6 +180,8 @@
     
     if (draft == NO) {
         [self.metadata setPublishedDate:[NSDate date]];
+    } else {
+        [self.metadata setPublishedDate:nil];
     }
     
     NSError *error = nil;
