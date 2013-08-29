@@ -9,6 +9,8 @@
 
 #import "TSPostMetadata.h"
 
+#import "NSDateFormatter+TBAdditions.h"
+
 @implementation TSPostMetadata
 
 @synthesize draft, publishedDate;
@@ -47,7 +49,11 @@
 - (void)extractDataFromDictionary:(NSDictionary *)dictionary {
     draft = [[dictionary objectForKey:@"draft"] boolValue];
     
-    publishedDate = [dictionary objectForKey:@"publishedDate"];
+    // Must convert back into NSDate from string
+    NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd'T'hh:mm:ssZ"];
+    NSString *dateString = [dictionary objectForKey:@"publishedDate"];
+    
+	publishedDate = [dateFormatter dateFromString:dateString];    
 }
 
 - (BOOL)readWithError:(NSError **)error {
@@ -84,7 +90,12 @@
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     
     [dictionary setValue:[NSNumber numberWithBool:draft] forKey:@"draft"];
-    [dictionary setValue:publishedDate forKey:@"publishedDate"];
+    
+    // Must format published date into string for JSON
+    NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd'T'hh:mm:ssZ"];
+	NSString *dateString = [dateFormatter stringFromDate:publishedDate];
+    
+    [dictionary setValue:dateString forKey:@"publishedDate"];
     
     return dictionary;
 }
