@@ -363,12 +363,36 @@
 					<int key="connectionID">577</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">markDraftMenuItem</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="774325703"/>
+					</object>
+					<int key="connectionID">586</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">unmarkDraftMenuItem</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="983684959"/>
+					</object>
+					<int key="connectionID">587</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">deleteSelectedRows:</string>
 						<reference key="source" ref="1003"/>
 						<reference key="destination" ref="390935342"/>
 					</object>
 					<int key="connectionID">405</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="117683742"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">588</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1769,7 +1793,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">584</int>
+			<int key="maxID">588</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1805,17 +1829,25 @@
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">postTableView</string>
-						<string key="NS.object.0">NSTableView</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">postTableView</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="markDraftMenuItem">NSMenuItem</string>
+						<string key="postTableView">NSTableView</string>
+						<string key="unmarkDraftMenuItem">NSMenuItem</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="markDraftMenuItem">
+							<string key="name">markDraftMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="postTableView">
 							<string key="name">postTableView</string>
 							<string key="candidateClassName">NSTableView</string>
 						</object>
-					</object>
+						<object class="IBToOneOutletInfo" key="unmarkDraftMenuItem">
+							<string key="name">unmarkDraftMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/TBPostsViewController.h</string>

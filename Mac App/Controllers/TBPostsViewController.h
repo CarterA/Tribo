@@ -10,8 +10,12 @@
 #import "TBViewController.h"
 #import <Quartz/Quartz.h>
 
-@interface TBPostsViewController : TBViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource>
+@interface TBPostsViewController : TBViewController <QLPreviewPanelDelegate, QLPreviewPanelDataSource, NSMenuDelegate>
 @property (nonatomic, assign) IBOutlet NSTableView *postTableView;
+
+@property (assign) IBOutlet NSMenuItem *unmarkDraftMenuItem;
+@property (assign) IBOutlet NSMenuItem *markDraftMenuItem;
+
 - (IBAction)editPost:(id)sender;
 - (IBAction)unmarkDraft:(id)sender;
 - (IBAction)markDraft:(id)sender;

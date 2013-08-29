@@ -23,6 +23,8 @@
 
 @implementation TBPostsViewController
 
+@synthesize markDraftMenuItem, unmarkDraftMenuItem;
+
 #pragma mark - View Controller Configuration
 
 - (NSString *)defaultNibName {
@@ -36,6 +38,16 @@
 - (void)viewDidLoad {
 	self.postTableView.target = self;
 	self.postTableView.doubleAction = @selector(editPost:);
+}
+
+#pragma mark - NSMenuDelegate
+
+- (void)menuNeedsUpdate:(NSMenu *)menu {
+	TBSiteDocument *document = (TBSiteDocument *)self.document;
+	TBPost *clickedPost = (document.site.posts)[[self.postTableView clickedRow]];
+    
+    [markDraftMenuItem setHidden:[clickedPost draft] == YES];
+    [unmarkDraftMenuItem setHidden:[clickedPost draft] == NO];
 }
 
 #pragma mark - Actions
