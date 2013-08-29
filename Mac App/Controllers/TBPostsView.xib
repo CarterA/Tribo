@@ -235,6 +235,22 @@
 							<string key="NSResourceName">NSMenuMixedState</string>
 						</object>
 					</object>
+					<object class="NSMenuItem" id="983684959">
+						<reference key="NSMenu" ref="117683742"/>
+						<string key="NSTitle">Unmark as Draft</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="466303921"/>
+						<reference key="NSMixedImage" ref="202476203"/>
+					</object>
+					<object class="NSMenuItem" id="774325703">
+						<reference key="NSMenu" ref="117683742"/>
+						<string key="NSTitle">Mark as Draft</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="466303921"/>
+						<reference key="NSMixedImage" ref="202476203"/>
+					</object>
 					<object class="NSMenuItem" id="670666972">
 						<reference key="NSMenu" ref="117683742"/>
 						<string key="NSTitle">Preview in Safari</string>
@@ -329,6 +345,22 @@
 						<reference key="destination" ref="405033403"/>
 					</object>
 					<int key="connectionID">251</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">unmarkDraft:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="983684959"/>
+					</object>
+					<int key="connectionID">576</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">markDraft:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="774325703"/>
+					</object>
+					<int key="connectionID">577</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -428,7 +460,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{289, 66}, {101, 17}}</string>
 									<reference key="NSSuperview" ref="69636014"/>
-									<reference key="NSNextKeyView" ref="187439019"/>
+									<reference key="NSNextKeyView" ref="416574352"/>
 									<string key="NSReuseIdentifierKey">_NS:3944</string>
 									<string key="NSHuggingPriority">{750, 750}</string>
 									<bool key="NSEnabled">YES</bool>
@@ -454,7 +486,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{289, 66}, {101, 17}}</string>
 									<reference key="NSSuperview" ref="69636014"/>
-									<reference key="NSNextKeyView" ref="302493667"/>
+									<reference key="NSNextKeyView" ref="187439019"/>
 									<string key="NSReuseIdentifierKey">_NS:3944</string>
 									<string key="NSHuggingPriority">{750, 750}</string>
 									<bool key="NSEnabled">YES</bool>
@@ -549,7 +581,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{17, 0}, {373, 63}}</string>
 									<reference key="NSSuperview" ref="69636014"/>
-									<reference key="NSNextKeyView" ref="416574352"/>
+									<reference key="NSNextKeyView" ref="302493667"/>
 									<string key="NSReuseIdentifierKey">_NS:360</string>
 									<string key="NSAntiCompressionPriority">{250, 750}</string>
 									<bool key="NSEnabled">YES</bool>
@@ -841,6 +873,8 @@
 							<reference ref="107642720"/>
 							<reference ref="788984813"/>
 							<reference ref="390935342"/>
+							<reference ref="983684959"/>
+							<reference ref="774325703"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Post Context Menu</string>
@@ -980,7 +1014,7 @@
 						<int key="objectID">178</int>
 						<reference key="object" ref="69636014"/>
 						<array class="NSMutableArray" key="children">
-							<object class="IBNSLayoutConstraint" id="298471146">
+							<object class="IBNSLayoutConstraint" id="543309054">
 								<reference key="firstItem" ref="416574352"/>
 								<int key="firstAttribute">6</int>
 								<int key="relation">0</int>
@@ -1012,7 +1046,7 @@
 								<float key="scoringTypeFloat">24</float>
 								<int key="contentType">2</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="408347072">
+							<object class="IBNSLayoutConstraint" id="97951931">
 								<reference key="firstItem" ref="416574352"/>
 								<int key="firstAttribute">11</int>
 								<int key="relation">0</int>
@@ -1590,7 +1624,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">571</int>
-						<reference key="object" ref="408347072"/>
+						<reference key="object" ref="97951931"/>
 						<reference key="parent" ref="69636014"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1600,8 +1634,19 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">573</int>
-						<reference key="object" ref="298471146"/>
+						<reference key="object" ref="543309054"/>
 						<reference key="parent" ref="69636014"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">574</int>
+						<reference key="object" ref="983684959"/>
+						<reference key="parent" ref="117683742"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">575</int>
+						<reference key="object" ref="774325703"/>
+						<reference key="parent" ref="117683742"/>
+						<string key="objectName">Menu Item - Mark as Draft</string>
 					</object>
 				</array>
 			</object>
@@ -1642,9 +1687,9 @@
 					<reference ref="660288961"/>
 					<reference ref="79387636"/>
 					<reference ref="1073305495"/>
-					<reference ref="408347072"/>
+					<reference ref="97951931"/>
 					<reference ref="37336824"/>
-					<reference ref="298471146"/>
+					<reference ref="543309054"/>
 				</array>
 				<string key="178.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="178.userInterfaceItemIdentifier">PostCell</string>
@@ -1708,6 +1753,8 @@
 				<string key="571.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="572.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="573.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="574.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="575.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<array class="NSMutableArray" key="81.IBNSViewMetadataConstraints">
 					<reference ref="238535976"/>
@@ -1722,7 +1769,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">573</int>
+			<int key="maxID">584</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1731,12 +1778,18 @@
 					<string key="superclassName">TBViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="editPost:">id</string>
+						<string key="markDraft:">id</string>
 						<string key="previewPost:">id</string>
 						<string key="revealPost:">id</string>
+						<string key="unmarkDraft:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="editPost:">
 							<string key="name">editPost:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="markDraft:">
+							<string key="name">markDraft:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="previewPost:">
@@ -1745,6 +1798,10 @@
 						</object>
 						<object class="IBActionInfo" key="revealPost:">
 							<string key="name">revealPost:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="unmarkDraft:">
+							<string key="name">unmarkDraft:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

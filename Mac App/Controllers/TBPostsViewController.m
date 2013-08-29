@@ -46,6 +46,18 @@
 	[[NSWorkspace sharedWorkspace] openURL:clickedPost.URL];
 }
 
+- (IBAction)unmarkDraft:(id)sender {
+	TBPost *clickedPost = (self.document.site.posts)[[self.postTableView clickedRow]];
+    
+    [clickedPost setDraft:NO];
+}
+
+- (IBAction)markDraft:(id)sender {
+	TBPost *clickedPost = (self.document.site.posts)[[self.postTableView clickedRow]];
+    
+    [clickedPost setDraft:YES];
+}
+
 - (IBAction)previewPost:(id)sender {
 	TBPost *clickedPost = (self.document.site.posts)[[self.postTableView clickedRow]];
 	NSDateFormatter *formatter = [NSDateFormatter new];
