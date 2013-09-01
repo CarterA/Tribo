@@ -120,7 +120,7 @@
 	@property templatesDirectory
 		A filesystem URL pointing to the templates directory for the site. The 
 		templates directory contains ".mustache" files that are used to generate 
-		the HTML for the site. Currently, only three tempaltes are supported: 
+		the HTML for the site. Currently, only three templates are supported: 
 		Default, Feed, and Post. The feed template is used to generate an RSS 
 		feed for the site, the post template is used to give standardized 
 		structure to every post page, and the default template is used 
