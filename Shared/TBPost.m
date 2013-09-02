@@ -171,6 +171,10 @@
 	bufrelease(outputBuffer);
 }
 
+- (NSDate *)date {
+    return [self.metadata publishedDate];
+}
+
 - (BOOL)draft {
     return [self.metadata draft];
 }

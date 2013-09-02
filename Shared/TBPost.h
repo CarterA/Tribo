@@ -63,7 +63,7 @@
 		The publishing date of the post. Derived from the filename of the post,
 		which must begin with a calendar date in the form YYYY-MM-DD.
  */
-@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong, readonly) NSDate *date;
 
 /*!
 	@property slug
