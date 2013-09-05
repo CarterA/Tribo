@@ -43,6 +43,20 @@
  */
 - (instancetype)initWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error;
 
+/*!
+     Create a TBPost object with a title and slug.
+     @param title
+         The title of the post.
+     @param slug
+         The slug of the post.
+     @param site
+         The TBSite object which contains the post.
+     @param error
+         If the return value is nil, then this argument will contain an NSError
+         object describing what went wrong.
+     @return
+         A TBPost object, or nil if an error was encountered.
+ */
 - (instancetype)initWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error;
 
 /*!
@@ -74,10 +88,24 @@
  */
 @property (nonatomic, strong) NSString *slug;
 
+/*!
+    @property metadata
+        Any metadata that goes along with the post. Examaples include the post
+        date.
+ */
 @property (nonatomic, strong) TSPostMetadata *metadata;
 
+/*!
+    @property draft
+        The state of the post, i.e. is it a draft (unfinished).
+ */
 @property (nonatomic, assign) BOOL draft;
 
+/*!
+    @property postDirectory
+        The directory the post resides in. Contains the post markdown file (known
+        as slug.md) and metadata file.
+ */
 @property (nonatomic, strong) NSURL *postDirectory;
 
 /*!
