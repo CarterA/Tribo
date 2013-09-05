@@ -39,13 +39,15 @@
 
 /*!
 	Process the entire site, writing the output into the destination directory.
+    @param includeDrafts
+        If set to YES, the generated sites will include any posts that are drafts.
 	@param error
 		If the return value is NO, then this argument will contain an NSError
 		object describing what went wrong.
 	@return
 		YES on successful processing, NO if an error was encountered.
  */
-- (BOOL)process:(NSError **)error;
+- (BOOL)processIncludingDrafts:(BOOL)includeDrafts error:(NSError **)error;
 
 /*!
 	Parse all post files into TBPost objects.

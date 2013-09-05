@@ -32,7 +32,7 @@
 		MAWeakSelfImport();
 
 		[[NSProcessInfo processInfo] disableSuddenTermination];
-		if (![self.site process:&error]) {
+		if (![self.site processIncludingDrafts:YES error:&error]) {
 			callback(nil, error);
 			return;
 		}
@@ -95,7 +95,7 @@
 			NSError *error;
 			
 			[[NSProcessInfo processInfo] disableSuddenTermination];
-			if (![self.site process:&error]) {
+			if (![self.site processIncludingDrafts:YES error:&error]) {
 				[NSApp tb_presentErrorOnMainQueue:error];
 				return;
 			}

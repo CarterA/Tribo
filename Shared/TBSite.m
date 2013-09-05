@@ -47,7 +47,7 @@
 
 #pragma mark - Site Processing
 
-- (BOOL)process:(NSError **)error {
+- (BOOL)processIncludingDrafts:(BOOL)includeDrafts error:(NSError **)error {
 	if (![self loadRawDefaultTemplate:error])
 		return NO;
 	
@@ -57,7 +57,7 @@
 	if (![self parsePosts:error])
 		return NO;
 	
-	if (![self writePosts:error])
+	if (![self writePostsIncludingDrafts:includeDrafts error:error])
 		return NO;
 	
 	if (![self writeFeed:error])
@@ -169,8 +169,12 @@
 	
 }
 
-- (BOOL)writePosts:(NSError **)error {
+- (BOOL)writePostsIncludingDrafts:(BOOL)includeDrafts error:(NSError **)error {
 	for (TBPost *post in self.posts) {
+        if (includeDrafts && post.draft) {
+            continue;
+        }
+        
 		post.stylesheets = @[@{@"stylesheetName": @"post"}];
 		
 		// Create the path to the folder where we are going to write the post file
