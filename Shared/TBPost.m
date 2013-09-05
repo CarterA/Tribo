@@ -35,7 +35,7 @@
 }
 
 + (instancetype)postWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error {
-    TBPost *post = [super init];
+    TBPost *post = [super new];
     
     if (post) {
         post.site = site;
