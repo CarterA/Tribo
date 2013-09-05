@@ -9,7 +9,7 @@
 
 #import "TBPage.h"
 
-#import "TSPostMetadata.h"
+#import "TBPostMetadata.h"
 
 /*!
 	@class TBPost
@@ -93,7 +93,7 @@
         Any metadata that goes along with the post. Examaples include the post
         date.
  */
-@property (nonatomic, strong) TSPostMetadata *metadata;
+@property (nonatomic, strong) TBPostMetadata *metadata;
 
 /*!
     @property draft

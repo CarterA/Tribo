@@ -43,7 +43,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSView" id="262020719">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSScrollView" id="111634547">
@@ -60,7 +60,6 @@
 										<array class="NSMutableArray" key="NSSubviews"/>
 										<string key="NSFrameSize">{410, 360}</string>
 										<reference key="NSSuperview" ref="137612995"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="69636014"/>
 										<string key="NSReuseIdentifierKey">_NS:1828</string>
 										<bool key="NSEnabled">YES</bool>
@@ -163,7 +162,6 @@
 								</array>
 								<string key="NSFrameSize">{410, 360}</string>
 								<reference key="NSSuperview" ref="111634547"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="405033403"/>
 								<string key="NSReuseIdentifierKey">_NS:1826</string>
 								<reference key="NSDocView" ref="405033403"/>
@@ -175,7 +173,6 @@
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{224, 17}, {15, 102}}</string>
 								<reference key="NSSuperview" ref="111634547"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="518927261"/>
 								<string key="NSReuseIdentifierKey">_NS:1845</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -188,8 +185,6 @@
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{1, 119}, {223, 15}}</string>
 								<reference key="NSSuperview" ref="111634547"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:1847</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
@@ -200,7 +195,6 @@
 						</array>
 						<string key="NSFrameSize">{410, 360}</string>
 						<reference key="NSSuperview" ref="262020719"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="137612995"/>
 						<string key="NSReuseIdentifierKey">_NS:1824</string>
 						<int key="NSsFlags">133680</int>
@@ -214,8 +208,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{410, 360}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="111634547"/>
 			</object>
 			<object class="NSMenu" id="117683742">
@@ -1303,7 +1295,7 @@
 				<array key="177.prototypeCellViews">
 					<reference ref="69636014"/>
 				</array>
-				<string key="178.CustomClassName">TSPostTableCellView</string>
+				<string key="178.CustomClassName">TBPostTableCellView</string>
 				<array class="NSMutableArray" key="178.IBNSViewMetadataConstraints">
 					<reference ref="595046925"/>
 					<reference ref="74407855"/>
@@ -1456,38 +1448,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/TBViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">TSPostTableCellView</string>
-					<string key="superclassName">NSTableCellView</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="date">NSTextField</string>
-						<string key="draft">NSTextField</string>
-						<string key="postExcerpt">NSTextField</string>
-						<string key="title">NSTextField</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="date">
-							<string key="name">date</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="draft">
-							<string key="name">draft</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="postExcerpt">
-							<string key="name">postExcerpt</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="title">
-							<string key="name">title</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TSPostTableCellView.h</string>
 					</object>
 				</object>
 			</array>

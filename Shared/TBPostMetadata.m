@@ -7,11 +7,11 @@
 //  See the included License.md file.
 //
 
-#import "TSPostMetadata.h"
+#import "TBPostMetadata.h"
 
 #import "NSDateFormatter+TBAdditions.h"
 
-@implementation TSPostMetadata
+@implementation TBPostMetadata
 
 @synthesize draft, publishedDate;
 @synthesize postDirectory;

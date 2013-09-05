@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Opt-6 Products, LLC. All rights reserved.
 //
 
-#import "TSPostTableCellView.h"
+#import "TBPostTableCellView.h"
 
 #import "NSTextField+TBAdditions.h"
 
-@implementation TSPostTableCellView
+@implementation TBPostTableCellView
 
 @synthesize title, date, draft, postExcerpt;
 

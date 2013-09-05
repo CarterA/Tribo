@@ -21,7 +21,7 @@
     
     self.slug = [URL lastPathComponent];
     
-    self.metadata = [[TSPostMetadata alloc] initWithPostDirectory:URL withError:error];
+    self.metadata = [[TBPostMetadata alloc] initWithPostDirectory:URL withError:error];
     
     if (self.metadata) {
         URL = [URL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.md", self.slug]];
@@ -47,7 +47,7 @@
         }
         
         // Metadata File
-        self.metadata = [[TSPostMetadata alloc] initWithPostDirectory:self.postDirectory withError:error];
+        self.metadata = [[TBPostMetadata alloc] initWithPostDirectory:self.postDirectory withError:error];
         
         [self.metadata writeWithError:error];
         

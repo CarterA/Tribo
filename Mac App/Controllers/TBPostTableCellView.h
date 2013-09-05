@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface TSPostTableCellView : NSTableCellView
+@interface TBPostTableCellView : NSTableCellView
 
 @property (assign) IBOutlet NSTextField *title;
 @property (assign) IBOutlet NSTextField *draft;

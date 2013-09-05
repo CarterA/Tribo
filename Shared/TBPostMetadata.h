@@ -16,7 +16,7 @@
  in a standized format.
  */
 
-@interface TSPostMetadata : NSObject
+@interface TBPostMetadata : NSObject
 
 #define METADATA_FILENAME @"metadata.json"
 
