@@ -38,6 +38,24 @@
 	self.postTableView.doubleAction = @selector(editPost:);
 }
 
+#pragma mark - NSMenuDelegate
+
+- (void)menuNeedsUpdate:(NSMenu *)menu {    
+    NSInteger clickedRow = [self.postTableView clickedRow];
+    
+    NSArray *items = [menu itemArray];
+    
+    bool hidden = NO;
+    
+    if (clickedRow < 0) {
+        hidden = YES;
+    }
+    
+    for (NSMenuItem *item in items) {
+        [item setHidden:hidden];
+    }
+}
+
 #pragma mark - Actions
 
 - (IBAction)editPost:(id)sender {
