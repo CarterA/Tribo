@@ -19,7 +19,6 @@
 - (instancetype)init {
     if (self = [super init]) {
         draft = YES;
-        
         publishedDate = nil;
     }
     
@@ -31,7 +30,6 @@
     
     if (metadata) {
         metadata.postDirectory = directory;
-        
         metadata.path = [directory URLByAppendingPathComponent:METADATA_FILENAME];
         
         [metadata readWithError:error];
@@ -70,7 +68,6 @@
     }
     
     NSData *data = [[NSData alloc] initWithContentsOfURL:_path];
-    
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
     
     if (data) {
@@ -88,7 +85,6 @@
     }
     
     NSData *data = [NSJSONSerialization dataWithJSONObject:[self dictionary] options:0 error:error];
-    
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     return [string writeToURL:_path atomically:YES encoding:NSUTF8StringEncoding error:error];

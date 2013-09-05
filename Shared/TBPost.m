@@ -18,16 +18,12 @@
 
 + (instancetype)postWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error {
     NSString *slug = [URL lastPathComponent];
-    
     NSURL *postURL = [URL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.md", slug]];
-    
     TBPost *post = [super pageWithURL:postURL inSite:site error:error];
     
     if (post) {
         post.postDirectory = URL;
-        
         post.slug = slug;
-        
         post.metadata = [TBPostMetadata metadataWithPostDirectory:URL withError:error];
         
         if (post.metadata) {
@@ -56,7 +52,6 @@
         
         // Metadata File
         post.metadata = [TBPostMetadata metadataWithPostDirectory:post.postDirectory withError:error];
-        
         [post.metadata writeWithError:error];
         
         // Post File
@@ -69,7 +64,6 @@
         }
         
         post.URL = contentDestination;
-        
         [post parse:error];
         
         return post;
