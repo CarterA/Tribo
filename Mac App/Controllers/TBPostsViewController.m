@@ -23,6 +23,8 @@
 
 @implementation TBPostsViewController
 
+@synthesize draftMenuItem;
+
 #pragma mark - View Controller Configuration
 
 - (NSString *)defaultNibName {
@@ -38,12 +40,42 @@
 	self.postTableView.doubleAction = @selector(editPost:);
 }
 
+#pragma mark - NSMenuDelegate
+
+- (void)menuNeedsUpdate:(NSMenu *)menu {
+	TBSiteDocument *document = (TBSiteDocument *)self.document;
+    
+    NSInteger clickedRow = [self.postTableView clickedRow];
+    
+    if (clickedRow < 0) {
+        [draftMenuItem setHidden:YES];
+        
+        return;
+    }
+    
+	TBPost *clickedPost = (document.site.posts)[clickedRow];
+    
+    [draftMenuItem setHidden:NO];
+    
+    if ([clickedPost draft]) {
+        [draftMenuItem setState:NSOnState];
+    } else {
+        [draftMenuItem setState:NSOffState];
+    }
+}
+
 #pragma mark - Actions
 
 - (IBAction)editPost:(id)sender {
 	TBSiteDocument *document = (TBSiteDocument *)self.document;
 	TBPost *clickedPost = (document.site.posts)[[self.postTableView clickedRow]];
 	[[NSWorkspace sharedWorkspace] openURL:clickedPost.URL];
+}
+
+- (IBAction)draft:(id)sender {
+	TBPost *clickedPost = (self.document.site.posts)[[self.postTableView clickedRow]];
+    
+    [clickedPost setDraft:![clickedPost draft]];
 }
 
 - (IBAction)previewPost:(id)sender {

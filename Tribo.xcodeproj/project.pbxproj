@@ -163,6 +163,9 @@
 		9B6B669D14F3546C00759DC3 /* TBAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B669B14F3546900759DC3 /* TBAsset.m */; };
 		9BEF1C7A14F5CFCF0072B295 /* TBSourceViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */; };
 		9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */; };
+		C35C2A9717D8100800A6BE68 /* TBPostTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35C2A9617D8100800A6BE68 /* TBPostTableCellView.m */; };
+		C35C2A9A17D8B14B00A6BE68 /* NSTextField+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C35C2A9917D8B14B00A6BE68 /* NSTextField+TBAdditions.m */; };
+		C3ACCD1817CD1EF00002CE67 /* TBPostMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ACCD1717CD1EEF0002CE67 /* TBPostMetadata.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -381,6 +384,12 @@
 		9BEF1C7714F5CFCF0072B295 /* TBSourceViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSourceViewControllerViewController.h; sourceTree = "<group>"; };
 		9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSourceViewControllerViewController.m; sourceTree = "<group>"; };
 		9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSourceViewControllerView.xib; sourceTree = "<group>"; };
+		C35C2A9517D8100800A6BE68 /* TBPostTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBPostTableCellView.h; path = Controllers/TBPostTableCellView.h; sourceTree = "<group>"; };
+		C35C2A9617D8100800A6BE68 /* TBPostTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBPostTableCellView.m; path = Controllers/TBPostTableCellView.m; sourceTree = "<group>"; };
+		C35C2A9817D8B14B00A6BE68 /* NSTextField+TBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextField+TBAdditions.h"; sourceTree = "<group>"; };
+		C35C2A9917D8B14B00A6BE68 /* NSTextField+TBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextField+TBAdditions.m"; sourceTree = "<group>"; };
+		C3ACCD1617CD1EEF0002CE67 /* TBPostMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBPostMetadata.h; sourceTree = "<group>"; };
+		C3ACCD1717CD1EEF0002CE67 /* TBPostMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBPostMetadata.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,6 +467,8 @@
 				4A3DE5FD176CF16C00C20026 /* NSDateFormatter+TBAdditions.m */,
 				4AF2BFEB17B88AB6008D67AB /* NSResponder+TBAdditions.h */,
 				4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */,
+				C35C2A9817D8B14B00A6BE68 /* NSTextField+TBAdditions.h */,
+				C35C2A9917D8B14B00A6BE68 /* NSTextField+TBAdditions.m */,
 			);
 			path = "System Additions";
 			sourceTree = "<group>";
@@ -580,6 +591,8 @@
 				4A00337A1430216500F6702F /* TBSite.m */,
 				4A00337C143028CA00F6702F /* TBPost.h */,
 				4A00337D143028CA00F6702F /* TBPost.m */,
+				C3ACCD1617CD1EEF0002CE67 /* TBPostMetadata.h */,
+				C3ACCD1717CD1EEF0002CE67 /* TBPostMetadata.m */,
 				4A72F14014368E1200A164E9 /* TBPage.h */,
 				4A72F14114368E1200A164E9 /* TBPage.m */,
 				9B6B669A14F3546900759DC3 /* TBAsset.h */,
@@ -874,6 +887,8 @@
 			isa = PBXGroup;
 			children = (
 				4AAC8E5E1456616F00AE978A /* TBPostsView.xib */,
+				C35C2A9517D8100800A6BE68 /* TBPostTableCellView.h */,
+				C35C2A9617D8100800A6BE68 /* TBPostTableCellView.m */,
 				4AAC8E5B1456609300AE978A /* TBPostsViewController.h */,
 				4AAC8E5C1456609300AE978A /* TBPostsViewController.m */,
 				4ABD6A5014417DBE007E2F5D /* TBQLPreviewView.xib */,
@@ -1163,6 +1178,9 @@
 				4A99C42917B4091D0023C9A9 /* CZAFileWatcher.m in Sources */,
 				4AA86A6C173EF28200046691 /* TBSite+TemplateAdditions.m in Sources */,
 				4AA86A70174124C300046691 /* TBPost+TemplateAdditions.m in Sources */,
+				C3ACCD1817CD1EF00002CE67 /* TBPostMetadata.m in Sources */,
+				C35C2A9717D8100800A6BE68 /* TBPostTableCellView.m in Sources */,
+				C35C2A9A17D8B14B00A6BE68 /* NSTextField+TBAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

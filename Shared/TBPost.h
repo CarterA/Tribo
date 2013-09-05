@@ -9,6 +9,8 @@
 
 #import "TBPage.h"
 
+#import "TBPostMetadata.h"
+
 /*!
 	@class TBPost
 	@discussion A post represents a piece of writing, loaded from disk, with its
@@ -28,9 +30,9 @@
 @interface TBPost : TBPage
 
 /*!
-	Create a TBPost object from a file on-disk.
+	Create a TBPost object from a directory.
 	@param URL
-		A filesystem URL pointing to the post file.
+		A filesystem URL pointing to the post directory.
 	@param site
 		The TBSite object which contains the post.
 	@param error
@@ -42,6 +44,22 @@
 + (instancetype)postWithURL:(NSURL *)URL
 					 inSite:(TBSite *)site
 					  error:(NSError **)error;
+
+/*!
+     Create a TBPost object with a title and slug.
+     @param title
+         The title of the post.
+     @param slug
+         The slug of the post.
+     @param site
+         The TBSite object which contains the post.
+     @param error
+         If the return value is nil, then this argument will contain an NSError
+         object describing what went wrong.
+     @return
+         A TBPost object, or nil if an error was encountered.
+ */
++ (instancetype)postWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error;
 
 /*!
 	Parse the contents of the markdownContent property, saving the HTML output
@@ -61,7 +79,7 @@
 		The publishing date of the post. Derived from the filename of the post,
 		which must begin with a calendar date in the form YYYY-MM-DD.
  */
-@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong, readonly) NSDate *date;
 
 /*!
 	@property slug
@@ -71,6 +89,26 @@
 		where the slug must immediately follow the date, separated by a dash.
  */
 @property (nonatomic, strong) NSString *slug;
+
+/*!
+    @property metadata
+        Any metadata that goes along with the post. Examaples include the post
+        date.
+ */
+@property (nonatomic, strong) TBPostMetadata *metadata;
+
+/*!
+    @property draft
+        The state of the post, i.e. is it a draft (unfinished).
+ */
+@property (nonatomic, assign) BOOL draft;
+
+/*!
+    @property postDirectory
+        The directory the post resides in. Contains the post markdown file (known
+        as slug.md) and metadata file.
+ */
+@property (nonatomic, strong) NSURL *postDirectory;
 
 /*!
 	@property markdownContent

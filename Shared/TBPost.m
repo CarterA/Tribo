@@ -17,15 +17,67 @@
 @implementation TBPost
 
 + (instancetype)postWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error {
-	return (TBPost *)[super pageWithURL:URL inSite:site error:error];
+    NSString *slug = [URL lastPathComponent];
+    NSURL *postURL = [URL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.md", slug]];
+    TBPost *post = [super pageWithURL:postURL inSite:site error:error];
+    
+    if (post) {
+        post.postDirectory = URL;
+        post.slug = slug;
+        post.metadata = [TBPostMetadata metadataWithPostDirectory:URL withError:error];
+        
+        if (post.metadata) {
+            return post;
+        }
+    }
+    
+    return nil;
+}
+
++ (instancetype)postWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error {
+    TBPost *post = [super new];
+    
+    if (post) {
+        post.site = site;
+        
+        // Create the directory
+        NSString *filename = [NSString stringWithString:slug];
+        
+        post.postDirectory = [site.postsDirectory URLByAppendingPathComponent:slug isDirectory:YES];
+        
+        if (![[NSFileManager defaultManager] createDirectoryAtURL:post.postDirectory withIntermediateDirectories:YES attributes:nil error:error]) {
+            // Unable to create directory structure
+            return nil;
+        }
+        
+        // Metadata File
+        post.metadata = [TBPostMetadata metadataWithPostDirectory:post.postDirectory withError:error];
+        [post.metadata writeWithError:error];
+        
+        // Post File
+        NSURL *contentDestination = [[post.postDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
+        
+        NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
+        
+        if (![contents writeToURL:contentDestination atomically:YES encoding:NSUTF8StringEncoding error:error]) {
+            return nil;
+        }
+        
+        post.URL = contentDestination;
+        [post parse:error];
+        
+        return post;
+    }
+    
+    return nil;
 }
 
 - (BOOL)parse:(NSError **)error {
-	
-	[self loadMarkdownContent];
-	
-	if (![self parseDateAndSlug:error])
+    [self loadMarkdownContent];
+    
+	if (![self parseSlug:error]) {
 		return NO;
+    }
 	
 	[self parseTitle];
 	
@@ -57,23 +109,16 @@
 	self.markdownContent = markdownContent;
 }
 
-- (BOOL)parseDateAndSlug:(NSError **)error {
-	// Dates and slugs are parsed from a pattern in the post file name.
-	static NSRegularExpression *fileNameRegex;
-	if (fileNameRegex == nil)
-		fileNameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d+-\\d+-\\d+)-(.*)" options:0 error:nil];
-	NSString *fileName = [self.URL.lastPathComponent stringByDeletingPathExtension];
-	NSTextCheckingResult *fileNameResult = [fileNameRegex firstMatchInString:fileName options:0 range:NSMakeRange(0, fileName.length)];
-	if (fileNameResult) {
-		NSDateFormatter *fileNameDateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
-		self.date = [fileNameDateFormatter dateFromString:[fileName substringWithRange:[fileNameResult rangeAtIndex:1]]];
-		self.slug = [fileName substringWithRange:[fileNameResult rangeAtIndex:2]];
-	}
-	else {
-		if (error) *error = TBError.badPostFileName(self.URL);
-		return NO;
-	}
-	return YES;
+- (BOOL)parseSlug:(NSError **)error {
+	NSString *filename = [[self.URL lastPathComponent] stringByDeletingPathExtension];
+    
+    if (filename && [filename length] > 0) {
+        self.slug = filename;
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void)parseMarkdownContent {
@@ -97,6 +142,33 @@
 	
 	bufrelease(smartyPantsOutputBuffer);
 	bufrelease(outputBuffer);
+}
+
+- (NSDate *)date {
+    return [self.metadata publishedDate];
+}
+
+- (BOOL)draft {
+    return [self.metadata draft];
+}
+
+- (void)setDraft:(BOOL)draft {
+    [self.metadata setDraft:draft];
+    
+    if (draft == NO) {
+        [self.metadata setPublishedDate:[NSDate date]];
+    } else {
+        [self.metadata setPublishedDate:nil];
+    }
+    
+    NSError *error = nil;
+    
+    [self.metadata writeWithError:&error];
+    
+    if (error) {
+        [self.metadata setDraft:!draft];
+        [self.metadata setPublishedDate:nil];
+    }
 }
 
 @end

@@ -40,8 +40,7 @@
 
 #pragma mark - Site Processing
 
-- (BOOL)process:(NSError **)error {
-		
+- (BOOL)processIncludingDrafts:(BOOL)includeDrafts error:(NSError **)error {
 	if (![self loadRawDefaultTemplate:error])
 		return NO;
 	
@@ -51,7 +50,7 @@
 	if (![self parsePosts:error])
 		return NO;
 	
-	if (![self writePosts:error])
+	if (![self writePostsIncludingDrafts:includeDrafts error:error])
 		return NO;
 	
 	if (![self writeFeed:error])
@@ -127,10 +126,12 @@
 	
 }
 
-- (BOOL)writePosts:(NSError **)error {
-	
+- (BOOL)writePostsIncludingDrafts:(BOOL)includeDrafts error:(NSError **)error {
 	for (TBPost *post in self.posts) {
-		
+        if (includeDrafts && post.draft) {
+            continue;
+        }
+
 		post.stylesheets = @[@{@"stylesheetName": @"post"}];
 		
 		// Create the path to the folder where we are going to write the post file.
@@ -301,18 +302,8 @@
 
 #pragma mark - Site Modification
 
-- (NSURL *)addPostWithTitle:(NSString *)title slug:(NSString *)slug error:(NSError **)error {
-	NSDate *currentDate = [NSDate date];
-	NSDateFormatter *dateFormatter = [NSDateFormatter tb_cachedDateFormatterFromString:@"yyyy-MM-dd"];
-	NSString *dateString = [dateFormatter stringFromDate:currentDate];
-	NSString *filename = [NSString stringWithFormat:@"%@-%@", dateString, slug];
-	NSURL *destination = [[self.postsDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
-	NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
-	if (![contents writeToURL:destination atomically:YES encoding:NSUTF8StringEncoding error:error])
-		return nil;
-	if (![self parsePosts:error])
-        return nil;
-	return destination;
+- (void)addPost:(TBPost *)post {
+    [self.posts addObject:post];
 }
 
 - (void)setMetadata:(NSDictionary *)metadata {
