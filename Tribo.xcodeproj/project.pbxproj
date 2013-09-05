@@ -164,6 +164,7 @@
 		9BEF1C7A14F5CFCF0072B295 /* TBSourceViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7814F5CFCF0072B295 /* TBSourceViewControllerViewController.m */; };
 		9BEF1C7B14F5CFCF0072B295 /* TBSourceViewControllerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */; };
 		C35C2A9717D8100800A6BE68 /* TSPostTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35C2A9617D8100800A6BE68 /* TSPostTableCellView.m */; };
+		C35C2A9A17D8B14B00A6BE68 /* NSTextField+TBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C35C2A9917D8B14B00A6BE68 /* NSTextField+TBAdditions.m */; };
 		C3ACCD1817CD1EF00002CE67 /* TSPostMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ACCD1717CD1EEF0002CE67 /* TSPostMetadata.m */; };
 /* End PBXBuildFile section */
 
@@ -385,6 +386,8 @@
 		9BEF1C7914F5CFCF0072B295 /* TBSourceViewControllerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBSourceViewControllerView.xib; sourceTree = "<group>"; };
 		C35C2A9517D8100800A6BE68 /* TSPostTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSPostTableCellView.h; path = Controllers/TSPostTableCellView.h; sourceTree = "<group>"; };
 		C35C2A9617D8100800A6BE68 /* TSPostTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSPostTableCellView.m; path = Controllers/TSPostTableCellView.m; sourceTree = "<group>"; };
+		C35C2A9817D8B14B00A6BE68 /* NSTextField+TBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextField+TBAdditions.h"; sourceTree = "<group>"; };
+		C35C2A9917D8B14B00A6BE68 /* NSTextField+TBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextField+TBAdditions.m"; sourceTree = "<group>"; };
 		C3ACCD1617CD1EEF0002CE67 /* TSPostMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPostMetadata.h; sourceTree = "<group>"; };
 		C3ACCD1717CD1EEF0002CE67 /* TSPostMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPostMetadata.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -464,6 +467,8 @@
 				4A3DE5FD176CF16C00C20026 /* NSDateFormatter+TBAdditions.m */,
 				4AF2BFEB17B88AB6008D67AB /* NSResponder+TBAdditions.h */,
 				4AF2BFEC17B88AB6008D67AB /* NSResponder+TBAdditions.m */,
+				C35C2A9817D8B14B00A6BE68 /* NSTextField+TBAdditions.h */,
+				C35C2A9917D8B14B00A6BE68 /* NSTextField+TBAdditions.m */,
 			);
 			path = "System Additions";
 			sourceTree = "<group>";
@@ -1175,6 +1180,7 @@
 				4AA86A70174124C300046691 /* TBPost+TemplateAdditions.m in Sources */,
 				C3ACCD1817CD1EF00002CE67 /* TSPostMetadata.m in Sources */,
 				C35C2A9717D8100800A6BE68 /* TSPostTableCellView.m in Sources */,
+				C35C2A9A17D8B14B00A6BE68 /* NSTextField+TBAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

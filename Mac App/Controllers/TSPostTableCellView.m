@@ -8,6 +8,8 @@
 
 #import "TSPostTableCellView.h"
 
+#import "NSTextField+TBAdditions.h"
+
 @implementation TSPostTableCellView
 
 @synthesize title, date, draft, postExcerpt;
@@ -24,18 +26,26 @@
 
 - (void)setBackgroundStyle:(NSBackgroundStyle)backgroundStyle {
     switch (backgroundStyle) {
-        case NSBackgroundStyleDark:
+        case NSBackgroundStyleDark: {
             [title setTextColor:[NSColor whiteColor]];
             [date setTextColor:[NSColor whiteColor]];
             [draft setTextColor:[NSColor whiteColor]];
             [postExcerpt setTextColor:[NSColor whiteColor]];
+            
+            [postExcerpt tb_setPlaceholderTextColor:[NSColor alternateSelectedControlColor]];
+            
             break;
-        default:
+        }
+        default: {
             [title setTextColor:[NSColor blackColor]];
-            [date setTextColor:[NSColor blueColor]];
-            [draft setTextColor:[NSColor redColor]];
+            [date setTextColor:[NSColor alternateSelectedControlColor]];
+            [draft setTextColor:[NSColor grayColor]];
             [postExcerpt setTextColor:[NSColor grayColor]];
+            
+            [postExcerpt tb_setPlaceholderTextColor:[NSColor grayColor]];
+
             break;
+        }
     }
 }
 
