@@ -23,7 +23,7 @@
 
 @implementation TBPostsViewController
 
-@synthesize markDraftMenuItem, unmarkDraftMenuItem;
+@synthesize draftMenuItem;
 
 #pragma mark - View Controller Configuration
 
@@ -48,16 +48,20 @@
     NSInteger clickedRow = [self.postTableView clickedRow];
     
     if (clickedRow < 0) {
-        [markDraftMenuItem setHidden:YES];
-        [unmarkDraftMenuItem setHidden:YES];
+        [draftMenuItem setHidden:YES];
         
         return;
     }
     
 	TBPost *clickedPost = (document.site.posts)[clickedRow];
     
-    [markDraftMenuItem setHidden:[clickedPost draft] == YES];
-    [unmarkDraftMenuItem setHidden:[clickedPost draft] == NO];
+    [draftMenuItem setHidden:NO];
+    
+    if ([clickedPost draft]) {
+        [draftMenuItem setState:NSOnState];
+    } else {
+        [draftMenuItem setState:NSOffState];
+    }
 }
 
 #pragma mark - Actions
@@ -68,16 +72,10 @@
 	[[NSWorkspace sharedWorkspace] openURL:clickedPost.URL];
 }
 
-- (IBAction)unmarkDraft:(id)sender {
+- (IBAction)draft:(id)sender {
 	TBPost *clickedPost = (self.document.site.posts)[[self.postTableView clickedRow]];
     
-    [clickedPost setDraft:NO];
-}
-
-- (IBAction)markDraft:(id)sender {
-	TBPost *clickedPost = (self.document.site.posts)[[self.postTableView clickedRow]];
-    
-    [clickedPost setDraft:YES];
+    [clickedPost setDraft:![clickedPost draft]];
 }
 
 - (IBAction)previewPost:(id)sender {
