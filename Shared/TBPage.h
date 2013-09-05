@@ -26,7 +26,6 @@
 
 /*!
 	 Create a TBPage object from a file on-disk.
- 
 	 @param URL
 		A filesystem URL pointing to the page file.
 	 @param site
@@ -37,7 +36,9 @@
 	 @return
 		An instance of TBPage, or nil if an error was encountered.
  */
-- (instancetype)initWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error;
++ (instancetype)pageWithURL:(NSURL *)URL
+					 inSite:(TBSite *)site
+					  error:(NSError **)error;
 
 /*!
 	@property URL

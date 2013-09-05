@@ -16,20 +16,28 @@
 
 @implementation TBPost
 
-- (instancetype)initWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error {
-    self.postDirectory = URL;
++ (instancetype)postWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error {
+    NSString *slug = [URL lastPathComponent];
     
-    self.slug = [URL lastPathComponent];
+    NSURL *postURL = [URL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.md", slug]];
     
-    self.metadata = [[TBPostMetadata alloc] initWithPostDirectory:URL withError:error];
+    TBPost *post = [super pageWithURL:postURL inSite:site error:error];
     
-    if (self.metadata) {
-        URL = [URL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.md", self.slug]];
-                
-        return [super initWithURL:URL inSite:site error:error];
-    } else {
+    if (post) {
+        post.postDirectory = URL;
+        
+        post.slug = slug;
+        
+        post.metadata = [[TBPostMetadata alloc] initWithPostDirectory:URL withError:error];
+        
+        if (post.metadata) {
+            return post;
+        }
+        
         return nil;
     }
+    
+    return nil;
 }
 
 - (instancetype)initWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error {
@@ -68,63 +76,40 @@
     return self;
 }
 
-- (BOOL)parse:(NSError **)error {	
+- (BOOL)parse:(NSError **)error {
+    [self loadMarkdownContent];
+    
 	if (![self parseSlug:error]) {
 		return NO;
     }
-    
-    [self loadMarkdownContent];
+	
 	[self parseTitle];
 	
     return YES;
 	
 }
 
-- (void)loadMarkdownContent {
-	self.markdownContent = [NSString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
+- (void)loadMarkdownContent; {
+	NSString *markdownContent = [NSString stringWithContentsOfURL:self.URL encoding:NSUTF8StringEncoding error:nil];
+	self.markdownContent = markdownContent;
 }
 
-/*!
- * Extracts the title from the markdown contents.
- *
- * Titles are optional.
- * Titles are defined as a single '#' header on the first line of the document.
- * Title must have '#' on both sides, e.g. '# Title of Post #'
- */
 - (void)parseTitle {
-	if (!self.markdownContent || ![self.markdownContent length]) {
-        // No markdown content found, return
-        return;
-    }
-    
+	// Titles are optional. A single # header on the first line of the document is regarded as the title.
+	if (!self.markdownContent || ![self.markdownContent length]) return;
 	NSMutableString *markdownContent = [self.markdownContent mutableCopy];
-    
 	static NSRegularExpression *headerRegex;
-    
-	if (headerRegex == nil) {
+	if (headerRegex == nil)
 		headerRegex = [NSRegularExpression regularExpressionWithPattern:@"#[ \\t](.*)[ \\t]#" options:0 error:nil];
-    }
-    
 	NSRange firstLineRange = NSMakeRange(0, [markdownContent rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location);
-    
-	if (firstLineRange.length == NSNotFound) {
-        // Can't find a first header
-        return;
-    }
-    
+	if (firstLineRange.length == NSNotFound) return;
 	NSString *firstLine = [markdownContent substringWithRange:firstLineRange];
-    
 	NSTextCheckingResult *titleResult = [headerRegex firstMatchInString:firstLine options:0 range:NSMakeRange(0, firstLine.length)];
-    
 	if (titleResult) {
 		self.title = [firstLine substringWithRange:[titleResult rangeAtIndex:1]];
-        
 		[markdownContent deleteCharactersInRange:NSMakeRange(firstLineRange.location, firstLineRange.length + 1)];
 	}
-    
-    // Remove the first new line after the title from the content
 	[markdownContent deleteCharactersInRange:[markdownContent rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]]];
-    
 	self.markdownContent = markdownContent;
 }
 
@@ -141,27 +126,19 @@
 }
 
 - (void)parseMarkdownContent {
-	if (!self.markdownContent || ![self.markdownContent length]) {
-        // No markdown content found, return
-        return;
-    }
-    
-	// Create and fill a buffer for with the raw markdown data
+	if (!self.markdownContent || ![self.markdownContent length]) return;
+	// Create and fill a buffer for with the raw markdown data.
+	if ([self.markdownContent length] == 0) return;
 	struct sd_callbacks callbacks;
 	struct html_renderopt options;
-    
 	const char *rawMarkdown = [self.markdownContent cStringUsingEncoding:NSUTF8StringEncoding];
 	struct buf *smartyPantsOutputBuffer = bufnew(1);
-    
 	sdhtml_smartypants(smartyPantsOutputBuffer, (const unsigned char *)rawMarkdown, strlen(rawMarkdown));
 	
-	// Parse the markdown into a new buffer using Sundown
+	// Parse the markdown into a new buffer using Sundown.
 	struct buf *outputBuffer = bufnew(64);
-    
 	sdhtml_renderer(&callbacks, &options, 0);
-    
 	struct sd_markdown *markdown = sd_markdown_new(0, 16, &callbacks, &options);
-    
 	sd_markdown_render(outputBuffer, smartyPantsOutputBuffer->data, smartyPantsOutputBuffer->size, markdown);
 	sd_markdown_free(markdown);
 	

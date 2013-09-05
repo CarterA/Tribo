@@ -41,7 +41,9 @@
 	@return
 		A TBPost object, or nil if an error was encountered.
  */
-- (instancetype)initWithURL:(NSURL *)URL inSite:(TBSite *)site error:(NSError **)error;
++ (instancetype)postWithURL:(NSURL *)URL
+					 inSite:(TBSite *)site
+					  error:(NSError **)error;
 
 /*!
      Create a TBPost object with a title and slug.

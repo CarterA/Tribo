@@ -156,7 +156,7 @@
 }
 
 - (BOOL)readFromURL:(NSURL *)URL ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError {
-	self.site = [[TBSite alloc] initWithRoot:URL];
+	self.site = [TBSite siteWithRoot:URL];
 	self.site.delegate = self;
     
     BOOL success = [self.site parsePosts:outError];
