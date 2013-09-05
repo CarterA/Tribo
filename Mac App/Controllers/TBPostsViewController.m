@@ -44,7 +44,17 @@
 
 - (void)menuNeedsUpdate:(NSMenu *)menu {
 	TBSiteDocument *document = (TBSiteDocument *)self.document;
-	TBPost *clickedPost = (document.site.posts)[[self.postTableView clickedRow]];
+    
+    NSInteger clickedRow = [self.postTableView clickedRow];
+    
+    if (clickedRow < 0) {
+        [markDraftMenuItem setHidden:YES];
+        [unmarkDraftMenuItem setHidden:YES];
+        
+        return;
+    }
+    
+	TBPost *clickedPost = (document.site.posts)[clickedRow];
     
     [markDraftMenuItem setHidden:[clickedPost draft] == YES];
     [unmarkDraftMenuItem setHidden:[clickedPost draft] == NO];
