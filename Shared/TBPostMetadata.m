@@ -26,24 +26,32 @@
     return self;
 }
 
-- (instancetype)initWithPostDirectory:(NSURL *)directory withError:(NSError **)error {
-    if (self = [self init]) {
-        postDirectory = directory;
++ (instancetype)metadataWithPostDirectory:(NSURL *)directory withError:(NSError **)error {
+    TBPostMetadata *metadata = [TBPostMetadata new];
+    
+    if (metadata) {
+        metadata.postDirectory = directory;
         
-        _path = [directory URLByAppendingPathComponent:METADATA_FILENAME];
+        metadata.path = [directory URLByAppendingPathComponent:METADATA_FILENAME];
         
-        [self readWithError:error];
+        [metadata readWithError:error];
+        
+        return metadata;
     }
     
-    return self;
+    return nil;
 }
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
-    if (self = [self init]) {
-        [self extractDataFromDictionary:dictionary];
++ (instancetype)metadataWithDictionary:(NSDictionary *)dictionary {
+    TBPostMetadata *metadata = [TBPostMetadata new];
+    
+    if (metadata) {
+        [metadata extractDataFromDictionary:dictionary];
+        
+        return metadata;
     }
     
-    return self;
+    return nil;
 }
 
 - (void)extractDataFromDictionary:(NSDictionary *)dictionary {

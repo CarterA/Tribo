@@ -28,39 +28,39 @@
         
         post.slug = slug;
         
-        post.metadata = [[TBPostMetadata alloc] initWithPostDirectory:URL withError:error];
+        post.metadata = [TBPostMetadata metadataWithPostDirectory:URL withError:error];
         
         if (post.metadata) {
             return post;
         }
-        
-        return nil;
     }
     
     return nil;
 }
 
-- (instancetype)initWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error {
-    if (self = [super init]) {
-        self.site = site;
++ (instancetype)postWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error {
+    TBPost *post = [super init];
+    
+    if (post) {
+        post.site = site;
         
         // Create the directory
         NSString *filename = [NSString stringWithString:slug];
         
-        self.postDirectory = [site.postsDirectory URLByAppendingPathComponent:slug isDirectory:YES];
+        post.postDirectory = [site.postsDirectory URLByAppendingPathComponent:slug isDirectory:YES];
         
-        if (![[NSFileManager defaultManager] createDirectoryAtURL:self.postDirectory withIntermediateDirectories:YES attributes:nil error:error]) {
+        if (![[NSFileManager defaultManager] createDirectoryAtURL:post.postDirectory withIntermediateDirectories:YES attributes:nil error:error]) {
             // Unable to create directory structure
             return nil;
         }
         
         // Metadata File
-        self.metadata = [[TBPostMetadata alloc] initWithPostDirectory:self.postDirectory withError:error];
+        post.metadata = [TBPostMetadata metadataWithPostDirectory:post.postDirectory withError:error];
         
-        [self.metadata writeWithError:error];
+        [post.metadata writeWithError:error];
         
         // Post File
-        NSURL *contentDestination = [[self.postDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
+        NSURL *contentDestination = [[post.postDirectory URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"md"];
         
         NSString *contents = [NSString stringWithFormat:@"# %@ #\n\n", title];
         
@@ -68,12 +68,14 @@
             return nil;
         }
         
-        self.URL = contentDestination;
+        post.URL = contentDestination;
         
-        [self parse:error];
+        [post parse:error];
+        
+        return post;
     }
     
-    return self;
+    return nil;
 }
 
 - (BOOL)parse:(NSError **)error {

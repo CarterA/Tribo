@@ -59,7 +59,7 @@
      @return
          A TBPost object, or nil if an error was encountered.
  */
-- (instancetype)initWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error;
++ (instancetype)postWithTitle:(NSString *)title slug:(NSString *)slug inSite:(TBSite *)site error:(NSError **)error;
 
 /*!
 	Parse the contents of the markdownContent property, saving the HTML output

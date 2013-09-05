@@ -89,7 +89,7 @@ const NSEdgeInsets TBAccessoryViewInsets = {
 	[self.addPostSheetController runModalForWindow:[document windowForSheet] completionBlock:^(NSString *title, NSString *slug) {
         NSError *error = nil;
         
-        TBPost *post = [[TBPost alloc] initWithTitle:title slug:slug inSite:document.site error:&error];
+        TBPost *post = [TBPost postWithTitle:title slug:slug inSite:document.site error:&error];
         
         if (post) {
             [document.site addPost:post];

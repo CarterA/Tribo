@@ -58,7 +58,7 @@
     @return
         A TSPostMetadata object, or nil if an error was encountered.
  */
-- (instancetype)initWithPostDirectory:(NSURL *)directory withError:(NSError **)error;
++ (instancetype)metadataWithPostDirectory:(NSURL *)directory withError:(NSError **)error;
 
 /*!
     Extract the metadata data from the given directory.
