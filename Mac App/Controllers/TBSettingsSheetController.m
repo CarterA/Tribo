@@ -83,6 +83,8 @@
 		protocolTitle = @"FTP";
 	else if ([protocol isEqualToString:TBSiteProtocolSFTP])
 		protocolTitle = @"SFTP";
+	else if ([protocol isEqualToString:TBSiteProtocolCloudflare])
+		protocolTitle = @"Cloudflare Pages";
 	[self.uploadViaPopUp selectItemWithTitle:protocolTitle];
 	self.serverField.stringValue = metadata[TBSiteServerKey] ?: @"";
 	self.portField.objectValue = metadata[TBSitePortKey] ?: @"";
@@ -131,6 +133,8 @@
 		protocol = TBSiteProtocolFTP;
 	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"SFTP"])
 		protocol = TBSiteProtocolSFTP;
+	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"Cloudflare Pages"])
+		protocol = TBSiteProtocolCloudflare;
 	NSDictionary *values = @{TBSiteNameMetadataKey: self.siteNameField.stringValue,
 							TBSiteAuthorMetadataKey: self.authorField.stringValue,
 							TBSiteBaseURLMetadataKey: self.baseURLField.stringValue,
@@ -159,6 +163,11 @@
 		protocol = kSecProtocolTypeFTP;
 	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"SFTP"])
 		protocol = kSecProtocolTypeSSH;
+	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"Cloudflare Pages"]) {
+		protocol = kSecProtocolTypeHTTPS;
+		serverName = [serverName stringByAppendingString:@".pages.dev"];
+	}
+		
 	OSStatus returnStatus = SecKeychainFindInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, "", port, protocol, kSecAuthenticationTypeDefault, &passwordLength, (void **)&passwordBuffer, NULL);
 	if (returnStatus != noErr)
 		return nil;
@@ -178,6 +187,10 @@
 		protocol = kSecProtocolTypeFTP;
 	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"SFTP"])
 		protocol = kSecProtocolTypeSSH;
+	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"Cloudflare Pages"]) {
+		protocol = kSecProtocolTypeHTTPS;
+		serverName = [serverName stringByAppendingString:@".pages.dev"];
+	}
 	SecKeychainItemRef item;
 	OSStatus returnStatus = SecKeychainFindInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, NULL, port, protocol, kSecAuthenticationTypeDefault, NULL, NULL, &item);
 	
@@ -203,6 +216,10 @@
 		protocol = kSecProtocolTypeFTP;
 	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"SFTP"])
 		protocol = kSecProtocolTypeSSH;
+	else if ([self.uploadViaPopUp.titleOfSelectedItem isEqualToString:@"Cloudflare Pages"]) {
+		protocol = kSecProtocolTypeHTTPS;
+		serverName = [serverName stringByAppendingString:@".pages.dev"];
+	}
 	if (!newPassword) newPassword = @"";
 	SecKeychainAddInternetPassword(NULL, (UInt32)serverName.length, [serverName UTF8String], 0, NULL, (UInt32)accountName.length, [accountName UTF8String], 0, NULL, port, protocol, kSecAuthenticationTypeDefault, (UInt32)newPassword.length, [newPassword UTF8String], NULL);
 	
