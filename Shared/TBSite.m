@@ -115,13 +115,17 @@
 		if (post) [posts addObject:post];
 	}
 	posts = [NSMutableArray arrayWithArray:[[posts reverseObjectEnumerator] allObjects]];
-	self.posts = posts;
 	
     // Prepare the asset object tree
-    self.templateAssets = [TBAsset assetsFromDirectory:self.templatesDirectory error:error];
-	if (!self.templateAssets) return NO;
-    self.sourceAssets = [TBAsset assetsFromDirectory:self.sourceDirectory error:error];
-	if (!self.sourceAssets) return NO;
+	NSArray *templateAssets = [TBAsset assetsFromDirectory:self.templatesDirectory error:error];
+	if (!templateAssets) return NO;
+    NSArray *sourceAssets = [TBAsset assetsFromDirectory:self.sourceDirectory error:error];
+	if (!sourceAssets) return NO;
+	dispatch_async(dispatch_get_main_queue(), ^{
+		self.posts = posts;
+		self.templateAssets = templateAssets;
+		self.sourceAssets = sourceAssets;
+	});
 	
     return YES;
 	
