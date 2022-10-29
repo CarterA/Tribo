@@ -11,6 +11,14 @@
 		4A00337E143028CA00F6702F /* TBPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00337D143028CA00F6702F /* TBPost.m */; };
 		4A03890015085F87006C7A0D /* TBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9ED52C1507AF83009C5754 /* TBConstants.m */; };
 		4A17D451156C769F00789C3D /* Default.tribo in Resources */ = {isa = PBXBuildFile; fileRef = 4A17D450156C769F00789C3D /* Default.tribo */; };
+		4A2C885C290AEC4900D824DB /* TBCloudflarePublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C885A290AEC4800D824DB /* TBCloudflarePublisher.m */; };
+		4A2C8866290B082300D824DB /* blake3_dispatch.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C885E290B082200D824DB /* blake3_dispatch.c */; };
+		4A2C8867290B082300D824DB /* blake3_sse2_x86-64_unix.S in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C885F290B082300D824DB /* blake3_sse2_x86-64_unix.S */; };
+		4A2C8868290B082300D824DB /* blake3_portable.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C8860290B082300D824DB /* blake3_portable.c */; };
+		4A2C8869290B082300D824DB /* blake3_sse41_x86-64_unix.S in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C8861290B082300D824DB /* blake3_sse41_x86-64_unix.S */; };
+		4A2C886A290B082300D824DB /* blake3.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C8862290B082300D824DB /* blake3.c */; };
+		4A2C886B290B082300D824DB /* blake3_avx512_x86-64_unix.S in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C8864290B082300D824DB /* blake3_avx512_x86-64_unix.S */; };
+		4A2C886C290B082300D824DB /* blake3_avx2_x86-64_unix.S in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C8865290B082300D824DB /* blake3_avx2_x86-64_unix.S */; };
 		4A2E6E3C15058D80000397B4 /* TBSFTPPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E6E3B15058D80000397B4 /* TBSFTPPublisher.m */; };
 		4A2E6E4015058D8C000397B4 /* TBFTPPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2E6E3F15058D8C000397B4 /* TBFTPPublisher.m */; };
 		4A2E84CD14FDD969008FE2C4 /* rsync in Resources */ = {isa = PBXBuildFile; fileRef = 4A2E84CC14FDD969008FE2C4 /* rsync */; };
@@ -202,6 +210,16 @@
 		4A00337C143028CA00F6702F /* TBPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TBPost.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A00337D143028CA00F6702F /* TBPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TBPost.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A17D450156C769F00789C3D /* Default.tribo */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Default.tribo; sourceTree = SOURCE_ROOT; };
+		4A2C8859290AEC4800D824DB /* TBCloudflarePublisher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBCloudflarePublisher.h; sourceTree = "<group>"; };
+		4A2C885A290AEC4800D824DB /* TBCloudflarePublisher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBCloudflarePublisher.m; sourceTree = "<group>"; };
+		4A2C885E290B082200D824DB /* blake3_dispatch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = blake3_dispatch.c; sourceTree = "<group>"; };
+		4A2C885F290B082300D824DB /* blake3_sse2_x86-64_unix.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = "blake3_sse2_x86-64_unix.S"; sourceTree = "<group>"; };
+		4A2C8860290B082300D824DB /* blake3_portable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = blake3_portable.c; sourceTree = "<group>"; };
+		4A2C8861290B082300D824DB /* blake3_sse41_x86-64_unix.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = "blake3_sse41_x86-64_unix.S"; sourceTree = "<group>"; };
+		4A2C8862290B082300D824DB /* blake3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = blake3.c; sourceTree = "<group>"; };
+		4A2C8863290B082300D824DB /* blake3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blake3.h; sourceTree = "<group>"; };
+		4A2C8864290B082300D824DB /* blake3_avx512_x86-64_unix.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = "blake3_avx512_x86-64_unix.S"; sourceTree = "<group>"; };
+		4A2C8865290B082300D824DB /* blake3_avx2_x86-64_unix.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = "blake3_avx2_x86-64_unix.S"; sourceTree = "<group>"; };
 		4A2E6E3A15058D80000397B4 /* TBSFTPPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBSFTPPublisher.h; sourceTree = "<group>"; };
 		4A2E6E3B15058D80000397B4 /* TBSFTPPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBSFTPPublisher.m; sourceTree = "<group>"; };
 		4A2E6E3E15058D8C000397B4 /* TBFTPPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBFTPPublisher.h; sourceTree = "<group>"; };
@@ -431,6 +449,7 @@
 		4A00338E14302F6600F6702F /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				4A2C885D290B076F00D824DB /* BLAKE3 */,
 				4A7557BE1436F4D70040A10C /* CocoaHTTPServer */,
 				4A9ED51A15069CD6009C5754 /* CurlHandle */,
 				4A99C41E17B4091D0023C9A9 /* CZAFileWatcher */,
@@ -438,8 +457,22 @@
 				4A2E84CB14FDD969008FE2C4 /* Rsync */,
 				4A72F125143155AE00A164E9 /* GRMustache */,
 			);
-			name = Dependencies;
-			path = Tribo;
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		4A2C885D290B076F00D824DB /* BLAKE3 */ = {
+			isa = PBXGroup;
+			children = (
+				4A2C8865290B082300D824DB /* blake3_avx2_x86-64_unix.S */,
+				4A2C8864290B082300D824DB /* blake3_avx512_x86-64_unix.S */,
+				4A2C885E290B082200D824DB /* blake3_dispatch.c */,
+				4A2C8860290B082300D824DB /* blake3_portable.c */,
+				4A2C885F290B082300D824DB /* blake3_sse2_x86-64_unix.S */,
+				4A2C8861290B082300D824DB /* blake3_sse41_x86-64_unix.S */,
+				4A2C8862290B082300D824DB /* blake3.c */,
+				4A2C8863290B082300D824DB /* blake3.h */,
+			);
+			path = BLAKE3;
 			sourceTree = "<group>";
 		};
 		4A2E84CB14FDD969008FE2C4 /* Rsync */ = {
@@ -856,6 +889,8 @@
 				4A2E6E3F15058D8C000397B4 /* TBFTPPublisher.m */,
 				4A2E6E3A15058D80000397B4 /* TBSFTPPublisher.h */,
 				4A2E6E3B15058D80000397B4 /* TBSFTPPublisher.m */,
+				4A2C8859290AEC4800D824DB /* TBCloudflarePublisher.h */,
+				4A2C885A290AEC4800D824DB /* TBCloudflarePublisher.m */,
 			);
 			path = Publishing;
 			sourceTree = "<group>";
@@ -987,12 +1022,27 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Opt-6 Products, LLC";
+				TargetAttributes = {
+					4A6DC8E61430203B00CB5025 = {
+						DevelopmentTeam = M89H68799H;
+						ProvisioningStyle = Automatic;
+					};
+					4A8696201437BE0B00204482 = {
+						DevelopmentTeam = M89H68799H;
+						ProvisioningStyle = Automatic;
+					};
+					4AE91C4B14FEE08200499469 = {
+						DevelopmentTeam = M89H68799H;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 4A6DC8E11430203B00CB5025 /* Build configuration list for PBXProject "Tribo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 4A6DC8DC1430203B00CB5025;
@@ -1093,6 +1143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2C886B290B082300D824DB /* blake3_avx512_x86-64_unix.S in Sources */,
 				4A8829021437C52200EBBD7E /* TBSite.m in Sources */,
 				4A8829031437C52200EBBD7E /* TBPost.m in Sources */,
 				4A8829041437C52200EBBD7E /* TBPage.m in Sources */,
@@ -1105,6 +1156,7 @@
 				4A88290B1437C52200EBBD7E /* DDData.m in Sources */,
 				4A88290C1437C52200EBBD7E /* DDNumber.m in Sources */,
 				4A88290D1437C52200EBBD7E /* DDRange.m in Sources */,
+				4A2C8867290B082300D824DB /* blake3_sse2_x86-64_unix.S in Sources */,
 				4A3DE5FF176CF16C00C20026 /* NSDateFormatter+TBAdditions.m in Sources */,
 				4A88290E1437C52200EBBD7E /* HTTPAuthenticationRequest.m in Sources */,
 				4A88290F1437C52200EBBD7E /* HTTPConnection.m in Sources */,
@@ -1120,6 +1172,7 @@
 				4AF9C9DA17A4587700709238 /* TBError.m in Sources */,
 				4A8829191437C52200EBBD7E /* houdini_html_e.c in Sources */,
 				4A88291A1437C52200EBBD7E /* html.c in Sources */,
+				4A2C8866290B082300D824DB /* blake3_dispatch.c in Sources */,
 				4A88291B1437C52200EBBD7E /* html_smartypants.c in Sources */,
 				4A88291C1437C52200EBBD7E /* autolink.c in Sources */,
 				4A88291D1437C52200EBBD7E /* buffer.c in Sources */,
@@ -1129,6 +1182,7 @@
 				4A86964F1437BE3400204482 /* TBAppDelegate.m in Sources */,
 				4A88296A143A737000EBBD7E /* TBSiteDocument.m in Sources */,
 				4ABD6A49143FE466007E2F5D /* TBAddPostSheetController.m in Sources */,
+				4A2C8869290B082300D824DB /* blake3_sse41_x86-64_unix.S in Sources */,
 				4ABD6A4F1441689B007E2F5D /* TBTableView.m in Sources */,
 				4AAC8E461451EFA800AE978A /* TBViewController.m in Sources */,
 				4AAC8E4E145286E000AE978A /* TBSiteWindowController.m in Sources */,
@@ -1136,6 +1190,7 @@
 				4A3ED15F145C6FDC00AE9BF3 /* TBTabView.m in Sources */,
 				4ADE327F14E21B510059D03C /* TBSite+Scripting.m in Sources */,
 				4ADE328214E21BC60059D03C /* TBPost+Scripting.m in Sources */,
+				4A2C885C290AEC4900D824DB /* TBCloudflarePublisher.m in Sources */,
 				4ADE328514E21C450059D03C /* TBSiteDocument+Scripting.m in Sources */,
 				9B6B669714F3480800759DC3 /* TBTemplatesViewController.m in Sources */,
 				9B6B669C14F3546900759DC3 /* TBAsset.m in Sources */,
@@ -1143,6 +1198,7 @@
 				4AE50F8114F882A300FCA39C /* TBSocketConnection.m in Sources */,
 				4AE50F8514F88A6C00FCA39C /* TBWebSocket.m in Sources */,
 				4AE50F8814F8906400FCA39C /* TBHTTPServer.m in Sources */,
+				4A2C886C290B082300D824DB /* blake3_avx2_x86-64_unix.S in Sources */,
 				4AE50F9B14F95ED500FCA39C /* TBPage+LiveReload.m in Sources */,
 				4AE50FE014FBD4E100FCA39C /* TBSettingsSheetController.m in Sources */,
 				4AE91C6614FF044700499469 /* TBPublisher.m in Sources */,
@@ -1150,11 +1206,13 @@
 				4A2E6E3C15058D80000397B4 /* TBSFTPPublisher.m in Sources */,
 				4A2E6E4015058D8C000397B4 /* TBFTPPublisher.m in Sources */,
 				4A9ED51F15069CD6009C5754 /* CURLHandle+extras.m in Sources */,
+				4A2C8868290B082300D824DB /* blake3_portable.c in Sources */,
 				4A9ED52015069CD6009C5754 /* CURLHandle.m in Sources */,
 				4A9ED5241506F81E009C5754 /* CURLFTPSession.m in Sources */,
 				4A9ED5271506F82B009C5754 /* CURLProtocol.m in Sources */,
 				4A9ED52D1507AF83009C5754 /* TBConstants.m in Sources */,
 				4A57A566150F8BAA00DACDBC /* TBStatusViewController.m in Sources */,
+				4A2C886A290B082300D824DB /* blake3.c in Sources */,
 				4A36B99115124DCB00A3D79A /* TBStatusView.m in Sources */,
 				4AF2BFEE17B88AB6008D67AB /* NSResponder+TBAdditions.m in Sources */,
 				4AB2796015152660009D7F93 /* TBShadowedTextFieldCell.m in Sources */,
@@ -1217,6 +1275,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				COPY_PHASE_STRIP = NO;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1260,6 +1319,7 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = "";
@@ -1285,6 +1345,9 @@
 		4A6DC8F71430203B00CB5025 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M89H68799H;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Command Line Interface/CLI-Prefix.pch";
 				LIBRARY_SEARCH_PATHS = (
@@ -1299,12 +1362,16 @@
 					"$SRCROOT/Mac\\ App/Resources/Info.plist",
 				);
 				PRODUCT_NAME = tribo;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		4A6DC8F81430203B00CB5025 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M89H68799H;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Command Line Interface/CLI-Prefix.pch";
 				LIBRARY_SEARCH_PATHS = (
@@ -1319,6 +1386,7 @@
 					"$SRCROOT/Mac\\ App/Resources/Info.plist",
 				);
 				PRODUCT_NAME = tribo;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
@@ -1326,8 +1394,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M89H68799H;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1345,6 +1415,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1353,8 +1424,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Mac App/Resources/Tribo.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M89H68799H;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac App/Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1372,6 +1445,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1379,16 +1453,24 @@
 		4AE91C5614FEE08200499469 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M89H68799H;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "Tribo Authentication Tool";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		4AE91C5714FEE08200499469 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M89H68799H;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "Tribo Authentication Tool";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

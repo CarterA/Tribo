@@ -2,75 +2,57 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>169373B3-7EF8-421E-B0F9-59B84E684744</string>
+	<string>EC4E9289-CD6F-4768-8930-212E5D431F27</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Tribo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>0E98572B-6BBC-4F54-BFAA-CB8942FA7FF8</key>
-		<string>ssh://github.com/CarterA/CurlHandle.git</string>
-		<key>28AD4339-CF55-49FF-A2A7-7368288E1E87</key>
+		<key>20FDB5E31A3A8BD07EF046E8EE01E98F71919869</key>
+		<string>github.com:CarterA/CurlHandle.git</string>
+		<key>9635D08B964B59C48EA8E6805E0CB50B3BAF24BE</key>
 		<string>https://github.com/CarterA/sundown.git</string>
-		<key>4F1DB7FC-3B6E-41F0-A9EF-097546719901</key>
-		<string>https://github.com/CarterA/CocoaHTTPServer</string>
-		<key>7BD161EE-472F-4ECB-B2EA-26ADAEF4998D</key>
-		<string>ssh://github.com/CarterA/Tribo.git</string>
-		<key>DA24E8B6-F7E2-464C-B30E-1BE55BA13A13</key>
+		<key>9767E9502B1D422E62DD906B7242FE96429C4FD1</key>
+		<string>github.com:CarterA/Tribo.git</string>
+		<key>9EDEC795D04B3E279370B0DA5F4D246DCDBD8B6C</key>
 		<string>https://github.com/groue/GRMustache.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Tribo.xcodeproj/project.xcworkspace</string>
+	<string>Tribo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>0E98572B-6BBC-4F54-BFAA-CB8942FA7FF8</key>
-		<string>../../Dependencies/CurlHandle</string>
-		<key>28AD4339-CF55-49FF-A2A7-7368288E1E87</key>
-		<string>../../Dependencies/Sundown</string>
-		<key>4F1DB7FC-3B6E-41F0-A9EF-097546719901</key>
-		<string>../../Dependencies/CocoaHTTPServer</string>
-		<key>7BD161EE-472F-4ECB-B2EA-26ADAEF4998D</key>
+		<key>20FDB5E31A3A8BD07EF046E8EE01E98F71919869</key>
+		<string>../..Dependencies/CurlHandle</string>
+		<key>9635D08B964B59C48EA8E6805E0CB50B3BAF24BE</key>
+		<string>../..Dependencies/Sundown</string>
+		<key>9767E9502B1D422E62DD906B7242FE96429C4FD1</key>
 		<string>../..</string>
-		<key>DA24E8B6-F7E2-464C-B30E-1BE55BA13A13</key>
-		<string>../../Dependencies/GRMustache</string>
+		<key>9EDEC795D04B3E279370B0DA5F4D246DCDBD8B6C</key>
+		<string>../..Dependencies/GRMustache</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/CarterA/Tribo.git</string>
+	<string>github.com:CarterA/Tribo.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7BD161EE-472F-4ECB-B2EA-26ADAEF4998D</string>
+	<string>9767E9502B1D422E62DD906B7242FE96429C4FD1</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4F1DB7FC-3B6E-41F0-A9EF-097546719901</string>
+			<string>20FDB5E31A3A8BD07EF046E8EE01E98F71919869</string>
 			<key>IDESourceControlWCCName</key>
-			<string>CocoaHTTPServer</string>
+			<string>CurlHandle</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7BD161EE-472F-4ECB-B2EA-26ADAEF4998D</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Tribo</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>28AD4339-CF55-49FF-A2A7-7368288E1E87</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Sundown</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DA24E8B6-F7E2-464C-B30E-1BE55BA13A13</string>
+			<string>9EDEC795D04B3E279370B0DA5F4D246DCDBD8B6C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>GRMustache</string>
 		</dict>
@@ -78,9 +60,17 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>0E98572B-6BBC-4F54-BFAA-CB8942FA7FF8</string>
+			<string>9635D08B964B59C48EA8E6805E0CB50B3BAF24BE</string>
 			<key>IDESourceControlWCCName</key>
-			<string>CurlHandle</string>
+			<string>Sundown</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9767E9502B1D422E62DD906B7242FE96429C4FD1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Tribo</string>
 		</dict>
 	</array>
 </dict>
