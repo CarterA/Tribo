@@ -17,6 +17,7 @@ NSString * const TBSiteNumberOfRecentPostsMetadataKey = @"TBSiteNumberOfRecentPo
 NSString * const TBSiteProtocolKey = @"TBSiteProtocol";
 NSString * const TBSiteProtocolFTP = @"TBSiteProtocolFTP";
 NSString * const TBSiteProtocolSFTP = @"TBSiteProtocolSFTP";
+NSString * const TBSiteProtocolCloudflare = @"TBSiteProtocolCloudflare";
 NSString * const TBSiteServerKey = @"TBSiteServer";
 NSString * const TBSitePortKey = @"TBSitePort";
 NSString * const TBSiteUserNameKey = @"TBSiteUserName";

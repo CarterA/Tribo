@@ -12,6 +12,7 @@
 
 #import "TBFTPPublisher.h"
 #import "TBSFTPPublisher.h"
+#import "TBCloudflarePublisher.h"
 
 @interface TBPlaceholderPublisher : TBPublisher
 @end
@@ -24,6 +25,8 @@
 		return [[TBFTPPublisher alloc] initWithSite:site];
 	else if ([protocol isEqualToString:TBSiteProtocolSFTP])
 		return [[TBSFTPPublisher alloc] initWithSite:site];
+	else if ([protocol isEqualToString:TBSiteProtocolCloudflare])
+		return [[TBCloudflarePublisher alloc] initWithSite:site];
 	[[NSException exceptionWithName:@"TBPublisherUnrecognizedProtocolException" reason:@"The protocol key of the site's metadata dictionary did not contain a valid protocol." userInfo:nil] raise];
 	return nil;
 }

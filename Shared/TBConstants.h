@@ -17,6 +17,7 @@ extern NSString * const TBSiteNumberOfRecentPostsMetadataKey;
 extern NSString * const TBSiteProtocolKey;
 extern NSString * const TBSiteProtocolFTP;
 extern NSString * const TBSiteProtocolSFTP;
+extern NSString * const TBSiteProtocolCloudflare;
 extern NSString * const TBSiteServerKey;
 extern NSString * const TBSitePortKey; // Not a teleportation device
 extern NSString * const TBSiteUserNameKey;
