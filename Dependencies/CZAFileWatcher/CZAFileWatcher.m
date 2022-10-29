@@ -97,11 +97,14 @@ static void eventCallback(ConstFSEventStreamRef eventStreamRef, void *callbackIn
 	CZAFileWatcher *fileWatcher = (__bridge CZAFileWatcher *)callbackInfo;
 	NSArray *paths = (__bridge NSArray *)eventPaths;
 	NSMutableArray *URLs = [NSMutableArray arrayWithCapacity:(NSUInteger)numberOfEvents];
-	for (NSString *path in paths) {
-		NSURL *URL = [NSURL fileURLWithPath:path];
+	for (size_t i = 0; i < numberOfEvents; i++) {
+		if (eventFlags[i] & kFSEventStreamEventFlagItemCloned) {
+			continue;
+		}
+		NSURL *URL = [NSURL fileURLWithPath:paths[i]];
 		[URLs addObject:URL];
 	}
-	if (fileWatcher.changesHandler)
+	if (fileWatcher.changesHandler && URLs.count != 0)
 		fileWatcher.changesHandler(URLs);
 }
 
